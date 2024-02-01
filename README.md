@@ -12,7 +12,7 @@ More Repos might be required if we need to setup another server as the backend d
 
 ## Group Members
 ### Drishty
-GitHub: TODO someone fill this
+GitHub: https://github.com/drishty02
 	
 ### Kevin
 GitHub: https://github.com/kzcheng
