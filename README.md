@@ -10,6 +10,11 @@ Currently, we are planning to use this Repo for the frontend website that will b
 More Repos might be required if we need to setup another server as the backend database.
 
 
+## Documentation
+### Proposal - Google Docs
+https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0/edit?usp=sharing
+
+
 ## Group Members
 ### Drishty
 GitHub: https://github.com/drishty02
