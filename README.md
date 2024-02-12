@@ -12,7 +12,7 @@ More Repos might be required if we need to setup another server as the backend d
 
 ## Documentation
 ### Proposal - Google Docs
-https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0/edit?usp=sharing
+https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0
 
 
 ## Group Members
