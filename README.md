@@ -1,4 +1,12 @@
 # **Realtorest**
+Realtorest is a custom web application designed to boost British Columbia realtor Aman's business, offering property exploration, sorting, and direct contact functionalities for users, while enabling Aman to manage listings and engage with potential buyers effectively, all within a user-friendly, ad-free environment.
+
+
+## FAQ
+### Port Number
+The port number of this project have been changed to 9090. This means that the project will be running on `http://localhost:9090/`, which is where you can access the website when hosting locally.
+
+
 ## About this project
 ### Abstract
 **Realtorest** is a real estate web application that is created for Aman, a realtor located in British Columbia. The application displays a list of properties that can be sorted based on price, location and room features, and the available map feature can assist users to explore properties in different locations. From general users’ perspective, users can create an account, manage their basic information, control their property choices with features such as ‘Save as Favorite’, and connect with Aman to discuss or set up an appointment. The application is specifically tailored for our client Aman, who is the middleman that helps property sellers and buyers connect with each other. This application focuses on helping Aman upload and display information of properties that are being sold and help potential buyers who are interested in those properties to make the purchase.
