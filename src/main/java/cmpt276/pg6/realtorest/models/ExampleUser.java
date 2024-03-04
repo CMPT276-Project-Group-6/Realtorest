@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 // This is a user object.
 // The @Entity annotation tells Spring that this is a table in the database.
 @Entity
-@Table(name = "users")
+@Table(name = "example_users")
 public class ExampleUser {
     // The @Id annotation tells Spring that this is the primary key.
     @Id
