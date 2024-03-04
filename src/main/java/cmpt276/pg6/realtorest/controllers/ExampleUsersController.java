@@ -27,18 +27,18 @@ public class ExampleUsersController {
     @Autowired
     private ExampleUserRepository userRepo;
 
-    @GetMapping("/users/view")
+    @GetMapping("/exampleUsers/view")
     public String getAllUsers(Model model) {
         System.out.println("Get all users");
         // Get all users from the database
         List<ExampleUser> users = userRepo.findAll();
         // End of database call.
         model.addAttribute("us", users);
-        return "users/showAll";
-        // Links to the file in resources/templates/users/showAll.html
+        return "exampleUsers/exampleShowAll";
+        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     }
 
-    @PostMapping("/users/add")
+    @PostMapping("/exampleUsers/add")
     public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newuser.get("name");
@@ -46,40 +46,40 @@ public class ExampleUsersController {
         int newSize = Integer.parseInt(newuser.get("size"));
         userRepo.save(new ExampleUser(newName, newPassword, newSize));
         response.setStatus(HttpServletResponse.SC_CREATED);
-        return "users/addedUser";
+        return "exampleUsers/exampleAddedUser";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/exampleLogin")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
         ExampleUser user = (ExampleUser) session.getAttribute("session_user");
         if (user == null) {
-            return "users/login";
+            return "exampleUsers/exampleLogin";
         } else {
             model.addAttribute("user", user);
-            return "users/protected";
+            return "exampleUsers/exampleProtected";
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/exampleLogin")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // Process the login form
         String name = formData.get("name");
         String password = formData.get("password");
         List<ExampleUser> userList = userRepo.findByNameAndPassword(name, password);
         if (userList.isEmpty()) {
-            return "users/login";
+            return "exampleUsers/exampleLogin";
         } else {
             // Successful login
             ExampleUser user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
-            return "users/protected";
+            return "exampleUsers/exampleProtected";
         }
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/exampleLogout")
     public String destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "users/login";
+        return "exampleUsers/exampleLogin";
     }
 }
