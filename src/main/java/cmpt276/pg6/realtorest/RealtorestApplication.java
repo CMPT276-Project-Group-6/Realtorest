@@ -8,7 +8,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class RealtorestApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.load();
+		Dotenv dotenv = Dotenv.configure().directory("./etc/secrets").load();
 		System.setProperty("DB_REALTOREST_URL", dotenv.get("DB_REALTOREST_URL"));
 		System.setProperty("DB_REALTOREST_USER", dotenv.get("DB_REALTOREST_USER"));
 		System.setProperty("DB_REALTOREST_PASS", dotenv.get("DB_REALTOREST_PASS"));
