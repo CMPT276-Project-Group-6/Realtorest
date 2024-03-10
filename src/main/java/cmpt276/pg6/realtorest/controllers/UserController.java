@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-import cmpt276.pg6.realtorest.models.ExampleUser;
-import cmpt276.pg6.realtorest.models.ExampleUserRepository;
+import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-public class ExampleUsersController {
+public class UserController {
     @Autowired
-    private ExampleUserRepository userRepo;
+    private UserRepository userRepo;
 
-    @GetMapping("/exampleUsers/view")
+   /* @GetMapping("/exampleUsers/view")
     public String getAllUsers(Model model) {
         System.out.println("Get all users");
         // Get all users from the database
@@ -37,49 +37,57 @@ public class ExampleUsersController {
         return "exampleUsers/exampleShowAll";
         // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     }
+*/
 
-    @PostMapping("/exampleUsers/add")
+    
+/* ACCOUNT CREATION NOT WORKING YET
+    @PostMapping("/Users/CreateAccount")
     public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newuser.get("name");
+        String newEmail = newuser.get("email");
         String newPassword = newuser.get("password");
-        int newSize = Integer.parseInt(newuser.get("size"));
-        userRepo.save(new ExampleUser(newName, newPassword, newSize));
+        userRepo.save(new User(newName, newEmail, newPassword));
         response.setStatus(HttpServletResponse.SC_CREATED);
-        return "exampleUsers/exampleAddedUser";
-    }
-
-    @GetMapping("/exampleLogin")
+        return "Users/accountCreated";
+    }//gets account details from form and stores in db
+*/
+    @GetMapping("/Login")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-        ExampleUser user = (ExampleUser) session.getAttribute("session_user");
+        User user = (User) session.getAttribute("session_user");
         if (user == null) {
-            return "exampleUsers/exampleLogin";
-        } else {
+            //System.out.println("Bad login");
+            model.addAttribute("message", "Invalid credentials entered");
+            return "Users/Login";
+        } //no such user exists in db
+        else {
             model.addAttribute("user", user);
-            return "exampleUsers/exampleProtected";
+            return "Users/Protected";
         }
-    }
+    }//process login to see if user exists in system
 
-    @PostMapping("/exampleLogin")
+    @PostMapping("/Login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
-        // Process the login form
-        String name = formData.get("name");
+        // Process the login form (user enters email and password to login)
+        String email = formData.get("email");
         String password = formData.get("password");
-        List<ExampleUser> userList = userRepo.findByNameAndPassword(name, password);
+        List<User> userList = userRepo.findByEmailAndPassword(email, password);
         if (userList.isEmpty()) {
-            return "exampleUsers/exampleLogin";
-        } else {
+            return "Users/Login";
+        } //if there are no user accounts in db
+        else 
+        {
             // Successful login
-            ExampleUser user = userList.get(0);
+            User user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
-            return "exampleUsers/exampleProtected";
+            return "Users/Protected";
         }
     }
 
-    @GetMapping("/exampleLogout")
+    @GetMapping("/Logout")
     public String destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "exampleUsers/exampleLogin";
+        return "Users/Login";
     }
 }

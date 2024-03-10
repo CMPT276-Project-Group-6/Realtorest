@@ -14,10 +14,13 @@
 		<div class="row justify-content-center">
 			<div class="col-md-4">
 				<h1 class="text-center mt-5 mb-4">Login</h1>
-				<form method="post" action="/exampleLogin">                    
+				
+				<div><span th:text = "${message}"></span></div>
+				
+				<form method="post" action="/Login">                    
 					<div class="mb-3">
-						<input type="text" id="name" name="name" class="form-control form-control-lg"
-                            placeholder="Name">
+						<input type="text" id="email" name="email" class="form-control form-control-lg"
+                            placeholder="Email">
 					</div>
 					<div class="mb-3">
 						<input type="password" id="password" name="password" class="form-control form-control-lg"
@@ -36,7 +39,9 @@
                     <div class="d-grid gap-2">
                         <a class="btn btn-primary" type="button" style="background-color: #3b5998" role="button"><i class="fa fa-facebook-f"></i> Continue with Facebook</a>
                         <a class="btn btn-primary" type="button" style="background-color: #208adc" role="button"><i class="fa fa-google"></i> Continue with Google</a></a>
-                    </div>
+						<br>
+						<a class="btn btn-secondary" href="/createUser">Create an account</a>
+					</div>
 				</form>
 			</div>
 		</div>
