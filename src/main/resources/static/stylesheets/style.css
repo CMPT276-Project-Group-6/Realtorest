@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family:  sans-serif;
+}
+
+/* Custom styles for the navbar */
+.navbar-custom {
+    background-color: #1d305f; 
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: #fff; /*  color for the brand and links */
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #50a1e2; /* hover color */
+}
+
+/* This is for the button on the right */
+.btn-custom {
+    color: #fff;
+    border-color: #fff; /
+}
+
+.btn-custom:hover {
+    color: #f64a4a;
+    background-color: #fff; /* Invert colors on hover */
+}
+.navbar .submitBtn {
+    color: #f64a4a;
+    background-color: #ffffffe7;
+    border-color: #f64a4a;
+}
+
+.navbar .submitBtn:hover {
+    color: #f64a4a;
+    background-color: white;
+}
+.bi-instagram{
+    color: white;
+}
+.nav-item.nav-icons.me-3 a:hover .bi-instagram {
+    color: #50a1e2; 
+}
+
+/* banner section */
+#banner{
+    background-image: url(/img/home1.webp);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     text-align: center; 
+}
+
+.promo-title{
+    background-color: white ;
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 100px;;
+}
