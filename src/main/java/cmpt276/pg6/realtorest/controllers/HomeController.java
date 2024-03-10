@@ -9,15 +9,14 @@ import jakarta.servlet.http.*;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    public String process() {
-        return "main";
+    public String getHomePage() {
+        return "home";
     }
 
     @GetMapping("/main")
-    public RedirectView getMainPage(Model model, HttpServletRequest request, HttpSession session) {
+    public RedirectView redirectMain(Model model, HttpServletRequest request, HttpSession session) {
         return new RedirectView("");
     }
-
 
     @GetMapping("/test/prop-listing")
     public String testPropListing() {
