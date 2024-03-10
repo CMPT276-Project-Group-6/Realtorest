@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: linear-gradient(to right, #ffffff 25%, #1b2b43 10%);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh; 
+    width: 400px;
+    /*z-index: -1;  Ensure the image stays behind other content */
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    border-top: 5px solid #5b2cb8;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.login-form {
+    width: 45%;
+    padding: 20px;
+    padding-left: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    position: relative;
+}
+
+.login-form h2 {
+    font-family: 'Monaco', Courier, monospace;
+    font-size: 25px;
+    color: #ffffff;
+    position: absolute;
+    top: -90px;
+    left: 550px;
+}
+
+.username-input,
+.email-input,
+.password-input,
+.confirm-password-input {
+    padding-top: 30px;
+    padding: 15px;
+    margin-bottom: 40px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    border-radius: 5px;
+    color: #ccc;
+    transition: border-color 0.3s ease;
+    appearance: none; /* Remove default styling */
+}
+
+.username-input:focus,
+.email-input:focus,
+.password-input:focus,
+.confirm-password-input:focus {
+    border-color: #ff0000;
+}
+
+.username-input::placeholder,
+.email-input::placeholder,
+.password-input::placeholder,
+.confirm-password-input::placeholder {
+    color: #ccc;
+}
+
+.username-input:focus::placeholder,
+.email-input:focus::placeholder,
+.password-input:focus::placeholder,
+.confirm-password-input:focus::placeholder {
+    color: transparent;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-wrapper input {
+    width: 200%;
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    border-radius: 5px;
+    color: #ffffff;
+    transition: border-color 0.3s ease;
+    appearance: none;
+}
+
+.input-wrapper input:focus {
+    border-color: #ff0000;
+}
+
+.input-wrapper input::placeholder {
+    color: transparent;
+}
+
+.input-wrapper input:focus::placeholder {
+    color: #ccc;
+}
+
+.input-wrapper input:focus,
+.input-wrapper input:not(:placeholder-shown) {
+    transform: translateY(30px);
+}
+
+.input-label {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    color: #ccc;
+    transition: top 0.3s, font-size 0.3s;
+    pointer-events: none;
+}
+
+.input-wrapper input:focus + .input-label,
+.input-wrapper input:not(:placeholder-shown) + .input-label {
+    top: 10px;
+    font-size: 12px;
+}
+
+.login-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    bottom: 40px;
+    right: 100px;
+}
+
+.login-form button:hover {
+    background-color: #5f0000;
+}
+
+.signup_link {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.signup_link a {
+    color: #2691d9;
+    text-decoration: none;
+}
+
+.signup_link a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="../static/signUp.css">
+</head>
+<body>
+    <img src="../static/house-register-page.jpg" alt="Image" class="left-image">
+    <div class="container">
+        <div class="login-form">
+            <h2>Register</h2>
+            <form action="/signUp" method="post" onsubmit="return validateForm()">
+                <div class="input-wrapper">
+                    <input type="text" class="username-input" placeholder="" name="username" required>
+                    <label class="input-label">Username</label>
+                </div>
+                <div class="input-wrapper">
+                    <input type="email" class="email-input" placeholder="" name="email" required>
+                    <label class="input-label">Email</label>
+                </div>
+                <div class="input-wrapper">
+                    <input type="password" class="password-input" id="password" placeholder="" name="password" required>
+                    <label class="input-label">Password</label>
+                </div>
+                <div class="input-wrapper">
+                    <input type="password" class="confirm-password-input" id="confirm_password" placeholder="" name="confirm_password" required>
+                    <label class="input-label">Confirm Password</label>
+                </div>                
+                <button type="submit">Register</button>
+                <div class="signup_link">
+                    Already have an account? <a href="/login">Login Here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            var confirm_password = document.getElementById("confirm_password").value;
+
+            if (password !== confirm_password) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
