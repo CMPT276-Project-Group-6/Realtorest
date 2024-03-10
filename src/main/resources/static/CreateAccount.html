@@ -11,8 +11,8 @@
     <div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-md-4">
-				<h1 class="text-center mt-5 mb-4">New User</h1>
-				<form action="/exampleUsers/add" method="post">
+				<h1 class="text-center mt-5 mb-4">Create an Accounts</h1>
+				<form action="/Users/CreateAccount" method="post">
                     
 					<div class="mb-3">
 						
@@ -21,18 +21,19 @@
 					</div>
 					<div class="mb-3">
 						
+						<input type="email" id="email" name="email" class="form-control form-control-lg" 
+                            placeholder="Email">
+					</div>
+					<div class="mb-3">
+						
 						<input type="password" id="password" name="password" class="form-control form-control-lg" 
                             placeholder="Password">
 					</div>
-                    <div class="mb-3">
-						
-						<input type="number" id="size" name="size" class="form-control form-control-lg" 
-                            placeholder="Size">
-					</div>
+                  
                     
 					<!-- Submit button -->
                     <div class="d-grid gap-2">
-                        <input class="btn btn-primary" type="submit" value="SEND"></input>
+                        <input class="btn btn-primary" type="submit" value="Create"></input>
                     </div>
 				</form>
 			</div>
