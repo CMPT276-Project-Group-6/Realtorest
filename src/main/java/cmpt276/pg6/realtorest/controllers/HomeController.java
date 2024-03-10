@@ -17,4 +17,10 @@ public class HomeController {
     public RedirectView getMainPage(Model model, HttpServletRequest request, HttpSession session) {
         return new RedirectView("");
     }
+
+
+    @GetMapping("/test/prop-listing")
+    public String testPropListing() {
+        return "PropertyListing";
+    }
 }
