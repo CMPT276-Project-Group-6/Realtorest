@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Getting data from database
     // For now, just make up some data
     const propertyData = [
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bath: 2,
             area: 100,
             address: "8888 University Dr, Burnaby, BC V5A 1S6",
-            images: ["Front.jpg", "Livingroom.jpeg", "Washroom.jpg"]
+            images: ["Front.jpg", "Livingroom.jpeg", "Washroom.jpg"],
         },
         {
             id: 2,
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bath: 2,
             area: 102,
             address: "13450 102 Ave #250, Surrey, BC V3T 0A3",
-            images: ["Front.jpg", "Livingroom.jpg", "Washroom.jpg"]
+            images: ["Front.jpg", "Livingroom.jpg", "Washroom.jpg"],
         },
         {
             id: 3,
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bath: 4,
             area: 259,
             address: "515 W Hastings St, Vancouver, BC V6B 5K3",
-            images: ["Front.jpg", "Livingroom.jpeg", "Washroom.jpg"]
+            images: ["Front.jpg", "Livingroom.jpeg", "Washroom.jpg"],
         },
         {
             id: 4,
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bath: 4,
             area: 259,
             address: "800 Robson St, Vancouver, BC V6Z 2E7",
-            images: ["Front.jpg", "Livingroom.jpg", "Washroom.jpg"]
+            images: ["Front.jpg", "Livingroom.jpg", "Washroom.jpg"],
         },
         {
             id: 5,
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bath: 4,
             area: 259,
             address: "2329 West Mall, Vancouver, BC Canada V6T 1Z4",
-            images: ["Front.jpg", "Livingroom.jpeg", "Washroom.jpg"]
+            images: ["Front.jpg", "Livingroom.jpeg", "Washroom.jpg"],
         },
         {
             id: 6,
@@ -54,39 +54,39 @@ document.addEventListener("DOMContentLoaded", function() {
             bath: 4,
             area: 259,
             address: "3333 University Way, Kelowna, BC Canada V1V 1V7",
-            images: ["Front.jpg", "Livingroom.jpg", "Washroom.jpg"]
-        }
-    ];
+            images: ["Front.jpg", "Livingroom.jpg", "Washroom.jpg"],
+        },
+    ]
 
     // Get the container element in HTML
-    const propertyContainer = document.getElementById("property-container");
+    const propertyContainer = document.getElementById("property-container")
 
     // Add property cards to the HTML
-    propertyData.forEach(property => {
-        const card = createPropertyCard(property);
-        propertyContainer.appendChild(card);
-    });
-});
+    propertyData.forEach((property) => {
+        const card = createPropertyCard(property)
+        propertyContainer.appendChild(card)
+    })
+})
 
 // Create the property card
 function createPropertyCard(property) {
     // Create the figure element in HTML
-    const figure = document.createElement("figure");
-    figure.className = "figure";
+    const figure = document.createElement("figure")
+    figure.className = "figure"
     figure.innerHTML = `
         <section id="carousel${property.id}" class="carousel slide">
             <section class="carousel-inner">
                 <section class="carousel-item active">
                     <button class="favorite-button" onclick=""><i class="fas fa-star"></i></button>
-                <img src="/CSS/Property${property.id}/${property.images[0]}" class="d-block w-100" alt="Front House">
+                <img src="/css/Property${property.id}/${property.images[0]}" class="d-block w-100" alt="Front House">
                 </section>
                 <section class="carousel-item">
                 <button class="favorite-button" onclick=""><i class="fas fa-star"></i></button>
-                <img src="/CSS/Property${property.id}/${property.images[1]}" class="d-block w-100" alt="Living Room">
+                <img src="/css/Property${property.id}/${property.images[1]}" class="d-block w-100" alt="Living Room">
                 </section>
                 <section class="carousel-item">
                 <button class="favorite-button" onclick=""><i class="fas fa-star"></i></button>
-                <img src="/CSS/Property${property.id}/${property.images[2]}" class="d-block w-100" alt="Washroom">
+                <img src="/css/Property${property.id}/${property.images[2]}" class="d-block w-100" alt="Washroom">
                 </section>
             </section>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel${property.id}" data-bs-slide="prev">
@@ -119,7 +119,7 @@ function createPropertyCard(property) {
                 <p class="property-address">${property.address}</p>
             </section>
         </figcaption>
-    `;
+    `
 
     return figure
 }
