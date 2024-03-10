@@ -1,0 +1,136 @@
+/* FONTS */
+@font-face {
+    font-family: 'Montserrat';
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+/* OFFCANVAS */
+.offcanvas-title {
+    font-size: 25px;
+    color: rgba(14,29,51,255);
+}
+.offcanvas {
+    width: 300px !important;
+}
+.list-group-item {
+    color: rgba(14,29,51,255);
+    font-size: 18px;
+}
+/* NAVIGATION BAR */
+.navbar {
+    background-color: rgba(14,29,51,255) !important;
+}
+.menu-offcanvas {
+    display: flex;
+    align-items: baseline;
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+.login {
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 20px;
+    display: flex;
+    align-items: baseline;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+.menu-offcanvas a, .login a {
+    color: white;
+    text-decoration: none;
+}
+/* BODY */
+.property-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.property-listing {
+    background-color: rgb(243, 243, 243);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100vh;
+}
+/* Property Card */
+.figure {
+    box-shadow: 0 0 5px 0.5px rgb(145, 145, 145);
+    background-color: white;
+    max-width: 300px;
+    border: none;
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.favorite-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: rgb(186, 186, 186);
+    border: none;
+    font-size: 20px;
+    outline: none;
+    z-index: 2 !important;
+}
+.favorite-button:hover {
+    cursor: pointer;
+    color: #f1c40f;
+}
+
+/* Description */
+.carousel-inner .carousel-item img {
+    height: 200px;
+    object-fit: cover;
+}
+.icon-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-left: -10px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.property-price {
+    margin-right: 15px;
+    padding-left: 15px;
+}
+.icon-subcontainer, .address-container {
+    display: flex;
+    align-items: baseline;
+}
+.fa-solid {
+    margin-right: 5px;
+}
+
+/* Address */
+.address-container {
+    margin-top: -10px;
+    font-size: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 300px;
+}
+.icon-container, .icon-container p, .address-container, .address-container p {
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
