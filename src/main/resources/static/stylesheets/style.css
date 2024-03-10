@@ -1,14 +1,14 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-body{
-    font-family:  sans-serif;
+body {
+    font-family: sans-serif;
 }
 
 /* Custom styles for the navbar */
 .navbar-custom {
-    background-color: #1d305f; 
+    background-color: #1d305f;
 }
 
 .navbar-custom .navbar-brand,
@@ -23,7 +23,7 @@ body{
 /* This is for the button on the right */
 .btn-custom {
     color: #fff;
-    border-color: #fff; 
+    border-color: #fff;
 }
 
 .btn-custom:hover {
@@ -40,15 +40,15 @@ body{
     color: #f64a4a;
     background-color: white;
 }
-.bi-instagram{
+.bi-instagram {
     color: white;
 }
 .nav-item.nav-icons.me-3 a:hover .bi-instagram {
-    color: #50a1e2; 
+    color: #50a1e2;
 }
 
 /* banner section */
-#banner{
+#banner {
     background-image: url(/img/home1.webp);
     background-size: cover;
     background-position: center;
@@ -56,12 +56,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-     text-align: center; 
+    text-align: center;
 }
 
-.promo-title{
-    background-color: white ;
+.promo-title {
+    background-color: white;
     font-size: 40px;
     font-weight: 600;
-    margin-top: 100px;;
+    margin-top: 100px;
 }
