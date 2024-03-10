@@ -1,38 +1,38 @@
 /* FONTS */
 @font-face {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
     src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 /* <uniquifier>: Use a unique and descriptive class name
 <weight>: Use a value from 400 to 900 */
 .playfair-regular {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 .playfair-semibold {
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
-  }
+}
 /* OFFCANVAS */
 .offcanvas-title {
     font-size: 25px;
-    color: rgba(14,29,51,255);
+    color: rgba(14, 29, 51, 255);
 }
 .offcanvas {
     width: 300px !important;
 }
 .list-group-item {
-    color: rgba(14,29,51,255);
+    color: rgba(14, 29, 51, 255);
     font-size: 18px;
 }
 /* NAVIGATION BAR */
 .navbar {
-    background-color: rgba(14,29,51,255) !important;
+    background-color: rgba(14, 29, 51, 255) !important;
 }
 .menu-offcanvas {
     display: flex;
@@ -42,7 +42,7 @@
     padding-left: 20px;
 }
 .login {
-    font-family: 'Montserrat', 'sans-serif';
+    font-family: "Montserrat", "sans-serif";
     font-size: 20px;
     display: flex;
     align-items: baseline;
@@ -50,7 +50,8 @@
     padding-top: 10px;
     padding-right: 20px;
 }
-.menu-offcanvas a, .login a {
+.menu-offcanvas a,
+.login a {
     color: white;
     text-decoration: none;
 }
@@ -111,7 +112,8 @@
     margin-right: 15px;
     padding-left: 15px;
 }
-.icon-subcontainer, .address-container {
+.icon-subcontainer,
+.address-container {
     display: flex;
     align-items: baseline;
 }
@@ -127,8 +129,11 @@
     padding-right: 15px;
     max-width: 300px;
 }
-.icon-container, .icon-container p, .address-container, .address-container p {
-    font-family: 'Montserrat', 'sans-serif';
+.icon-container,
+.icon-container p,
+.address-container,
+.address-container p {
+    font-family: "Montserrat", "sans-serif";
     font-size: 15px;
     overflow: hidden;
     white-space: nowrap;
