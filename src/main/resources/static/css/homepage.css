@@ -49,7 +49,7 @@ body {
 
 /* banner section */
 #banner {
-    background-image: url(/img/home1.webp);
+    background-image: url(/img/homepage/home1.webp);
     background-size: cover;
     background-position: center;
     height: 100vh;
