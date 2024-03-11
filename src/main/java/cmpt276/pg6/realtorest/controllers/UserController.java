@@ -29,7 +29,9 @@ public class UserController {
     private UserRepository userRepo;
 
     /**
-     * A way to grab the current URL, using this to refresh the webpage after doing something. Kevin: Yeah I know this is a weird hack but please don't touch this for now.
+     * A way to grab the current URL, using this to refresh the webpage after doing something.
+     * 
+     * Kevin: Yeah I know this is a weird hack but please don't touch this for now.
      */
     @ModelAttribute("currentUrl")
     public String getCurrentUrl(HttpServletRequest request) {
@@ -43,23 +45,9 @@ public class UserController {
         List<User> users = userRepo.findAll();
         // End of database call.
         model.addAttribute("user", users);
-        return "Users/listAll";
+        return "users/listAll";
         // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     }
-
-    // @GetMapping("/login")
-    // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-    //     User user = (User) session.getAttribute("session_user");
-    //     if (user == null) {
-    //         //System.out.println("Bad login");
-    //         model.addAttribute("message", "Invalid credentials entered");
-    //         return "Users/Login";
-    //     } //no such user exists in db
-    //     else {
-    //         model.addAttribute("user", user);
-    //         return "Users/Protected";
-    //     }
-    // } //process login to see if user exists in system
 
     @GetMapping("/login")
     public String getLoginPage(Model model, HttpServletRequest request, HttpSession session) {
@@ -79,9 +67,9 @@ public class UserController {
         String password = formData.get("password");
         List<User> userList = userRepo.findByEmailAndPassword(email, password);
         if (userList.isEmpty()) {
+            // if there are no user accounts in db
             return "Users/Login";
-        } // if there are no user accounts in db
-        else {
+        } else {
             // Successful login
             User user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
@@ -91,9 +79,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String destroySession(HttpServletRequest request) {
+    public RedirectView destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "Users/Login";
+        return new RedirectView("");
     }
 
     /**

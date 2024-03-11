@@ -44,7 +44,6 @@ body {
     margin-right: 45%;
 }
 
-
 .side-box-content {
     font-size: 16px; /* Paragraph font size */
     margin-bottom: 0px; /* Bottom margin for paragraphs */
@@ -63,9 +62,9 @@ body {
 
 .login-form {
     width: 45%;
-    padding: 20px; 
+    padding: 20px;
     margin-left: 200px;
-    margin-top: -50px; 
+    margin-top: -50px;
     background-color: #1b2b43;
     display: flex;
     flex-direction: column;
@@ -76,7 +75,7 @@ body {
 }
 
 .login-form h2 {
-    font-family: 'Monaco', Courier, monospace;
+    font-family: "Monaco", Courier, monospace;
     font-size: 25px;
     color: #ffffff;
     position: absolute;
@@ -118,7 +117,7 @@ body {
 }
 
 .input-wrapper input {
-    width: 200%; 
+    width: 200%;
     padding: 15px;
     border: none;
     border-bottom: 2px solid #ccc;
@@ -127,7 +126,6 @@ body {
     color: #ffffff; /* Set text color to white */
     transition: border-color 0.3s ease;
     appearance: none;
-
 }
 
 .input-wrapper input:focus {
@@ -163,7 +161,7 @@ body {
 }
 
 .login-form button {
-    padding: 10px 20px; 
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #ff0000;
@@ -182,12 +180,12 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    left: 15px; 
+    left: 15px;
     bottom: -80px; /* Center vertically */
 }
 
-.google-login{
-    margin-bottom: 20px; 
+.google-login {
+    margin-bottom: 20px;
     white-space: nowrap; /* Prevent text from wrapping */
     width: 230px; /* Set a fixed width */
     height: 40px; /* Set a fixed height */
@@ -198,20 +196,20 @@ body {
     background-color: #4285f4;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
-    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
 }
 
 .google-login:hover {
     cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
 }
 
 .google-login:active {
     cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
 }
 
 .google-login .content-wrapper {
@@ -241,7 +239,7 @@ body {
 .google-login .text-container {
     font-family: "Roboto", arial, sans-serif;
     font-weight: 500;
-    letter-spacing: .21px;
+    letter-spacing: 0.21px;
     font-size: 16px;
     line-height: 48px;
     vertical-align: top;
@@ -249,7 +247,6 @@ body {
     text-align: center;
     width: 180px;
 }
-
 
 .apple-login {
     white-space: nowrap; /* Prevent text from wrapping */
@@ -261,21 +258,21 @@ body {
     background-color: #4285f4;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
-    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
     text-decoration: none;
 }
 
 .apple-login:hover {
     cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
 }
 
 .apple-login:active {
     cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
 }
 
 .apple-login .content-wrapper {
@@ -297,7 +294,7 @@ body {
     margin-right: 10px;
     font-family: "Roboto", arial, sans-serif;
     font-weight: 500;
-    letter-spacing: .21px;
+    letter-spacing: 0.21px;
     font-size: 16px;
     display: inline-block;
     vertical-align: middle;
