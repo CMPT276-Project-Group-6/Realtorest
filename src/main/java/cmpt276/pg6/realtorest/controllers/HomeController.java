@@ -20,6 +20,10 @@ public class HomeController {
 
     @GetMapping("/propertylisting")
     public String testPropListing() {
+<<<<<<< HEAD
         return "propertylisting";
+=======
+        return "propertyListing";
+>>>>>>> main
     }
 }
