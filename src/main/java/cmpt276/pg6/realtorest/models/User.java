@@ -24,7 +24,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-
     }
 
     public String getEmail() {

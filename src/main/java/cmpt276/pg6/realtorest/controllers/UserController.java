@@ -9,6 +9,7 @@ import org.springframework.boot.actuate.autoconfigure.observation.ObservationPro
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import cmpt276.pg6.realtorest.models.User;
@@ -27,16 +28,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
-    // @GetMapping("/exampleUsers/view")
-    // public String getAllUsers(Model model) {
-    //     System.out.println("Get all users");
-    //     // Get all users from the database
-    //     List<ExampleUser> users = userRepo.findAll();
-    //     // End of database call.
-    //     model.addAttribute("us", users);
-    //     return "exampleUsers/exampleShowAll";
-    //     // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
-    // }
+    /**
+     * A way to grab the current URL, using this to refresh the webpage after doing something. Kevin: Yeah I know this is a weird hack but please don't touch this for now.
+     */
+    @ModelAttribute("currentUrl")
+    public String getCurrentUrl(HttpServletRequest request) {
+        return request.getRequestURI();
+    }
 
     @GetMapping("/users/all")
     public String getAllUsers(Model model) {
@@ -48,18 +46,6 @@ public class UserController {
         return "Users/listAll";
         // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     }
-
-    // ACCOUNT CREATION NOT WORKING YET
-    // @PostMapping("/Users/CreateAccount")
-    // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
-    //     System.out.println("ADD user");
-    //     String newName = newuser.get("name");
-    //     String newEmail = newuser.get("email");
-    //     String newPassword = newuser.get("password");
-    //     userRepo.save(new User(newName, newEmail, newPassword));
-    //     response.setStatus(HttpServletResponse.SC_CREATED);
-    //     return "Users/accountCreated";
-    // }//gets account details from form and stores in db
 
     @GetMapping("/login")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
@@ -83,7 +69,7 @@ public class UserController {
         List<User> userList = userRepo.findByEmailAndPassword(email, password);
         if (userList.isEmpty()) {
             return "Users/Login";
-        } //if there are no user accounts in db
+        } // if there are no user accounts in db
         else {
             // Successful login
             User user = userList.get(0);
@@ -112,4 +98,16 @@ public class UserController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
+
+    // ACCOUNT CREATION NOT WORKING YET
+    // @PostMapping("/Users/CreateAccount")
+    // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+    //     System.out.println("ADD user");
+    //     String newName = newuser.get("name");
+    //     String newEmail = newuser.get("email");
+    //     String newPassword = newuser.get("password");
+    //     userRepo.save(new User(newName, newEmail, newPassword));
+    //     response.setStatus(HttpServletResponse.SC_CREATED);
+    //     return "Users/accountCreated";
+    // }//gets account details from form and stores in db
 }
