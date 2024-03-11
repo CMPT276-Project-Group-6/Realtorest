@@ -27,31 +27,16 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
-   /* @GetMapping("/exampleUsers/view")
-    public String getAllUsers(Model model) {
-        System.out.println("Get all users");
-        // Get all users from the database
-        List<ExampleUser> users = userRepo.findAll();
-        // End of database call.
-        model.addAttribute("us", users);
-        return "exampleUsers/exampleShowAll";
-        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
-    }
-*/
+    /*
+     * @GetMapping("/exampleUsers/view") public String getAllUsers(Model model) { System.out.println("Get all users"); // Get all users from the database List<ExampleUser> users = userRepo.findAll(); // End of database call. model.addAttribute("us", users); return "exampleUsers/exampleShowAll"; // Links to the file in resources/templates/exampleUsers/exampleShowAll.html }
+     */
 
-    
-/* ACCOUNT CREATION NOT WORKING YET
-    @PostMapping("/Users/CreateAccount")
-    public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
-        System.out.println("ADD user");
-        String newName = newuser.get("name");
-        String newEmail = newuser.get("email");
-        String newPassword = newuser.get("password");
-        userRepo.save(new User(newName, newEmail, newPassword));
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return "Users/accountCreated";
-    }//gets account details from form and stores in db
-*/
+
+    /*
+     * ACCOUNT CREATION NOT WORKING YET
+     * 
+     * @PostMapping("/Users/CreateAccount") public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) { System.out.println("ADD user"); String newName = newuser.get("name"); String newEmail = newuser.get("email"); String newPassword = newuser.get("password"); userRepo.save(new User(newName, newEmail, newPassword)); response.setStatus(HttpServletResponse.SC_CREATED); return "Users/accountCreated"; }//gets account details from form and stores in db
+     */
     @GetMapping("/Login")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -75,8 +60,7 @@ public class UserController {
         if (userList.isEmpty()) {
             return "Users/Login";
         } //if there are no user accounts in db
-        else 
-        {
+        else {
             // Successful login
             User user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
