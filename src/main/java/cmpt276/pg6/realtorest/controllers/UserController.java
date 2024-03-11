@@ -102,17 +102,14 @@ public class UserController {
     public String getRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
         return "users/register";
     }
-    
 
-    // ACCOUNT CREATION NOT WORKING YET
-    // @PostMapping("/Users/CreateAccount")
-    // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
-    //     System.out.println("ADD user");
-    //     String newName = newuser.get("name");
-    //     String newEmail = newuser.get("email");
-    //     String newPassword = newuser.get("password");
-    //     userRepo.save(new User(newName, newEmail, newPassword));
-    //     response.setStatus(HttpServletResponse.SC_CREATED);
-    //     return "Users/accountCreated";
-    // }//gets account details from form and stores in db
+    @PostMapping("/register")
+    public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
+        String name = newUser.get("name");
+        String email = newUser.get("email");
+        String password = newUser.get("password");
+        userRepo.save(new User(name, email, password));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "home";
+    }
 }
