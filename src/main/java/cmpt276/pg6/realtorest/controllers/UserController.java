@@ -98,6 +98,12 @@ public class UserController {
         return "redirect:" + redirectUrl;
     }
 
+    @GetMapping("/register")
+    public String getRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
+        return "users/register";
+    }
+    
+
     // ACCOUNT CREATION NOT WORKING YET
     // @PostMapping("/Users/CreateAccount")
     // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
