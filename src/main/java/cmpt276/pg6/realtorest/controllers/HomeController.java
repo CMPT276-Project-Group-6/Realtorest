@@ -18,7 +18,7 @@ public class HomeController {
         return new RedirectView("");
     }
 
-    @GetMapping("/test/prop-listing")
+    @GetMapping("/property-listing")
     public String testPropListing() {
         return "propertyListing";
     }
