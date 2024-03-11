@@ -12,65 +12,55 @@
         <link rel="stylesheet" href="/css/homepage.css" />
     </head>
     <body>
-        <section id="nav-bar">
-            <nav class="navbar navbar-expand-sm navbar-custom">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Realtorest</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarContent">
-                        <!-- left aligned -->
-                        <ul class="navbar-nav me-auto">
-                            <!-- Instagram link -->
-                            <li class="nav-item nav-icons me-3" id="instaLogo">
-                                <a href="https://www.instagram.com/drishty11.11">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <div class="logo-container">
-                                    <img src="img/homepage/logo.png" alt="Logo" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover" />
-                                    <button class="info-button" type="button" style="margin-left: 5px">+</button>
-                                </div>
-                            </li>
-                        </ul>
-                        <!-- right aligned -->
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Properties </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Residential</a></li>
-                                    <li><a class="dropdown-item" href="#">Commercial</a></li>
-                                    <li><a class="dropdown-item" href="#">Industrial</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About Us</a>
-                            </li>
-                        </ul>
-
-                        <form class="d-flex">
-                            <button class="btn submitBtn" type="submit">SIGN IN</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
+        <!-- CLIENT INFORMATION -->
+        <section class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+            <section class="profile-image">
+                <img src="/img/homepage/logo.png" alt="Profile Picture">
+            </section>
+            <section class="offcanvas-header">
+                <p class="playfair-regular client-name" id="offcanvasTopLabel">Aman Dhiman</p>
+                <p class="client-information" id="offcanvasTopLabel">Agent</p>  
+                <p class="client-information" id="offcanvasTopLabel">amandhiman@gmail.com</p>      
+                <p class="client-information" id="offcanvasTopLabel">604-123-4567</p>              
+                <section class="social-media">
+                    <a href="https://www.facebook.com"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                    <a href="https://www.instagram.com/yyj.realtor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                    <a href="https://www.youtube.com"></a><i class="fa-brands fa-youtube fa-lg"></i></a>
+                </section>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+            </section>
+            <section class="offcanvas-body">
+                <p class="playfair-regular description-title">About Aman</p>
+                <p class="client-personal-statement">
+                    "Hello, I'm Aman, your dedicated Victoria, BC realtor. With a passion for the unique charm of our city, I specialize in turning property dreams into reality. From first-time buyers to seasoned investors, I provide personalized guidance for a smooth and satisfying real estate experience. Let's make your dreams come true together!"
+                </p>
+            </section>
         </section>
 
-        <!-- home photo section -->
-        <section id="banner">
-            <div class="container">
-                <div class="row" b title>
-                    <div class="col-md-6">
-                        <p class="promo-title">Welcome to Realtorest</p>
-                        <button type="button" class="btn btn-primary">EXPLORE</button>
-                    </div>
-                </div>
-            </div>
+        <!-- NAVIGATION BAR -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <section class="realtorest-title">
+                <a href="">
+                    <p class="playfair-semibold" style="color: white;">Realtorest</p>
+                </a>
+            </section>
+            <section class="navbar-categories ms-auto">
+                <a class="navbar-category"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><p>About Us</p></a>
+                <a href="" class="navbar-category"><p>Buy</p></a>
+                <a href="" class="navbar-category"><p>Rent</p></a>
+                <a href="" class="navbar-category"><p>Sell</p></a>
+                <a href="" class="navbar-category"><p>Register/Sign In</p></a>
+            </section>
+        </nav>
+        
+        <!-- INTRODUCTION -->
+        <section class="banner">
+            <section class="container">
+                <p class="title playfair-extrabold">Welcome to Realtorest</p>
+                <button type="button" class="btn btn-primary view-listing" href="">Explore Our Listing</button>
+            </section>
         </section>
+
     </body>
 </html>

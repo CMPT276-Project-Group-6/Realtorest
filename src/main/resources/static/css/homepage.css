@@ -1,67 +1,176 @@
-* {
-    margin: 0;
-    padding: 0;
+/* FONTS */
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
 }
-body {
-    font-family: sans-serif;
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
-
-/* Custom styles for the navbar */
-.navbar-custom {
-    background-color: #1d305f;
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 }
-
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-nav .nav-link {
-    color: #fff; /*  color for the brand and links */
-}
-
-.navbar-custom .navbar-nav .nav-link:hover {
-    color: #50a1e2; /* hover color */
-}
-
-/* This is for the button on the right */
-.btn-custom {
-    color: #fff;
-    border-color: #fff;
-}
-
-.btn-custom:hover {
-    color: #f64a4a;
-    background-color: #fff; /* Invert colors on hover */
-}
-.navbar .submitBtn {
-    color: #f64a4a;
-    background-color: #ffffffe7;
-    border-color: #f64a4a;
+.playfair-extrabold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
 }
 
-.navbar .submitBtn:hover {
-    color: #f64a4a;
-    background-color: white;
+/* NAVIGATION BAR */
+.realtorest-title {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 30px;
 }
-.bi-instagram {
+a {
+    text-decoration: none;
+}
+.navbar-categories {
+    display: flex;
+    font-family: "Montserrat", "sans-serif";
+    font-size: 20px;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-right: 20px;
+}
+.navbar-category {
     color: white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.nav-item.nav-icons.me-3 a:hover .bi-instagram {
-    color: #50a1e2;
+.navbar-category:hover {
+    color: rgb(211, 211, 211);
+}
+.navbar {
+    background-color: rgba(0, 0, 0, 0) !important;
 }
 
-/* banner section */
-#banner {
-    background-image: url(/img/homepage/home1.webp);
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+/* INTRODUCTION */
+.banner {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-
-.promo-title {
-    background-color: white;
-    font-size: 40px;
+.title {
+    color: white;
+    background-color: none;
+    font-size: 60px;
     font-weight: 600;
-    margin-top: 100px;
+    margin-top: 25vh;
+}
+.view-listing {
+    background-color: transparent;
+    border: none;
+    border-radius: 0%;
+    font-family: "Montserrat", "sans-serif";
+    font-size: 20px;
+    font-weight: 400;
+    transition: border-bottom 0.25s ease-in-out;
+}
+.view-listing:hover {
+    border-bottom: 2px solid white;
+    background-color: transparent !important;
+}
+.view-listing:active {
+    color: white !important; 
+    border-bottom: 2px solid white !important;
+}
+.banner .container p.title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* BODY */
+body {
+    background-image: url(/img/homepage/wallpaper2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+/* OFF CANVAS */
+.offcanvas {
+    background-color: rgba(14, 29, 51) !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 250px !important;
+}
+.profile-image {
+    height: 200px;
+    width: 200px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    padding-left: 30px;
+}
+.profile-image img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.offcanvas-header {
+    margin-top: 50px;
+    padding-top: 5px;
+    margin-left: 45px;
+    display: block;
+    text-align: left;
+}
+.offcanvas-header p {
+    margin-bottom: -5px;
+}
+.offcanvas-body {
+    color: white;
+}
+.client-name {
+    color: white; 
+    font-size: 23px;
+    padding-bottom: 15px;
+}
+.client-information {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
+    padding-bottom: 5px;
+}
+.social-media {
+    color: white;
+    padding-top: 10px;
+}
+.social-media i {
+    padding-right: 15px;
+}
+.social-media a {
+    color: white;
+}
+.social-media a:hover {
+    color: rgb(211, 211, 211);
+}
+.offcanvas-body {
+    height: 180px;
+    margin-top: 50px;
+    padding-top: 9px;
+    margin-left: 50px;
+    display: block;
+    text-align: left;
+    border-left: 1px solid gray;
+}
+.description-title {
+    font-size: 20px;
+}
+.client-personal-statement {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
 }
