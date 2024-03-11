@@ -38,6 +38,17 @@ public class UserController {
     //     // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     // }
 
+    @GetMapping("/users/all")
+    public String getAllUsers(Model model) {
+        System.out.println("Get all users");
+        // Get all users from the database
+        List<User> users = userRepo.findAll();
+        // End of database call.
+        model.addAttribute("user", users);
+        return "Users/listAll";
+        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
+    }
+
     // ACCOUNT CREATION NOT WORKING YET
     // @PostMapping("/Users/CreateAccount")
     // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
@@ -50,7 +61,7 @@ public class UserController {
     //     return "Users/accountCreated";
     // }//gets account details from form and stores in db
 
-    @GetMapping("/Login")
+    @GetMapping("/login")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
@@ -64,7 +75,7 @@ public class UserController {
         }
     } //process login to see if user exists in system
 
-    @PostMapping("/Login")
+    @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // Process the login form (user enters email and password to login)
         String email = formData.get("email");
@@ -82,7 +93,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/Logout")
+    @GetMapping("/logout")
     public String destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
         return "Users/Login";
