@@ -38,8 +38,6 @@ public class UserController {
     //     // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     // }
 
-
-
     // ACCOUNT CREATION NOT WORKING YET
     // @PostMapping("/Users/CreateAccount")
     // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
@@ -64,7 +62,7 @@ public class UserController {
             model.addAttribute("user", user);
             return "Users/Protected";
         }
-    }//process login to see if user exists in system
+    } //process login to see if user exists in system
 
     @PostMapping("/Login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
