@@ -20,6 +20,6 @@ public class HomeController {
 
     @GetMapping("/test/prop-listing")
     public String testPropListing() {
-        return "PropertyListing";
+        return "propertyListing";
     }
 }

@@ -63,13 +63,13 @@ public class UserController {
         List<User> userList = userRepo.findByEmailAndPassword(email, password);
         if (userList.isEmpty()) {
             // if there are no user accounts in db
-            return "Users/Login";
+            return "users/login";
         } else {
             // Successful login
             User user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
-            return "Users/Protected";
+            return "users/protected";
         }
     }
 
@@ -84,7 +84,6 @@ public class UserController {
      */
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
-        System.out.println("ADD user");
         String name = newUser.get("name");
         String email = newUser.get("email");
         String password = newUser.get("password");
