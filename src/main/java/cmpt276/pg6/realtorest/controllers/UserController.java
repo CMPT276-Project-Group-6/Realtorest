@@ -98,4 +98,18 @@ public class UserController {
         request.getSession().invalidate();
         return "Users/Login";
     }
+
+    /**
+     * Adds a new user to the system.
+     */
+    @PostMapping("/users/add")
+    public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
+        System.out.println("ADD user");
+        String name = newUser.get("name");
+        String email = newUser.get("email");
+        String password = newUser.get("password");
+        userRepo.save(new User(name, email, password));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "redirect:" + redirectUrl;
+    }
 }
