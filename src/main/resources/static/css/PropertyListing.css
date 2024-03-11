@@ -18,43 +18,111 @@
     font-weight: 600;
     font-style: normal;
 }
-/* OFFCANVAS */
-.offcanvas-title {
-    font-size: 25px;
-    color: rgba(14, 29, 51, 255);
-}
+/* OFF CANVAS */
 .offcanvas {
-    width: 300px !important;
+    background-color: rgba(14, 29, 51) !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 250px !important;
 }
-.list-group-item {
-    color: rgba(14, 29, 51, 255);
-    font-size: 18px;
+.profile-image {
+    height: 200px;
+    width: 200px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    padding-left: 30px;
+}
+.profile-image img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.offcanvas-header {
+    margin-top: 50px;
+    padding-top: 5px;
+    margin-left: 45px;
+    display: block;
+    text-align: left;
+}
+.offcanvas-header p {
+    margin-bottom: -5px;
+}
+.offcanvas-body {
+    color: white;
+}
+.client-name {
+    color: white; 
+    font-size: 23px;
+    padding-bottom: 15px;
+}
+.client-information {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
+    padding-bottom: 5px;
+}
+.social-media {
+    color: white;
+    padding-top: 10px;
+}
+.social-media i {
+    padding-right: 15px;
+}
+.social-media a {
+    color: white;
+}
+.social-media a:hover {
+    color: rgb(211, 211, 211);
+}
+.offcanvas-body {
+    height: 180px;
+    margin-top: 50px;
+    padding-top: 9px;
+    margin-left: 50px;
+    display: block;
+    text-align: left;
+    border-left: 1px solid gray;
+}
+.description-title {
+    font-size: 20px;
+}
+.client-personal-statement {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
 }
 /* NAVIGATION BAR */
+.realtorest-title {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 30px;
+}
+a {
+    text-decoration: none;
+}
+.navbar-categories {
+    display: flex;
+    font-family: "Montserrat", "sans-serif";
+    font-size: 20px;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-right: 20px;
+}
+.navbar-category {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar-category:hover {
+    color: rgb(211, 211, 211);
+}
 .navbar {
     background-color: rgba(14, 29, 51, 255) !important;
 }
-.menu-offcanvas {
-    display: flex;
-    align-items: baseline;
-    font-size: 25px;
-    padding-top: 5px;
-    padding-left: 20px;
-}
-.login {
-    font-family: "Montserrat", "sans-serif";
-    font-size: 20px;
-    display: flex;
-    align-items: baseline;
-    font-size: 15px;
-    padding-top: 10px;
-    padding-right: 20px;
-}
-.menu-offcanvas a,
-.login a {
-    color: white;
-    text-decoration: none;
-}
+
 /* BODY */
 .property-container {
     display: flex;

@@ -14,36 +14,48 @@
     <title>Properties Listing</title>
 </head>
 <body class="property-listing">
-    <section class="offcanvas offcanvas-start custom-width" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <!-- CLIENT INFORMATION -->
+    <section class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <section class="profile-image">
+            <img src="/img/homepage/logo.png" alt="Profile Picture">
+        </section>
         <section class="offcanvas-header">
-            <h5 class="offcanvas-title playfair-semibold" id="offcanvasExampleLabel">Realtorest</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <p class="playfair-regular client-name" id="offcanvasTopLabel">Aman Dhiman</p>
+            <p class="client-information" id="offcanvasTopLabel">Agent</p>  
+            <p class="client-information" id="offcanvasTopLabel">amandhiman@gmail.com</p>      
+            <p class="client-information" id="offcanvasTopLabel">604-123-4567</p>              
+            <section class="social-media">
+                <a href="https://www.facebook.com"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                <a href="https://www.instagram.com/yyj.realtor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-lg"></i></a>
+                <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                <a href="https://www.youtube.com"></a><i class="fa-brands fa-youtube fa-lg"></i></a>
+            </section>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
         </section>
         <section class="offcanvas-body">
-            <section>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item playfair-regular">About</li>
-                    <li class="list-group-item playfair-regular">Buy</li>
-                    <li class="list-group-item playfair-regular">Sell</li>
-                    <li class="list-group-item playfair-regular">Contact</li>
-                  </ul>
-            </section>
-            </section>
+            <p class="playfair-regular description-title">About Aman</p>
+            <p class="client-personal-statement">
+                "Hello, I'm Aman, your dedicated Victoria, BC realtor. With a passion for the unique charm of our city, I specialize in turning property dreams into reality. From first-time buyers to seasoned investors, I provide personalized guidance for a smooth and satisfying real estate experience. Let's make your dreams come true together!"
+            </p>
         </section>
     </section>
+
+    <!-- NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <section class="menu-offcanvas">
-            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" >
-                <i class="fa-solid fa-bars" style="padding-right: 5px;"></i>
-            </a>
-            <a href="">
-                <p class="playfair-semibold">Realtorest</p>
+        <section class="realtorest-title">
+            <a th:href="@{/main}">
+                <p class="playfair-semibold" style="color: white;">Realtorest</p>
             </a>
         </section>
-        <section class="login ms-auto">
-                <a href=""><p>Register/Sign In</p></a>
+        <section class="navbar-categories ms-auto">
+            <a class="navbar-category"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><p>About Us</p></a>
+            <a href="" class="navbar-category"><p>Buy</p></a>
+            <a href="" class="navbar-category"><p>Rent</p></a>
+            <a href="" class="navbar-category"><p>Sell</p></a>
+            <a href="" class="navbar-category"><p>Register/Sign In</p></a>
         </section>
     </nav>
+    
     <section id="property-container" class="property-container"></section>
 </body>
 </html>
