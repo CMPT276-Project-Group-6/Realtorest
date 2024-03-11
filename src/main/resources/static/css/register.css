@@ -13,11 +13,10 @@ body {
     position: absolute;
     left: 0;
     top: 0;
-    height: 100vh; 
+    height: 100vh;
     width: 400px;
     /*z-index: -1;  Ensure the image stays behind other content */
 }
-
 
 .container {
     display: flex;
@@ -26,7 +25,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-
 
 .login-form {
     width: 45%;
@@ -41,7 +39,7 @@ body {
 }
 
 .login-form h2 {
-    font-family: 'Monaco', Courier, monospace;
+    font-family: "Monaco", Courier, monospace;
     font-size: 25px;
     color: #ffffff;
     position: absolute;
