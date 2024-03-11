@@ -1,0 +1,334 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    border-top: 5px solid #5b2cb8; /* Add border to the top */
+    min-height: 100vh;
+    background-color: #1b2b43;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    width: 1200px;
+    padding: 30px; /* Adjust padding */
+}
+
+.side-box {
+    width: 50%;
+    margin-right: -70px;
+    padding: 20px;
+    background-color: #1b2b43;
+    color: #ffffff;
+}
+
+.side-box h1 {
+    width: 45%;
+    font-family: Raleway, sans-serif;
+    font-size: 2em;
+    line-height: 1em;
+    font-weight: 100;
+    margin-bottom: 0px; /* Bottom margin for paragraphs */
+    margin-top: 10px; /* Remove default top margin */
+    font-size: 30px; /* Header font size */
+    margin-bottom: 20px; /* Bottom margin for header */
+    margin-top: -200px; /* Remove default top margin */
+    margin-right: 45%;
+}
+
+.side-box-content {
+    font-size: 16px; /* Paragraph font size */
+    margin-bottom: 0px; /* Bottom margin for paragraphs */
+    margin-top: 110px; /* Remove default top margin */
+}
+
+.side-box-content p {
+    width: 40%;
+    font-family: Yanone Kaffeesatz, sans-serif;
+    font-size: 25px;
+    font-weight: 200;
+    margin-bottom: 0px; /* Bottom margin for paragraphs */
+    margin-top: 10px; /* Remove default top margin */
+    text-align: center;
+}
+
+.login-form {
+    width: 45%;
+    padding: 20px;
+    margin-left: 200px;
+    margin-top: -50px;
+    background-color: #1b2b43;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the top */
+    justify-content: flex-start; /* Align content to the top */
+    text-align: left; /* Align text to the left */
+    position: relative;
+}
+
+.login-form h2 {
+    font-family: "Monaco", Courier, monospace;
+    font-size: 25px;
+    color: #ffffff;
+    position: absolute;
+    bottom: 400px;
+}
+
+.username-input,
+.password-input {
+    padding-top: 30px;
+    padding: 15px;
+    margin-bottom: 40px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    border-radius: 5px;
+    color: #ccc;
+    transition: border-color 0.3s ease;
+    appearance: none; /* Remove default styling */
+}
+
+.username-input:focus,
+.password-input:focus {
+    border-color: #ff0000;
+}
+
+.username-input::placeholder,
+.password-input::placeholder {
+    color: #ccc; /* Placeholder text color */
+}
+
+.username-input:focus::placeholder,
+.password-input:focus::placeholder {
+    color: transparent; /* Hide placeholder text when input is focused */
+}
+
+.input-wrapper {
+    position: relative;
+    width: 120%;
+}
+
+.input-wrapper input {
+    width: 200%;
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    border-radius: 5px;
+    color: #ffffff; /* Set text color to white */
+    transition: border-color 0.3s ease;
+    appearance: none;
+}
+
+.input-wrapper input:focus {
+    border-color: #ff0000;
+}
+
+.input-wrapper input::placeholder {
+    color: transparent; /* Placeholder text color */
+}
+
+.input-wrapper input:focus::placeholder {
+    color: #ccc; /* Hide placeholder text when input is focused */
+}
+
+.input-wrapper input:focus,
+.input-wrapper input:not(:placeholder-shown) {
+    transform: translateY(30px); /* Move text downwards */
+}
+
+.input-label {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    color: #ccc;
+    transition: top 0.3s, font-size 0.3s;
+    pointer-events: none; /* Prevent clicking on label */
+}
+
+.input-wrapper input:focus + .input-label,
+.input-wrapper input:not(:placeholder-shown) + .input-label {
+    top: 10px;
+    font-size: 12px;
+}
+
+.login-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    bottom: 80px;
+    right: -100px;
+}
+
+.login-form button:hover {
+    background-color: #5f0000;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 15px;
+    bottom: -80px; /* Center vertically */
+}
+
+.google-login {
+    margin-bottom: 20px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    width: 230px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+    display: flex; /* Use flexbox to center the text */
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    text-decoration: none;
+    background-color: #4285f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+}
+
+.google-login:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+}
+
+.google-login:active {
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+}
+
+.google-login .content-wrapper {
+    height: 100%;
+    width: 100%;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-login img {
+    width: 20px;
+    height: 20px;
+}
+
+.google-login .logo-wrapper {
+    background: #fff;
+    width: 48px;
+    height: 100%;
+    border-radius: 5px;
+    display: flex; /* Use flexbox to align items */
+    justify-content: center; /* Center the logo horizontally */
+    align-items: center; /* Center the logo vertically */
+}
+
+.google-login .text-container {
+    font-family: "Roboto", arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.21px;
+    font-size: 16px;
+    line-height: 48px;
+    vertical-align: top;
+    border: none;
+    text-align: center;
+    width: 180px;
+}
+
+.apple-login {
+    white-space: nowrap; /* Prevent text from wrapping */
+    width: 230px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+    display: flex; /* Use flexbox to center the text */
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    background-color: #4285f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+    text-decoration: none;
+}
+
+.apple-login:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+}
+
+.apple-login:active {
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+}
+
+.apple-login .content-wrapper {
+    height: 100%;
+    width: 100%;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.apple-login img {
+    width: 25px; /* Apple logo size */
+    height: 25px; /* Apple logo size */
+    margin-right: 30px; /* Add margin between logo and text */
+}
+
+.apple-login .text-container {
+    margin-right: 10px;
+    font-family: "Roboto", arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.21px;
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.forgot_password {
+    padding-right: 125px;
+    padding-bottom: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.forgot_password a {
+    color: #2691d9;
+    text-decoration: none;
+}
+
+.forgot_password a:hover {
+    text-decoration: underline;
+}
+
+.signup_link {
+    padding-bottom: 25px;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.signup_link a {
+    color: #2691d9;
+    text-decoration: none;
+}
+
+.signup_link a:hover {
+    text-decoration: underline;
+}
