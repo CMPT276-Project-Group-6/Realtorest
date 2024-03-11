@@ -47,19 +47,30 @@ public class UserController {
         // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
     }
 
+    // @GetMapping("/login")
+    // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
+    //     User user = (User) session.getAttribute("session_user");
+    //     if (user == null) {
+    //         //System.out.println("Bad login");
+    //         model.addAttribute("message", "Invalid credentials entered");
+    //         return "Users/Login";
+    //     } //no such user exists in db
+    //     else {
+    //         model.addAttribute("user", user);
+    //         return "Users/Protected";
+    //     }
+    // } //process login to see if user exists in system
+
     @GetMapping("/login")
-    public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
+    public String getLoginPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
-            //System.out.println("Bad login");
-            model.addAttribute("message", "Invalid credentials entered");
-            return "Users/Login";
-        } //no such user exists in db
-        else {
+            return "users/login";
+        } else {
             model.addAttribute("user", user);
-            return "Users/Protected";
+            return "users/protected";
         }
-    } //process login to see if user exists in system
+    }
 
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
