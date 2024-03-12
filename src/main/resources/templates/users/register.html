@@ -24,7 +24,7 @@
                 <div class="col-mb-5">
                     <div class="register-form mb-3">
                         <h2 class="text-center">Register</h2>
-                        <form action="/register" method="post" onsubmit="return validateForm()">
+                        <form action="/users/add" method="post" onsubmit="return validateForm()">
                             <div class="input-wrapper">
                                 <input type="text" class="username-input" placeholder="" name="username" required />
                                 <label class="input-label">Username</label>
@@ -52,7 +52,7 @@
         <!-- NAVIGATION BAR -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <section class="realtorest-title">
-                <a th:href="@{/main}">
+                <a th:href="@{/}">
                     <p class="playfair-semibold" style="color: white">Realtorest</p>
                 </a>
             </section>
