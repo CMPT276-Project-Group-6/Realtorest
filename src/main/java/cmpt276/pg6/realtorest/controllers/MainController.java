@@ -67,9 +67,8 @@ public class MainController {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             return "users/login";
-        } else {
+        } else {// Redirect to the home page if the user is already logged in
             model.addAttribute("user", user);
-            // Redirect to the home page if the user is already logged in
             return "redirect:/";
         }
     }
@@ -77,7 +76,13 @@ public class MainController {
     // Register Page
     @GetMapping("/register")
     public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
-        return "users/register";
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "users/register";
+        } else {
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
     }
 
     // Admin Page
