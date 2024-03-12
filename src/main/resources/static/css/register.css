@@ -9,42 +9,34 @@ body {
     overflow: hidden;
 }
 
-.left-image {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 400px;
-    /*z-index: -1;  Ensure the image stays behind other content */
-}
 
 .container {
     display: flex;
-    justify-content: center;
-    border-top: 5px solid #5b2cb8;
+    justify-content: center; 
     align-items: center;
-    height: 100vh;
+    height: 60vh;
+   margin-top: 50px;
 }
 
-.login-form {
-    width: 45%;
+.register-form {
+    width: 500px;
     padding: 20px;
-    padding-left: 600px;
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
-    position: relative;
+    background-color: #1b2b43;
+    /* position: relative; */
 }
 
-.login-form h2 {
+.register-form h2 {
     font-family: "Monaco", Courier, monospace;
     font-size: 25px;
     color: #ffffff;
     position: absolute;
-    top: -90px;
-    left: 550px;
+    left: 150px;
+    bottom: 560px;
 }
 
 .username-input,
@@ -60,7 +52,7 @@ body {
     border-radius: 5px;
     color: #ccc;
     transition: border-color 0.3s ease;
-    appearance: none; /* Remove default styling */
+    appearance: none;
 }
 
 .username-input:focus,
@@ -133,34 +125,35 @@ body {
     font-size: 12px;
 }
 
-.login-form button {
+.register-form button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #ff0000;
     color: #fff;
     cursor: pointer;
-    position: absolute;
-    bottom: 40px;
-    right: 100px;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 20px; 
 }
 
 .login-form button:hover {
     background-color: #5f0000;
 }
 
-.signup_link {
+.login_link {
     margin: 30px 0;
     text-align: center;
     font-size: 16px;
-    color: #666666;
+    color: white;
 }
 
-.signup_link a {
+.login_link a {
     color: #2691d9;
     text-decoration: none;
 }
 
-.signup_link a:hover {
+.login_link a:hover {
     text-decoration: underline;
 }
