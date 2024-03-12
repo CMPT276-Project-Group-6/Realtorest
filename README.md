@@ -30,8 +30,11 @@ The website’s primary focus will be helping buyers find properties they like, 
 
 
 ## Documentation
-### Proposal - Google Docs
+### Proposal
 https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0
+
+### Requirements and Specification Document - Iteration 1
+https://docs.google.com/document/d/1_oOKkc0if6xlwWooyd694t9nAQmbeQBu31ZJ956VdmE/edit?usp=sharing
 
 ### Canvas Pages
 (An SFU account is required to access these pages)
@@ -49,31 +52,29 @@ https://canvas.sfu.ca/courses/83043/assignments/952051
 https://canvas.sfu.ca/courses/83043/files/23292672?module_item_id=3242357
 
 
-### UI Mockups
-#### Home Page of **Realtorest**
-![Home Page of Realtorest](<Documentation/UI Mockup 1.png>)
-#### Login Page
-![Login Page](<Documentation/UI Mockup 2.png>)
+### Screenshots
+#### Home Page
+![Home Page](<Documentation/Screenshots/I1 Home Page.png>)
 #### Properties Listing View
-![Properties Listing View](<Documentation/UI Mockup 3.png>)
+![Properties Listing View](<Documentation/Screenshots/I1 Listing.png>)
 
 
 ## Group Members
-### Drishty
-GitHub: https://github.com/drishty02
-	
 ### Kevin
 GitHub: https://github.com/kzcheng
  
 ### Nam
 GitHub: https://github.com/namneyugn21
 
-### Malaika
-GitHub: https://github.com/MalaikaQ
- 
+### Drishty
+GitHub: https://github.com/drishty02
+
 ### Amrit
 GitHub: https://github.com/htoor1999
- 
+
+### Malaika
+GitHub: https://github.com/MalaikaQ
+
 
 ## Useful Links
 ### GitHub Repository
