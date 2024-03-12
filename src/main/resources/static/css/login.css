@@ -37,43 +37,41 @@ body {
     color: rgb(211, 211, 211);
 }
 .navbar {
-    position: fixed; 
-    top: 0; 
-    width: 100%; 
-    z-index: 1000; 
-    background-color: rgba(14, 29, 51, 255) 
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(14, 29, 51, 255);
 }
 
 .container {
     display: flex;
     justify-content: flex-start;
     width: 1200px;
-    padding: 30px; 
+    padding: 30px;
 }
 
 .side-box {
     width: 60%;
-   padding: 0;
+    padding: 0;
     color: #ffffff;
     display: flex;
     flex-direction: column;
-    justify-content:flex-start;
-  
+    justify-content: flex-start;
 }
 
 .side-box h1 {
     font-family: Raleway, sans-serif;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
 .side-box-content {
     font-family: "Playfair Display", serif;
-    margin-top: 60px;  
-
+    margin-top: 60px;
 }
 
-.side-box-content p{
-    width: 100px;    
+.side-box-content p {
+    width: 100px;
     font-family: "Playfair Display", serif;
     font-size: 15px;
     font-weight: 200;
@@ -87,13 +85,13 @@ body {
     margin-left: 200px;
     margin-top: -30px;
     background-color: #1b2b43;
-     display: flex;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start; 
-    justify-content: flex-start; 
-    text-align: left; 
-    position: relative; 
-} 
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    position: relative;
+}
 
 .login-form h2 {
     font-family: "Monaco", Courier, monospace;
@@ -121,7 +119,6 @@ body {
 .password-input:focus {
     border-color: #ff0000;
 }
-
 
 .username-input::placeholder,
 .password-input::placeholder {
