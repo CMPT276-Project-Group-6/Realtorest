@@ -9,13 +9,12 @@ body {
     overflow: hidden;
 }
 
-
 .container {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     height: 60vh;
-   margin-top: 50px;
+    margin-top: 50px;
 }
 
 .register-form {
@@ -135,7 +134,7 @@ body {
     position: relative;
     bottom: auto;
     right: auto;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 .login-form button:hover {
