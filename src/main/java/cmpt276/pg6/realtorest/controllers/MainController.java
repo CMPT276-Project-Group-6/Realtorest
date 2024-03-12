@@ -23,16 +23,78 @@ public class MainController {
     @Autowired
     private UserRepository userRepo;
 
-    // BACK END MECHANICS
+    //
+    // #region Model Attributes as Global Variables
+
     /**
-     * A way to grab the current URL, using this to refresh the webpage after doing something.
-     * 
-     * Kevin: Yeah I know this is a weird hack but please don't touch this for now.
+     * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
      */
     @ModelAttribute("currentUrl")
     public String getCurrentUrl(HttpServletRequest request) {
         return request.getRequestURI();
     }
+
+    // #endregion
+
+    //
+    // #region Visitable Pages
+
+    // Home Page
+    @GetMapping("/")
+    public String showHomePage(Model model, HttpServletRequest request, HttpSession session) {
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        // Redirect to "/main" view
+        return "home";
+    }
+
+    // Display users database
+    @GetMapping("/users/all")
+    public String showAdminPage(Model model) {
+        System.out.println("Get all users");
+        // Get all users from the database
+        List<User> users = userRepo.findAll();
+        // End of database call.
+        model.addAttribute("user", users);
+        return "users/listAll";
+        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
+    }
+
+    // PROPERTY LISTING
+    @GetMapping("/property-listing")
+    public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "propertyListing";
+    }
+
+    // SIGN IN and LOG OUT
+    @GetMapping("/login")
+    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "users/login";
+        } else {
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
+
+    // REGISTER
+    @GetMapping("/register")
+    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
+        return "users/register";
+    }
+
+    // #endregion
+
+    //
+    // #region Not Visitable Stuff
 
     /**
      * Adds a new user to the system.
@@ -45,42 +107,6 @@ public class MainController {
         userRepo.save(new User(name, email, password));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
-    }
-
-    // Display users database
-    @GetMapping("/users/all")
-    public String getAllUsers(Model model) {
-        System.out.println("Get all users");
-        // Get all users from the database
-        List<User> users = userRepo.findAll();
-        // End of database call.
-        model.addAttribute("user", users);
-        return "users/listAll";
-        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
-    }
-
-    // HOME PAGE
-    @GetMapping("/")
-    public String redirectMain(Model model, HttpServletRequest request, HttpSession session) {
-        // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-        // Redirect to "/main" view
-        return "home";
-    }
-
-    // SIGN IN and LOG OUT
-    @GetMapping("/login")
-    public String getLoginPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "users/login";
-        } else {
-            model.addAttribute("user", user);
-            return "redirect:/";
-        }
     }
 
     @PostMapping("/login")
@@ -101,28 +127,6 @@ public class MainController {
         }
     }
 
-    @GetMapping("/logout")
-    public RedirectView destroySession(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return new RedirectView("");
-    }
-
-    // PROPERTY LISTING
-    @GetMapping("/property-listing")
-    public String PropListing(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-        return "propertyListing";
-    }
-
-    // REGISTER
-    @GetMapping("/register")
-    public String getRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
-        return "users/register";
-    }
-
     @PostMapping("/register")
     public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
         String name = newUser.get("name");
@@ -132,4 +136,12 @@ public class MainController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:/";
     }
+
+    @GetMapping("/logout")
+    public RedirectView destroySession(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return new RedirectView("");
+    }
+    
+    // #endregion
 }
