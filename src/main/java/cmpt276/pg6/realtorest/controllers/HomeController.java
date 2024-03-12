@@ -22,4 +22,7 @@ public class HomeController {
     public String testPropListing() {
         return "propertyListing";
     }
+
 }
+
+
