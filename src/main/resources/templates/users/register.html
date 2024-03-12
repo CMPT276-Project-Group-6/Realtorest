@@ -25,6 +25,7 @@
                     <div class="register-form mb-3">
                         <h2 class="text-center">Register</h2>
                         <form action="/users/add" method="post" onsubmit="return validateForm()">
+                            <input type="hidden" name="redirectUrl" value="/" />
                             <div class="input-wrapper">
                                 <input type="text" class="username-input" placeholder="" name="username" required />
                                 <label class="input-label">Username</label>
