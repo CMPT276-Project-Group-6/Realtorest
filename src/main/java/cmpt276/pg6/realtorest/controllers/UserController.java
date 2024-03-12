@@ -23,60 +23,15 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
+    // BACK END MECHANICS
     /**
      * A way to grab the current URL, using this to refresh the webpage after doing something.
      * 
      * Kevin: Yeah I know this is a weird hack but please don't touch this for now.
-     */
+    */
     @ModelAttribute("currentUrl")
     public String getCurrentUrl(HttpServletRequest request) {
         return request.getRequestURI();
-    }
-
-    @GetMapping("/users/all")
-    public String getAllUsers(Model model) {
-        System.out.println("Get all users");
-        // Get all users from the database
-        List<User> users = userRepo.findAll();
-        // End of database call.
-        model.addAttribute("user", users);
-        return "users/listAll";
-        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
-    }
-
-    @GetMapping("/login")
-    public String getLoginPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "users/login";
-        } else {
-            model.addAttribute("user", user);
-            return "users/protected";
-        }
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
-        // Process the login form (user enters email and password to login)
-        String email = formData.get("email");
-        String password = formData.get("password");
-        List<User> userList = userRepo.findByEmailAndPassword(email, password);
-        if (userList.isEmpty()) {
-            // if there are no user accounts in db
-            return "users/login";
-        } else {
-            // Successful login
-            User user = userList.get(0);
-            request.getSession().setAttribute("session_user", user);
-            model.addAttribute("user", user);
-            return "home";
-        }
-    }
-
-    @GetMapping("/logout")
-    public RedirectView destroySession(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return new RedirectView("");
     }
 
     /**
@@ -92,11 +47,79 @@ public class UserController {
         return "redirect:" + redirectUrl;
     }
 
+    // Display users database
+    @GetMapping("/users/all")
+    public String getAllUsers(Model model) {
+        System.out.println("Get all users");
+        // Get all users from the database
+        List<User> users = userRepo.findAll();
+        // End of database call.
+        model.addAttribute("user", users);
+        return "users/listAll";
+        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
+    }
+
+    // HOME PAGE
+    @GetMapping("/")
+    public String redirectMain(Model model, HttpServletRequest request, HttpSession session) {
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        // Redirect to "/main" view
+        return "home";
+    }
+
+    // SIGN IN and LOG OUT
+    @GetMapping("/login")
+    public String getLoginPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "users/login";
+        } else {
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
+    @PostMapping("/login")
+    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
+        // Process the login form (user enters email and password to login)
+        String email = formData.get("email");
+        String password = formData.get("password");
+        List<User> userList = userRepo.findByEmailAndPassword(email, password);
+        if (userList.isEmpty()) {
+            // if there are no user accounts in db
+            return "users/login";
+        } else {
+            // Successful login
+            User user = userList.get(0);
+            request.getSession().setAttribute("session_user", user);
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
+    @GetMapping("/logout")
+    public RedirectView destroySession(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return new RedirectView("");
+    }
+
+    // PROPERTY LISTING
+    @GetMapping("/property-listing")
+    public String PropListing(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "propertyListing";
+    }
+
+    // REGISTER
     @GetMapping("/register")
     public String getRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
         return "users/register";
     }
-
     @PostMapping("/register")
     public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
         String name = newUser.get("name");
@@ -104,6 +127,6 @@ public class UserController {
         String password = newUser.get("password");
         userRepo.save(new User(name, email, password));
         response.setStatus(HttpServletResponse.SC_CREATED);
-        return "home";
+        return "redirect:/";
     }
 }
