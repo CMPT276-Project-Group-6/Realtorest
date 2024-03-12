@@ -129,10 +129,10 @@ public class MainController {
     // Register logic, a bit redundant with the /users/add endpoint, will probably remove it later
     @PostMapping("/register")
     public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
-        String name = newUser.get("name");
+        String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
-        userRepo.save(new User(name, email, password));
+        userRepo.save(new User(username, email, password));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:/";
     }
