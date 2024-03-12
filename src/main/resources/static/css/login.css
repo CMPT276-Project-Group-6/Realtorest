@@ -43,7 +43,6 @@ body {
     z-index: 1000;
     background-color: rgba(14, 29, 51, 255);
 }
-/************/
 
 .container {
     display: flex;
@@ -52,30 +51,39 @@ body {
     padding: 30px;
 }
 
-.introduction-section{
-    margin-top: 80px;
-    width: 40%;
-}
-
 .side-box {
-    width: 280px;
-    padding: 10px;
+    width: 60%;
+    padding: 0;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
-
 
 .side-box h1 {
     font-family: Raleway, sans-serif;
     font-weight: bold;
-    font-size: 50px;
+}
+
+.side-box-content {
+    font-family: "Playfair Display", serif;
+    margin-top: 60px;
+}
+
+.side-box-content p {
+    width: 100px;
+    font-family: "Playfair Display", serif;
+    font-size: 15px;
+    font-weight: 200;
+    margin-top: 5px;
+    text-align: center;
 }
 
 .login-form {
     width: 400px;
-    height: 500px;
     padding: 10px;
     margin-left: 200px;
-    margin-top: -20px;
+    margin-top: -30px;
     background-color: #1b2b43;
     display: flex;
     flex-direction: column;
@@ -90,7 +98,7 @@ body {
     font-size: 25px;
     color: #ffffff;
     position: absolute;
-    bottom: 500px;
+    bottom: 400px;
 }
 
 .username-input,
@@ -128,7 +136,7 @@ body {
 }
 
 .input-wrapper input {
-    width: 140%;
+    width: 100%;
     padding: 15px;
     border: none;
     border-bottom: 2px solid #ccc;
@@ -191,8 +199,7 @@ body {
     flex-direction: column;
     position: absolute;
     left: 15px;
-    bottom: 20px;
-    
+    bottom: -80px; /* Center vertically */
 }
 
 .google-login {
@@ -332,7 +339,7 @@ body {
     padding-bottom: 25px;
     text-align: center;
     font-size: 16px;
-    color: white;
+    color: #666666;
 }
 
 .signup_link a {
