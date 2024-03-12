@@ -94,14 +94,13 @@ public class MainController {
     //
     // #region Not Visitable Stuff
 
-    // Adding a user to the database, mostly used for testing, a bit obsolete
-    // TODO: Combine this with the /register endpoint
+    // Adding a user to the database, used for registering
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
-        String name = newUser.get("name");
+        String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
-        userRepo.save(new User(name, email, password));
+        userRepo.save(new User(username, email, password));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -124,17 +123,6 @@ public class MainController {
             model.addAttribute("user", user);
             return "redirect:/";
         }
-    }
-
-    // Register logic, a bit redundant with the /users/add endpoint, will probably remove it later
-    @PostMapping("/register")
-    public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
-        String name = newUser.get("name");
-        String email = newUser.get("email");
-        String password = newUser.get("password");
-        userRepo.save(new User(name, email, password));
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return "redirect:/";
     }
 
     // Logout by nuking the session

@@ -12,7 +12,7 @@
         <header class="container my-5">
             <div class="card section-box mx-auto" style="max-width: 600px">
                 <div class="card-body text-center">
-                    <h1 class="display-3" style="font-weight: 500">User Test Page</h1>
+                    <h1 class="display-3" style="font-weight: 500">Admin Page</h1>
                 </div>
             </div>
         </header>
@@ -26,7 +26,7 @@
                         <thead class="table-info">
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Name</th>
+                                <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Password</th>
                             </tr>
@@ -34,7 +34,7 @@
                         <tbody>
                             <tr th:each="user:${user}">
                                 <td th:text="${user.uid}"></td>
-                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.username}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.password}"></td>
                                 <!-- <td>
@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <h2 class="mb-3">Add User</h2>
                     <form action="/users/add" method="post">
-                        <input type="text" class="form-control" name="name" placeholder="Name" /><br />
+                        <input type="text" class="form-control" name="username" placeholder="Username" /><br />
                         <input type="text" class="form-control" name="email" placeholder="Email" /><br />
                         <input type="text" class="form-control" name="password" placeholder="Password" /><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
