@@ -98,10 +98,10 @@ public class MainController {
     // TODO: Combine this with the /register endpoint
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
-        String name = newUser.get("name");
+        String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
-        userRepo.save(new User(name, email, password));
+        userRepo.save(new User(username, email, password));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
