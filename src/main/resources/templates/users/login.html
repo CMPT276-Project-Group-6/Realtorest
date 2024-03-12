@@ -5,59 +5,111 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login Page</title>
         <link rel="stylesheet" type="text/css" href="/css/login.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <!-- FontAwesome -->
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.css" rel="stylesheet" />
+        <!-- Google Fonts & Custom CSS -->
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&family=Lobster&family=Kaushan+Script&family=Great+Vibes&family=Amatic+SC&family=Shadows+Into+Light&family=Satisfy&family=Courgette&family=Tangerine&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="/css/login.css" />
+        <link rel="stylesheet" href="/css/homepage.css" />
     </head>
+
     <body>
-        <div class="container">
-            <div class="side-box">
-                <h1>FIND YOUR NEXT HOME</h1>
-                <div class="side-box-content">
-                    <p>I don't want to sell you a house</p>
-                    <p>I want to find you a <strong>HOME</strong></p>
+        <section class="main-content">
+            <div class="container mt-5">
+                <div class="row">
+                    <!-- Introduction Section -->
+                    <section class="introduction-section col-md-4">
+                        <div class="side-box">
+                            <h1>FIND YOUR NEXT HOME</h1>
+                            <div class="side-box-content">
+                                <p>I don't want to sell you a house</p>
+                                <p>I want to find you a <strong>HOME</strong></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Login Form Section -->
+                <div class="row">
+                    <section class="login-form-section col-md-8">
+                        <div class="login-form">
+                            <h2>SIGN IN</h2>
+                            <form action="/login" method="post" onsubmit="return validateForm()">
+                                <div class="input-wrapper">
+                                    <input type="text" class="username-input" placeholder=" " name="email" required />
+                                    <label class="input-label">Email</label>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="password" class="password-input" placeholder=" " name="password" required />
+                                    <label class="input-label">Password</label>
+                                </div>
+                                <button type="submit">Login</button>
+
+                                <div class="social-login">
+                                    <a href="#" class="google-login">
+                                        <div class="content-wrapper">
+                                            <div class="logo-wrapper">
+                                                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
+                                            </div>
+                                            <span class="text-container">
+                                                <span>Sign in with Google</span>
+                                            </span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="apple-login">
+                                        <div class="content-wrapper">
+                                            <div class="logo-wrapper">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" />
+                                            </div>
+                                            <span class="text-container">
+                                                <span>Sign in with Apple</span>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="forgot_password">
+                                    <a href="">Forgot Password?</a>
+                                </div>
+                                <div class="signup_link">Don't have an account? <a href="/signUp">Register Here</a></div>
+                            </form>
+                        </div>
+                        <div class="forgot_password">
+                            <a href="">Forgot Password?</a>
+                        </div>
+                        <div class="signup_link">Don't have an account? <a th:href="@{/register}">Register Here</a></div>
+                    </section>
                 </div>
             </div>
-            <div class="login-form">
-                <h2>SIGN IN</h2>
-                <form action="/login" method="post" onsubmit="return validateForm()">
-                    <div class="input-wrapper">
-                        <input type="text" class="username-input" placeholder=" " name="email" required />
-                        <label class="input-label">Email</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="password" class="password-input" placeholder=" " name="password" required />
-                        <label class="input-label">Password</label>
-                    </div>
-                    <button type="submit">Login</button>
-                    <div class="social-login">
-                        <a href="#" class="google-login">
-                            <div class="content-wrapper">
-                                <div class="logo-wrapper">
-                                    <img src="https://developers.google.com/identity/images/g-logo.png" />
-                                </div>
-                                <span class="text-container">
-                                    <span>Sign in with Google</span>
-                                </span>
-                            </div>
-                        </a>
-                        <a href="#" class="apple-login">
-                            <div class="content-wrapper">
-                                <div class="logo-wrapper">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" />
-                                </div>
-                                <span class="text-container">
-                                    <span>Sign in with Apple</span>
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="forgot_password">
-                        <a href="">Forgot Password?</a>
-                    </div>
-                    <div class="signup_link">Don't have an account? <a th:href="@{/register}">Register Here</a></div>
-                </form>
-            </div>
-        </div>
+        </section>
+
+        <!-- NAVIGATION BAR -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <section class="realtorest-title">
+                <a th:href="@{/}">
+                    <p class="playfair-semibold" style="color: white">Realtorest</p>
+                </a>
+            </section>
+            <section class="navbar-categories ms-auto">
+                <a class="navbar-category" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                    <p>About Us</p>
+                </a>
+                <a href="" class="navbar-category">
+                    <p>Buy</p>
+                </a>
+                <a href="" class="navbar-category">
+                    <p>Rent</p>
+                </a>
+                <a href="" class="navbar-category">
+                    <p>Sell</p>
+                </a>
+                <a href="" class="navbar-category">
+                    <p>Register/Sign In</p>
+                </a>
+            </section>
+        </nav>
     </body>
 </html>
