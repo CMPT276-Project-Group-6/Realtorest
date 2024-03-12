@@ -28,7 +28,7 @@ public class UserController {
      * A way to grab the current URL, using this to refresh the webpage after doing something.
      * 
      * Kevin: Yeah I know this is a weird hack but please don't touch this for now.
-    */
+     */
     @ModelAttribute("currentUrl")
     public String getCurrentUrl(HttpServletRequest request) {
         return request.getRequestURI();
@@ -82,6 +82,7 @@ public class UserController {
             return "redirect:/";
         }
     }
+
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // Process the login form (user enters email and password to login)
@@ -99,6 +100,7 @@ public class UserController {
             return "redirect:/";
         }
     }
+
     @GetMapping("/logout")
     public RedirectView destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
@@ -120,6 +122,7 @@ public class UserController {
     public String getRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
         return "users/register";
     }
+
     @PostMapping("/register")
     public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
         String name = newUser.get("name");
