@@ -47,23 +47,11 @@ public class MainController {
         if (user != null) {
             model.addAttribute("user", user);
         }
-        // Redirect to "/main" view
+        // Display the home page
         return "home";
     }
 
-    // Display users database
-    @GetMapping("/users/all")
-    public String showAdminPage(Model model) {
-        System.out.println("Get all users");
-        // Get all users from the database
-        List<User> users = userRepo.findAll();
-        // End of database call.
-        model.addAttribute("user", users);
-        return "users/listAll";
-        // Links to the file in resources/templates/exampleUsers/exampleShowAll.html
-    }
-
-    // PROPERTY LISTING
+    // Property Listing Page
     @GetMapping("/property-listing")
     public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -73,7 +61,7 @@ public class MainController {
         return "propertyListing";
     }
 
-    // SIGN IN and LOG OUT
+    // Login Page
     @GetMapping("/login")
     public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -81,14 +69,25 @@ public class MainController {
             return "users/login";
         } else {
             model.addAttribute("user", user);
+            // Redirect to the home page if the user is already logged in
             return "redirect:/";
         }
     }
 
-    // REGISTER
+    // Register Page
     @GetMapping("/register")
     public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
         return "users/register";
+    }
+
+    // Admin Page
+    @GetMapping("/users/all")
+    public String showAdminPage(Model model, HttpServletRequest request, HttpSession session) {
+        System.out.println("Get all users");
+        // Get all users from the database
+        List<User> users = userRepo.findAll();
+        model.addAttribute("user", users);
+        return "users/listAll";
     }
 
     // #endregion
@@ -96,9 +95,8 @@ public class MainController {
     //
     // #region Not Visitable Stuff
 
-    /**
-     * Adds a new user to the system.
-     */
+    // Adding a user to the database, mostly used for testing, a bit obsolete
+    // TODO: Combine this with the /register endpoint
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
         String name = newUser.get("name");
@@ -109,6 +107,7 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
+    // Login logic
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // Process the login form (user enters email and password to login)
@@ -116,7 +115,8 @@ public class MainController {
         String password = formData.get("password");
         List<User> userList = userRepo.findByEmailAndPassword(email, password);
         if (userList.isEmpty()) {
-            // if there are no user accounts in db
+            // If no user that matches the email and password is found, return to the login page
+            // TODO Add a message to the login page that says "Invalid email or password"
             return "users/login";
         } else {
             // Successful login
@@ -127,6 +127,7 @@ public class MainController {
         }
     }
 
+    // Register logic, a bit redundant with the /users/add endpoint, will probably remove it later
     @PostMapping("/register")
     public String register(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
         String name = newUser.get("name");
@@ -137,11 +138,13 @@ public class MainController {
         return "redirect:/";
     }
 
+    // Logout by nuking the session
+    // TODO: Would it be better to use a POST request for this?
     @GetMapping("/logout")
     public RedirectView destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
         return new RedirectView("");
     }
-    
+
     // #endregion
 }
