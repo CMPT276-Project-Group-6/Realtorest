@@ -81,13 +81,12 @@ public class MainController {
     }
 
     // Admin Page
-    @GetMapping("/users/all")
+    @GetMapping("/dev/admin")
     public String showAdminPage(Model model, HttpServletRequest request, HttpSession session) {
-        System.out.println("Get all users");
         // Get all users from the database
         List<User> users = userRepo.findAll();
         model.addAttribute("user", users);
-        return "users/listAll";
+        return "dev/admin";
     }
 
     // #endregion
@@ -144,6 +143,16 @@ public class MainController {
     public RedirectView destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
         return new RedirectView("");
+    }
+
+    // #endregion
+
+    // 
+    // #region Redirects
+
+    @GetMapping("/admin")
+    public RedirectView reAdmin() {
+        return new RedirectView("/dev/admin");
     }
 
     // #endregion
