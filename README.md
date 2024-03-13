@@ -18,13 +18,11 @@ As shown in `src\main\resources\application.properties`, the environment variabl
 
 Using `cdimascio/dotenv-java`, the data is being read from the file `etc\secrets\.env`, which should be provided as a part of the submission. If there are any issues, please contact me at <kzcheng@sfu.ca>.
 
-### Commits with Descriptions
-Some commits may have more details in descriptions. They may be useful to provide more insight.
+### Admin Page
+The admin page can be accessed by going to `/dev/admin`. It have some useful functions, like displaying the table of all users and adding users manually.
 
-### More Insight into my Workflow Available
-If you are interested in seeing more of my workflow, feel free to check out the [GitHub Issue page](https://github.com/kzcheng/CMPT276-Assignment-2/issues?q=) and the [GitHub Projects](https://github.com/users/kzcheng/projects/2) page of this assignment.
-
-Work that are done will no longer be open, so remember to check not just the open Issues.
+### More Insight into the Workflow Available
+If you are interested in seeing more of the workflow, feel free to check out the [GitHub Issues](https://github.com/CMPT276-Project-Group-6/Realtorest/issues?q=is%3Aissue) page, [GitHub Pull Requests](https://github.com/CMPT276-Project-Group-6/Realtorest/pulls?q=is%3Apr) page, and the [GitHub Projects](https://github.com/orgs/CMPT276-Project-Group-6/projects/1) page of this assignment.
 
 
 ## About this project
