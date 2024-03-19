@@ -33,8 +33,8 @@
                 <div class="row">
                     <section class="login-form-section col-md-8">
                         <div class="login-form">
-                            <h2>SIGN IN</h2>
-                            <form action="/login" method="post" onsubmit="return validateForm()">
+                            <h2>ADMIN SIGN IN</h2>
+                            <form action="/adminlogin" method="post" onsubmit="return validateForm()">
                                 <div class="input-wrapper">
                                     <input type="text" class="username-input" placeholder=" " name="email" required />
                                     <label class="input-label">Email</label>
@@ -44,36 +44,10 @@
                                     <label class="input-label">Password</label>
                                 </div>
                                 <button type="submit">Login</button>
-
-                                <div class="social-login">
-                                    <a href="#" class="google-login">
-                                        <div class="content-wrapper">
-                                            <div class="logo-wrapper">
-                                                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
-                                            </div>
-                                            <span class="text-container">
-                                                <span>Sign in with Google</span>
-                                            </span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="apple-login">
-                                        <div class="content-wrapper">
-                                            <div class="logo-wrapper">
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1200px-Apple_logo_white.svg.png" alt="Apple Logo" />
-                                            </div>
-                                            <span class="text-container">
-                                                <span>Sign in with Apple</span>
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
                                 <div class="forgot_password">
                                     <a href="">Forgot Password?</a>
                                 </div>
-                                <div class="signup_link">Don't have an account? <a href="/register">Register Here</a> <br>
-                                    Admin? <a href="/adminlogin">Login Here</a>
-                                </div>
-                            </form>
+                             </form>
                         </div>
                     </section>
                 </div>
