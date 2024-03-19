@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+
+import cmpt276.pg6.realtorest.models.Admin;
+import cmpt276.pg6.realtorest.models.AdminRepository;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +25,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private AdminRepository adminRepo;
 
     //
     // #region Model Attributes as Global Variables
@@ -149,4 +155,60 @@ public class MainController {
     }
 
     // #endregion
+
+     @PostMapping("/users/addAdmin")
+    public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
+        String adminName = newUser.get("username");
+        String email = newUser.get("email");
+        String password = newUser.get("password");
+        adminRepo.save(new Admin(adminName, email, password));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "redirect:" + redirectUrl;
+    }
+
+    
+    @GetMapping("/registerAdmin")
+    public String showRegisterAdminPage(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            return "users/registerAdmin";
+        } else {
+            model.addAttribute("admin", admin);
+            return "redirect:/";
+        }
+    }
+
+
+      // Login Page for admin
+    @GetMapping("/adminlogin")
+    public String showAdminLoginPage(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            return "users/adminlogin";
+        } else {// Redirect to the home page if the user is already logged in
+            model.addAttribute("admin", admin);
+            return "protected";
+        }
+    }
+
+    @PostMapping("/adminlogin")
+    public String adminlogin(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
+        // Process the login form (user enters email and password to login)
+        String email = formData.get("email");
+        String password = formData.get("password");
+        List<Admin> adminList = adminRepo.findByEmailAndPassword(email, password);
+        if (adminList.isEmpty()) {
+            // If no user that matches the email and password is found, return to the login page
+            // TODO Add a message to the login page that says "Invalid email or password"
+            return "users/adminlogin";
+        } else {
+            // Successful login
+            Admin admin = adminList.get(0);
+            request.getSession().setAttribute("session_user", admin);
+            model.addAttribute("admin", admin);
+            return "protected";
+        }
+    }
 }
+
+
