@@ -151,21 +151,22 @@ a {
     box-shadow: 0 0 10px 1px rgb(145, 145, 145);
 }
 .favorite-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    background-color: tomato;
+    margin-left: -5px;
+    padding-top: 15px;
     background-color: transparent;
     color: rgb(186, 186, 186);
     border: none;
-    font-size: 20px;
     outline: none;
-    z-index: 2 !important;
+}
+#favourite-button p {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(100, 100, 100);
 }
 .favorite-button:hover {
     cursor: pointer;
     color: #f1c40f;
 }
-
 /* Description */
 .carousel-inner .carousel-item img {
     height: 200px;
@@ -217,4 +218,49 @@ a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/* PROPERTY DETAILS */
+.modal .carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+.location-address {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 25px;
+    font-weight: 400;
+    color: rgb(43, 67, 102);
+}
+.location-icon-container {
+    color: rgb(43, 67, 102);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-family: "Montserrat", "sans-serif";
+    margin-left: -15px;
+}
+.location-icon-container .icon-subcontainer {
+    margin-right: 20px;
+}
+.detailed-description {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 17px;
+    color: rgb(100, 100, 100);
+    font-weight: 300;
+}
+.display-realtor {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    height: 250px
+}
+.display-realtor .offcanvas-header p, .display-realtor .offcanvas-header .social-media a {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: rgb(100, 100, 100);
+    font-weight: 300;
+}
+.display-realtor .offcanvas-header .social-media a:hover {
+    color: rgb(140, 140, 140);
 }
