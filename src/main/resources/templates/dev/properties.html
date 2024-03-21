@@ -6,37 +6,41 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" defer></script>
         <link href="/css/dev.css" rel="stylesheet" />
-        <title>Developer Page</title>
+        <title>Properties Database</title>
     </head>
     <body class="justify-content-center">
         <header class="container my-5">
             <div class="card section-box mx-auto" style="max-width: 600px">
                 <div class="card-body text-center">
-                    <h1 class="display-3" style="font-weight: 500">Developer Page</h1>
+                    <h1 class="display-3" style="font-weight: 500">Properties Database</h1>
                 </div>
             </div>
         </header>
 
-        <!-- A table listing all users -->
+        <!-- A table listing everything in the db table -->
         <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
-                    <h2 class="mb-3">Table of All Users</h2>
+                    <h2 class="mb-3">Table of All Properties</h2>
                     <table class="table table-hover table-bordered" id="student-table">
                         <thead class="table-info">
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Password</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Bedrooms</th>
+                                <th scope="col">Bathrooms</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="user:${user}">
-                                <td th:text="${user.uid}"></td>
-                                <td th:text="${user.username}"></td>
-                                <td th:text="${user.email}"></td>
-                                <td th:text="${user.password}"></td>
+                            <tr th:each="property:${properties}">
+                                <td th:text="${property.pid}"></td>
+                                <td th:text="${property.name}"></td>
+                                <td th:text="${property.location}"></td>
+                                <td th:text="${property.price}"></td>
+                                <td th:text="${property.brCount}"></td>
+                                <td th:text="${property.baCount}"></td>
                                 <!-- <td>
                                     <div class="d-flex gap-1">
                                         <button type="button" class="btn btn-primary mr-2" th:attr="sid=${student.sid},name=${student.name},weight=${student.weight},height=${student.height},hairColor=${student.hairColor},gpa=${student.gpa}" onclick="selectedStudent(this)">Edit</button>
@@ -53,17 +57,19 @@
             </div>
         </section>
 
-        <!-- Form to add a new user -->
+        <!-- Form to add a new entry -->
         <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
-                    <h2 class="mb-3">Add User</h2>
-                    <form action="/users/add" method="post">
-                        <input type="text" class="form-control" name="username" placeholder="Username" /><br />
-                        <input type="text" class="form-control" name="email" placeholder="Email" /><br />
-                        <input type="text" class="form-control" name="password" placeholder="Password" /><br />
+                    <h2 class="mb-3">Add Property</h2>
+                    <form action="/properties/add" method="post">
+                        <input type="text" class="form-control" name="name" placeholder="Name" /><br />
+                        <input type="text" class="form-control" name="location" placeholder="Location" /><br />
+                        <input type="text" class="form-control" name="price" placeholder="Price" /><br />
+                        <input type="text" class="form-control" name="brCount" placeholder="Number of Bedrooms" /><br />
+                        <input type="text" class="form-control" name="baCount" placeholder="Number of Bathrooms" /><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                        <button type="submit" class="btn btn-primary">Add User</button>
+                        <button type="submit" class="btn btn-primary">Add Property</button>
                     </form>
                 </div>
             </div>

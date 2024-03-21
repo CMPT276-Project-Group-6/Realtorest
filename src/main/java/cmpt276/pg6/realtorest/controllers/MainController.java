@@ -7,14 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+import cmpt276.pg6.realtorest.models.Property;
+import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -23,7 +25,9 @@ public class MainController {
     @Autowired
     private UserRepository userRepo;
 
-    //
+    @Autowired
+    private PropertyRepository propertyRepo;
+
     // #region Model Attributes as Global Variables
 
     /**
@@ -36,7 +40,8 @@ public class MainController {
 
     // #endregion
 
-    //
+
+
     // #region Visitable Pages
 
     // Home Page
@@ -85,18 +90,28 @@ public class MainController {
         }
     }
 
-    // Admin Page
-    @GetMapping("/dev")
-    public String showAdminPage(Model model, HttpServletRequest request, HttpSession session) {
+    // Dev Page for Users Database
+    @GetMapping("/dev/users")
+    public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
         // Get all users from the database
         List<User> users = userRepo.findAll();
-        model.addAttribute("user", users);
-        return "dev/dev";
+        model.addAttribute("users", users);
+        return "dev/users";
+    }
+
+    // Dev Page for Properties Database
+    @GetMapping("/dev/properties")
+    public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
+        // Get all users from the database
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
+        return "dev/properties";
     }
 
     // #endregion
 
-    //
+
+
     // #region Not Visitable Stuff
 
     // Adding a user to the database, used for registering
@@ -109,6 +124,19 @@ public class MainController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
+
+    @PostMapping("/properties/add")
+    public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
+        String name = newProperty.get("name");
+        String location = newProperty.get("location");
+        int price = Integer.parseInt(newProperty.get("price"));
+        int brCount = Integer.parseInt(newProperty.get("brCount"));
+        int baCount = Integer.parseInt(newProperty.get("baCount"));
+        propertyRepo.save(new Property(name, location, price, brCount, baCount));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "redirect:" + redirectUrl;
+    }
+
 
     // Login logic
     @PostMapping("/login")
@@ -140,7 +168,8 @@ public class MainController {
 
     // #endregion
 
-    // 
+
+
     // #region Redirects
 
     @GetMapping("/admin")
@@ -151,6 +180,12 @@ public class MainController {
     @GetMapping("/dev/admin")
     public RedirectView reDevAdmin() {
         return new RedirectView("/dev");
+    }
+
+    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
+    @GetMapping("/dev")
+    public RedirectView reDev() {
+        return new RedirectView("/dev/users");
     }
 
     // #endregion
