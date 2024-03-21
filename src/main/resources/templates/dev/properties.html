@@ -57,21 +57,23 @@
             </div>
         </section>
 
-        <!-- Form to add a new user
+        <!-- Form to add a new entry -->
         <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
                     <h2 class="mb-3">Add Property</h2>
-                    <form action="/users/add" method="post">
-                        <input type="text" class="form-control" name="username" placeholder="Username" /><br />
-                        <input type="text" class="form-control" name="email" placeholder="Email" /><br />
-                        <input type="text" class="form-control" name="password" placeholder="Password" /><br />
+                    <form action="/properties/add" method="post">
+                        <input type="text" class="form-control" name="name" placeholder="Name" /><br />
+                        <input type="text" class="form-control" name="location" placeholder="Location" /><br />
+                        <input type="text" class="form-control" name="price" placeholder="Price" /><br />
+                        <input type="text" class="form-control" name="brCount" placeholder="Number of Bedrooms" /><br />
+                        <input type="text" class="form-control" name="baCount" placeholder="Number of Bathrooms" /><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                        <button type="submit" class="btn btn-primary">Add User</button>
+                        <button type="submit" class="btn btn-primary">Add Property</button>
                     </form>
                 </div>
             </div>
-        </section> -->
+        </section>
 
         <!-- Buttons used for testing purposes -->
         <!-- <section class="container my-5">

@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -124,6 +125,19 @@ public class MainController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
+
+    @PostMapping("/properties/add")
+    public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
+        String name = newProperty.get("name");
+        String location = newProperty.get("location");
+        int price = Integer.parseInt(newProperty.get("price"));
+        int brCount = Integer.parseInt(newProperty.get("brCount"));
+        int baCount = Integer.parseInt(newProperty.get("baCount"));
+        propertyRepo.save(new Property(name, location, price, brCount, baCount));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "redirect:" + redirectUrl;
+    }
+
 
     // Login logic
     @PostMapping("/login")
