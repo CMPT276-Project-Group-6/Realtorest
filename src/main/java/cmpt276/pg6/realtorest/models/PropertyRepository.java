@@ -1,5 +1,7 @@
 package cmpt276.pg6.realtorest.models;
 
-public class PropertyRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PropertyRepository extends JpaRepository<Property, Integer> {
+
 }

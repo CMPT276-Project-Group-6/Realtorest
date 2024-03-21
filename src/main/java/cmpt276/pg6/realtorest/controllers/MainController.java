@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+import cmpt276.pg6.realtorest.models.Property;
+import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +24,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private PropertyRepository propertyRepo;
 
     // #region Model Attributes as Global Variables
 
@@ -85,13 +90,22 @@ public class MainController {
         }
     }
 
-    // Admin Page
+    // Dev Page for Users Database
     @GetMapping("/dev/users")
     public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
         // Get all users from the database
         List<User> users = userRepo.findAll();
-        model.addAttribute("user", users);
+        model.addAttribute("users", users);
         return "dev/users";
+    }
+
+    // Dev Page for Properties Database
+    @GetMapping("/dev/properties")
+    public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
+        // Get all users from the database
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
+        return "dev/properties";
     }
 
     // #endregion
