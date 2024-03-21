@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import cmpt276.pg6.realtorest.models.Admin;
@@ -209,6 +210,13 @@ public class MainController {
             return "protected";
         }
     }
+
+    @GetMapping({"/listUsers"})
+	public ModelAndView getAllUsers() {
+		ModelAndView mav = new ModelAndView("list-users");
+		mav.addObject("users", userRepo.findAll());
+		return mav;
+	}//lists all users in database
 }
 
 

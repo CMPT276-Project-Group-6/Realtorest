@@ -39,9 +39,30 @@
         <!-- INTRODUCTION -->
         <section class="banner">
             <section class="container">
-                <p class="title playfair-semibold">Welcome to Realtorest Admin Page</p>
-                <a th:href="@{/edit-listing}"><button type="button" class="btn btn-primary view-listing">Edit Listings</button></a>
+                <p class="title playfair-semibold">User List</p>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user: ${users}">
+                            <td th:text="${user.username}"></td>
+                            <td th:text ="${user.email}"></td>
+                        </tr>
+                    </tbody>
+			    </table>
+                
             </section>
         </section>
+
+       
+
+
+
     </body>
 </html>
