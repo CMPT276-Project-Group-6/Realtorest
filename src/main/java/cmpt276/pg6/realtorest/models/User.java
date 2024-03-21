@@ -1,6 +1,10 @@
 package cmpt276.pg6.realtorest.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 // This is a user object.
 // The @Entity annotation tells Spring that this is a table in the database.
@@ -25,12 +29,12 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public int getUid() {
+        return uid;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getUsername() {
@@ -41,19 +45,19 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
     }
 }
