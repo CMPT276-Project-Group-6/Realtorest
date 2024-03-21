@@ -1,6 +1,10 @@
 package cmpt276.pg6.realtorest.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 // This is a user object.
 // The @Entity annotation tells Spring that this is a table in the database.
