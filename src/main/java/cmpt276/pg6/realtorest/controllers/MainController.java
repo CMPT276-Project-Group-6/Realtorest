@@ -23,7 +23,6 @@ public class MainController {
     @Autowired
     private UserRepository userRepo;
 
-    //
     // #region Model Attributes as Global Variables
 
     /**
@@ -36,7 +35,8 @@ public class MainController {
 
     // #endregion
 
-    //
+
+
     // #region Visitable Pages
 
     // Home Page
@@ -86,17 +86,18 @@ public class MainController {
     }
 
     // Admin Page
-    @GetMapping("/dev")
-    public String showAdminPage(Model model, HttpServletRequest request, HttpSession session) {
+    @GetMapping("/dev/users")
+    public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
         // Get all users from the database
         List<User> users = userRepo.findAll();
         model.addAttribute("user", users);
-        return "dev/dev";
+        return "dev/users";
     }
 
     // #endregion
 
-    //
+
+
     // #region Not Visitable Stuff
 
     // Adding a user to the database, used for registering
@@ -140,7 +141,8 @@ public class MainController {
 
     // #endregion
 
-    // 
+
+
     // #region Redirects
 
     @GetMapping("/admin")
@@ -151,6 +153,12 @@ public class MainController {
     @GetMapping("/dev/admin")
     public RedirectView reDevAdmin() {
         return new RedirectView("/dev");
+    }
+
+    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
+    @GetMapping("/dev")
+    public RedirectView reDev() {
+        return new RedirectView("/dev/users");
     }
 
     // #endregion
