@@ -147,6 +147,9 @@ a {
     margin-left: 25px;
     margin-right: 25px;
 }
+.figure:hover {
+    box-shadow: 0 0 10px 1px rgb(145, 145, 145);
+}
 .favorite-button {
     position: absolute;
     top: 10px;
@@ -189,6 +192,14 @@ a {
     margin-right: 5px;
 }
 
+/* Figcaption */
+.figure-caption:hover {
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+}
+.figure-caption a {
+    color: gray;
+}
 /* Address */
 .address-container {
     margin-top: -10px;
