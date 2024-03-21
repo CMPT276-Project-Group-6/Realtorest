@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
@@ -112,7 +113,7 @@ public class MainController {
 
 
 
-    // #region Not Visitable Stuff
+    // #region Post mappings
 
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
@@ -138,6 +139,15 @@ public class MainController {
         userRepo.save(new User("Frank", "frank@email.com", "963"));
         userRepo.save(new User("Grace", "grace@email.com", "846"));
         userRepo.save(new User("Heidi", "heidi@email.com", "753"));
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * Deletes a user from the system.
+     */
+    @PostMapping("/users/delete/{uid}")
+    public String deleteUser(@PathVariable int uid, @RequestParam String redirectUrl) {
+        userRepo.deleteById(uid);
         return "redirect:" + redirectUrl;
     }
 
