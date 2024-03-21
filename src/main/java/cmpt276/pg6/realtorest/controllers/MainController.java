@@ -125,6 +125,22 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
+    /**
+     * Fills the users database with testing data.
+     */
+    @PostMapping("/users/fill")
+    public String fillTestingData(@RequestParam String redirectUrl) {
+        userRepo.save(new User("Alice", "alice@email.com", "123"));
+        userRepo.save(new User("Bob", "bob@email.com", "456"));
+        userRepo.save(new User("Charlie", "charlie@email.com", "789"));
+        userRepo.save(new User("David", "david@email.com", "741"));
+        userRepo.save(new User("Eve", "eve@email.com", "852"));
+        userRepo.save(new User("Frank", "frank@email.com", "963"));
+        userRepo.save(new User("Grace", "grace@email.com", "846"));
+        userRepo.save(new User("Heidi", "heidi@email.com", "753"));
+        return "redirect:" + redirectUrl;
+    }
+
     @PostMapping("/properties/add")
     public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
         String name = newProperty.get("name");
@@ -164,6 +180,8 @@ public class MainController {
         request.getSession().invalidate();
         return new RedirectView("");
     }
+
+
 
     // #endregion
 
