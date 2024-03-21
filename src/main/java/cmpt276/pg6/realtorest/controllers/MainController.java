@@ -129,7 +129,7 @@ public class MainController {
      * Fills the users database with testing data.
      */
     @PostMapping("/users/fill")
-    public String fillTestingData(@RequestParam String redirectUrl) {
+    public String fillTestingDataUsers(@RequestParam String redirectUrl) {
         userRepo.save(new User("Alice", "alice@email.com", "123"));
         userRepo.save(new User("Bob", "bob@email.com", "456"));
         userRepo.save(new User("Charlie", "charlie@email.com", "789"));
@@ -138,6 +138,17 @@ public class MainController {
         userRepo.save(new User("Frank", "frank@email.com", "963"));
         userRepo.save(new User("Grace", "grace@email.com", "846"));
         userRepo.save(new User("Heidi", "heidi@email.com", "753"));
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * Deletes all users from the database.
+     * 
+     * This is a dangerous operation and should not be used in a production environment.
+     */
+    @PostMapping("/users/delete/all")
+    public String deleteAllUsers(@RequestParam String redirectUrl) {
+        userRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
 
