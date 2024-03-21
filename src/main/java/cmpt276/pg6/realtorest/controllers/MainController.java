@@ -137,7 +137,6 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-
     // Login logic
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
