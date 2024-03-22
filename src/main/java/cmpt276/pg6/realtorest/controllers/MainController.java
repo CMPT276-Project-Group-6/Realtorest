@@ -114,6 +114,14 @@ public class MainController {
         return "dev/properties";
     }
 
+    @GetMapping("/dev/admins")
+    public String showDevPageAdmins(Model model, HttpServletRequest request, HttpSession session) {
+        // Get all users from the database
+        List<Admin> admins = adminRepo.findAll();
+        model.addAttribute("admins", admins);
+        return "dev/admins";
+    }
+
     // #endregion
 
 
@@ -196,7 +204,7 @@ public class MainController {
 
     // #endregion
 
-     @PostMapping("/users/addAdmin")
+     @PostMapping("/admin/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
         String adminName = newUser.get("username");
         String email = newUser.get("email");
