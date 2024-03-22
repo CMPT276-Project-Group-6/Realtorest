@@ -29,6 +29,7 @@
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Password</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,15 +38,14 @@
                                 <td th:text="${user.username}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.password}"></td>
-                                <!-- <td>
+                                <td>
                                     <div class="d-flex gap-1">
-                                        <button type="button" class="btn btn-primary mr-2" th:attr="sid=${student.sid},name=${student.name},weight=${student.weight},height=${student.height},hairColor=${student.hairColor},gpa=${student.gpa}" onclick="selectedStudent(this)">Edit</button>
-                                        <form th:action="@{/students/delete/{sid}(sid=${student.sid})}" method="post">
+                                        <form th:action="@{/users/delete/{uid}(uid=${user.uid})}" method="post">
                                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </div>
-                                </td> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -70,22 +70,22 @@
         </section>
 
         <!-- Buttons used for testing purposes -->
-        <!-- <section class="container my-5">
+        <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
                     <h2 class="mb-3">Testing Buttons</h2>
                     <div class="d-flex gap-2">
-                        <form th:action="@{/students/fill}" method="post">
+                        <form th:action="@{/users/fill}" method="post">
                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                             <button type="submit" class="btn btn-primary">Add Testing Data</button>
                         </form>
-                        <form th:action="@{/students/delete/all}" method="post">
+                        <form th:action="@{/users/delete/all}" method="post">
                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                            <button type="submit" class="btn btn-danger">Delete All Students</button>
+                            <button type="submit" class="btn btn-danger">Delete All Entries</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </section> -->
+        </section>
     </body>
 </html>

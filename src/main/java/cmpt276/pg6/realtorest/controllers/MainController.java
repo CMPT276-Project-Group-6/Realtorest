@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,8 +21,6 @@ import cmpt276.pg6.realtorest.models.PropertyRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-
 
 @Controller
 public class MainController {
@@ -45,8 +44,6 @@ public class MainController {
     }
 
     // #endregion
-
-
 
     // #region Visitable Pages
 
@@ -124,9 +121,9 @@ public class MainController {
 
     // #endregion
 
+    // #region Post mappings
 
-
-    // #region Not Visitable Stuff
+    // #region Users
 
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
@@ -138,6 +135,46 @@ public class MainController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
+
+    /**
+     * Fills the users database with testing data.
+     */
+    @PostMapping("/users/fill")
+    public String fillTestingDataUsers(@RequestParam String redirectUrl) {
+        userRepo.save(new User("Alice", "alice@email.com", "123"));
+        userRepo.save(new User("Bob", "bob@email.com", "456"));
+        userRepo.save(new User("Charlie", "charlie@email.com", "789"));
+        userRepo.save(new User("David", "david@email.com", "741"));
+        userRepo.save(new User("Eve", "eve@email.com", "852"));
+        userRepo.save(new User("Frank", "frank@email.com", "963"));
+        userRepo.save(new User("Grace", "grace@email.com", "846"));
+        userRepo.save(new User("Heidi", "heidi@email.com", "753"));
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * Deletes a user from the system.
+     */
+    @PostMapping("/users/delete/{uid}")
+    public String deleteUser(@PathVariable int uid, @RequestParam String redirectUrl) {
+        userRepo.deleteById(uid);
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * Deletes all users from the database.
+     * 
+     * This is a dangerous operation and should not be used in a production environment.
+     */
+    @PostMapping("/users/delete/all")
+    public String deleteAllUsers(@RequestParam String redirectUrl) {
+        userRepo.deleteAll();
+        return "redirect:" + redirectUrl;
+    }
+
+    // #endregion
+
+    // #region Properties
 
     @PostMapping("/properties/add")
     public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
@@ -151,6 +188,43 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
+    /**
+     * Fills the properties database with testing data.
+     */
+    @PostMapping("/properties/fill")
+    public String fillTestingDataProperties(@RequestParam String redirectUrl) {
+        propertyRepo.save(new Property("Alice's House", "Richmond", 1000000, 3, 2));
+        propertyRepo.save(new Property("Bob's House", "Burnaby", 2000000, 4, 3));
+        propertyRepo.save(new Property("Charlie's House", "Vancouver Island", 3000000, 5, 4));
+        propertyRepo.save(new Property("David's House", "Surrey", 4000000, 3, 2));
+        propertyRepo.save(new Property("Eve's House", "Vancouver Island", 5000000, 3, 5));
+        propertyRepo.save(new Property("Frank's House", "Burnaby", 6000000, 4, 6));
+        propertyRepo.save(new Property("Grace's House", "Vancouver Island", 4500000, 5, 7));
+        propertyRepo.save(new Property("Heidi's House", "Surrey", 6500000, 1, 2));
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * Deletes a property from the system.
+     */
+    @PostMapping("/properties/delete/{pid}")
+    public String deleteProperty(@PathVariable int pid, @RequestParam String redirectUrl) {
+        propertyRepo.deleteById(pid);
+        return "redirect:" + redirectUrl;
+    }
+
+    /**
+     * Deletes all properties from the database.
+     * 
+     * This is a dangerous operation and should not be used in a production environment.
+     */
+    @PostMapping("/properties/delete/all")
+    public String deleteAllProperties(@RequestParam String redirectUrl) {
+        propertyRepo.deleteAll();
+        return "redirect:" + redirectUrl;
+    }
+
+    // #endregion
 
     // Login logic
     @PostMapping("/login")
@@ -181,8 +255,6 @@ public class MainController {
     }
 
     // #endregion
-
-
 
     // #region Redirects
 
