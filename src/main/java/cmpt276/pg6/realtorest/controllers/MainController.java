@@ -204,9 +204,9 @@ public class MainController {
 
     // #endregion
 
-     @PostMapping("/admin/add")
+     @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
-        String adminName = newUser.get("username");
+        String adminName = newUser.get("adminname");
         String email = newUser.get("email");
         String password = newUser.get("password");
         adminRepo.save(new Admin(adminName, email, password));
