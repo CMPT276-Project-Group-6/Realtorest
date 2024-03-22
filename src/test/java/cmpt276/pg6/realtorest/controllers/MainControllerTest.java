@@ -30,6 +30,8 @@ public class MainControllerTest {
 
     @Test
     void testShowHomePage() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("home"));
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("home"));
     }
 }
