@@ -149,7 +149,6 @@ public class MainController {
 
     /**
      * Deletes all users from the database.
-     * 
      * This is a dangerous operation and should not be used in a production environment.
      */
     @PostMapping("/users/delete/all")
@@ -201,7 +200,6 @@ public class MainController {
 
     /**
      * Deletes all properties from the database.
-     * 
      * This is a dangerous operation and should not be used in a production environment.
      */
     @PostMapping("/properties/delete/all")
