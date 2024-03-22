@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import cmpt276.pg6.realtorest.models.Admin;
+import cmpt276.pg6.realtorest.models.AdminRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
@@ -23,6 +26,9 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private AdminRepository adminRepo;
 
     @Autowired
     private PropertyRepository propertyRepo;
@@ -107,6 +113,14 @@ public class MainController {
         return "dev/properties";
     }
 
+    @GetMapping("/dev/admins")
+    public String showDevPageAdmins(Model model, HttpServletRequest request, HttpSession session) {
+        // Get all users from the database
+        List<Admin> admins = adminRepo.findAll();
+        model.addAttribute("admins", admins);
+        return "dev/admins";
+    }
+
     // #endregion
 
     // #region Post mappings
@@ -151,7 +165,6 @@ public class MainController {
 
     /**
      * Deletes all users from the database.
-     * 
      * This is a dangerous operation and should not be used in a production environment.
      */
     @PostMapping("/users/delete/all")
@@ -208,7 +221,6 @@ public class MainController {
 
     /**
      * Deletes all properties from the database.
-     * 
      * This is a dangerous operation and should not be used in a production environment.
      */
     @PostMapping("/properties/delete/all")
@@ -268,4 +280,68 @@ public class MainController {
     }
 
     // #endregion
+
+    @PostMapping("/admins/add")
+    public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
+        String adminName = newUser.get("adminname");
+        String email = newUser.get("email");
+        String password = newUser.get("password");
+        adminRepo.save(new Admin(adminName, email, password));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "redirect:" + redirectUrl;
+    }
+
+    @GetMapping("/registerAdmin")
+    public String showRegisterAdminPage(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            return "users/registerAdmin";
+        } else {
+            model.addAttribute("admin", admin);
+            return "redirect:/";
+        }
+    }
+
+    // Login Page for admin
+    @GetMapping("/adminlogin")
+    public String showAdminLoginPage(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            return "users/adminlogin";
+        } else {// Redirect to the home page if the user is already logged in
+            model.addAttribute("admin", admin);
+            return "protected";
+        }
+    }
+
+    @PostMapping("/adminlogin")
+    public String adminlogin(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
+        // Process the login form (user enters email and password to login)
+        String email = formData.get("email");
+        String password = formData.get("password");
+        List<Admin> adminList = adminRepo.findByEmailAndPassword(email, password);
+        if (adminList.isEmpty()) {
+            // If no user that matches the email and password is found, return to the login page
+            // TODO Add a message to the login page that says "Invalid email or password"
+            return "users/adminlogin";
+        } else {
+            // Successful login
+            Admin admin = adminList.get(0);
+            request.getSession().setAttribute("session_user", admin);
+            model.addAttribute("admin", admin);
+            return "protected";
+        }
+    }
+
+    @GetMapping({"/listUsers"})
+    public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            throw new SecurityException("This is a protected page");
+        } else {
+            ModelAndView mav = new ModelAndView("list-users");
+            mav.addObject("users", userRepo.findAll());
+            return mav;
+        }
+    }// lists all users in database for admin
 }
