@@ -32,8 +32,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="admin:${admin}">
-                                <td th:text="${admin.uid}"></td>
+                            <tr th:each="admin:${admins}">
+                                <td th:text="${admin.aid}"></td>
                                 <td th:text="${admin.adminName}"></td>
                                 <td th:text="${admin.email}"></td>
                                 <td th:text="${admin.password}"></td>

@@ -259,11 +259,16 @@ public class MainController {
     }
 
     @GetMapping({"/listUsers"})
-	public ModelAndView getAllUsers() {
-		ModelAndView mav = new ModelAndView("list-users");
-		mav.addObject("users", userRepo.findAll());
-		return mav;
-	}//lists all users in database
+	public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            throw new SecurityException("This is a protected page");
+        } else {
+            ModelAndView mav = new ModelAndView("list-users");
+		    mav.addObject("users", userRepo.findAll());
+		    return mav;
+        }
+	}//lists all users in database for admin
 }
 
 

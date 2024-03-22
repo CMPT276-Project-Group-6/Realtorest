@@ -11,11 +11,18 @@ public class Admin {
     // The @GeneratedValue annotation tells Spring that this is an auto-incremented field.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // The above two annotations are applied to the uid field.
-    private int uid;
+    private int aid;
     private String adminName;
     private String email;
     private String password;
-
+    
+    public int getAid() {
+        return aid;
+    }
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+    
     public String getAdminName() {
         return adminName;
     }
