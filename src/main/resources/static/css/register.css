@@ -16,7 +16,7 @@ body {
     height: 60vh;
     margin-top: 50px;
 }
-.register-container{
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
