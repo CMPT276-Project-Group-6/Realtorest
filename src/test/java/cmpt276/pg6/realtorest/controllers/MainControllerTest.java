@@ -31,26 +31,26 @@ public class MainControllerTest {
     @Test
     void testShowHomePage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("home"));
+            .andExpect(MockMvcResultMatchers.view().name("home"));
     }
 
     @Test
     void testShowLoginPage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/login")).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("users/login"));
+            .andExpect(MockMvcResultMatchers.view().name("users/login"));
     }
 
     @Test
     void testShowRegisterPage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/register")).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("users/register"));
+            .andExpect(MockMvcResultMatchers.view().name("users/register"));
     }
 
     @Test
     void testShowPropertyListingsPage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/property-listing"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("propertyListing"));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("propertyListing"));
     }
 
     @Test
@@ -60,37 +60,36 @@ public class MainControllerTest {
         String email = "newUser@example.com";
         String password = "securePassword123";
         String redirectUrl = "/login"; // Assuming redirection to login after registration
-    
+
         // Perform POST request and verify redirection
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/add")
-                .param("username", username)
-                .param("email@gmail.com", email)
-                .param("password12", password)
-                .param("redirectUrl", redirectUrl))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Expecting redirection
-                .andExpect(MockMvcResultMatchers.redirectedUrl(redirectUrl)); // Verify the redirection URL
+            .param("username", username)
+            .param("email@gmail.com", email)
+            .param("password12", password)
+            .param("redirectUrl", redirectUrl))
+            .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Expecting redirection
+            .andExpect(MockMvcResultMatchers.redirectedUrl(redirectUrl)); // Verify the redirection URL
     }
-    
 
     @Test
     void testUserLogin() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/login")
-                .param("email", "email@gmail.com")
-                .param("password", "password12"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-                // im curious where are we redirecting to after login?
-                // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
+            .param("email", "email@gmail.com")
+            .param("password", "password12"))
+            .andExpect(MockMvcResultMatchers.status().isOk());
+        // im curious where are we redirecting to after login?
+        // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
     }
 
     @Test
     void testUserLogout() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
-                .andExpect(MockMvcResultMatchers.redirectedUrl(""));
-                // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
-                
-                // initally it should redirect to home page [/] not [""]
-                // whosoever was responsible for this function in model controller 
-                //should fix it or either explain what is actually happening
+            .andExpect(MockMvcResultMatchers.redirectedUrl(""));
+        // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
+
+        // initally it should redirect to home page [/] not [""]
+        // whosoever was responsible for this function in model controller
+        // should fix it or either explain what is actually happening
     }
 
     // @Test
