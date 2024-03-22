@@ -29,6 +29,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Price</th>
+                                <th scope="col">Area (ft&sup2)</th>
                                 <th scope="col">Bedrooms</th>
                                 <th scope="col">Bathrooms</th>
                                 <th scope="col">Description</th>
@@ -41,6 +42,7 @@
                                 <td th:text="${property.name}"></td>
                                 <td th:utext="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
                                 <td th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></td>
+                                <td th:text="${property.area}"></td>
                                 <td th:text="${property.brCount}"></td>
                                 <td th:text="${property.baCount}"></td>
                                 <td>
@@ -106,6 +108,7 @@
                             <span id="charCount">0 / 3000</span>
                         </div> <br>
                         <input type="text" class="form-control" name="price" pattern="[0-9]+" placeholder="Price" required /><br />
+                        <input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" placeholder="Area of Property in Squared Foot" required /><br />
                         <input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" placeholder="Number of Bedrooms" required /><br />
                         <input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" placeholder="Number of Bathrooms" required /><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />

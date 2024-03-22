@@ -19,12 +19,13 @@ public class Property {
     private String zipCode; // zip code
     private String description; // description of the property
     private int price; // in CAD
+    private double area; // in square feet
     private int brCount; // number of bedrooms
     private int baCount; // number of bathrooms
 
     public Property() {}
 
-    public Property(String name, String street, String city, String province, String zipCode, String description, int price, int brCount, int baCount) {
+    public Property(String name, String street, String city, String province, String zipCode, String description, int price, double area, int brCount, int baCount) {
         this.name = name;
         this.street = street;
         this.city = city;
@@ -32,6 +33,7 @@ public class Property {
         this.zipCode = zipCode;
         this.description = description;
         this.price = price;
+        this.area = area;
         this.brCount = brCount;
         this.baCount = baCount;
     }
@@ -114,5 +116,13 @@ public class Property {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
     }
 }
