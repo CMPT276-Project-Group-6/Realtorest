@@ -19,8 +19,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 public class MainController {
     @Autowired
@@ -40,8 +38,6 @@ public class MainController {
     }
 
     // #endregion
-
-
 
     // #region Visitable Pages
 
@@ -110,8 +106,6 @@ public class MainController {
     }
 
     // #endregion
-
-
 
     // #region Post mappings
 
@@ -246,11 +240,7 @@ public class MainController {
         return new RedirectView("");
     }
 
-
-
     // #endregion
-
-
 
     // #region Redirects
 

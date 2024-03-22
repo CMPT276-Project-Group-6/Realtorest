@@ -2,7 +2,6 @@ package cmpt276.pg6.realtorest;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import io.github.cdimascio.dotenv.Dotenv;
 
