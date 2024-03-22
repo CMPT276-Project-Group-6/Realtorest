@@ -124,17 +124,33 @@ a {
 }
 
 /* BODY */
-.property-container {
+.listing-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.property-container {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 300px;
+    background-color: whitesmoke;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: solid 1px rgb(145, 145, 145);
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0.5px rgb(145, 145, 145);
+}
+.property-container:hover {
+    box-shadow: 0 0 10px 1px rgb(145, 145, 145);
 }
 .property-listing {
     background-color: rgb(243, 243, 243);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow: hidden;
+    overflow: scroll;
     height: 100vh;
 }
 /* Property Card */
@@ -150,23 +166,7 @@ a {
 .figure:hover {
     box-shadow: 0 0 10px 1px rgb(145, 145, 145);
 }
-.favorite-button {
-    background-color: tomato;
-    margin-left: -5px;
-    padding-top: 15px;
-    background-color: transparent;
-    color: rgb(186, 186, 186);
-    border: none;
-    outline: none;
-}
-#favourite-button p {
-    font-family: "Montserrat", sans-serif;
-    color: rgb(100, 100, 100);
-}
-.favorite-button:hover {
-    cursor: pointer;
-    color: #f1c40f;
-}
+
 /* Description */
 .carousel-inner .carousel-item img {
     height: 200px;
@@ -174,15 +174,14 @@ a {
 }
 .icon-container {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-    margin-left: -10px;
-    padding-right: 20px;
+    align-items: flex-start;
+    padding-left: 11px;
+    padding-right: 10px;
     padding-top: 10px;
 }
-.property-price {
-    margin-right: 15px;
+.icon-subcontainer i {
     padding-left: 15px;
+    padding-right: 3px;
 }
 .icon-subcontainer,
 .address-container {
@@ -205,8 +204,8 @@ a {
 .address-container {
     margin-top: -10px;
     font-size: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     max-width: 300px;
 }
 .icon-container,
@@ -237,10 +236,10 @@ a {
     justify-content: flex-start;
     align-items: flex-end;
     font-family: "Montserrat", "sans-serif";
-    margin-left: -15px;
 }
 .location-icon-container .icon-subcontainer {
-    margin-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .detailed-description {
     font-family: "Montserrat", "sans-serif";
@@ -265,3 +264,20 @@ a {
 .display-realtor .offcanvas-header .social-media a:hover {
     color: rgb(140, 140, 140);
 }
+.favourite-button {
+    padding-top: 15px;
+    margin-left: -20px;
+    background-color: transparent;
+    color: rgb(186, 186, 186);
+    border: none;
+    outline: none;
+}
+#favourite-button p {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(100, 100, 100);
+}
+.favourite-button:hover {
+    cursor: pointer;
+    color: #f1c40f;
+}
+
