@@ -59,6 +59,10 @@
                 <th:block th:if="${user != null}">
                     <a th:href="@{/logout}" class="navbar-category"><p>Log Out</p></a>
                 </th:block>
+
+                <th:block th:if="${admin != null}">
+                    <a th:href="@{/logout}" class="navbar-category"><p>Admin Logout</p></a>
+                </th:block>
             </section>
         </nav>
 
