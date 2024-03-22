@@ -160,7 +160,7 @@ a {
     outline: none;
 }
 #favourite-button p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: rgb(100, 100, 100);
 }
 .favorite-button:hover {
@@ -253,9 +253,10 @@ a {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    height: 250px
+    height: 250px;
 }
-.display-realtor .offcanvas-header p, .display-realtor .offcanvas-header .social-media a {
+.display-realtor .offcanvas-header p,
+.display-realtor .offcanvas-header .social-media a {
     font-family: "Montserrat", "sans-serif";
     font-size: 15px;
     color: rgb(100, 100, 100);
