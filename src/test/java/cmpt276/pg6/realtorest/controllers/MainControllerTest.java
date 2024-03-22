@@ -30,19 +30,22 @@ public class MainControllerTest {
 
     @Test
     void testShowHomePage() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk())
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.view().name("home"));
     }
 
     @Test
     void testShowLoginPage() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/login")).andExpect(MockMvcResultMatchers.status().isOk())
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/login"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.view().name("users/login"));
     }
 
     @Test
     void testShowRegisterPage() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/register")).andExpect(MockMvcResultMatchers.status().isOk())
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/register"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.view().name("users/register"));
     }
 
