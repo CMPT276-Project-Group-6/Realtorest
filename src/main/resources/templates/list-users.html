@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="/css/homepage.css" />
     </head>
     <body>
-  
         <!-- NAVIGATION BAR -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <section class="realtorest-title">
@@ -31,7 +30,6 @@
                     <a th:href="@{/edit-listings}" class="navbar-category"><p>Edit Listings</p></a>
 
                     <a th:href="@{/logout}" class="navbar-category"><p>Admin Logout</p></a>
-                    
                 </th:block>
             </section>
         </nav>
@@ -46,23 +44,16 @@
                         <tr>
                             <th>Username</th>
                             <th>Email</th>
-                          
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="user: ${users}">
                             <td th:text="${user.username}"></td>
-                            <td th:text ="${user.email}"></td>
+                            <td th:text="${user.email}"></td>
                         </tr>
                     </tbody>
-			    </table>
-                
+                </table>
             </section>
         </section>
-
-       
-
-
-
     </body>
 </html>

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import cmpt276.pg6.realtorest.models.User;
-import cmpt276.pg6.realtorest.models.UserRepository;
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.AdminRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
+import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -274,7 +274,7 @@ public class MainController {
 
     // #endregion
 
-     @PostMapping("/admins/add")
+    @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
         String adminName = newUser.get("adminname");
         String email = newUser.get("email");
@@ -284,7 +284,6 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-    
     @GetMapping("/registerAdmin")
     public String showRegisterAdminPage(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
@@ -296,8 +295,7 @@ public class MainController {
         }
     }
 
-
-      // Login Page for admin
+    // Login Page for admin
     @GetMapping("/adminlogin")
     public String showAdminLoginPage(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
@@ -329,16 +327,14 @@ public class MainController {
     }
 
     @GetMapping({"/listUsers"})
-	public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
+    public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
         if (admin == null) {
             throw new SecurityException("This is a protected page");
         } else {
             ModelAndView mav = new ModelAndView("list-users");
-		    mav.addObject("users", userRepo.findAll());
-		    return mav;
+            mav.addObject("users", userRepo.findAll());
+            return mav;
         }
-	}//lists all users in database for admin
+    }// lists all users in database for admin
 }
-
-
