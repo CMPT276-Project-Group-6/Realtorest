@@ -12,17 +12,25 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pid;
-    private String name; // name of the property listing
-    private String location; // just the city name
+    private String name; // name of the owner listing the property
+    private String street; // street address
+    private String city; // city name
+    private String province; // province name
+    private String zipCode; // zip code
+    private String description; // description of the property
     private int price; // in CAD
     private int brCount; // number of bedrooms
     private int baCount; // number of bathrooms
 
     public Property() {}
 
-    public Property(String name, String location, int price, int brCount, int baCount) {
+    public Property(String name, String street, String city, String province, String zipCode, String description, int price, int brCount, int baCount) {
         this.name = name;
-        this.location = location;
+        this.street = street;
+        this.city = city;
+        this.province = province;
+        this.zipCode = zipCode;
+        this.description = description;
         this.price = price;
         this.brCount = brCount;
         this.baCount = baCount;
@@ -44,12 +52,36 @@ public class Property {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getStreet() {
+        return street;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public int getPrice() {
@@ -74,5 +106,13 @@ public class Property {
 
     public void setBaCount(int baCount) {
         this.baCount = baCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

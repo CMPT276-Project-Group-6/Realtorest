@@ -60,6 +60,8 @@ public class MainController {
         if (user != null) {
             model.addAttribute("user", user);
         }
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
         return "propertyListing";
     }
 
@@ -165,11 +167,15 @@ public class MainController {
     @PostMapping("/properties/add")
     public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
         String name = newProperty.get("name");
-        String location = newProperty.get("location");
+        String street = newProperty.get("street");
+        String city = newProperty.get("city");
+        String province = newProperty.get("province");
+        String zipCode = newProperty.get("zipCode");
+        String description = newProperty.get("description");
         int price = Integer.parseInt(newProperty.get("price"));
         int brCount = Integer.parseInt(newProperty.get("brCount"));
         int baCount = Integer.parseInt(newProperty.get("baCount"));
-        propertyRepo.save(new Property(name, location, price, brCount, baCount));
+        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, brCount, baCount));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -179,14 +185,14 @@ public class MainController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "Richmond", 1000000, 3, 2));
-        propertyRepo.save(new Property("Bob's House", "Burnaby", 2000000, 4, 3));
-        propertyRepo.save(new Property("Charlie's House", "Vancouver Island", 3000000, 5, 4));
-        propertyRepo.save(new Property("David's House", "Surrey", 4000000, 3, 2));
-        propertyRepo.save(new Property("Eve's House", "Vancouver Island", 5000000, 3, 5));
-        propertyRepo.save(new Property("Frank's House", "Burnaby", 6000000, 4, 6));
-        propertyRepo.save(new Property("Grace's House", "Vancouver Island", 4500000, 5, 7));
-        propertyRepo.save(new Property("Heidi's House", "Surrey", 6500000, 1, 2));
+        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
+        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 3, 2));
         return "redirect:" + redirectUrl;
     }
 
