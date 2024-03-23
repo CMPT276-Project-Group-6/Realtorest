@@ -24,7 +24,7 @@
                 <div class="col-mb-5 register-container">
                     <div class="register-form mb-3">
                         <h2 class="text-center">REGISTER</h2>
-                        <form action="/users/add" method="post" onsubmit="return validateForm()">
+                        <form action="/users/add" method="post" onsubmit="return validateRegistration()">
                             <input type="hidden" name="redirectUrl" value="/" />
                             <div class="input-wrapper">
                                 <input type="text" class="username-input" placeholder="" name="username" required />
@@ -35,8 +35,12 @@
                                 <label class="input-label">Email</label>
                             </div>
                             <div class="input-wrapper">
-                                <input type="password" class="password-input" id="password" placeholder="" name="password" required />
+                                <input type="password" class="password-input" id="password" oninput="checkPasswordStrength()" placeholder="" name="password" required />
                                 <label class="input-label">Password</label>
+                                <div class="strength-pass-check">
+                                    <progress value="0" max="100" id="password-strength"></progress>
+                                    <p id="password-strength-text"></p>
+                                </div>
                             </div>
                             <div class="input-wrapper">
                                 <input type="password" class="confirm-password-input" id="confirm_password" placeholder="" name="confirm_password" required />
@@ -85,6 +89,82 @@
                     alert("Passwords do not match!")
                     return false
                 }
+
+                return true
+            }
+
+            function validatePasswordStrength(password) {
+                var minLength = password.length >= 8
+                var lowerCase = /[a-z]/.test(password)
+                var number = /[0-9]/.test(password)
+                var specialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
+
+                // Calculate strength score
+                var strength = 0
+                if (minLength) strength++
+                if (lowerCase) strength++
+                if (number) strength++
+                if (specialCharacter) strength++
+
+                return strength
+            }
+
+            function checkPasswordStrength() {
+                var password = document.getElementById("password").value
+                var strengthBar = document.getElementById("password-strength")
+                var strengthText = document.getElementById("password-strength-text")
+
+                var passwordInput = document.getElementById("password")
+                passwordInput.addEventListener("input", checkPasswordStrength)
+
+                passwordInput.addEventListener("focus", function () {
+                    strengthBar.style.display = "block"
+                    strengthText.style.display = "block"
+                })
+
+                passwordInput.addEventListener("blur", function () {
+                    strengthBar.style.display = "none"
+                    strengthText.style.display = "none"
+                })
+
+                var strength = validatePasswordStrength(password)
+                strengthBar.value = strength * 25 // Multiply by 25 to get a value out of 100
+
+                switch (strength) {
+                    case 0:
+                        strengthText.innerHTML = "Password must be at least 8 characters long and<br>contain lowercase, number, and special character."
+                        break
+                    case 1:
+                        strengthText.innerHTML = "Weak"
+                        break
+                    case 2:
+                        strengthText.innerHTML = "Medium"
+                        break
+                    case 3:
+                        strengthText.innerHTML = "Strong"
+                        break
+                    case 4:
+                        strengthText.innerHTML = "Very Strong"
+                        break
+                    default:
+                        break
+                }
+            }
+
+            function validateRegistration() {
+                if (!validateForm()) {
+                    return false // Prevent form submission
+                }
+
+                var password = document.getElementById("password").value
+                var strength = validatePasswordStrength(password)
+
+                if (strength < 4) {
+                    alert("Please enter a stronger password.")
+                    return false // Prevent form submission
+                }
+
+                // Proceed with form submission
                 return true
             }
         </script>

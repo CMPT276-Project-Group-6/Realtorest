@@ -165,3 +165,36 @@ body {
 .login_link a:hover {
     text-decoration: underline;
 }
+
+#strength-pass-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 20px;
+    left: 900px;
+    white-space: nowrap;
+    line-height: 20px;
+}
+
+progress {
+    width: 50%;
+    height: 20px;
+    margin-right: 10px;
+}
+
+#password-strength-text {
+    color: white;
+    font-size: 18px;
+    font-family: "Montserrat", "sans-serif";
+    white-space: nowrap;
+    line-height: 20px;
+    align-self: center;
+}
+
+#password-strength,
+#password-strength-text {
+    display: none;
+}
