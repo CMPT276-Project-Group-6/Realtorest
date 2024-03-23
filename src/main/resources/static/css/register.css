@@ -166,7 +166,6 @@ body {
     text-decoration: underline;
 }
 
-
 #strength-pass-check {
     display: flex;
     justify-content: center;
@@ -183,7 +182,7 @@ body {
 progress {
     width: 50%;
     height: 20px;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 #password-strength-text {
@@ -192,11 +191,10 @@ progress {
     font-family: "Montserrat", "sans-serif";
     white-space: nowrap;
     line-height: 20px;
-    align-self: center; 
+    align-self: center;
 }
 
 #password-strength,
 #password-strength-text {
     display: none;
 }
-
