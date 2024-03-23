@@ -51,6 +51,9 @@
                 <a href="" class="navbar-category"><p>Rent</p></a>
                 <a href="" class="navbar-category"><p>Sell</p></a>
                 <!-- Check to see if the user signed in or not -->
+                <th:block th:if="${user != null}">
+               <a th:href="@{/favourites}" class="navbar-category"><p>Favourites</p></a>
+               </th:block>
                 <th:block th:if="${user == null}">
                     <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
                 </th:block>
@@ -92,7 +95,7 @@
 
                                 <!-- PROPERTY INFO -->
                                 <section id="favourite-button" class="icon-subcontainer">
-                                    <button class="favourite-button" onclick=""><i class="fa-solid fa-bookmark"></i></button>
+                                    <button class="favourite-button" onclick="addFavourite(property.id)"><i class="fa-solid fa-bookmark"></i></button>
                                     <p> Add to favourites</p>
                                 </section>
                                 <p class="location-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
@@ -182,5 +185,85 @@
                 </figcaption>
             </section>
         </section>
+
+        <script>
+        function addFavourite(propertyId) {
+            // Check if the user is logged in
+            fetch('/check-login')
+                .then(response => {
+                    if (response.ok) {
+                        // User is logged in, proceed to add property to favorites
+                        const button = document.getElementById(`favorite-button-${propertyId}`);
+                        const isFavorited = button.classList.contains('favorited');
+
+                        // Toggle favorite status
+                        if (isFavorited) {
+                            // Remove from favorites
+                            removeFromFavorites(propertyId)
+                                .then(response => {
+                                    if (response.ok) {
+                                        button.classList.remove('favorited');
+                                        alert('Property removed from favorites');
+                                    } else {
+                                        return response.text().then(errorMessage => {
+                                            alert(errorMessage);
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        } else {
+                            // Add to favorites
+                            addToFavorites(propertyId)
+                                .then(response => {
+                                    if (response.ok) {
+                                        button.classList.add('favorited');
+                                        alert('Property added to favorites');
+                                    } else {
+                                        return response.text().then(errorMessage => {
+                                            alert(errorMessage);
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        }
+                    } else {
+                        // User is not logged in, redirect to login page
+                        window.location.href = '/login';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking login status:', error);
+                });
+        }
+
+        
+        
+        // Function to add property to favorites
+        function addToFavorites(propertyId) {
+            return fetch('/add-favourite?propertyId=' + propertyId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            });
+        }
+        
+        
+        // Function to remove property from favorites
+        function removeFromFavorites(propertyId) {
+            return fetch('/remove-favourite?propertyId=' + propertyId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+            });
+        }
+        </script>
     </body>
 </html>

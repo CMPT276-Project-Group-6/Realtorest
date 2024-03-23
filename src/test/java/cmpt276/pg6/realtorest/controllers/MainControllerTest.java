@@ -1,14 +1,27 @@
 package cmpt276.pg6.realtorest.controllers;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.servlet.http.HttpSession;
+import cmpt276.pg6.realtorest.models.User;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -134,5 +147,55 @@ public class MainControllerTest {
     // this.mockMvc.perform(MockMvcRequestBuilders.get("/properties"))
     // .andExpect(MockMvcResultMatchers.status().isOk());
     // }
+
+    @Test
+    void testShowFavouritesPage() throws Exception {
+        // Assuming there's a user logged in with id 1 and they have two favourite properties with ids 1 and 2
+        HttpSession session = new MockHttpSession();
+        User user = new User();
+        user.setUid(1);
+        user.setFavouritePropertyIds(Arrays.asList(1, 2));
+        session.setAttribute("session_user", user);
+
+        // Perform the request
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/favourites").session((MockHttpSession) session))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("favourites"))
+            .andExpect(MockMvcResultMatchers.model().attributeExists("favoriteProperties"));
+    }
+
+    @Test
+    void testAddFavourite() throws Exception {
+        // Assuming there's a user logged in with id 1
+        HttpSession session = new MockHttpSession();
+        User user = new User();
+        user.setUid(1);
+        session.setAttribute("session_user", user);
+
+        // Perform the request
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/add-favourite")
+            .param("propertyId", "1")
+            .session((MockHttpSession) session))
+            .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void testRemoveFavourite() throws Exception {
+        // Assuming there's a user logged in with id 1 and they have a favourite property with id 1
+        HttpSession session = new MockHttpSession();
+        User user = new User();
+        user.setUid(1);
+        user.setFavouritePropertyIds(new ArrayList<>(Arrays.asList(1)));
+        session.setAttribute("session_user", user);
+
+        // Perform the request
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/remove-favourite")
+            .param("propertyId", "1")
+            .session((MockHttpSession) session))
+            .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+
+
 
 }

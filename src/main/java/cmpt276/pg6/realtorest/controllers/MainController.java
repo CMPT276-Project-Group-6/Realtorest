@@ -3,6 +3,8 @@ package cmpt276.pg6.realtorest.controllers;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,6 +97,19 @@ public class MainController {
         }
     }
 
+    //Favourites Page
+   @GetMapping("/favourites")
+   public String showFavouritesPage(Model model, HttpSession session) {
+       User user = (User) session.getAttribute("session_user");
+       if (user != null) {
+           List<Property> favoriteProperties = propertyRepo.findAllById(user.getFavouritePropertyIds());
+           model.addAttribute("favoriteProperties", favoriteProperties);
+           return "favourites";
+       } else {
+           return "redirect:/login"; // Redirect to login page if user is not logged in
+       }
+   }
+
     // Dev Page for Users Database
     @GetMapping("/dev/users")
     public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
@@ -172,6 +187,41 @@ public class MainController {
         userRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
+
+    //Adds property to favourites
+    @PostMapping("/add-favourite")
+    public ResponseEntity<String> addFavourite(@RequestParam int propertyId, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in");
+        }
+        
+        if (!user.getFavouritePropertyIds().contains(propertyId)) {
+            user.getFavouritePropertyIds().add(propertyId);
+            userRepo.save(user);
+            return ResponseEntity.ok("Property added to favorites");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Property already in favorites");
+        }
+    }
+
+    //Removes property from favourites
+    @PostMapping("/remove-favourite")
+    public ResponseEntity<String> removeFavourite(@RequestParam int propertyId, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in");
+        }
+
+        if (user.getFavouritePropertyIds().contains(propertyId)) {
+            user.getFavouritePropertyIds().remove((Integer) propertyId); // Remove the Integer object
+            userRepo.save(user);
+            return ResponseEntity.ok("Property removed from favorites");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Property not found in favorites");
+        }
+    }
+
 
     // #endregion
 

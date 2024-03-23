@@ -1,10 +1,14 @@
 package cmpt276.pg6.realtorest.models;
 
+import java.util.ArrayList;
+
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.List;
 
 // This is a user object.
 // The @Entity annotation tells Spring that this is a table in the database.
@@ -21,12 +25,24 @@ public class User {
     private String email;
     private String password;
 
+    @ElementCollection
+    private List<Integer> favouritePropertyIds = new ArrayList<>();
+
     public User() {}
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.favouritePropertyIds = new ArrayList<>();
+    }
+
+    public List<Integer> getFavouritePropertyIds() {
+        return favouritePropertyIds;
+    }
+
+    public void setFavouritePropertyIds(List<Integer> favouritePropertyIds) {
+        this.favouritePropertyIds = favouritePropertyIds;
     }
 
     public int getUid() {
