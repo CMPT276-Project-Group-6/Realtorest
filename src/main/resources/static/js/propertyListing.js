@@ -96,13 +96,13 @@ function createPropertyCard(property) {
                         <section id="modal-carousel${property.id}" class="carousel slide carousel-fade" data-bs-ride="carousel">
                             <section class="carousel-inner">
                                 <section class="carousel-item active data-bs-interval="3000"">
-                                    <img src="/css/Property${property.id}/${property.images[0]}" class="d-block w-100" alt="Front House">
+                                    <img src="/img/Property${property.id}/${property.images[0]}" class="d-block w-100" alt="Front House">
                                 </section>
                                 <section class="carousel-item data-bs-interval="3000"">
-                                    <img src="/css/Property${property.id}/${property.images[1]}" class="d-block w-100" alt="Living Room">
+                                    <img src="/img/Property${property.id}/${property.images[1]}" class="d-block w-100" alt="Living Room">
                                 </section>
                                 <section class="carousel-item data-bs-interval="3000"">
-                                    <img src="/css/Property${property.id}/${property.images[2]}" class="d-block w-100" alt="Washroom">
+                                    <img src="/img/Property${property.id}/${property.images[2]}" class="d-block w-100" alt="Washroom">
                                 </section>
                             </section>
                             <button class="carousel-control-prev" type="button" data-bs-target="#modal-carousel${property.id}" data-bs-slide="prev">
@@ -168,13 +168,13 @@ function createPropertyCard(property) {
         <section id="carousel${property.id}" class="carousel slide carousel-fade">
             <section class="carousel-inner">
                 <section class="carousel-item active">
-                    <img src="/css/Property${property.id}/${property.images[0]}" class="d-block w-100" alt="Front House">
+                    <img src="/img/Property${property.id}/${property.images[0]}" class="d-block w-100" alt="Front House">
                 </section>
                 <section class="carousel-item">
-                    <img src="/css/Property${property.id}/${property.images[1]}" class="d-block w-100" alt="Living Room">
+                    <img src="/img/Property${property.id}/${property.images[1]}" class="d-block w-100" alt="Living Room">
                 </section>
                 <section class="carousel-item">
-                    <img src="/css/Property${property.id}/${property.images[2]}" class="d-block w-100" alt="Washroom">
+                    <img src="/img/Property${property.id}/${property.images[2]}" class="d-block w-100" alt="Washroom">
                 </section>
             </section>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel${property.id}" data-bs-slide="prev">

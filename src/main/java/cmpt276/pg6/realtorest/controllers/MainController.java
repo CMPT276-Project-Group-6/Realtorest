@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import cmpt276.pg6.realtorest.models.User;
-import cmpt276.pg6.realtorest.models.UserRepository;
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.AdminRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
+import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -66,6 +66,8 @@ public class MainController {
         if (user != null) {
             model.addAttribute("user", user);
         }
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
         return "propertyListing";
     }
 
@@ -163,7 +165,6 @@ public class MainController {
 
     /**
      * Deletes all users from the database.
-     * 
      * This is a dangerous operation and should not be used in a production environment.
      */
     @PostMapping("/users/delete/all")
@@ -179,11 +180,16 @@ public class MainController {
     @PostMapping("/properties/add")
     public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
         String name = newProperty.get("name");
-        String location = newProperty.get("location");
+        String street = newProperty.get("street");
+        String city = newProperty.get("city");
+        String province = newProperty.get("province");
+        String zipCode = newProperty.get("zipCode");
+        String description = newProperty.get("description");
         int price = Integer.parseInt(newProperty.get("price"));
+        double area = Double.parseDouble(newProperty.get("area"));
         int brCount = Integer.parseInt(newProperty.get("brCount"));
         int baCount = Integer.parseInt(newProperty.get("baCount"));
-        propertyRepo.save(new Property(name, location, price, brCount, baCount));
+        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -193,14 +199,14 @@ public class MainController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "Richmond", 1000000, 3, 2));
-        propertyRepo.save(new Property("Bob's House", "Burnaby", 2000000, 4, 3));
-        propertyRepo.save(new Property("Charlie's House", "Vancouver Island", 3000000, 5, 4));
-        propertyRepo.save(new Property("David's House", "Surrey", 4000000, 3, 2));
-        propertyRepo.save(new Property("Eve's House", "Vancouver Island", 5000000, 3, 5));
-        propertyRepo.save(new Property("Frank's House", "Burnaby", 6000000, 4, 6));
-        propertyRepo.save(new Property("Grace's House", "Vancouver Island", 4500000, 5, 7));
-        propertyRepo.save(new Property("Heidi's House", "Surrey", 6500000, 1, 2));
+        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
         return "redirect:" + redirectUrl;
     }
 
@@ -215,7 +221,6 @@ public class MainController {
 
     /**
      * Deletes all properties from the database.
-     * 
      * This is a dangerous operation and should not be used in a production environment.
      */
     @PostMapping("/properties/delete/all")
@@ -277,7 +282,7 @@ public class MainController {
 
     // #endregion
 
-     @PostMapping("/admins/add")
+    @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
         String adminName = newUser.get("adminname");
         String email = newUser.get("email");
@@ -287,7 +292,6 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-    
     @GetMapping("/registerAdmin")
     public String showRegisterAdminPage(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
@@ -299,8 +303,7 @@ public class MainController {
         }
     }
 
-
-      // Login Page for admin
+    // Login Page for admin
     @GetMapping("/adminlogin")
     public String showAdminLoginPage(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
@@ -332,16 +335,14 @@ public class MainController {
     }
 
     @GetMapping({"/listUsers"})
-	public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
+    public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
         if (admin == null) {
             throw new SecurityException("This is a protected page");
         } else {
             ModelAndView mav = new ModelAndView("list-users");
-		    mav.addObject("users", userRepo.findAll());
-		    return mav;
+            mav.addObject("users", userRepo.findAll());
+            return mav;
         }
-	}//lists all users in database for admin
+    }// lists all users in database for admin
 }
-
-
