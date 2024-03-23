@@ -1,3 +1,24 @@
+/* FONTS */
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +31,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 5px solid #5b2cb8; /* Add border to the top */
     min-height: 100vh;
     background-color: #1b2b43;
 }
@@ -43,7 +63,16 @@ body {
     z-index: 1000;
     background-color: rgba(14, 29, 51, 255);
 }
-/************/
+
+/* QUOTE */
+.quote {
+    font-size: 30px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 50px;
+
+}
+
 .container {
     display: flex;
     justify-content: flex-start;
@@ -60,15 +89,6 @@ body {
     justify-content: flex-start;
 }
 
-.side-box h1 {
-    font-family: Raleway, sans-serif;
-    font-weight: bold;
-}
-
-.side-box-content {
-    font-family: "Playfair Display", serif;
-    margin-top: 60px;
-}
 .introduction-section {
     margin-top: 50px;
     margin-bottom: 50px;

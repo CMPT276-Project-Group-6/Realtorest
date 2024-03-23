@@ -127,23 +127,19 @@ a {
 .listing-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-right: 12%;
+    padding-left: 12%;
 }
 .property-container {
-    margin-top: 10px;
+    height: 300px;
+    width: calc(33.33% - 20px); /* 33.33% width for each property with margin */
     margin-bottom: 30px;
-    width: 300px;
     background-color: whitesmoke;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: solid 1px rgb(145, 145, 145);
-    border-radius: 5px;
-    box-shadow: 0 0 5px 0.5px rgb(145, 145, 145);
-}
-.property-container:hover {
-    box-shadow: 0 0 10px 1px rgb(145, 145, 145);
+    border: solid 1px rgb(200, 200, 200);
+    border-radius: 6px;
+    box-shadow: 0 0 5px 0.2px rgb(145, 145, 145);
 }
 .property-listing {
     background-color: rgb(243, 243, 243);
@@ -169,7 +165,7 @@ a {
 
 /* Description */
 .carousel-inner .carousel-item img {
-    height: 200px;
+    height: 220px;
     object-fit: cover;
 }
 .icon-container {
@@ -206,7 +202,7 @@ a {
     font-size: 15px;
     padding-left: 10px;
     padding-right: 10px;
-    max-width: 300px;
+    max-width: 500px;
 }
 .icon-container,
 .icon-container p,
@@ -281,3 +277,27 @@ a {
     color: #f1c40f;
 }
 
+/* PAGINATION */
+.pagination {
+    padding-bottom: 30px;
+}
+.pagination a {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 18px;
+    color: rgb(140, 140, 140);
+    padding: 0px 15px;
+    background-color: transparent;
+    border: none;
+}
+.page-item.active .page-link {
+    background-color: rgb(215, 215, 215); /* Set background to clear transparent */
+    color: rgb(140, 140, 140);
+}
+.page-item.disabled .page-link {
+    background-color: transparent; /* Set background to clear transparent */
+    color: rgb(140, 140, 140);
+}
+.page-item .page-link:hover {
+    background-color: rgb(230, 230, 230);
+    color: rgb(140, 140, 140);
+}
