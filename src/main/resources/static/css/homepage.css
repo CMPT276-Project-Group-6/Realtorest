@@ -75,15 +75,16 @@ a {
     font-family: "Montserrat", "sans-serif";
     font-size: 20px;
     font-weight: 400;
-    transition: border-bottom 0.25s ease-in-out;
+    border-bottom: 1.5px solid transparent;
+    transition: border-bottom 0.15s ease-in-out;
 }
 .view-listing:hover {
-    border-bottom: 2px solid white;
+    border-bottom: 1.5px solid white;
     background-color: transparent !important;
 }
 .view-listing:active {
     color: white !important;
-    border-bottom: 2px solid white !important;
+    border-bottom: 1.5px solid white !important;
 }
 .banner .container p.title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);

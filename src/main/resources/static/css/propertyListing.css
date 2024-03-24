@@ -145,7 +145,7 @@ body {
     width: calc(33.33% - 20px); /* 33.33% width for each property with margin */
     margin-bottom: 30px;
     background-color: whitesmoke;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 0 5px 0.1px rgb(125, 125, 125);
 }
 .property-listing {
@@ -169,8 +169,10 @@ body {
 .carousel-inner .carousel-item img {
     height: 220px;
     object-fit: cover;
-    border-radius: 8px;
-
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .icon-container {
     display: flex;
