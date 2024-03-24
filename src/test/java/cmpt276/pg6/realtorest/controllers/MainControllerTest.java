@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootTest
@@ -16,8 +18,8 @@ public class MainControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // @Autowired
-    // private MainController mainController;
+    @MockBean
+    private UserRepository userRepository;
 
     @BeforeAll
     static void setUp() {
@@ -62,13 +64,13 @@ public class MainControllerTest {
         String username = "newUser";
         String email = "newUser@example.com";
         String password = "securePassword123";
-        String redirectUrl = "/login"; // Assuming redirection to login after registration
+        String redirectUrl = "/"; // Usually we redirect to the home page
 
         // Perform POST request and verify redirection
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/add")
             .param("username", username)
-            .param("email@gmail.com", email)
-            .param("password12", password)
+            .param("email", email)
+            .param("password", password)
             .param("redirectUrl", redirectUrl))
             .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Expecting redirection
             .andExpect(MockMvcResultMatchers.redirectedUrl(redirectUrl)); // Verify the redirection URL
