@@ -60,6 +60,49 @@
             </section>
         </nav>
 
+        <!-- FILTER BAR SECTION -->
+    <section class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Filter Properties</h5>
+            </div>
+            <div class="card-body">
+                <form class="row g-3 align-items-center justify-content-start">
+                    <div class="col-auto">
+                        <label for="propertyType" class="visually-hidden">Property Type</label>
+                        <select class="form-select" id="propertyType">
+                            <option selected>Choose Type...</option>
+                            <option value="house">House</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="condo">Condo</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <label for="priceRange" class="visually-hidden">Price Range</label>
+                        <select class="form-select" id="priceRange">
+                            <option selected>Price Range...</option>
+                            <option value="0-100000">$0 - $100,000</option>
+                            <option value="100001-200000">$100,001 - $200,000</option>
+                            <option value="200001+">$200,001+</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <label for="bedrooms" class="visually-hidden">Bedrooms</label>
+                        <select class="form-select" id="bedrooms">
+                            <option selected>Bedrooms...</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
         <section class="listing-container">
             <section id="property-container" class="property-container" th:each="property : ${properties}">
                 <!-- MODAL INFORMATION -->
