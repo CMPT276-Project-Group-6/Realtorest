@@ -95,7 +95,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    min-height: 100vh; /* Set minimum height to full viewport height */
 }
 
 /* OFF CANVAS */

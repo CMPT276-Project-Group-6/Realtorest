@@ -120,10 +120,18 @@ a {
     color: rgb(211, 211, 211);
 }
 .navbar {
-    background-color: rgba(14, 29, 51, 255) !important;
+    background-color: rgba(14, 29, 51, 0) !important;
 }
 
 /* BODY */
+body {
+    background-image: url(/img/listingBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+}
+
 .listing-container {
     display: flex;
     flex-wrap: wrap;
@@ -137,17 +145,11 @@ a {
     width: calc(33.33% - 20px); /* 33.33% width for each property with margin */
     margin-bottom: 30px;
     background-color: whitesmoke;
-    border: solid 1px rgb(200, 200, 200);
-    border-radius: 6px;
-    box-shadow: 0 0 5px 0.2px rgb(145, 145, 145);
+    border-radius: 8px;
+    box-shadow: 0 0 5px 0.1px rgb(125, 125, 125);
 }
 .property-listing {
     background-color: rgb(243, 243, 243);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: scroll;
-    height: 100vh;
 }
 /* Property Card */
 .figure {
@@ -167,6 +169,8 @@ a {
 .carousel-inner .carousel-item img {
     height: 220px;
     object-fit: cover;
+    border-radius: 8px;
+
 }
 .icon-container {
     display: flex;
@@ -284,20 +288,20 @@ a {
 .pagination a {
     font-family: "Montserrat", "sans-serif";
     font-size: 18px;
-    color: rgb(140, 140, 140);
+    color: rgb(255, 255, 255);
     padding: 0px 15px;
     background-color: transparent;
     border: none;
 }
 .page-item.active .page-link {
-    background-color: rgb(215, 215, 215); /* Set background to clear transparent */
-    color: rgb(140, 140, 140);
+    background-color: rgba(150, 150, 150, 0.502); /* Set background to clear transparent */
+    color: rgb(255, 255, 255);
 }
 .page-item.disabled .page-link {
     background-color: transparent; /* Set background to clear transparent */
-    color: rgb(140, 140, 140);
+    color: rgb(255, 255, 255);
 }
 .page-item .page-link:hover {
-    background-color: rgb(230, 230, 230);
-    color: rgb(140, 140, 140);
+    background-color: rgba(150, 150, 150, 0.502);
+    color: rgb(255, 255, 255);
 }

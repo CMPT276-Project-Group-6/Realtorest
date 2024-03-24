@@ -1,167 +1,152 @@
+/* FONTS */
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* MAIN CONTENT */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Roboto;
-    background-repeat: no-repeat;
+    background-image: url(/img/registerBackground.jpg) !important;
     background-size: cover;
-    background: linear-gradient(to right, #ffffff 25%, #1b2b43 10%);
-    height: 100vh;
-    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+}
+.main-content {
+    display: flex;
 }
 
-.container {
+/* QUOTE */
+.quote-container {
+    width: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-    margin-top: 50px;
 }
-.register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-    margin-top: 50px;
-    padding-left: 250px;
-    padding-bottom: 70px;
-}
-
-.register-form {
-    width: 500px;
-    height: 550px;
-    padding: 20px;
-    padding-left: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: left;
-    background-color: #1b2b43;
-}
-
-.register-form h2 {
-    font-family: "Monaco", Courier, monospace;
-    font-size: 25px;
+.quote {
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 200;
+    font-size: 50px;
     color: #ffffff;
-    position: absolute;
-    left: 400px;
-    bottom: 560px;
+    padding-top: 150px;
+    padding-left: 45%;
+    padding-right: 20%;
 }
 
-.username-input,
-.email-input,
-.password-input,
-.confirm-password-input {
-    padding-top: 30px;
-    padding: 15px;
-    margin-bottom: 40px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    background: transparent;
-    border-radius: 5px;
-    color: #ccc;
-    transition: border-color 0.3s ease;
-    appearance: none;
+/* REGISTER FORM */
+.form-container {
+    background-color: rgba(0, 0, 0, 0.559);
+    padding: 50px 80px;
+    width: 700px;
+    height: 540px;
+    margin-right: 150px;
+    margin-top: 100px;
 }
-
-.username-input:focus,
-.email-input:focus,
-.password-input:focus,
-.confirm-password-input:focus {
-    border-color: #ff0000;
-}
-
-.username-input::placeholder,
-.email-input::placeholder,
-.password-input::placeholder,
-.confirm-password-input::placeholder {
-    color: #ccc;
-}
-
-.username-input:focus::placeholder,
-.email-input:focus::placeholder,
-.password-input:focus::placeholder,
-.confirm-password-input:focus::placeholder {
-    color: transparent;
-}
-
-.input-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.input-wrapper input {
-    width: 100% !important;
-    padding: 15px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    background: transparent;
-    border-radius: 5px;
+.form-label {
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 18px;
     color: #ffffff;
-    transition: border-color 0.3s ease;
-    appearance: none;
 }
-
-.input-wrapper input:focus {
-    border-color: #ff0000;
+.form-control {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0% !important; 
+    border-bottom: rgb(225, 225, 225) 1px solid !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-family: "Montserrat", "sans-serif" !important;
+    font-weight: 300 !important;
 }
-
-.input-wrapper input::placeholder {
-    color: transparent;
+.form-control:focus {
+    background-color: transparent !important;
+    border-bottom: rgb(225, 225, 225) 1px solid !important;
+    outline: none !important;
 }
-
-.input-wrapper input:focus::placeholder {
-    color: #ccc;
-}
-
-.input-wrapper input:focus,
-.input-wrapper input:not(:placeholder-shown) {
-    transform: translateY(30px);
-}
-
-.input-label {
-    position: absolute;
-    left: 15px;
-    top: 20px;
-    color: #ccc;
-    transition: top 0.3s, font-size 0.3s;
-    pointer-events: none;
-}
-
-.input-wrapper input:focus + .input-label,
-.input-wrapper input:not(:placeholder-shown) + .input-label {
-    top: 10px;
-    font-size: 12px;
-}
-
-.register-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #ff0000;
-    color: #fff;
-    cursor: pointer;
-    position: relative;
-    bottom: auto;
-    right: auto;
-    margin-top: 20px;
-}
-
-.login-form button:hover {
-    background-color: #5f0000;
-}
-
-.login_link {
-    margin: 30px 0;
-    text-align: center;
+.register-form .btn {
+    background-color: transparent !important;
+    color: #ffffff !important; 
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
     font-size: 16px;
+    border-radius: 0%;
+    border: white 1px solid;  
+    padding: 5px 0px;
+    width: 100px;
+    height: 35px;
+    margin-top: 15px;
+}
+.register-form .btn:hover {
+    background-color: rgb(220, 220, 220) !important;
+    color: #000000 !important;
+    border: white 1px solid !important;
+    cursor: pointer !important;  
+}
+.register-form .btn:active {
+    background-color: rgb(220, 220, 220) !important;
+    color: #000000 !important;
+    border: white 1px solid !important;
+}
+.add-link, .add-link a {
+    padding-top: 20px !important;
+    color: #ffffff !important;
+    font-family: "Montserrat", "sans-serif" !important;
+    font-weight: 300 !important;
+    font-size: 15px !important;
+    text-decoration: none !important;
+}
+.add-link a:hover {
+    cursor: pointer !important;
+    color: #d0d0d0 !important;    
+}
+.question-text {
+    color: #a5b5bc !important;
+    font-weight: 400 !important;
+}
+
+#strength-pass-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 20px;
+    left: 900px;
+    white-space: nowrap;
+    line-height: 20px;
+}
+
+progress {
+    width: 50%;
+    height: 20px;
+    margin-right: 10px;
+}
+
+#password-strength-text {
     color: white;
+    font-size: 15px;
+    font-family: "Montserrat", "sans-serif";
+    white-space: nowrap;
+    line-height: 20px;
+    align-self: center;
+    font-weight: 300;
 }
 
-.login_link a {
-    color: #2691d9;
-    text-decoration: none;
-}
-
-.login_link a:hover {
-    text-decoration: underline;
+#password-strength,
+#password-strength-text {
+    display: none;
 }
