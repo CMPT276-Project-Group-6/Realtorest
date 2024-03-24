@@ -120,38 +120,36 @@ a {
     color: rgb(211, 211, 211);
 }
 .navbar {
-    background-color: rgba(14, 29, 51, 255) !important;
+    background-color: rgba(14, 29, 51, 0) !important;
 }
 
 /* BODY */
-.listing-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-.property-container {
-    margin-top: 10px;
-    margin-bottom: 30px;
-    width: 300px;
-    background-color: whitesmoke;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: solid 1px rgb(145, 145, 145);
-    border-radius: 5px;
-    box-shadow: 0 0 5px 0.5px rgb(145, 145, 145);
-}
-.property-container:hover {
-    box-shadow: 0 0 10px 1px rgb(145, 145, 145);
-}
-.property-listing {
-    background-color: rgb(243, 243, 243);
+body {
+    background-image: url(/img/listingBackground.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow: scroll;
-    height: 100vh;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+}
+
+.listing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-right: 12%;
+    padding-left: 12%;
+}
+.property-container {
+    height: 300px;
+    width: calc(33.33% - 20px); /* 33.33% width for each property with margin */
+    margin-bottom: 30px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    box-shadow: 0 0 5px 0.1px rgb(125, 125, 125);
+}
+.property-listing {
+    background-color: rgb(243, 243, 243);
 }
 /* Property Card */
 .figure {
@@ -169,8 +167,12 @@ a {
 
 /* Description */
 .carousel-inner .carousel-item img {
-    height: 200px;
+    height: 220px;
     object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .icon-container {
     display: flex;
@@ -206,7 +208,7 @@ a {
     font-size: 15px;
     padding-left: 10px;
     padding-right: 10px;
-    max-width: 300px;
+    max-width: 500px;
 }
 .icon-container,
 .icon-container p,
@@ -281,3 +283,27 @@ a {
     color: #f1c40f;
 }
 
+/* PAGINATION */
+.pagination {
+    padding-bottom: 30px;
+}
+.pagination a {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    padding: 0px 15px;
+    background-color: transparent;
+    border: none;
+}
+.page-item.active .page-link {
+    background-color: rgba(150, 150, 150, 0.502); /* Set background to clear transparent */
+    color: rgb(255, 255, 255);
+}
+.page-item.disabled .page-link {
+    background-color: transparent; /* Set background to clear transparent */
+    color: rgb(255, 255, 255);
+}
+.page-item .page-link:hover {
+    background-color: rgba(150, 150, 150, 0.502);
+    color: rgb(255, 255, 255);
+}

@@ -1,350 +1,135 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* FONTS */
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
 }
-
-body {
-    padding-top: 60px;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: 5px solid #5b2cb8; /* Add border to the top */
-    min-height: 100vh;
-    background-color: #1b2b43;
-}
-
-/* NAVIGATION BAR */
-.realtorest-title {
-    font-size: 25px;
-    padding-top: 5px;
-    padding-left: 30px;
-}
-.navbar-categories {
-    display: flex;
-    font-family: "Montserrat", "sans-serif";
-    font-size: 15px;
-    padding-top: 15px;
-    padding-right: 20px;
-}
-.navbar-category {
-    color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-.navbar-category:hover {
-    color: rgb(211, 211, 211);
-}
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(14, 29, 51, 255);
-}
-/************/
-.container {
-    display: flex;
-    justify-content: flex-start;
-    width: 1200px;
-    padding: 30px;
-}
-
-.side-box {
-    width: 60%;
-    padding: 0;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.side-box h1 {
-    font-family: Raleway, sans-serif;
-    font-weight: bold;
-}
-
-.side-box-content {
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
     font-family: "Playfair Display", serif;
-    margin-top: 60px;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
-.introduction-section {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    font-size: 20px;
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* MAIN CONTENT */
+body {
+    background-image: url(/img/loginBackground.jpg) !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+}
+.main-content {
+    display: flex;
+}
+
+/* QUOTE */
+.quote-container {
+    width: 50%;
+    display: flex;
+}
+.quote {
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 200;
+    font-size: 50px;
+    color: #ffffff;
+    padding-top: 150px;
+    padding-left: 45%;
+    padding-right: 20%;
+}
+
+/* LOGIN FORM */
+.form-container {
+    background-color: rgba(0, 0, 0, 0.559);
+    padding: 50px 80px;
+    width: 700px;
+    height: 400px;
+    margin-right: 150px;
+    margin-top: 120px;
+}
+.form-label {
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 18px;
     color: #ffffff;
 }
-
-.login-form {
-    width: 450px;
-    height: 500px;
-    padding: 10px;
-    margin-left: 200px;
-    margin-top: -10px;
-    background-color: #1b2b43;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    position: relative;
+.form-control {
+    background-color: transparent;
+    border: none;
+    border-radius: 0%;
+    border-bottom: rgb(225, 225, 225) 1px solid;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-family: "Montserrat", "sans-serif" !important;
+    font-weight: 300 !important;
 }
-
-.login-form h2 {
-    font-family: "Monaco", Courier, monospace;
-    font-size: 25px;
+.form-control:focus {
+    background-color: transparent;
+    border-bottom: rgb(225, 225, 225) 1px solid;
+    outline: none !important;
+}
+.login-form .btn {
+    background-color: transparent;
     color: #ffffff;
-    position: absolute;
-    bottom: 500px;
-}
-
-.username-input,
-.password-input {
-    padding-top: 30px;
-    padding: 15px;
-    margin-bottom: 40px;
-    border: none;
-    border-bottom: 13px solid #ccc;
-    background: transparent;
-    border-radius: 5px;
-    color: #ccc;
-    transition: border-color 0.3s ease;
-    appearance: none; /* Remove default styling */
-}
-
-.username-input:focus,
-.password-input:focus {
-    border-color: #ff0000;
-}
-
-.username-input::placeholder,
-.password-input::placeholder {
-    color: #ccc; /* Placeholder text color */
-}
-
-.username-input:focus::placeholder,
-.password-input:focus::placeholder {
-    color: transparent; /* Hide placeholder text when input is focused */
-}
-
-.input-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.input-wrapper input {
-    width: 160%;
-    padding: 15px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    background: transparent;
-    border-radius: 5px;
-    color: #ffffff; /* Set text color to white */
-    transition: border-color 0.3s ease;
-    appearance: none;
-}
-
-.input-wrapper input:focus {
-    border-color: #ff0000;
-}
-
-.input-wrapper input::placeholder {
-    color: transparent; /* Placeholder text color */
-}
-
-.input-wrapper input:focus::placeholder {
-    color: #ccc; /* Hide placeholder text when input is focused */
-}
-
-.input-wrapper input:focus,
-.input-wrapper input:not(:placeholder-shown) {
-    transform: translateY(30px); /* Move text downwards */
-}
-
-.input-label {
-    position: absolute;
-    left: 15px;
-    top: 20px;
-    color: #ccc;
-    transition: top 0.3s, font-size 0.3s;
-    pointer-events: none; /* Prevent clicking on label */
-}
-
-.input-wrapper input:focus + .input-label,
-.input-wrapper input:not(:placeholder-shown) + .input-label {
-    top: 10px;
-    font-size: 12px;
-}
-
-.login-form button {
-    padding: 7px 20px;
-    border: none;
-    border-radius: 3px;
-    background-color: #ff0000;
-    color: #fff;
-    cursor: pointer;
-    bottom: 80px;
-    right: -100px;
-}
-
-.login-form button:hover {
-    background-color: #5f0000;
-}
-
-.social-login {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 15px;
-    bottom: 30px; /* Center vertically */
-}
-
-.google-login {
-    margin-bottom: 20px;
-    white-space: nowrap; /* Prevent text from wrapping */
-    width: 230px; /* Set a fixed width */
-    height: 40px; /* Set a fixed height */
-    display: flex; /* Use flexbox to center the text */
-    justify-content: center; /* Center the text horizontally */
-    align-items: center; /* Center the text vertically */
-    text-decoration: none;
-    background-color: rgba(208, 193, 193, 0.186);
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
-    transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
-}
-
-.google-login:hover {
-    cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
-}
-
-.google-login:active {
-    cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px black;
-    box-shadow: 0 0 3px 3px black;
-}
-
-.google-login .content-wrapper {
-    height: 100%;
-    width: 100%;
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.google-login img {
-    width: 20px;
-    height: 20px;
-}
-
-.google-login .logo-wrapper {
-    background: #fff;
-    width: 48px;
-    height: 100%;
-    border-radius: 5px;
-    display: flex; /* Use flexbox to align items */
-    justify-content: center; /* Center the logo horizontally */
-    align-items: center; /* Center the logo vertically */
-}
-
-.google-login .text-container {
-    font-family: "Roboto", arial, sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.21px;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
     font-size: 16px;
-    line-height: 48px;
-    vertical-align: top;
-    border: none;
-    text-align: center;
-    width: 180px;
+    border-radius: 0%;
+    border: white 1px solid;  
+    padding: 5px 0px;
+    width: 100px;
+    height: 35px;
+    margin-top: 15px;
 }
-
-.apple-login {
-    white-space: nowrap; /* Prevent text from wrapping */
-    width: 230px; /* Set a fixed width */
-    height: 40px; /* Set a fixed height */
-    display: flex; /* Use flexbox to center the text */
-    justify-content: center; /* Center the text horizontally */
-    align-items: center; /* Center the text vertically */
-    background-color: rgba(208, 193, 193, 0.186);
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
-    transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+.login-form .btn:hover {
+    background-color: rgb(220, 220, 220) !important;
+    color: #000000;
+    border: white 1px solid;
+    cursor: pointer;  
+}
+.login-form .btn:active {
+    background-color: rgb(220, 220, 220) !important;
+    color: #000000;
+    border: white 1px solid;
+}
+.add-link, .add-link a {
+    padding-top: 20px;
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 15px;
     text-decoration: none;
 }
-
-.apple-login:hover {
+.add-link a:hover {
     cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    color: #d0d0d0;    
+}
+.question-text {
+    color: #a5b5bc;
+    font-weight: 400;
 }
 
-.apple-login:active {
-    cursor: pointer;
-    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+/* ADMIN LOGIN BACKGROUND */
+.admin-login {
+    background-image: url(/img/adminBackground.jpg) !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set minimum height to full viewport height */
 }
 
-.apple-login .content-wrapper {
-    height: 100%;
-    width: 100%;
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.apple-login img {
-    width: 25px; /* Apple logo size */
-    height: 25px; /* Apple logo size */
-    margin-right: 30px; /* Add margin between logo and text */
-}
-
-.apple-login .text-container {
-    margin-right: 10px;
-    font-family: "Roboto", arial, sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.21px;
-    font-size: 16px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.forgot_password {
-    padding-right: 125px;
-    padding-bottom: 50px;
-    text-align: center;
-    font-size: 16px;
-    color: #666666;
-}
-
-.forgot_password a {
-    color: #2691d9;
-    text-decoration: none;
-}
-
-.forgot_password a:hover {
-    text-decoration: underline;
-}
-
-.signup_link {
-    padding-bottom: 25px;
-    text-align: center;
-    font-size: 16px;
-    color: white;
-}
-
-.signup_link a {
-    color: #2691d9;
-    text-decoration: none;
-}
-
-.signup_link a:hover {
-    text-decoration: underline;
+/* ERROR MESSAGE */
+#errorMessage {
+    color: rgb(254, 140, 140);
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 15px;
 }
