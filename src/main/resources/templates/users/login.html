@@ -30,11 +30,15 @@
                     </section>
                 </div>
                 <!-- Login Form Section -->
+                
                 <div class="row">
+
                     <section class="login-form-section col-md-8">
                         <div class="login-form">
                             <h2>SIGN IN</h2>
+                        
                             <form action="/login" method="post" onsubmit="return validateForm()">
+                                <span th:text="${error}" style="color: red;" ></span>
                                 <div class="input-wrapper">
                                     <input type="text" class="username-input" placeholder=" " name="email" required />
                                     <label class="input-label">Email</label>
@@ -67,12 +71,12 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="forgot_password">
+                                <div class="forgot_password" style="height: 40px;">
                                     <a href="">Forgot Password?</a>
                                 </div>
-                                <div class="signup_link">
-                                    Don't have an account? <a href="/register">Register Here</a> <br />
-                                    Admin? <a href="/adminlogin">Login Here</a>
+                                <div class="signup_link" >
+                                    Don't have an account? <a href="/register">Register Here</a> <br>
+                                    Admin?  <a href="/adminlogin" >Login here</a>
                                 </div>
                             </form>
                         </div>
@@ -107,4 +111,5 @@
             </section>
         </nav>
     </body>
+
 </html>
