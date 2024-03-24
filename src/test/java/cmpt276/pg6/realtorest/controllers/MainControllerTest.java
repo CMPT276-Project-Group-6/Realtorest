@@ -82,19 +82,21 @@ public class MainControllerTest {
             .param("email", "email@gmail.com")
             .param("password", "password12"))
             .andExpect(MockMvcResultMatchers.status().isOk());
-        // im curious where are we redirecting to after login?
+
+        // Drishty: im curious where are we redirecting to after login?
         // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
+
+        // Kevin: The probably is likely because login have failed, since the email and password are not in the database.
     }
 
     @Test
     void testUserLogout() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
-            .andExpect(MockMvcResultMatchers.redirectedUrl(""));
-        // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
+            .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
 
-        // initally it should redirect to home page [/] not [""]
-        // whosoever was responsible for this function in model controller
-        // should fix it or either explain what is actually happening
+        // Drishty: initially it should redirect to home page [/] not [""] whosoever was responsible for this function in model controller should fix it or either explain what is actually happening
+
+        // Kevin: Both the home page and the empty string URL are the same page, but I changed it to redirect to "/" instead if you prefer that.
     }
 
     // @Test

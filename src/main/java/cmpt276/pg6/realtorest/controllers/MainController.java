@@ -257,7 +257,7 @@ public class MainController {
     @GetMapping("/logout")
     public RedirectView destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
-        return new RedirectView("");
+        return new RedirectView("/");
     }
 
     // #endregion
