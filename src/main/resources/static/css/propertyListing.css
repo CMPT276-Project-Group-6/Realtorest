@@ -311,3 +311,95 @@ body {
     background-color: rgba(150, 150, 150, 0.502);
     color: rgb(255, 255, 255);
 }
+
+
+/* Styles for the pop-up form */
+#popup-form {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    bottom: -100%;
+    right: 20px;
+    background-color: rgba(33, 45, 57, 0.95);
+    border: none; 
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: bottom 0.7s ease-in-out, opacity 0.7s ease-in-out, visibility 0.7s ease-in-out;
+    max-width: 350px;
+    width: 100%;
+    border-radius: 10px; 
+}
+
+#popup-form.active {
+    opacity: 1;
+    visibility: visible;
+    bottom: 0;
+}
+
+#popup-form label {
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+}
+
+h2 { 
+    text-align: center;
+    padding-bottom: 20px;
+    color: #ffffff; 
+    font-family: "Montserrat", "sans-serif"; 
+    font-weight: 300; 
+    font-size: 18px; 
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 1.2em; 
+    cursor: pointer; 
+    color: #ffffff; 
+    font-family: "Montserrat", "sans-serif"; 
+    font-weight: 300; 
+}
+
+/* Styles for form elements */
+#popup-form input[type="text"],
+#popup-form input[type="email"],
+#popup-form input[type="tel"] {
+    width: calc(100% - 10px);
+    margin-bottom: 10px;
+    padding: 5px;
+    border: none; 
+    border-bottom: rgb(225, 225, 225) 1px solid; 
+    border-radius: 0%; 
+    background-color: transparent; 
+    color: #ffffff; 
+    font-size: 16px; 
+    font-family: "Montserrat", "sans-serif"; 
+    font-weight: 300; 
+}
+
+#popup-form input[type="text"]:focus,
+#popup-form input[type="email"]:focus,
+#popup-form input[type="tel"]:focus {
+    border-color: rgb(52, 64, 60);
+}
+
+#submit-button {
+    background-color: rgb(52, 64, 60);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: "Montserrat", "sans-serif";
+}
+
+#submit-button:hover {
+    background-color: rgb(32, 44, 40);
+}
+
+/* End of popup form styles */
+
