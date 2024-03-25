@@ -60,40 +60,49 @@
             </section>
         </nav>
 
-        <!-- FILTER BAR SECTION -->
+        <!-- FILTER BAR SECTION with Thymeleaf -->
     <section class="container mt-5">
         <div class="card">
             <div class="card-header">
                 <h5>Filter Properties</h5>
             </div>
             <div class="card-body">
-                <form class="row g-3 align-items-center justify-content-start">
+                <form action="#" th:action="@{/properties}" method="get" class="row g-3 align-items-center justify-content-start">
+                    <!-- City filter -->
                     <div class="col-auto">
-                        <label for="propertyType" class="visually-hidden">Property Type</label>
-                        <select class="form-select" id="propertyType">
-                            <option selected>Choose Type...</option>
-                            <option value="house">House</option>
-                            <option value="apartment">Apartment</option>
-                            <option value="condo">Condo</option>
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+                    </div>
+                    <!-- Price sort order -->
+                    <div class="col-auto">
+                        <label for="priceSort" class="form-label">Sort by Price</label>
+                        <select class="form-select" id="priceSort" name="sortOrder">
+                            <option value="ASC">Low to High</option>
+                            <option value="DESC">High to Low</option>
                         </select>
                     </div>
+                    <!-- Additional filters like Bedrooms and Bathrooms -->
                     <div class="col-auto">
-                        <label for="priceRange" class="visually-hidden">Price Range</label>
-                        <select class="form-select" id="priceRange">
-                            <option selected>Price Range...</option>
-                            <option value="0-100000">$0 - $100,000</option>
-                            <option value="100001-200000">$100,001 - $200,000</option>
-                            <option value="200001+">$200,001+</option>
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <label for="bedrooms" class="visually-hidden">Bedrooms</label>
-                        <select class="form-select" id="bedrooms">
+                        <label for="bedrooms" class="form-label">Bedrooms</label>
+                        <select class="form-select" id="bedrooms" name="bedrooms">
                             <option selected>Bedrooms...</option>
                             <option value="1">1+</option>
                             <option value="2">2+</option>
                             <option value="3">3+</option>
                         </select>
+                    </div>
+                    <div class="col-auto">
+                        <label for="bathrooms" class="form-label">Bathrooms</label>
+                        <select class="form-select" id="bathrooms" name="bathrooms">
+                            <option selected>Bathrooms...</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <label for="searchName" class="form-label">Search by Name</label>
+                        <input type="text" class="form-control" id="searchName" name="name" placeholder="Property name">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary">Apply Filters</button>
