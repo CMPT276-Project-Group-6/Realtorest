@@ -348,26 +348,6 @@ public class MainController {
 
     // #endregion
 
-    // #region Redirects
-
-    @GetMapping("/admin")
-    public RedirectView reAdmin() {
-        return new RedirectView("/dev");
-    }
-
-    @GetMapping("/dev/admin")
-    public RedirectView reDevAdmin() {
-        return new RedirectView("/dev");
-    }
-
-    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
-    @GetMapping("/dev")
-    public RedirectView reDev() {
-        return new RedirectView("/dev/users");
-    }
-
-    // #endregion
-
     @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
         String adminName = newUser.get("adminname");
@@ -431,4 +411,24 @@ public class MainController {
             return mav;
         }
     }// lists all users in database for admin
+
+    // #region Redirects
+
+    @GetMapping("/admin")
+    public RedirectView reAdmin() {
+        return new RedirectView("/dev");
+    }
+
+    @GetMapping("/dev/admin")
+    public RedirectView reDevAdmin() {
+        return new RedirectView("/dev");
+    }
+
+    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
+    @GetMapping("/dev")
+    public RedirectView reDev() {
+        return new RedirectView("/dev/users");
+    }
+
+    // #endregion
 }

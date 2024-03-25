@@ -1,26 +1,31 @@
 package cmpt276.pg6.realtorest.controllers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.ui.Model;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
@@ -29,21 +34,20 @@ import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.Optional;
-import java.util.Set; 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MainControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @InjectMocks
+    MockHttpSession mockHttpSession;
+
     @MockBean
     private UserRepository userRepository;
 
     @MockBean
     private PropertyRepository propertyRepository;
-
 
     @BeforeAll
     static void setUp() {
@@ -163,7 +167,6 @@ public class MainControllerTest {
     // .andExpect(MockMvcResultMatchers.status().isOk());
     // }
 
-
     @Test
     public void testGetFavourites() {
         // Arrange
@@ -178,7 +181,7 @@ public class MainControllerTest {
 
         MainController controller = new MainController();
         controller.setUserRepo(userRepo);
-        
+
         // Act
         String result = controller.getFavourites(request, session, model);
 
@@ -239,10 +242,63 @@ public class MainControllerTest {
         assertEquals("Property removed from favourites successfully", result.getBody());
         verify(userRepo, times(1)).save(user);
     }
+
+    @Test
+    void testShowAdminLoginPage() throws Exception {
+        // Setup session
+        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+            .andReturn().getRequest().getSession();
+
+        // Perform GET request and verify the view name
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminlogin").session(session))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("users/adminlogin"));
+    }
+
+    @Test
+    void testShowAdminLoginPageLoggedIn() throws Exception {
+        // Setup session with an admin user
+        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+            .andReturn().getRequest().getSession();
+        session.setAttribute("session_user", new Admin());
+
+        // Perform GET request and verify the view name
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminlogin").session(session))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("protected"));
+    }
+
+    @Test
+    void testGetAllUsers() throws Exception {
+        // Setup session with an admin user
+        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+            .andReturn().getRequest().getSession();
+        session.setAttribute("session_user", new Admin());
+
+        // Mock the user repository and its findAll() method
+        List<User> users = new ArrayList<>();
+        users.add(new User("user1", "user1@example.com", "password1"));
+        users.add(new User("user2", "user2@example.com", "password2"));
+        when(userRepository.findAll()).thenReturn(users);
+
+        // Perform GET request and verify the view name and model attribute
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/listUsers").session(session))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("list-users"))
+            .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
+            .andExpect(MockMvcResultMatchers.model().attribute("users", users));
+    }
+
+    @Test
+    void testGetAllUsersUnauthenticated() throws Exception {
+        // Perform GET request without an admin user in the session
+        Exception exception = assertThrows(jakarta.servlet.ServletException.class, () -> {
+            this.mockMvc.perform(MockMvcRequestBuilders.get("/listUsers"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andExpect(MockMvcResultMatchers.handler().handlerType(MainController.class))
+                .andExpect(MockMvcResultMatchers.handler().methodName("getAllUsers"));
+        });
+        assertEquals("Request processing failed: java.lang.SecurityException: This is a protected page", exception.getMessage());
+
+    }
 }
-
-
-
-    
-
-
