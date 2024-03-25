@@ -2,21 +2,28 @@ package cmpt276.pg6.realtorest.controllers;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.servlet.http.HttpSession;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MainControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @InjectMocks
+    MockHttpSession mockHttpSession;
 
     @MockBean
     private UserRepository userRepository;
@@ -139,4 +146,28 @@ public class MainControllerTest {
     // .andExpect(MockMvcResultMatchers.status().isOk());
     // }
 
+    @Test
+    void testShowAdminLoginPage() throws Exception {
+        // Setup session
+        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+            .andReturn().getRequest().getSession();
+
+        // Perform GET request and verify the view name
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminlogin").session(session))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("users/adminlogin"));
+    }
+
+    @Test
+    void testShowAdminLoginPageLoggedIn() throws Exception {
+        // Setup session with an admin user
+        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+            .andReturn().getRequest().getSession();
+        session.setAttribute("session_user", new Admin());
+
+        // Perform GET request and verify the view name
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminlogin").session(session))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("protected"));
+    }
 }
