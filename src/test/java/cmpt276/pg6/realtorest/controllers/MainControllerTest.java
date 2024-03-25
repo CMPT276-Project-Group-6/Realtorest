@@ -1,16 +1,36 @@
 package cmpt276.pg6.realtorest.controllers;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.ui.Model;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import cmpt276.pg6.realtorest.models.Property;
+import cmpt276.pg6.realtorest.models.PropertyRepository;
+import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+import java.util.Optional;
+import java.util.Set; 
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,6 +40,10 @@ public class MainControllerTest {
 
     @MockBean
     private UserRepository userRepository;
+
+    @MockBean
+    private PropertyRepository propertyRepository;
+
 
     @BeforeAll
     static void setUp() {
@@ -139,4 +163,86 @@ public class MainControllerTest {
     // .andExpect(MockMvcResultMatchers.status().isOk());
     // }
 
+
+    @Test
+    public void testGetFavourites() {
+        // Arrange
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
+        Model model = mock(Model.class);
+        UserRepository userRepo = mock(UserRepository.class);
+        User user = new User();
+        user.setUid(1);
+        when(session.getAttribute("session_user")).thenReturn(user);
+        when(userRepo.findById(1)).thenReturn(Optional.of(user));
+
+        MainController controller = new MainController();
+        controller.setUserRepo(userRepo);
+        
+        // Act
+        String result = controller.getFavourites(request, session, model);
+
+        // Assert
+        assertEquals("favourites", result);
+        verify(model, times(1)).addAttribute(eq("favouriteProperties"), any(Set.class));
+        verify(model, times(1)).addAttribute("user", user);
+    }
+
+    @Test
+    public void testAddToFavourites() {
+        // Arrange
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
+        UserRepository userRepo = mock(UserRepository.class);
+        PropertyRepository propertyRepo = mock(PropertyRepository.class);
+        User user = new User();
+        user.setUid(1);
+        Property property = new Property();
+        property.setPid(1);
+        when(session.getAttribute("session_user")).thenReturn(user);
+        when(userRepo.findById(1)).thenReturn(Optional.of(user));
+        when(propertyRepo.findById(1)).thenReturn(Optional.of(property));
+
+        MainController controller = new MainController();
+        controller.setUserRepo(userRepo);
+        controller.setPropertyRepo(propertyRepo); // set the propertyRepo mock
+
+        // Act
+        ResponseEntity<String> result = controller.addToFavourites(1, request, session);
+
+        // Assert
+        assertEquals("Property added to favourites successfully", result.getBody());
+        verify(userRepo, times(1)).save(user);
+    }
+
+    @Test
+    public void testRemoveFromFavourites() {
+        // Arrange
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
+        UserRepository userRepo = mock(UserRepository.class);
+        User user = new User();
+        user.setUid(1);
+        Property property = new Property();
+        property.setPid(1);
+        user.getFavouriteProperties().add(property);
+        when(session.getAttribute("session_user")).thenReturn(user);
+        when(userRepo.findById(1)).thenReturn(Optional.of(user));
+
+        MainController controller = new MainController();
+        controller.setUserRepo(userRepo);
+
+        // Act
+        ResponseEntity<String> result = controller.removeFromFavourites(1, request, session);
+
+        // Assert
+        assertEquals("Property removed from favourites successfully", result.getBody());
+        verify(userRepo, times(1)).save(user);
+    }
 }
+
+
+
+    
+
+

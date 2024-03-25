@@ -283,6 +283,10 @@ body {
     color: #f1c40f;
 }
 
+.favourite-button i.highlighted {
+    color: #f1c40f;
+ } 
+
 /* PAGINATION */
 .pagination {
     padding-bottom: 30px;

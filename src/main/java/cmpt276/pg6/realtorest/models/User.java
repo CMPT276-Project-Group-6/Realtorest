@@ -1,9 +1,16 @@
 package cmpt276.pg6.realtorest.models;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 // This is a user object.
@@ -20,6 +27,14 @@ public class User {
     private String username;
     private String email;
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_favourite_properties",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "property_id"))
+    
+    private Set<Property> favouriteProperties = new HashSet<>();
 
     public User() {}
 
@@ -60,4 +75,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Set<Property> getFavouriteProperties() {
+        return favouriteProperties;
+    }
+
+    public void setFavouriteProperties(Set<Property> favouriteProperties) {
+        this.favouriteProperties = favouriteProperties;
+    }
 }
+
