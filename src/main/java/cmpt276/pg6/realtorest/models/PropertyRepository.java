@@ -12,4 +12,6 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<Property> findByCity(String city, Sort sort);
     List<Property> findByBrCount(Integer brCount, Sort sort);
     List<Property> findByBaCount(Integer baCount, Sort sort);
+    List<Property> findByBrCountGreaterThanEqual(Integer brCount, Sort sort);
+    List<Property> findByBaCountGreaterThanEqual(Integer baCount, Sort sort);
 }

@@ -22,8 +22,8 @@ public class PropertyController {
     @GetMapping("/properties")
     public String getProperties(
             @RequestParam(required = false) String city,
-            @RequestParam(required = false) Integer brCount,
-            @RequestParam(required = false) Integer baCount,
+            @RequestParam(required = false) String brCount,
+            @RequestParam(required = false) String baCount,
             @RequestParam(required = false) String name,
             @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
             Model model) {
@@ -31,12 +31,21 @@ public class PropertyController {
         
         List<Property> properties;
         
+        
         if (!city.isEmpty()) {
             properties = propertyRepo.findByCity(city, sort);
-        } else if (brCount !=null) {
-            properties = propertyRepo.findByBrCount(brCount,sort);
-        } else if (baCount != null) {
-            properties = propertyRepo.findByBaCount(baCount, sort);
+        } else if (!brCount.isEmpty() &&  brCount !=null) {
+            System.out.println("brCount: " + brCount);
+            String numericPart = brCount.replaceAll("[^\\d]", "");
+            int bathroomCount = Integer.parseInt(numericPart);
+            properties = propertyRepo.findByBrCountGreaterThanEqual(bathroomCount,sort);
+        } else if (!baCount.isEmpty()) {
+            System.out.println("baCount: " + baCount);
+            String numericPart = baCount.replaceAll("[^\\d]", "");
+            System.out.println("Numeric part: " + numericPart);
+            int bedroomCount = Integer.parseInt(numericPart);
+
+            properties = propertyRepo.findByBaCountGreaterThanEqual(bedroomCount, sort);
         } else if (name.isEmpty()) {
             properties = propertyRepo.findByNameContainingIgnoreCase(name, sort);
         } else {
