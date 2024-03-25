@@ -94,3 +94,63 @@ function goToPage(page) {
 // Initial display and pagination setup
 displayProperties();
 updatePagination();
+
+
+
+// Function to show the pop-up form
+function showPopup() {
+    var popup = document.getElementById('popup-form');
+    popup.classList.add('active');
+}
+
+
+// Function to close the pop-up form
+function closePopup() {
+    var popup = document.getElementById('popup-form');
+    popup.classList.remove('active');
+}
+
+
+setTimeout(showPopup, 120000); //Show popup after 2 minutes
+
+
+
+// Function to handle form submission
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+event.preventDefault(); // Prevent default form submission
+
+// Get form data
+var name = document.getElementById("name").value;
+var email = document.getElementById("email").value;
+var phone = document.getElementById("phone").value;
+
+// Validate form data (you may add more validation here)
+if (name.trim() === '' || email.trim() === '' || phone.trim() === ''){
+    alert("Please fill in all fields.");
+    return;
+}
+
+// Send form data to backend
+fetch('/submit-contact-form', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: name, email: email, phone: phone})
+})
+.then(response => {
+    if (response.ok) {
+    // Form submission successful, do something (e.g., show a success message)
+    alert("Thank you! Your information has been submitted.");
+    // Optionally, close the modal after submission
+    document.getElementById("popup-form").style.display = "none";
+    } else {
+    // Form submission failed, handle errors
+    alert("Error: Form submission failed.");
+    }
+})
+.catch(error => {
+    // Handle network errors
+    alert("Network error: Unable to submit form.");
+});
+});
