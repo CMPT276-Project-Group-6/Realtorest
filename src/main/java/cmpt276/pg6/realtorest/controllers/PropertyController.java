@@ -52,6 +52,11 @@ public class PropertyController {
             // Default action: fetch all listings sorted 
             properties = propertyRepo.findAll(sort);
         }
+        model.addAttribute("city", city);
+        model.addAttribute("brCount", brCount);
+        model.addAttribute("baCount", baCount);
+        model.addAttribute("name", name);
+        model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("properties", properties);
         System.out.println("Fetched properties: " + properties.size());
         return "propertyListing"; 
