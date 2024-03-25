@@ -97,6 +97,84 @@ updatePagination();
 
 
 
+function checkLoginStatus(button) {
+    fetch('/check-login', {
+        method: 'GET',
+        credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.loggedIn) {
+            toggleFavourite(button);
+        } else {
+            window.location.href = '/login';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+document.getElementById('favourite-button-${property.pid}').onclick = function() {
+    checkLoginStatus(this);
+};
+
+
+function toggleFavourite(button) {
+    var propertyId = button.getAttribute('data-pid');
+    var iconElement = button.querySelector('i');
+
+
+    if (iconElement.classList.contains('highlighted')) {
+        // Remove from favourites
+        iconElement.classList.remove('highlighted');
+        removeFavourite(propertyId);
+        localStorage.removeItem(propertyId); // Remove from local storage
+    } else {
+        // Add to favourites
+        iconElement.classList.add('highlighted');
+        addFavourite(propertyId);
+        localStorage.setItem(propertyId, true); // Add to local storage
+    }
+}
+
+
+window.onload = function() {
+    var favouriteButtons = document.querySelectorAll('.favourite-button');
+    favouriteButtons.forEach(function(button) {
+        var propertyId = button.getAttribute('data-pid');
+        if (localStorage.getItem(propertyId)) {
+            button.querySelector('i').classList.add('highlighted');
+        }
+    });
+};
+
+
+function addFavourite(propertyId) {
+    // Make AJAX POST request to add property to favourites
+    fetch(`/add-favourite/${propertyId}`, {
+        method: 'POST',
+        credentials: 'include', // This is required to include the session cookie in the request
+    })
+    .then(response => response.text())
+    .then(message => {
+        console.log(message);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+function removeFavourite(propertyId) {
+    // Make AJAX DELETE request to remove property from favourites
+    fetch(`/remove-favourite/${propertyId}`, {
+        method: 'DELETE',
+        credentials: 'include', // This is required to include the session cookie in the request
+    })
+    .then(response => response.text())
+    .then(message => {
+        console.log(message);
+    })
+    .catch(error => console.error('Error:', error));
+}
 // Function to show the pop-up form
 function showPopup() {
     var popup = document.getElementById('popup-form');
