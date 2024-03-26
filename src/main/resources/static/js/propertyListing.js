@@ -97,7 +97,8 @@ updatePagination();
 
 
 
-function checkLoginStatus(button) {
+// Function to check login status and update behavior of favorite buttons
+function updateFavoriteButtons() {
     fetch('/check-login', {
         method: 'GET',
         credentials: 'include',
@@ -105,52 +106,74 @@ function checkLoginStatus(button) {
     .then(response => response.json())
     .then(data => {
         if (data.loggedIn) {
-            toggleFavourite(button);
+            // User is logged in, update behavior of favorite buttons
+            var favoriteButtons = document.querySelectorAll('.favourite-button');
+            favoriteButtons.forEach(function(button) {
+                button.onclick = function() {
+                    toggleFavourite(this);
+                };
+            });
         } else {
-            window.location.href = '/login';
+            // User is not logged in, redirect to login page when any favorite button is clicked
+            var favoriteButtons = document.querySelectorAll('.favourite-button');
+            favoriteButtons.forEach(function(button) {
+                button.onclick = function() {
+                    window.location.href = '/login';
+                };
+            });
         }
     })
     .catch(error => console.error('Error:', error));
 }
 
+window.onload = function() {
+    updateFavoriteButtons();
 
-document.getElementById('favourite-button-${property.pid}').onclick = function() {
-    checkLoginStatus(this);
+    // Fetch login status again
+    fetch('/check-login', {
+        method: 'GET',
+        credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Clear local storage if user is not logged in
+        if (!data.loggedIn) {
+            localStorage.clear();
+        }
+
+        // Initialize the state of favorite buttons based on local storage
+        var favouriteButtons = document.querySelectorAll('.favourite-button');
+        favouriteButtons.forEach(function(button) {
+            var propertyId = button.getAttribute('data-pid');
+            if (localStorage.getItem(propertyId)) {
+                button.querySelector('i').classList.add('highlighted');
+            }
+        });
+    })
+    .catch(error => console.error('Error:', error));
 };
 
-
+// Function to toggle favorite status
 function toggleFavourite(button) {
     var propertyId = button.getAttribute('data-pid');
     var iconElement = button.querySelector('i');
 
-
     if (iconElement.classList.contains('highlighted')) {
-        // Remove from favourites
+        // Remove from favorites
         iconElement.classList.remove('highlighted');
         removeFavourite(propertyId);
         localStorage.removeItem(propertyId); // Remove from local storage
     } else {
-        // Add to favourites
+        // Add to favorites
         iconElement.classList.add('highlighted');
         addFavourite(propertyId);
         localStorage.setItem(propertyId, true); // Add to local storage
     }
 }
 
-
-window.onload = function() {
-    var favouriteButtons = document.querySelectorAll('.favourite-button');
-    favouriteButtons.forEach(function(button) {
-        var propertyId = button.getAttribute('data-pid');
-        if (localStorage.getItem(propertyId)) {
-            button.querySelector('i').classList.add('highlighted');
-        }
-    });
-};
-
-
+// Function to add property to favorites
 function addFavourite(propertyId) {
-    // Make AJAX POST request to add property to favourites
+    // Make AJAX POST request to add property to favorites
     fetch(`/add-favourite/${propertyId}`, {
         method: 'POST',
         credentials: 'include', // This is required to include the session cookie in the request
@@ -162,9 +185,9 @@ function addFavourite(propertyId) {
     .catch(error => console.error('Error:', error));
 }
 
-
+// Function to remove property from favorites
 function removeFavourite(propertyId) {
-    // Make AJAX DELETE request to remove property from favourites
+    // Make AJAX DELETE request to remove property from favorites
     fetch(`/remove-favourite/${propertyId}`, {
         method: 'DELETE',
         credentials: 'include', // This is required to include the session cookie in the request
@@ -175,6 +198,9 @@ function removeFavourite(propertyId) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+
+
 // Function to show the pop-up form
 function showPopup() {
     var popup = document.getElementById('popup-form');
