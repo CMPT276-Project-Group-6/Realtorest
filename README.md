@@ -62,10 +62,15 @@ There are many personalized websites tailored for realtors, hence it is very com
 
 ## Screenshots
 ### Home Page
-![Home Page](<Documentation/Screenshots/I1 Home Page.png>)
-### Properties Listing View
-![Properties Listing View](<Documentation/Screenshots/I1 Listing.png>)
-
+![Home Page](<Documentation/Screenshots/I2 Home Page.png>)
+### Properties Listing
+![Properties Listing View](<Documentation/Screenshots/I2 Listing.png>)
+### Login
+![Login](<Documentation/Screenshots/I2 Login.png>)
+### Admin Login
+![Admin Login](<Documentation/Screenshots/I2 Admin Login.png>)
+### Register
+![Register](<Documentation/Screenshots/I2 Register.png>)
 
 ## Group Members
 ### Kevin
