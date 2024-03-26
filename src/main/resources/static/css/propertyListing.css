@@ -198,6 +198,7 @@ body {
 .figure-caption:hover {
     cursor: pointer;
     background-color: rgb(240, 240, 240);
+    border-radius: 20px;
 }
 .figure-caption a {
     color: gray;
@@ -225,6 +226,7 @@ body {
 .modal .carousel-item img {
     height: 500px;
     object-fit: cover;
+    border-radius: 5px;
 }
 .location-address {
     font-family: "Montserrat", "sans-serif";
@@ -311,7 +313,6 @@ body {
     background-color: rgba(150, 150, 150, 0.502);
     color: rgb(255, 255, 255);
 }
-
 
 /* Styles for the pop-up form */
 #popup-form {
