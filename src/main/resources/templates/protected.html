@@ -42,12 +42,13 @@
         <!-- NAVIGATION BAR -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <section class="realtorest-title">
-                <a th:href="@{/}">
+                <a th:href="@{/adminlogin}">
                     <p class="playfair-semibold" style="color: white">Realtorest</p>
                 </a>
             </section>
             <section class="navbar-categories ms-auto">
                 <a class="navbar-category" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><p>About Us</p></a>
+                <a th:href="@{/dev/properties}" class="navbar-category"><p>Properties</p></a>
                 <!-- <a th:href="@{/property-listing}" class="navbar-category"><p>Listing</p></a> -->
                 <!-- <a href="" class="navbar-category"><p>Buy</p></a>
                 <a href="" class="navbar-category"><p>Rent</p></a>
