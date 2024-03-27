@@ -48,17 +48,17 @@
             </section>
             <section class="navbar-categories ms-auto">
                 <a class="navbar-category" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><p>About Us</p></a>
-                <a th:href="@{/property-listing}" class="navbar-category"><p>Listing</p></a>
+                <!-- <a th:href="@{/property-listing}" class="navbar-category"><p>Listing</p></a> -->
                 <!-- <a href="" class="navbar-category"><p>Buy</p></a>
                 <a href="" class="navbar-category"><p>Rent</p></a>
                 <a href="" class="navbar-category"><p>Sell</p></a> -->
                 <!-- Check to see if the user signed in or not -->
-                <th:block th:if="${user == null}">
+                <!-- <th:block th:if="${user == null}">
                     <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
                 </th:block>
                 <th:block th:if="${user != null}">
                     <a th:href="@{/logout}" class="navbar-category"><p>Log Out</p></a>
-                </th:block>
+                </th:block> -->
 
                 <th:block th:if="${admin != null}">
                     <a th:href="@{/logout}" class="navbar-category"><p>Admin Logout</p></a>
@@ -70,7 +70,7 @@
         <section class="banner">
             <section class="container">
                 <p class="title playfair-semibold">Welcome to Realtorest Admin Page</p>
-                <a th:href="@{/edit-listing}"><button type="button" class="btn btn-primary view-listing">Edit Listings</button></a>
+                <!-- <a th:href="@{/edit-listing}"><button type="button" class="btn btn-primary view-listing">Edit Listings</button></a> -->
             </section>
         </section>
     </body>
