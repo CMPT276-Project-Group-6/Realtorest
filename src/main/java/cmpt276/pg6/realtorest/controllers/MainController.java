@@ -278,6 +278,21 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
+        //show edit property page
+    @PostMapping("/properties/edit")
+    public String editPropertyPage(Model model, @RequestParam int pid) {
+        //TODO: process POST request
+        Property property = propertyRepo.findById(pid).get();
+        model.addAttribute("property", property);
+        return "dev/edit-property";
+    }
+    
+    @PostMapping("/properties/update")
+	public String updateProperty(@ModelAttribute Property Property) {
+		propertyRepo.save(Property);
+		return "redirect:/dev/properties";
+	}//updates Property info to db
+
     /**
      * Fills the properties database with testing data.
      */
