@@ -338,7 +338,7 @@ public class MainController {
         if (userList.isEmpty()) {
             // If no user that matches the email and password is found, return to the login page
             // TODO Add a message to the login page that says "Invalid email or password"
-            model.addAttribute("error", "Invalid Credentials Entered.");
+            model.addAttribute("errorMessage", "Invalid Credentials Entered.");
             return "users/login";
         } else {
             // Successful login
@@ -401,6 +401,7 @@ public class MainController {
         if (adminList.isEmpty()) {
             // If no user that matches the email and password is found, return to the login page
             // TODO Add a message to the login page that says "Invalid email or password"
+            model.addAttribute("errorMessage", "Invalid Credentials Entered.");
             return "users/adminlogin";
         } else {
             // Successful login

@@ -82,6 +82,7 @@
                             <label class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" required />
                         </section>
+                        <section id="errorMessage" th:text="${errorMessage}"></section>
                         <button type="submit" class="btn btn-primary">Login</button>
                         <section class="add-link">
                             <p class="question-text">Are you a Realtorest customer?<a href="/login"> Login Here</a></p>
