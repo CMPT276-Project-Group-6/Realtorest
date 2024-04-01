@@ -251,23 +251,3 @@ fetch('/submit-contact-form', {
     alert("Network error: Unable to submit form.");
 });
 });
-
-// Function to display map API
-var property = {
-    street: "${property.street}",
-    city: "${property.city}",
-    province: "${property.province}",
-    zipCode: "${property.zipCode}"
-};
-var mapURL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=" + encodeURI(property.street + ", " + property.city + ", " + property.province + " " + property.zipCode);
-var display = document.getElementById("map-display");
-display.innerHTML = `
-    <iframe>
-        width="450"
-        height="250"
-        frameborder="0" style="border:0"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="${mapURL}"
-        allowfullscreen>
-    </iframe>
-`;
