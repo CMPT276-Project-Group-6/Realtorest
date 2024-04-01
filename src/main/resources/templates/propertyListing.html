@@ -63,7 +63,7 @@
                 <!-- If user is not logged in, link to login page -->
                 <th:block th:if="${user == null}">
                     <a th:href="@{/login}" class="navbar-category"><p>Favourites</p></a>
-                </th:block>           
+                </th:block>
                 <th:block th:if="${user == null}">
                     <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
                 </th:block>
@@ -84,7 +84,7 @@
                         <!-- City filter -->
                         <div class="col-auto">
                             <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" />
                         </div>
                         <!-- Price sort order -->
                         <div class="col-auto">
@@ -138,13 +138,13 @@
                                 <section th:id="'inner-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
                                     <section class="carousel-inner">
                                         <section class="carousel-item active" data-bs-interval="3000">
-                                            <img src="/img/Property1/Front.jpg" class="d-block w-100" alt="Front House">
+                                            <img src="/img/Property1/Front.jpg" class="d-block w-100" alt="Front House" />
                                         </section>
                                         <section class="carousel-item" data-bs-interval="3000">
-                                            <img src="/img/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room">
+                                            <img src="/img/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room" />
                                         </section>
-                                        <section class="carousel-item" data-bs-interval="3000"> 
-                                            <img src="/img/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom">
+                                        <section class="carousel-item" data-bs-interval="3000">
+                                            <img src="/img/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom" />
                                         </section>
                                     </section>
                                     <button class="carousel-control-prev" type="button" th:data-bs-target="'#inner-carousel' + ${property.pid}" data-bs-slide="prev">
@@ -162,7 +162,7 @@
                                     <button id="favourite-button-${property.pid}" class="favourite-button ${property.isFavourite ? 'highlighted' : ''}" th:data-pid="${property.pid}" onclick="toggleFavourite(this)">
                                         <i class="fa-solid fa-bookmark"></i>
                                     </button>
-                                    <p> Add to favourites</p>
+                                    <p>Add to favourites</p>
                                 </section>
                                 <p class="location-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
                                 <section class="location-icon-container">
@@ -195,13 +195,13 @@
                                 </section>
                                 <section class="display-realtor">
                                     <section class="profile-image">
-                                        <img src="/img/homepage/logo.png" alt="Profile Picture">
+                                        <img src="/img/homepage/logo.png" alt="Profile Picture" />
                                     </section>
                                     <section class="offcanvas-header">
                                         <p class="playfair-regular client-name" id="offcanvasTopLabel">Aman Dhiman</p>
-                                        <p class="client-information" id="offcanvasTopLabel">Agent</p>  
-                                        <p class="client-information" id="offcanvasTopLabel">amandhiman@gmail.com</p>      
-                                        <p class="client-information" id="offcanvasTopLabel">604-123-4567</p>              
+                                        <p class="client-information" id="offcanvasTopLabel">Agent</p>
+                                        <p class="client-information" id="offcanvasTopLabel">amandhiman@gmail.com</p>
+                                        <p class="client-information" id="offcanvasTopLabel">604-123-4567</p>
                                         <section class="social-media">
                                             <a href="https://www.facebook.com"><i class="fa-brands fa-facebook fa-lg"></i></a>
                                             <a href="https://www.instagram.com/yyj.realtor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-lg"></i></a>
@@ -218,13 +218,13 @@
                 <section th:id="'carousel' + ${property.pid}" class="carousel slide carousel-fade">
                     <section class="carousel-inner">
                         <section class="carousel-item active">
-                            <img src="/img/Property1/Front.jpg" class="d-block w-100" alt="Front House">
+                            <img src="/img/Property1/Front.jpg" class="d-block w-100" alt="Front House" />
                         </section>
                         <section class="carousel-item">
-                            <img src="/img/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room">
+                            <img src="/img/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room" />
                         </section>
                         <section class="carousel-item">
-                            <img src="/img/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom">
+                            <img src="/img/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom" />
                         </section>
                     </section>
                     <button class="carousel-control-prev" type="button" th:data-bs-target="'#carousel' + ${property.pid}" data-bs-slide="prev">
@@ -239,25 +239,25 @@
 
                 <!-- PROPERTY INFO -->
                 <figcaption class="figure-caption" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
-                        <section class="icon-container">
-                            <p th:text="'$ ' + ${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-bed"></i>
-                                <p th:text="${property.brCount}"></p>
-                            </section>
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-bath"></i>
-                                <p th:text="${property.baCount}"></p>
-                            </section>
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-house"></i>
-                                <p th:text="${property.area} + ' ft&sup2'">;</p>
-                            </section>
+                    <section class="icon-container">
+                        <p th:text="'$ ' + ${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                        <section class="icon-subcontainer">
+                            <i class="fa-solid fa-bed"></i>
+                            <p th:text="${property.brCount}"></p>
                         </section>
-                        <section class="address-container">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p class="property-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
+                        <section class="icon-subcontainer">
+                            <i class="fa-solid fa-bath"></i>
+                            <p th:text="${property.baCount}"></p>
                         </section>
+                        <section class="icon-subcontainer">
+                            <i class="fa-solid fa-house"></i>
+                            <p th:text="${property.area} + ' ft&sup2'">;</p>
+                        </section>
+                    </section>
+                    <section class="address-container">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p class="property-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
+                    </section>
                 </figcaption>
             </section>
         </section>

@@ -1,15 +1,12 @@
 package cmpt276.pg6.realtorest.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 
@@ -21,24 +18,23 @@ public class PropertyController {
 
     @GetMapping("/properties")
     public String getProperties(
-            @RequestParam(required = false) String city,
-            @RequestParam(required = false) String brCount,
-            @RequestParam(required = false) String baCount,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
-            Model model) {
-            Sort sort = Sort.by(sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, "price");
-        
+        @RequestParam(required = false) String city,
+        @RequestParam(required = false) String brCount,
+        @RequestParam(required = false) String baCount,
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
+        Model model) {
+        Sort sort = Sort.by(sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, "price");
+
         List<Property> properties;
-        
-        
+
         if (!city.isEmpty()) {
             properties = propertyRepo.findByCity(city, sort);
-        } else if (!brCount.isEmpty() &&  brCount !=null) {
+        } else if (!brCount.isEmpty() && brCount != null) {
             System.out.println("brCount: " + brCount);
             String numericPart = brCount.replaceAll("[^\\d]", "");
             int bathroomCount = Integer.parseInt(numericPart);
-            properties = propertyRepo.findByBrCountGreaterThanEqual(bathroomCount,sort);
+            properties = propertyRepo.findByBrCountGreaterThanEqual(bathroomCount, sort);
         } else if (!baCount.isEmpty()) {
             System.out.println("baCount: " + baCount);
             String numericPart = baCount.replaceAll("[^\\d]", "");
@@ -59,17 +55,7 @@ public class PropertyController {
         model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("properties", properties);
         System.out.println("Fetched properties: " + properties.size());
-        return "propertyListing"; 
+        return "propertyListing";
     }
 
-
-
-
-
-
-
-
-
-
-    
 }

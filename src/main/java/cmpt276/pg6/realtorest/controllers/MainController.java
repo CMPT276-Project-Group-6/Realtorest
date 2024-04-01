@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -34,7 +31,7 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
-    
+
     public void setUserRepo(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
@@ -122,8 +119,8 @@ public class MainController {
         return ResponseEntity.ok(response);
     }
 
-     //Favourites Page
-     @GetMapping("/favourites")
+    //Favourites Page
+    @GetMapping("/favourites")
     public String getFavourites(HttpServletRequest request, HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
@@ -134,7 +131,7 @@ public class MainController {
                 User user = userOptional.get();
                 Set<Property> favouriteProperties = user.getFavouriteProperties();
                 model.addAttribute("favouriteProperties", favouriteProperties);
-                model.addAttribute("user", user);  // Add this line
+                model.addAttribute("user", user); // Add this line
                 return "favourites";
             }
         }
@@ -218,7 +215,6 @@ public class MainController {
         userRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
-
 
     //Add property to favourites
     @PostMapping("/add-favourite/{propertyId}")
@@ -313,7 +309,6 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-
     // #endregion
 
     // Login logic
@@ -336,7 +331,6 @@ public class MainController {
             return "redirect:/";
         }
     }
-
 
     // Logout by nuking the session
     // TODO: Would it be better to use a POST request for this?

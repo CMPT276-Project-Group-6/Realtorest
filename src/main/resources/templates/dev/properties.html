@@ -47,10 +47,8 @@
                                 <td th:text="${property.baCount}"></td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
-                                        View
-                                    </button>
-                                    
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">View</button>
+
                                     <!-- Modal -->
                                     <div class="modal fade" th:id="'modal' + ${property.pid}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -100,13 +98,14 @@
                             <option value="PE">Prince Edward Island</option>
                             <option value="QC">Quebec</option>
                             <option value="SK">Saskatchewan</option>
-                            <option value="YT">Yukon</option>
-                        </select><br>
+                            <option value="YT">Yukon</option></select
+                        ><br />
                         <input type="text" class="form-control" name="zipCode" placeholder="A1B 2C3" required /><br />
                         <div class="input-group">
-                            <textarea id="textInput" class="form-control" name="description" placeholder="Something about the property..." required></textarea><br>
+                            <textarea id="textInput" class="form-control" name="description" placeholder="Something about the property..." required></textarea><br />
                             <span id="charCount">0 / 3000</span>
-                        </div> <br>
+                        </div>
+                        <br />
                         <input type="text" class="form-control" name="price" pattern="[0-9]+" placeholder="Price" required /><br />
                         <input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" placeholder="Area of Property in Squared Foot" required /><br />
                         <input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" placeholder="Number of Bedrooms" required /><br />
@@ -138,19 +137,19 @@
         </section>
 
         <script>
-            const maxLength = 3000;
-            const textInput = document.getElementById('textInput');
-            const charCount = document.getElementById('charCount');
-    
-            textInput.addEventListener('input', function() {
-                const remainingChars = maxLength - textInput.value.length;
-                charCount.textContent = `${remainingChars} / 3000`;
-    
+            const maxLength = 3000
+            const textInput = document.getElementById("textInput")
+            const charCount = document.getElementById("charCount")
+
+            textInput.addEventListener("input", function () {
+                const remainingChars = maxLength - textInput.value.length
+                charCount.textContent = `${remainingChars} / 3000`
+
                 if (remainingChars < 0) {
-                    textInput.value = textInput.value.slice(0, maxLength);
-                    charCount.textContent = 'Character limit reached';
+                    textInput.value = textInput.value.slice(0, maxLength)
+                    charCount.textContent = "Character limit reached"
                 }
-            });
+            })
         </script>
     </body>
 </html>

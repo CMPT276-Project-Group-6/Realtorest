@@ -64,7 +64,7 @@ body {
 .form-control {
     background-color: transparent !important;
     border: none !important;
-    border-radius: 0% !important; 
+    border-radius: 0% !important;
     border-bottom: rgb(225, 225, 225) 1px solid !important;
     color: #ffffff !important;
     font-size: 16px !important;
@@ -78,12 +78,12 @@ body {
 }
 .register-form .btn {
     background-color: transparent !important;
-    color: #ffffff !important; 
+    color: #ffffff !important;
     font-family: "Montserrat", "sans-serif";
     font-weight: 300;
     font-size: 16px;
     border-radius: 0%;
-    border: white 1px solid;  
+    border: white 1px solid;
     padding: 5px 0px;
     width: 100px;
     height: 35px;
@@ -93,14 +93,15 @@ body {
     background-color: rgb(220, 220, 220) !important;
     color: #000000 !important;
     border: white 1px solid !important;
-    cursor: pointer !important;  
+    cursor: pointer !important;
 }
 .register-form .btn:active {
     background-color: rgb(220, 220, 220) !important;
     color: #000000 !important;
     border: white 1px solid !important;
 }
-.add-link, .add-link a {
+.add-link,
+.add-link a {
     padding-top: 20px !important;
     color: #ffffff !important;
     font-family: "Montserrat", "sans-serif" !important;
@@ -110,7 +111,7 @@ body {
 }
 .add-link a:hover {
     cursor: pointer !important;
-    color: #d0d0d0 !important;    
+    color: #d0d0d0 !important;
 }
 .question-text {
     color: #a5b5bc !important;
