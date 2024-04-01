@@ -135,7 +135,7 @@ body {
 .listing-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 10px 30px;
     margin-top: 40px;
     padding-right: 12%;
     padding-left: 12%;
