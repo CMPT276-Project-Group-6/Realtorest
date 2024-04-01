@@ -1,9 +1,7 @@
 package cmpt276.pg6.realtorest.models;
 
-
 import java.util.HashSet;
 import java.util.Set;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,10 +28,10 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_favourite_properties",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "property_id"))
-    
+        name = "user_favourite_properties",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "property_id"))
+
     private Set<Property> favouriteProperties = new HashSet<>();
 
     public User() {}
@@ -84,4 +82,3 @@ public class User {
         this.favouriteProperties = favouriteProperties;
     }
 }
-

@@ -8,24 +8,23 @@
     box-shadow: 0 0 5px 0.1px rgb(125, 125, 125); /* Match shadow style from property-container */
     border: none;
     height: 100%;
-   
-    background-color: rgb(211, 211, 211); 
+
+    background-color: rgb(211, 211, 211);
 }
 
 .filter-bar-card .card-header {
-    background-color: rgb(153, 161, 148); 
+    background-color: rgb(153, 161, 148);
     color: white;
     border-bottom: none;
     font-family: "Montserrat", sans-serif; /* Consistent font family */
     font-weight: 600; /* Maintained font weight */
-    
 }
 
 .filter-bar-card .col-auto {
-    flex-grow: 1;            
-    min-width: 120px;          
-    max-width: 200px;        
-} 
+    flex-grow: 1;
+    min-width: 120px;
+    max-width: 200px;
+}
 
 .filter-bar-card .form-control,
 .filter-bar-card .form-select {
@@ -43,7 +42,7 @@
 }
 
 .filter-bar-card .btn-primary {
-    background-color:#99a194;
+    background-color: #99a194;
     border-color: rgb(153, 161, 148);
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
@@ -55,4 +54,3 @@
     background-color: #8fb3005d; /* Hover effect similar to navbar-category */
     border-color: #8fb30044;
 }
-
