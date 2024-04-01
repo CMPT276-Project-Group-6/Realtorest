@@ -126,6 +126,7 @@
         </section>
 
         <!-- PROPERTY LISTING -->
+        
         <section class="listing-container">
             <section id="property-container" class="property-container" th:each="property : ${properties}">
                 <!-- MODAL INFORMATION -->
@@ -181,6 +182,16 @@
                                 </section>
                                 <section class="detailed-description">
                                     <p th:text="${property.description}"></p>
+                                </section>
+                                <section id="map-display">
+                                    <iframe
+                                    width="100%"
+                                    height="350px"
+                                    frameborder="0" style="border:0"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=' + ${property.street} + ', ' + ${property.city} + ', ' + ${property.province} + ', ' + ${property.zipCode}}"
+                                    allowfullscreen>
+                                </iframe>
                                 </section>
                                 <section class="display-realtor">
                                     <section class="profile-image">

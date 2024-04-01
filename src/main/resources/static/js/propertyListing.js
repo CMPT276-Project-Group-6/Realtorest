@@ -95,8 +95,6 @@ function goToPage(page) {
 displayProperties();
 updatePagination();
 
-
-
 // Function to check login status and update behavior of favorite buttons
 function updateFavoriteButtons() {
     fetch('/check-login', {
@@ -199,8 +197,6 @@ function removeFavourite(propertyId) {
     .catch(error => console.error('Error:', error));
 }
 
-
-
 // Function to show the pop-up form
 function showPopup() {
     var popup = document.getElementById('popup-form');
@@ -214,10 +210,7 @@ function closePopup() {
     popup.classList.remove('active');
 }
 
-
 setTimeout(showPopup, 120000); //Show popup after 2 minutes
-
-
 
 // Function to handle form submission
 document.getElementById("contactForm").addEventListener("submit", function(event) {
@@ -258,3 +251,23 @@ fetch('/submit-contact-form', {
     alert("Network error: Unable to submit form.");
 });
 });
+
+// Function to display map API
+var property = {
+    street: "${property.street}",
+    city: "${property.city}",
+    province: "${property.province}",
+    zipCode: "${property.zipCode}"
+};
+var mapURL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=" + encodeURI(property.street + ", " + property.city + ", " + property.province + " " + property.zipCode);
+var display = document.getElementById("map-display");
+display.innerHTML = `
+    <iframe>
+        width="450"
+        height="250"
+        frameborder="0" style="border:0"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="${mapURL}"
+        allowfullscreen>
+    </iframe>
+`;

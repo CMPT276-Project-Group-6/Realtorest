@@ -91,7 +91,7 @@ a {
 }
 
 /* BODY */
-body {
+main {
     background-image: url(/img/homepage/wallpaper2.jpg);
     background-size: cover;
     background-position: center;
