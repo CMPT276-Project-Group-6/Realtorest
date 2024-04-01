@@ -68,7 +68,12 @@
 
         <section class="main-content">
             <section class="quote-container">
-                <p class="quote">FIND <br>YOUR<br>NEXT <br> HOME</p>
+                <p class="quote">
+                    FIND <br />
+                    YOUR <br />
+                    NEXT <br />
+                    HOME
+                </p>
             </section>
             <section class="form-container">
                 <section class="register-form">
@@ -76,14 +81,14 @@
                         <input type="hidden" name="redirectUrl" value="/" />
                         <section class="mb-3">
                             <label class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required>
+                            <input type="text" class="form-control" name="username" required />
                         </section>
                         <section class="mb-3">
                             <label class="form-label">Email address</label>
-                            <input type="email" class="form-control" name="email" required>
+                            <input type="email" class="form-control" name="email" required />
                         </section>
                         <section class="mb-3">
-                            <label class="form-label" >Password</label>
+                            <label class="form-label">Password</label>
                             <input type="password" class="form-control password-input" id="password" oninput="checkPasswordStrength()" placeholder="" name="password" required />
                             <section class="strength-pass-check">
                                 <progress value="0" max="100" id="password-strength"></progress>
@@ -98,7 +103,7 @@
                         <section class="add-link">
                             <p class="question-text">Already have an account? <a href="/login">Login Here</a></p>
                         </section>
-                      </form>
+                    </form>
                 </section>
             </section>
         </section>
@@ -158,23 +163,23 @@
                 switch (strength) {
                     case 0:
                         strengthText.innerHTML = "Password must be at least 8 characters long and<br>contains uppercase, lowercase, number, and special character."
-                        strengthText.style.color = "#a5b5bc";
+                        strengthText.style.color = "#a5b5bc"
                         break
                     case 1:
                         strengthText.innerHTML = "Weak"
-                        strengthText.style.color = "#a5b5bc";
+                        strengthText.style.color = "#a5b5bc"
                         break
                     case 2:
                         strengthText.innerHTML = "Medium"
-                        strengthText.style.color = "#a5b5bc";
+                        strengthText.style.color = "#a5b5bc"
                         break
                     case 3:
                         strengthText.innerHTML = "Strong"
-                        strengthText.style.color = "#a5b5bc";
+                        strengthText.style.color = "#a5b5bc"
                         break
                     case 4:
                         strengthText.innerHTML = "Very Strong"
-                        strengthText.style.color = "#a5b5bc";
+                        strengthText.style.color = "#a5b5bc"
                         break
                     default:
                         break

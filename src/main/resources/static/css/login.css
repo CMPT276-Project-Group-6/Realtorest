@@ -83,7 +83,7 @@ body {
     font-weight: 300;
     font-size: 16px;
     border-radius: 0%;
-    border: white 1px solid;  
+    border: white 1px solid;
     padding: 5px 0px;
     width: 100px;
     height: 35px;
@@ -93,14 +93,15 @@ body {
     background-color: rgb(220, 220, 220) !important;
     color: #000000;
     border: white 1px solid;
-    cursor: pointer;  
+    cursor: pointer;
 }
 .login-form .btn:active {
     background-color: rgb(220, 220, 220) !important;
     color: #000000;
     border: white 1px solid;
 }
-.add-link, .add-link a {
+.add-link,
+.add-link a {
     padding-top: 20px;
     color: #ffffff;
     font-family: "Montserrat", "sans-serif";
@@ -110,7 +111,7 @@ body {
 }
 .add-link a:hover {
     cursor: pointer;
-    color: #d0d0d0;    
+    color: #d0d0d0;
 }
 .question-text {
     color: #a5b5bc;
