@@ -31,7 +31,7 @@ body {
     position: relative;
     height: 100px;
 }
-#charCount{
+#charCount {
     position: absolute;
     bottom: 5px;
     right: 5px;

@@ -277,7 +277,7 @@ body {
     outline: none;
 }
 #favourite-button p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: rgb(100, 100, 100);
 }
 .favourite-button:hover {
@@ -287,7 +287,7 @@ body {
 
 .favourite-button i.highlighted {
     color: #f1c40f;
- } 
+}
 
 /* PAGINATION */
 .pagination {
@@ -322,14 +322,14 @@ body {
     bottom: -100%;
     right: 20px;
     background-color: rgba(33, 45, 57, 0.95);
-    border: none; 
+    border: none;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
     transition: bottom 0.7s ease-in-out, opacity 0.7s ease-in-out, visibility 0.7s ease-in-out;
     max-width: 350px;
     width: 100%;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 #popup-form.active {
@@ -343,13 +343,13 @@ body {
     font-family: "Montserrat", "sans-serif";
 }
 
-h2 { 
+h2 {
     text-align: center;
     padding-bottom: 20px;
-    color: #ffffff; 
-    font-family: "Montserrat", "sans-serif"; 
-    font-weight: 300; 
-    font-size: 18px; 
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 18px;
 }
 
 .close-button {
@@ -358,11 +358,11 @@ h2 {
     right: 0;
     background: none;
     border: none;
-    font-size: 1.2em; 
-    cursor: pointer; 
-    color: #ffffff; 
-    font-family: "Montserrat", "sans-serif"; 
-    font-weight: 300; 
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
 }
 
 /* Styles for form elements */
@@ -372,14 +372,14 @@ h2 {
     width: calc(100% - 10px);
     margin-bottom: 10px;
     padding: 5px;
-    border: none; 
-    border-bottom: rgb(225, 225, 225) 1px solid; 
-    border-radius: 0%; 
-    background-color: transparent; 
-    color: #ffffff; 
-    font-size: 16px; 
-    font-family: "Montserrat", "sans-serif"; 
-    font-weight: 300; 
+    border: none;
+    border-bottom: rgb(225, 225, 225) 1px solid;
+    border-radius: 0%;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
 }
 
 #popup-form input[type="text"]:focus,
@@ -403,4 +403,3 @@ h2 {
 }
 
 /* End of popup form styles */
-
