@@ -278,18 +278,20 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-        //show edit property page
+       
     @PostMapping("/properties/edit")
     public String editPropertyPage(Model model, @RequestParam int pid) {
         //TODO: process POST request
         Property property = propertyRepo.findById(pid).get();
         model.addAttribute("property", property);
         return "dev/edit-property";
-    }
+    } //show edit property page
     
-    @PostMapping("/properties/update")
-	public String updateProperty(@ModelAttribute Property Property) {
-		propertyRepo.save(Property);
+    @PostMapping("/properties/update/{pid}")
+	public String updateProperty(@PathVariable int pid, @ModelAttribute Property Property) {
+		Property updateProperty = propertyRepo.findById(pid).get();
+        updateProperty = Property;
+        propertyRepo.save(updateProperty);
 		return "redirect:/dev/properties";
 	}//updates Property info to db
 
