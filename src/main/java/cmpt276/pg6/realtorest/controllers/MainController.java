@@ -69,6 +69,9 @@ public class MainController {
         if (user != null) {
             model.addAttribute("user", user);
         }
+        // Fetch the featured properties from the database
+        List<Property> featuredProperties = propertyRepo.findByFeatured(true);
+        model.addAttribute("properties", featuredProperties);
         // Display the home page
         return "home";
     }
@@ -279,7 +282,8 @@ public class MainController {
         double area = Double.parseDouble(newProperty.get("area"));
         int brCount = Integer.parseInt(newProperty.get("brCount"));
         int baCount = Integer.parseInt(newProperty.get("baCount"));
-        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount));
+        boolean featured = Boolean.parseBoolean(newProperty.get("featured"));
+        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount, featured));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -289,14 +293,14 @@ public class MainController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
         return "redirect:" + redirectUrl;
     }
 
