@@ -81,7 +81,7 @@ a {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-main {
+header {
     background-image: url(/img/homepage/wallpaper1.jpeg);
     background-size: cover;
     background-position: center;
