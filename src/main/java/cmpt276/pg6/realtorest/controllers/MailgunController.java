@@ -22,6 +22,9 @@ public class MailgunController {
         return request.getRequestURI();
     }
 
+    private static final String MAILGUN_DOMAIN = System.getProperty("MAILGUN_DOMAIN");
+    private static final String MAILGUN_API_KEY = System.getProperty("MAILGUN_API_KEY");
+
     @GetMapping("/dev/mail")
     public String showDevPageMail(Model model, HttpServletRequest request, HttpSession session) {
         return "dev/mail";
@@ -29,15 +32,21 @@ public class MailgunController {
 
     @PostMapping("/dev/mail/test")
     public String sendTestMail(@RequestParam String redirectUrl) {
+        String recipient = "CMPT276 Realtorest <cmpt276projectgroup6@gmail.com>";
+        String subject = "Test Mailgun API";
+        String text = "This is a test email sent from the Realtorest application.\n"
+            + "If you received this email, the Mailgun API is working correctly.";
+        System.out.println("MAILGUN_DOMAIN: " + MAILGUN_DOMAIN);
+        System.out.println("MAILGUN_API_KEY: " + MAILGUN_API_KEY);
         HttpResponse<JsonNode> response = Unirest
-            .post("https://api.mailgun.net/v3/REDACTED/messages")
-            .basicAuth("api", "REDACTED")
-            .field("from", "Mailgun Sandbox <postmaster@REDACTED.mailgun.org>")
-            .field("to", "CMPT276 Realtorest <cmpt276projectgroup6@gmail.com>")
-            .field("subject", "From Realtorest Application")
-            .field("text",
-                "This is sent from the Realtorest application. If you received this email, the Mailgun API is working correctly.")
+            .post("https://api.mailgun.net/v3/" + MAILGUN_DOMAIN + "/messages")
+            .basicAuth("api", MAILGUN_API_KEY)
+            .field("from", "Mailgun Sandbox <postmaster@" + MAILGUN_DOMAIN + ">")
+            .field("to", recipient)
+            .field("subject", subject)
+            .field("text", text)
             .asJson();
+        System.out.println("Send Mail Response: " + response);
         return "redirect:" + redirectUrl;
     }
 }
