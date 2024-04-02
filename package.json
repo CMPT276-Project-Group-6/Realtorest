@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "mailgun.js": "^10.2.1"
   }
 }
