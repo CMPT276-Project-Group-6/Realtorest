@@ -2,6 +2,13 @@
 A small web application used to host a website. Designed for hosting a personal website for realtors. Exploration, sorting, and direct contact functionalities are available for visiting users, while enabling Admin to manage listings and engage with potential buyers effectively, all within a user-friendly, ad-free environment.
 
 
+## Setup Project Locally
+1. Stuff.
+
+2. Run `npm install` in the root directory to install dependencies.
+
+3. More Stuff.
+
 ## Notes for Marking This
 ### Recommended Way for Marking
 When working on this project, GitHub's productivity tools are being used extensively. Because commits are being done on multiple branches concurrently, it may be confusing if you are only looking at the commit history. This is also compounded by the fact that the commits are not being squashed, because we are still uncertain if it would be a good idea to do so. Thus to better understand how this project came to be, it is recommended to approach reviewing this project following these steps:
