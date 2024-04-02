@@ -32,6 +32,7 @@
                                 <th scope="col">Area (ft&sup2)</th>
                                 <th scope="col">Bedrooms</th>
                                 <th scope="col">Bathrooms</th>
+                                <th scope="col">Featured</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -45,6 +46,7 @@
                                 <td th:text="${property.area}"></td>
                                 <td th:text="${property.brCount}"></td>
                                 <td th:text="${property.baCount}"></td>
+                                <td th:text="${property.featured}"></td>
                                 <td>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
@@ -104,17 +106,21 @@
                         </select><br>
                         Zip:<input type="text" class="form-control" name="zipCode" th:value="${property.zipCode}" required /><br />
                         Description:<div class="input-group">
-                            <textarea id="textInput" class="form-control" name="description" th:placeholder="${property.description}" required></textarea><br>
+                            <textarea id="textInput" class="form-control" name="description" th:text="${property.description}" required></textarea><br>
                             <span id="charCount">0 / 3000</span>
                         </div> <br>
                         Price:<input type="text" class="form-control" name="price" pattern="[0-9]+" th:value="${property.price}" required /><br />
                         Area:<input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" th:value="${property.area}" required /><br />
                         Number of Bedrooms:<input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" th:value="${property.brCount}" required /><br />
                         Number of Bathrooms:<input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" th:value="${property.baCount}" required /><br />
+                        Featured?<select class="form-control" name="featured" required>
+                            <option value="false">Not Featured</>
+                            <option value="true">Featured</option>
+                        </select><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                         <button type="submit" class="btn btn-primary">Update Property Information</button>
                     </form>
-                    
+
                 </div>
             </div>
         </section>
