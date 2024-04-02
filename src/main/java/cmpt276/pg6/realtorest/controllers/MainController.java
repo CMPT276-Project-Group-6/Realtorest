@@ -172,7 +172,8 @@ public class MainController {
 
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
+    public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl,
+        HttpServletResponse response) {
         String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
@@ -218,7 +219,8 @@ public class MainController {
 
     //Add property to favourites
     @PostMapping("/add-favourite/{propertyId}")
-    public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
+    public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
+        HttpSession session) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
@@ -237,7 +239,8 @@ public class MainController {
 
     //Remove property from favourites
     @DeleteMapping("/remove-favourite/{propertyId}")
-    public ResponseEntity<String> removeFromFavourites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
+    public ResponseEntity<String> removeFromFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
+        HttpSession session) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
@@ -258,7 +261,8 @@ public class MainController {
     // #region Properties
 
     @PostMapping("/properties/add")
-    public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
+    public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl,
+        HttpServletResponse response) {
         String name = newProperty.get("name");
         String street = newProperty.get("street");
         String city = newProperty.get("city");
@@ -269,7 +273,8 @@ public class MainController {
         double area = Double.parseDouble(newProperty.get("area"));
         int brCount = Integer.parseInt(newProperty.get("brCount"));
         int baCount = Integer.parseInt(newProperty.get("baCount"));
-        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount));
+        propertyRepo
+            .save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -279,14 +284,22 @@ public class MainController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2));
         return "redirect:" + redirectUrl;
     }
 
@@ -313,7 +326,8 @@ public class MainController {
 
     // Login logic
     @PostMapping("/login")
-    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
+    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
+        HttpSession session) {
         // Process the login form (user enters email and password to login)
         String email = formData.get("email");
         String password = formData.get("password");
@@ -343,7 +357,8 @@ public class MainController {
     // #endregion
 
     @PostMapping("/admins/add")
-    public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
+    public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl,
+        HttpServletResponse response) {
         String adminName = newUser.get("adminname");
         String email = newUser.get("email");
         String password = newUser.get("password");
@@ -376,7 +391,8 @@ public class MainController {
     }
 
     @PostMapping("/adminlogin")
-    public String adminlogin(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
+    public String adminlogin(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
+        HttpSession session) {
         // Process the login form (user enters email and password to login)
         String email = formData.get("email");
         String password = formData.get("password");
@@ -407,15 +423,20 @@ public class MainController {
     }// lists all users in database for admin
 
     // #region Redirects
+    @GetMapping("/dev/user")
+    public RedirectView reDevUser() {
+        return new RedirectView("/dev/users");
+    }
 
-    @GetMapping("/admin")
-    public RedirectView reAdmin() {
-        return new RedirectView("/dev");
+    @GetMapping("/dev/property")
+    public RedirectView reDevProperty() {
+        return new RedirectView("/dev/properties");
     }
 
     @GetMapping("/dev/admin")
     public RedirectView reDevAdmin() {
-        return new RedirectView("/dev");
+        // Previously this redirected to /dev, but now we have a dev page for the admins database
+        return new RedirectView("/dev/admins");
     }
 
     // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
@@ -423,6 +444,5 @@ public class MainController {
     public RedirectView reDev() {
         return new RedirectView("/dev/users");
     }
-
     // #endregion
 }
