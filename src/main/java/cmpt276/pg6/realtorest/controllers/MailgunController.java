@@ -32,7 +32,7 @@ public class MailgunController {
 
     @PostMapping("/dev/mail/test")
     public String sendTestMail(@RequestParam String redirectUrl) {
-        String recipient = "CMPT276 Realtorest <cmpt276projectgroup6@gmail.com>";
+        String recipient = "CMPT276 Realtorest <cmpt276projectgroup6+mailgun2@gmail.com>";
         String subject = "Test Mailgun API";
         String text = "This is a test email sent from the Realtorest application.\n"
             + "If you received this email, the Mailgun API is working correctly.";
