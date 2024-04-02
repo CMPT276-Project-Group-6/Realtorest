@@ -17,6 +17,18 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<!-- https://mvnrepository.com/artifact/com.konghq/unirest-java-bom -->
+			<dependency>
+				<groupId>com.konghq</groupId>
+				<artifactId>unirest-java-bom</artifactId>
+				<version>4.3.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
@@ -67,6 +79,28 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.konghq/unirest-java -->
+		<dependency>
+			<groupId>com.konghq</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>3.14.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.konghq/unirest-java-core -->
+		<dependency>
+			<groupId>com.konghq</groupId>
+			<artifactId>unirest-java-core</artifactId>
+		</dependency>
+		<!-- pick a JSON module if you want to parse JSON include one of these: -->
+		<!-- Google GSON -->
+		<dependency>
+			<groupId>com.konghq</groupId>
+			<artifactId>unirest-modules-gson</artifactId>
+		</dependency>
+		<!-- OR maybe you like Jackson better? -->
+		<dependency>
+			<groupId>com.konghq</groupId>
+			<artifactId>unirest-modules-jackson</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

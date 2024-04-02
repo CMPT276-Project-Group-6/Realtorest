@@ -166,10 +166,6 @@ public class MainController {
         return "dev/admins";
     }
 
-    @GetMapping("/dev/mail")
-    public String showDevPageMail(Model model, HttpServletRequest request, HttpSession session) {
-        return "dev/mail";
-    }
     // #endregion
 
     // #region Post mappings
