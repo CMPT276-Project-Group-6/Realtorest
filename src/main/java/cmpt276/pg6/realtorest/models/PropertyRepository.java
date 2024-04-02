@@ -20,4 +20,6 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<Property> findByBrCountGreaterThanEqual(Integer brCount, Sort sort);
 
     List<Property> findByBaCountGreaterThanEqual(Integer baCount, Sort sort);
+
+    List<Property> findByFeatured(boolean featured);
 }

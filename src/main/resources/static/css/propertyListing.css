@@ -135,7 +135,7 @@ body {
 .listing-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 10px 30px;
     margin-top: 40px;
     padding-right: 12%;
     padding-left: 12%;
@@ -181,14 +181,11 @@ body {
     padding-right: 10px;
     padding-top: 10px;
 }
-.icon-subcontainer i {
-    padding-left: 15px;
-    padding-right: 3px;
-}
 .icon-subcontainer,
 .address-container {
     display: flex;
     align-items: baseline;
+    padding-right: 15px;
 }
 .fa-solid {
     margin-right: 5px;
@@ -242,8 +239,7 @@ body {
     font-family: "Montserrat", "sans-serif";
 }
 .location-icon-container .icon-subcontainer {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 25px;
 }
 .detailed-description {
     font-family: "Montserrat", "sans-serif";
@@ -270,7 +266,6 @@ body {
 }
 .favourite-button {
     padding-top: 15px;
-    margin-left: -20px;
     background-color: transparent;
     color: rgb(186, 186, 186);
     border: none;

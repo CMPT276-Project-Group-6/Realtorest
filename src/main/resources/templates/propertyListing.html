@@ -72,60 +72,61 @@
                 </th:block>
             </section>
         </nav>
-
+ 
         <!-- FILTER BAR SECTION with Thymeleaf -->
-        <section class="container mt-5 filter-bar-section">
-            <div class="card filter-bar-card">
-                <div class="card-header">
-                    <h5>Filter Properties</h5>
-                </div>
-                <div class="card-body">
-                    <form action="#" th:action="@{/properties}" method="get" class="row g-3 align-items-center justify-content-start" id="filterForm">
-                        <!-- City filter -->
-                        <div class="col-auto">
-                            <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" />
+                <section class="container mt-5 filter-bar-section">
+                    <div class="card filter-bar-card">
+                        <div class="card-header">
+                            <h5>Filter Properties</h5>
                         </div>
-                        <!-- Price sort order -->
-                        <div class="col-auto">
-                            <label for="priceSort" class="form-label">Sort by Price</label>
-                            <select class="form-select" id="priceSort" name="sortOrder">
-                                <option value="ASC">Low to High</option>
-                                <option value="DESC">High to Low</option>
-                            </select>
+                        <div class="card-body">
+                            <form action="#" th:action="@{/properties}" method="get" class="row g-3 align-items-center justify-content-start" id="filterForm">
+                                <!-- City filter -->
+                                <div class="col-auto">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" th:value="${city}">
+                                </div>
+                                <!-- Price sort order -->
+                                <div class="col-auto">
+                                    <label for="priceSort" class="form-label">Sort by Price</label>
+                                    <select class="form-select" id="priceSort" name="sortOrder">
+                                        <option value="ASC" th:selected="${sortOrder == 'ASC'}">Low to High</option>
+                                        <option value="DESC" th:selected="${sortOrder == 'DESC'}">High to Low</option>
+                                    </select>
+                                </div>
+                                <!-- Additional filters like Bedrooms and Bathrooms -->
+                                <div class="col-auto">
+                                    <label for="bedrooms" class="form-label">Bedrooms</label>
+                                    <select class="form-select" id="bedrooms" name="brCount">
+                                        <!-- <option selected>Bedrooms...</option> -->
+                                        <option value="1" th:selected="${brCount == '1'}">1+</option>
+                                        <option value="2" th:selected="${brCount == '2'}">2+</option>
+                                        <option value="3" th:selected="${brCount == '3'}">3+</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="bathrooms" class="form-label">Bathrooms</label>
+                                    <select class="form-select" id="bathrooms" name="baCount">
+                                        <!-- <option selected>Bathrooms...</option> -->
+                                        <option value="1" th:selected="${baCount == '1'}">1+</option>
+                                        <option value="2" th:selected="${baCount == '2'}">2+</option>
+                                        <option value="3" th:selected="${baCount == '3'}">3+</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="col-auto">
+                                    <label for="searchName" class="form-label">Search by Name</label>
+                                    <input type="text" class="form-control" id="searchName" name="name" placeholder="Property name">
+                                </div> -->
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- Additional filters like Bedrooms and Bathrooms -->
-                        <div class="col-auto">
-                            <label for="bedrooms" class="form-label">Bedrooms</label>
-                            <select class="form-select" id="bedrooms" name="brCount">
-                                <!-- <option selected>Bedrooms...</option> -->
-                                <option value="1">1+</option>
-                                <option value="2">2+</option>
-                                <option value="3">3+</option>
-                            </select>
-                        </div>
-                        <div class="col-auto">
-                            <label for="bathrooms" class="form-label">Bathrooms</label>
-                            <select class="form-select" id="bathrooms" name="baCount">
-                                <!-- <option selected>Bathrooms...</option> -->
-                                <option value="1">1+</option>
-                                <option value="2">2+</option>
-                                <option value="3">3+</option>
-                            </select>
-                        </div>
-                        <!-- <div class="col-auto">
-                            <label for="searchName" class="form-label">Search by Name</label>
-                            <input type="text" class="form-control" id="searchName" name="name" placeholder="Property name">
-                        </div> -->
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">Apply Filters</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
+                    </div>
+                </section>
 
         <!-- PROPERTY LISTING -->
+        
         <section class="listing-container">
             <section id="property-container" class="property-container" th:each="property : ${properties}">
                 <!-- MODAL INFORMATION -->
@@ -165,7 +166,10 @@
                                 </section>
                                 <p class="location-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
                                 <section class="location-icon-container">
-                                    <p th:text="'$ ' + ${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                                    <section class="icon-subcontainer">
+                                        <i class="fa-solid fa-dollar-sign"></i>
+                                        <p th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                                    </section>
                                     <section class="icon-subcontainer">
                                         <i class="fa-solid fa-bed"></i>
                                         <p th:text="${property.brCount}"></p>
@@ -181,6 +185,16 @@
                                 </section>
                                 <section class="detailed-description">
                                     <p th:text="${property.description}"></p>
+                                </section>
+                                <section id="map-display">
+                                    <iframe
+                                    width="100%"
+                                    height="350px"
+                                    frameborder="0" style="border:0"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=' + ${property.street} + ', ' + ${property.city} + ', ' + ${property.province} + ', ' + ${property.zipCode}}"
+                                    allowfullscreen>
+                                    </iframe>
                                 </section>
                                 <section class="display-realtor">
                                     <section class="profile-image">
@@ -229,7 +243,10 @@
                 <!-- PROPERTY INFO -->
                 <figcaption class="figure-caption" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
                     <section class="icon-container">
-                        <p th:text="'$ ' + ${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                        <section class="icon-subcontainer">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            <p th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                        </section>
                         <section class="icon-subcontainer">
                             <i class="fa-solid fa-bed"></i>
                             <p th:text="${property.brCount}"></p>

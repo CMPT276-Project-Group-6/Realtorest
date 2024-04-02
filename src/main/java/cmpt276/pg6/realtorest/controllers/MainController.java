@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.AdminRepository;
@@ -68,6 +69,9 @@ public class MainController {
         if (user != null) {
             model.addAttribute("user", user);
         }
+        // Fetch the featured properties from the database
+        List<Property> featuredProperties = propertyRepo.findByFeatured(true);
+        model.addAttribute("properties", featuredProperties);
         // Display the home page
         return "home";
     }
@@ -172,14 +176,23 @@ public class MainController {
 
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl, HttpServletResponse response) {
+    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request, @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
-        userRepo.save(new User(username, email, password));
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return "redirect:" + redirectUrl;
+        // Check if a user with the same email already exists
+
+        if (!userRepo.findByEmail(email).isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "An account with this email already exists. Please try logging in.");
+            return "redirect:/login";
     }
+            User user = new User(username, email, password);
+            userRepo.save(user);
+            request.getSession().setAttribute("session_user", user);  // add user to session
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            return "redirect:" + redirectUrl;
+        
+}
 
     /**
      * Fills the users database with testing data.
@@ -269,7 +282,8 @@ public class MainController {
         double area = Double.parseDouble(newProperty.get("area"));
         int brCount = Integer.parseInt(newProperty.get("brCount"));
         int baCount = Integer.parseInt(newProperty.get("baCount"));
-        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount));
+        boolean featured = Boolean.parseBoolean(newProperty.get("featured"));
+        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount, featured));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -296,14 +310,14 @@ public class MainController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
-        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2));
+        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
         return "redirect:" + redirectUrl;
     }
 
