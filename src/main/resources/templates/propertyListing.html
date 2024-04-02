@@ -166,7 +166,10 @@
                                 </section>
                                 <p class="location-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
                                 <section class="location-icon-container">
-                                    <p th:text="'$ ' + ${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                                    <section class="icon-subcontainer">
+                                        <i class="fa-solid fa-dollar-sign"></i>
+                                        <p th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                                    </section>
                                     <section class="icon-subcontainer">
                                         <i class="fa-solid fa-bed"></i>
                                         <p th:text="${property.brCount}"></p>
@@ -191,7 +194,7 @@
                                     referrerpolicy="no-referrer-when-downgrade"
                                     th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=' + ${property.street} + ', ' + ${property.city} + ', ' + ${property.province} + ', ' + ${property.zipCode}}"
                                     allowfullscreen>
-                                </iframe>
+                                    </iframe>
                                 </section>
                                 <section class="display-realtor">
                                     <section class="profile-image">
@@ -240,7 +243,10 @@
                 <!-- PROPERTY INFO -->
                 <figcaption class="figure-caption" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
                     <section class="icon-container">
-                        <p th:text="'$ ' + ${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                        <section class="icon-subcontainer">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            <p th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
+                        </section>
                         <section class="icon-subcontainer">
                             <i class="fa-solid fa-bed"></i>
                             <p th:text="${property.brCount}"></p>

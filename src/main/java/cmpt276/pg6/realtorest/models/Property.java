@@ -22,10 +22,11 @@ public class Property {
     private double area; // in square feet
     private int brCount; // number of bedrooms
     private int baCount; // number of bathrooms
+    private boolean featured; // whether the property is featured
 
     public Property() {}
 
-    public Property(String name, String street, String city, String province, String zipCode, String description, int price, double area, int brCount, int baCount) {
+    public Property(String name, String street, String city, String province, String zipCode, String description, int price, double area, int brCount, int baCount, boolean featured) {
         this.name = name;
         this.street = street;
         this.city = city;
@@ -36,6 +37,7 @@ public class Property {
         this.area = area;
         this.brCount = brCount;
         this.baCount = baCount;
+        this.featured = featured;
     }
 
     public int getPid() {
@@ -124,5 +126,13 @@ public class Property {
 
     public void setArea(double area) {
         this.area = area;
+    }
+
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
     }
 }
