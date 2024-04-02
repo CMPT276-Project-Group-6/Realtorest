@@ -33,5 +33,6 @@ build/
 .vscode/
 
 ### Other Stuff ###
+/node_modules
 .env
 .DS_Store
