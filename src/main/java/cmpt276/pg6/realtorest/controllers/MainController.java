@@ -32,22 +32,18 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private PropertyRepository propertyRepo;
+    @Autowired
+    private AdminRepository adminRepo;
 
     public void setUserRepo(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 
-    @Autowired
-    private AdminRepository adminRepo;
-
-    @Autowired
-    private PropertyRepository propertyRepo;
-
     public void setPropertyRepo(PropertyRepository propertyRepo) {
         this.propertyRepo = propertyRepo;
     }
-
-    // #region Model Attributes as Global Variables
 
     /**
      * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
@@ -57,11 +53,7 @@ public class MainController {
         return request.getRequestURI();
     }
 
-    // #endregion
-
-    // #region Visitable Pages
-
-    // Home Page
+    //#region Get Request for Visitable Pages
     @GetMapping("/")
     public String showHomePage(Model model, HttpServletRequest request, HttpSession session) {
         // Check if the user is in the session
@@ -76,7 +68,6 @@ public class MainController {
         return "home";
     }
 
-    // Property Listing Page
     @GetMapping("/property-listing")
     public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -88,7 +79,6 @@ public class MainController {
         return "propertyListing";
     }
 
-    // Login Page
     @GetMapping("/login")
     public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -100,7 +90,6 @@ public class MainController {
         }
     }
 
-    // Register Page
     @GetMapping("/register")
     public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -112,18 +101,6 @@ public class MainController {
         }
     }
 
-    @GetMapping("/check-login")
-    public ResponseEntity<Map<String, Boolean>> checkLogin(HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
-        boolean isLoggedIn = sessionUser != null;
-
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("loggedIn", isLoggedIn);
-
-        return ResponseEntity.ok(response);
-    }
-
-    //Favourites Page
     @GetMapping("/favourites")
     public String getFavourites(HttpServletRequest request, HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("session_user");
@@ -141,9 +118,9 @@ public class MainController {
         }
         return "login";
     }
-    // #endregion
+    //#endregion
 
-    // #region Dev Pages
+    //#region Get Request for Visitable Dev Pages
     // Dev Page for Users Database
     @GetMapping("/dev/users")
     public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
@@ -162,6 +139,7 @@ public class MainController {
         return "dev/properties";
     }
 
+    // Dev Page for Admins Database
     @GetMapping("/dev/admins")
     public String showDevPageAdmins(Model model, HttpServletRequest request, HttpSession session) {
         // Get all users from the database
@@ -170,31 +148,55 @@ public class MainController {
         return "dev/admins";
     }
 
-    // #endregion
+    //#endregion
 
-    // #region Post mappings
+    //#region Redirects
+    @GetMapping("/dev/user")
+    public RedirectView reDevUser() {
+        return new RedirectView("/dev/users");
+    }
 
-    // #region Users
+    @GetMapping("/dev/property")
+    public RedirectView reDevProperty() {
+        return new RedirectView("/dev/properties");
+    }
 
+    @GetMapping("/dev/admin")
+    public RedirectView reDevAdmin() {
+        // Previously this redirected to /dev, but now we have a dev page for the admins database
+        return new RedirectView("/dev/admins");
+    }
+
+    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
+    @GetMapping("/dev")
+    public RedirectView reDev() {
+        return new RedirectView("/dev/users");
+    }
+
+    //#endregion
+
+    //#region Users
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request, @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
+        @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
         // Check if a user with the same email already exists
 
         if (!userRepo.findByEmail(email).isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "An account with this email already exists. Please try logging in.");
+            redirectAttributes.addFlashAttribute("error",
+                "An account with this email already exists. Please try logging in.");
             return "redirect:/login";
+        }
+        User user = new User(username, email, password);
+        userRepo.save(user);
+        request.getSession().setAttribute("session_user", user); // add user to session
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "redirect:" + redirectUrl;
+
     }
-            User user = new User(username, email, password);
-            userRepo.save(user);
-            request.getSession().setAttribute("session_user", user);  // add user to session
-            response.setStatus(HttpServletResponse.SC_CREATED);
-            return "redirect:" + redirectUrl;
-        
-}
 
     /**
      * Fills the users database with testing data.
@@ -230,7 +232,9 @@ public class MainController {
         userRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
+    //#endregion
 
+    //#region Properties
     //Add property to favourites
     @PostMapping("/add-favourite/{propertyId}")
     public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
@@ -270,9 +274,6 @@ public class MainController {
         return ResponseEntity.badRequest().body("User not found");
     }
 
-    // #endregion
-
-    // #region Properties
     @PostMapping("/properties/add")
     public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl,
         HttpServletResponse response) {
@@ -287,7 +288,8 @@ public class MainController {
         int brCount = Integer.parseInt(newProperty.get("brCount"));
         int baCount = Integer.parseInt(newProperty.get("baCount"));
         boolean featured = Boolean.parseBoolean(newProperty.get("featured"));
-        propertyRepo.save(new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount, featured));
+        propertyRepo.save(
+            new Property(name, street, city, province, zipCode, description, price, area, brCount, baCount, featured));
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
@@ -297,14 +299,22 @@ public class MainController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6", "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
+            "Nothing much...", 1000000, 1500.50, 3, 2, false));
         return "redirect:" + redirectUrl;
     }
 
@@ -326,10 +336,9 @@ public class MainController {
         propertyRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
+    //#endregion
 
-    // #endregion
-
-    // Login logic
+    //#region Login logic
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
         HttpSession session) {
@@ -358,8 +367,20 @@ public class MainController {
         request.getSession().invalidate();
         return new RedirectView("/");
     }
-    // #endregion
 
+    @GetMapping("/check-login")
+    public ResponseEntity<Map<String, Boolean>> checkLogin(HttpSession session) {
+        User sessionUser = (User) session.getAttribute("session_user");
+        boolean isLoggedIn = sessionUser != null;
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("loggedIn", isLoggedIn);
+
+        return ResponseEntity.ok(response);
+    }
+    //#endregion
+
+    //#region Admins
     @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl,
         HttpServletResponse response) {
@@ -414,6 +435,7 @@ public class MainController {
         }
     }
 
+    // lists all users in database for admin
     @GetMapping({"/listUsers"})
     public ModelAndView getAllUsers(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
@@ -424,29 +446,7 @@ public class MainController {
             mav.addObject("users", userRepo.findAll());
             return mav;
         }
-    }// lists all users in database for admin
 
-    // #region Redirects
-    @GetMapping("/dev/user")
-    public RedirectView reDevUser() {
-        return new RedirectView("/dev/users");
     }
-
-    @GetMapping("/dev/property")
-    public RedirectView reDevProperty() {
-        return new RedirectView("/dev/properties");
-    }
-
-    @GetMapping("/dev/admin")
-    public RedirectView reDevAdmin() {
-        // Previously this redirected to /dev, but now we have a dev page for the admins database
-        return new RedirectView("/dev/admins");
-    }
-
-    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
-    @GetMapping("/dev")
-    public RedirectView reDev() {
-        return new RedirectView("/dev/users");
-    }
-    // #endregion
+    //#endregion
 }
