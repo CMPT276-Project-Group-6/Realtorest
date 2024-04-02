@@ -137,7 +137,9 @@ public class MainController {
         }
         return "login";
     }
+    // #endregion
 
+    // #region Dev Pages
     // Dev Page for Users Database
     @GetMapping("/dev/users")
     public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
@@ -164,6 +166,10 @@ public class MainController {
         return "dev/admins";
     }
 
+    @GetMapping("/dev/mail")
+    public String showDevPageMail(Model model, HttpServletRequest request, HttpSession session) {
+        return "dev/mail";
+    }
     // #endregion
 
     // #region Post mappings
@@ -259,7 +265,6 @@ public class MainController {
     // #endregion
 
     // #region Properties
-
     @PostMapping("/properties/add")
     public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl,
         HttpServletResponse response) {
@@ -353,7 +358,6 @@ public class MainController {
         request.getSession().invalidate();
         return new RedirectView("/");
     }
-
     // #endregion
 
     @PostMapping("/admins/add")
