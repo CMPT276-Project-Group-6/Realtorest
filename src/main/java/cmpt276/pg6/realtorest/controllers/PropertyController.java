@@ -31,14 +31,11 @@ public class PropertyController {
         if (!city.isEmpty()) {
             properties = propertyRepo.findByCity(city, sort);
         } else if (!brCount.isEmpty() && brCount != null) {
-            System.out.println("brCount: " + brCount);
             String numericPart = brCount.replaceAll("[^\\d]", "");
             int bathroomCount = Integer.parseInt(numericPart);
             properties = propertyRepo.findByBrCountGreaterThanEqual(bathroomCount, sort);
         } else if (!baCount.isEmpty()) {
-            System.out.println("baCount: " + baCount);
             String numericPart = baCount.replaceAll("[^\\d]", "");
-            System.out.println("Numeric part: " + numericPart);
             int bedroomCount = Integer.parseInt(numericPart);
 
             properties = propertyRepo.findByBaCountGreaterThanEqual(bedroomCount, sort);
