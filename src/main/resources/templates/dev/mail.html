@@ -75,9 +75,9 @@
                 <div class="card-body">
                     <h2 class="mb-3">Testing Buttons</h2>
                     <div class="d-flex gap-2">
-                        <form th:action="@{/users/fill}" method="post">
+                        <form th:action="@{/dev/mail/test}" method="post">
                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                            <button type="submit" class="btn btn-primary">Add Testing Data</button>
+                            <button type="submit" class="btn btn-primary">Send Test Mail</button>
                         </form>
                     </div>
                 </div>
