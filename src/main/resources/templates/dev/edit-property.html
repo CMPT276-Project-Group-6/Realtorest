@@ -114,7 +114,7 @@
                         Number of Bedrooms:<input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" th:value="${property.brCount}" required /><br />
                         Number of Bathrooms:<input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" th:value="${property.baCount}" required /><br />
                         Featured?<select class="form-control" name="featured" required>
-                            <option value="false">Not Featured</>
+                            <option value="false">Not Featured</option>
                             <option value="true">Featured</option>
                         </select><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
