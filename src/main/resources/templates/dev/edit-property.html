@@ -12,16 +12,16 @@
         <header class="container my-5">
             <div class="card section-box mx-auto" style="max-width: 600px">
                 <div class="card-body text-center">
-                    <h1 class="display-3" style="font-weight: 500">Properties Database</h1>
+                    <h1 class="display-3" style="font-weight: 500">Edit Property</h1>
                 </div>
             </div>
         </header>
 
-        <!-- A table listing everything in the db table -->
+        <!-- A table listing everything of selected property table -->
         <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
-                    <h2 class="mb-3">Property Essential Property</h2>
+                    <h2 class="mb-3">Property Information</h2>
                     <table class="table table-hover table-bordered" id="student-table">
                         <thead class="table-info">
                             <tr>
@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="property:${properties}">
+                            <tr>
                                 <td th:text="${property.pid}"></td>
                                 <td th:text="${property.name}"></td>
                                 <td th:utext="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
@@ -49,8 +49,10 @@
                                 <td th:text="${property.featured}"></td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">View</button>
-
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
+                                        View
+                                    </button>
+                                    
                                     <!-- Modal -->
                                     <div class="modal fade" th:id="'modal' + ${property.pid}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -64,16 +66,10 @@
                                 </td>
                                 <td>
                                     <div class="d-flex gap-1">
-                                        <form th:action="@{/properties/edit(pid=${property.pid})}" method="post">
-                                            <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                                            <button type="submit" class="btn btn-primary">Edit</button>
-                                        </form>
-
                                         <form th:action="@{/properties/delete/{pid}(pid=${property.pid})}" method="post">
                                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
-
                                     </div>
                                 </td>
                             </tr>
@@ -87,12 +83,12 @@
         <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
-                    <h2 class="mb-3">Add Property</h2>
-                    <form action="/properties/add" method="post">
-                        <input type="text" class="form-control" name="name" placeholder="Name" required /><br />
-                        <input type="text" class="form-control" name="street" placeholder="123 Fantastic St" required /><br />
-                        <input type="text" class="form-control" name="city" placeholder="Happyville" required /><br />
-                        <select class="form-control" name="province" required>
+                    <h2 class="mb-3">Edit Property Information</h2>
+                    <form th:action="@{/properties/update/{pid}(pid=${property.pid})}" method="post">
+                        Name:<input type="text" class="form-control" name="name" th:value="${property.name}" required /><br />
+                        Street:<input type="text" class="form-control" name="street" th:value="${property.street}" required /><br />
+                        City:<input type="text" class="form-control" name="city" th:value="${property.city}" required /><br />
+                        Province:<select class="form-control" name="province"  required>
                             <option value="">Select Province/Territory</option>
                             <option value="AB">Alberta</option>
                             <option value="BC">British Columbia</option>
@@ -106,62 +102,45 @@
                             <option value="PE">Prince Edward Island</option>
                             <option value="QC">Quebec</option>
                             <option value="SK">Saskatchewan</option>
-                            <option value="YT">Yukon</option></select
-                        ><br />
-                        <input type="text" class="form-control" name="zipCode" placeholder="A1B 2C3" required /><br />
-                        <div class="input-group">
-                            <textarea id="textInput" class="form-control" name="description" placeholder="Something about the property..." required></textarea><br />
+                            <option value="YT">Yukon</option>
+                        </select><br>
+                        Zip:<input type="text" class="form-control" name="zipCode" th:value="${property.zipCode}" required /><br />
+                        Description:<div class="input-group">
+                            <textarea id="textInput" class="form-control" name="description" th:text="${property.description}" required></textarea><br>
                             <span id="charCount">0 / 3000</span>
-                        </div>
-                        <br />
-                        <input type="text" class="form-control" name="price" pattern="[0-9]+" placeholder="Price" required /><br />
-                        <input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" placeholder="Area of Property in Squared Foot" required /><br />
-                        <input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" placeholder="Number of Bedrooms" required /><br />
-                        <input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" placeholder="Number of Bathrooms" required /><br />
-                        <select class="form-control" name="featured" required>
+                        </div> <br>
+                        Price:<input type="text" class="form-control" name="price" pattern="[0-9]+" th:value="${property.price}" required /><br />
+                        Area:<input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" th:value="${property.area}" required /><br />
+                        Number of Bedrooms:<input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" th:value="${property.brCount}" required /><br />
+                        Number of Bathrooms:<input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" th:value="${property.baCount}" required /><br />
+                        Featured?<select class="form-control" name="featured" required>
                             <option value="false">Not Featured</option>
                             <option value="true">Featured</option>
                         </select><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                        <button type="submit" class="btn btn-primary">Add Property</button>
+                        <button type="submit" class="btn btn-primary">Update Property Information</button>
                     </form>
+
                 </div>
             </div>
         </section>
 
         <!-- Buttons used for testing purposes -->
-        <section class="container my-5">
-            <div class="card section-box">
-                <div class="card-body">
-                    <h2 class="mb-3">Testing Buttons</h2>
-                    <div class="d-flex gap-2">
-                        <form th:action="@{/properties/fill}" method="post">
-                            <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                            <button type="submit" class="btn btn-primary">Add Testing Data</button>
-                        </form>
-                        <form th:action="@{/properties/delete/all}" method="post">
-                            <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                            <button type="submit" class="btn btn-danger">Delete All Entries</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <script>
-            const maxLength = 3000
-            const textInput = document.getElementById("textInput")
-            const charCount = document.getElementById("charCount")
-
-            textInput.addEventListener("input", function () {
-                const remainingChars = maxLength - textInput.value.length
-                charCount.textContent = `${remainingChars} / 3000`
-
+            const maxLength = 3000;
+            const textInput = document.getElementById('textInput');
+            const charCount = document.getElementById('charCount');
+    
+            textInput.addEventListener('input', function() {
+                const remainingChars = maxLength - textInput.value.length;
+                charCount.textContent = `${remainingChars} / 3000`;
+    
                 if (remainingChars < 0) {
-                    textInput.value = textInput.value.slice(0, maxLength)
-                    charCount.textContent = "Character limit reached"
+                    textInput.value = textInput.value.slice(0, maxLength);
+                    charCount.textContent = 'Character limit reached';
                 }
-            })
+            });
         </script>
     </body>
 </html>
