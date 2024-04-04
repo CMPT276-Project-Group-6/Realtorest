@@ -1,16 +1,15 @@
 package cmpt276.pg6.realtorest.controllers;
 
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kong.unirest.core.HttpResponse;
 import kong.unirest.core.JsonNode;
@@ -21,6 +20,9 @@ import kong.unirest.core.Unirest;
  */
 @Controller
 public class MailgunController {
+    @Autowired
+    private UserRepository userRepo;
+
     /**
      * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
      */
@@ -31,10 +33,10 @@ public class MailgunController {
 
     private static final String MAILGUN_DOMAIN = System.getProperty("MAILGUN_DOMAIN");
     private static final String MAILGUN_API_KEY = System.getProperty("MAILGUN_API_KEY");
-    private static final String[] RECIPIENTS = {
-            "Test 1 <cmpt276projectgroup6+test1@gmail.com>",
-            "Test 2 <cmpt276projectgroup6+test2@gmail.com>"
-    };
+    // private static final String[] RECIPIENTS = {
+    //         "Test 1 <cmpt276projectgroup6+test1@gmail.com>",
+    //         "Test 2 <cmpt276projectgroup6+test2@gmail.com>"
+    // };
 
     @GetMapping("/dev/mail")
     public String showDevPageMail(Model model, HttpServletRequest request, HttpSession session) {
@@ -49,6 +51,7 @@ public class MailgunController {
             + "If you received this email, the Mailgun API is working correctly.";
         // System.out.println("MAILGUN_DOMAIN: " + MAILGUN_DOMAIN);
         // System.out.println("MAILGUN_API_KEY: " + MAILGUN_API_KEY);
+
         HttpResponse<JsonNode> response = sendMail(recipient, subject, text);
         System.out.println("Send Mail Response: " + response.getBody().toPrettyString());
         return "redirect:" + redirectUrl;
@@ -56,9 +59,11 @@ public class MailgunController {
 
     @PostMapping("/mail/send")
     public String addUser(@RequestParam Map<String, String> mail, @RequestParam String redirectUrl) {
+        String[] recipients = loadRecipients();
+
         String subject = mail.get("subject");
         String text = mail.get("text");
-        for (String recipient : RECIPIENTS) {
+        for (String recipient : recipients) {
             HttpResponse<JsonNode> response = sendMail(recipient, subject, text);
             System.out.println("Send Mail Response: " + response.getBody().toPrettyString());
         }
@@ -76,6 +81,12 @@ public class MailgunController {
             .field("subject", subject)
             .field("text", text)
             .asJson();
+    }
+
+    private String[] loadRecipients() {
+        return userRepo.findByIsOnMailingList(true).stream()
+            .map(user -> user.getUsername() + " <" + user.getEmail() + ">")
+            .toArray(String[]::new);
     }
 
 }
