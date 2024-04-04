@@ -17,57 +17,20 @@
             </div>
         </header>
 
-        <!-- A table listing all users -->
-        <!-- <section class="container my-5">
-            <div class="card section-box">
-                <div class="card-body">
-                    <h2 class="mb-3">Table of All Users</h2>
-                    <table class="table table-hover table-bordered" id="student-table">
-                        <thead class="table-info">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Password</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="user:${users}">
-                                <td th:text="${user.uid}"></td>
-                                <td th:text="${user.username}"></td>
-                                <td th:text="${user.email}"></td>
-                                <td th:text="${user.password}"></td>
-                                <td>
-                                    <div class="d-flex gap-1">
-                                        <form th:action="@{/users/delete/{uid}(uid=${user.uid})}" method="post">
-                                            <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section> -->
-
         <!-- Form to add a new user -->
-        <!-- <section class="container my-5">
+        <section class="container my-5">
             <div class="card section-box">
                 <div class="card-body">
-                    <h2 class="mb-3">Add User</h2>
-                    <form action="/users/add" method="post">
-                        <input type="text" class="form-control" name="username" placeholder="Username" /><br />
-                        <input type="text" class="form-control" name="email" placeholder="Email" /><br />
-                        <input type="text" class="form-control" name="password" placeholder="Password" /><br />
+                    <h2 class="mb-3">Send Mails to Mailing List</h2>
+                    <form action="/mail/send" method="post">
+                        <input type="text" class="form-control" name="subject" placeholder="Subject" /><br />
+                        <textarea type="text" class="form-control" name="text" placeholder="Text" rows="5"></textarea><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                        <button type="submit" class="btn btn-primary">Add User</button>
+                        <button type="submit" class="btn btn-primary">Send Mail</button>
                     </form>
                 </div>
             </div>
-        </section> -->
+        </section>
 
         <!-- Buttons used for testing purposes -->
         <section class="container my-5">
