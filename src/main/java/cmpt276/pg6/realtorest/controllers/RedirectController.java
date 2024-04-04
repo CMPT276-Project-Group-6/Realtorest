@@ -3,7 +3,6 @@ package cmpt276.pg6.realtorest.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.view.RedirectView;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -22,24 +21,24 @@ public class RedirectController {
 
     // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
     @GetMapping("/dev")
-    public RedirectView redirectDev() {
-        return new RedirectView("/dev/users");
+    public String redirectDev() {
+        return "redirect:/dev/users";
     }
 
     @GetMapping("/dev/user")
-    public RedirectView redirectDevUser() {
-        return new RedirectView("/dev/users");
+    public String redirectDevUser() {
+        return "redirect:/dev/users";
     }
 
     @GetMapping("/dev/property")
-    public RedirectView redirectDevProperty() {
-        return new RedirectView("/dev/properties");
+    public String redirectDevProperty() {
+        return "redirect:/dev/properties";
     }
 
     // Previously this redirected to /dev, but now we have a dev page for the admins database
     @GetMapping("/dev/admin")
-    public RedirectView redirectDevAdmin() {
-        return new RedirectView("/dev/admins");
+    public String redirectDevAdmin() {
+        return "redirect:/dev/admins";
     }
 
 }
