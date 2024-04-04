@@ -25,7 +25,9 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private boolean isOnMailingList;
 
+    // Kevin: So it seems like, Malaika made the favourite list not as a attribute of users, but as a relationship table. Seems fine.
     @ManyToMany
     @JoinTable(
         name = "user_favourite_properties",
@@ -36,10 +38,17 @@ public class User {
 
     public User() {}
 
+    // Constructor with no isOnMailingList
+    // Defaults to false
     public User(String username, String email, String password) {
+        this(username, email, password, false);
+    }
+
+    public User(String username, String email, String password, boolean isOnMailingList) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.isOnMailingList = isOnMailingList;
     }
 
     public int getUid() {
@@ -72,6 +81,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isOnMailingList() {
+        return isOnMailingList;
+    }
+
+    public void setOnMailingList(boolean isOnMailingList) {
+        this.isOnMailingList = isOnMailingList;
     }
 
     public Set<Property> getFavouriteProperties() {
