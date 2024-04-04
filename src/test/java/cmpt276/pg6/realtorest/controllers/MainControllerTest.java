@@ -127,46 +127,6 @@ public class MainControllerTest {
         // Kevin: Both the home page and the empty string URL are the same page, but I changed it to redirect to "/" instead if you prefer that.
     }
 
-    // @Test
-    // void testAddProperty() throws Exception {
-    // // This is just an example
-    // this.mockMvc.perform(MockMvcRequestBuilders.post("/properties/add")
-    // .param("name", "Test Property")
-    // .param("location", "Test Location")
-    // .param("price", "100000")
-    // .param("bedrCount", "3")
-    // .param("bathrCount", "2"))
-    // .andExpect(MockMvcResultMatchers.status().isCreated());
-    // }
-
-    // modify this test after implementing the getAllProperties method and
-    // properties repository (database)
-
-    // @Test
-    // void testGetAllProperties() throws Exception {
-    // Property p1 = new Property();
-    // p1.setName("whatever fr now");
-    // p1.setLocation("whatever fr now");
-    // p1.setPrice(5000000);
-    // p1.setBedrCount(3);
-    // p1.setBathrCount(2);
-    // Property p2 = new Property();
-    // p2.setName("whatever 2");
-    // p2.setLocation("whatever 2");
-    // p2.setPrice(200000);
-    // p2.setBrCount(3);
-    // p2.setBaCount(1);
-
-    // ArrayList<Property> properties = new ArrayList<Property>();
-    // properties.add(p1);
-    // properties.add(p2);
-
-    // when(propertyRepository.findAll()).thenReturn(properties);
-
-    // this.mockMvc.perform(MockMvcRequestBuilders.get("/properties"))
-    // .andExpect(MockMvcResultMatchers.status().isOk());
-    // }
-
     @Test
     public void testGetFavourites() {
         // Arrange
@@ -246,8 +206,9 @@ public class MainControllerTest {
     @Test
     void testShowAdminLoginPage() throws Exception {
         // Setup session
-        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-            .andReturn().getRequest().getSession();
+        MockHttpSession session =
+            (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+                .andReturn().getRequest().getSession();
 
         // Perform GET request and verify the view name
         this.mockMvc.perform(MockMvcRequestBuilders.get("/adminlogin").session(session))
@@ -258,8 +219,9 @@ public class MainControllerTest {
     @Test
     void testShowAdminLoginPageLoggedIn() throws Exception {
         // Setup session with an admin user
-        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-            .andReturn().getRequest().getSession();
+        MockHttpSession session =
+            (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+                .andReturn().getRequest().getSession();
         session.setAttribute("session_user", new Admin());
 
         // Perform GET request and verify the view name
@@ -271,8 +233,9 @@ public class MainControllerTest {
     @Test
     void testGetAllUsers() throws Exception {
         // Setup session with an admin user
-        MockHttpSession session = (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-            .andReturn().getRequest().getSession();
+        MockHttpSession session =
+            (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
+                .andReturn().getRequest().getSession();
         session.setAttribute("session_user", new Admin());
 
         // Mock the user repository and its findAll() method
@@ -298,7 +261,7 @@ public class MainControllerTest {
                 .andExpect(MockMvcResultMatchers.handler().handlerType(MainController.class))
                 .andExpect(MockMvcResultMatchers.handler().methodName("getAllUsers"));
         });
-        assertEquals("Request processing failed: java.lang.SecurityException: This is a protected page", exception.getMessage());
-
+        assertEquals("Request processing failed: java.lang.SecurityException: This is a protected page",
+            exception.getMessage());
     }
 }
