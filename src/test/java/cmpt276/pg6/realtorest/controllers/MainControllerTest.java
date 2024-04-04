@@ -143,7 +143,7 @@ public class MainControllerTest {
         controller.setUserRepo(userRepo);
 
         // Act
-        String result = controller.getFavourites(request, session, model);
+        String result = controller.showFavourites(request, session, model);
 
         // Assert
         assertEquals("favourites", result);
