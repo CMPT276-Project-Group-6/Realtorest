@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.AdminRepository;
@@ -118,15 +117,6 @@ public class MainController {
         return "login";
     }
 
-    // Dev Page for Users Database
-    @GetMapping("/dev/users")
-    public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
-        // Get all users from the database
-        List<User> users = userRepo.findAll();
-        model.addAttribute("users", users);
-        return "dev/users";
-    }
-
     // Dev Page for Properties Database
     @GetMapping("/dev/properties")
     public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
@@ -143,63 +133,6 @@ public class MainController {
         List<Admin> admins = adminRepo.findAll();
         model.addAttribute("admins", admins);
         return "dev/admins";
-    }
-
-    // Adding a user to the database, used for registering
-    @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
-        @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-        String username = newUser.get("username");
-        String email = newUser.get("email");
-        String password = newUser.get("password");
-        // Check if a user with the same email already exists
-
-        if (!userRepo.findByEmail(email).isEmpty()) {
-            redirectAttributes.addFlashAttribute("error",
-                "An account with this email already exists. Please try logging in.");
-            return "redirect:/login";
-        }
-        User user = new User(username, email, password);
-        userRepo.save(user);
-        request.getSession().setAttribute("session_user", user); // add user to session
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return "redirect:" + redirectUrl;
-
-    }
-
-    /**
-     * Fills the users database with testing data.
-     */
-    @PostMapping("/users/fill")
-    public String fillTestingDataUsers(@RequestParam String redirectUrl) {
-        userRepo.save(new User("Alice", "alice@email.com", "123"));
-        userRepo.save(new User("Bob", "bob@email.com", "456"));
-        userRepo.save(new User("Charlie", "charlie@email.com", "789"));
-        userRepo.save(new User("David", "david@email.com", "741"));
-        userRepo.save(new User("Eve", "eve@email.com", "852"));
-        userRepo.save(new User("Frank", "frank@email.com", "963"));
-        userRepo.save(new User("Grace", "grace@email.com", "846"));
-        userRepo.save(new User("Heidi", "heidi@email.com", "753"));
-        return "redirect:" + redirectUrl;
-    }
-
-    /**
-     * Deletes a user from the system.
-     */
-    @PostMapping("/users/delete/{uid}")
-    public String deleteUser(@PathVariable int uid, @RequestParam String redirectUrl) {
-        userRepo.deleteById(uid);
-        return "redirect:" + redirectUrl;
-    }
-
-    /**
-     * Deletes all users from the database.
-     * This is a dangerous operation and should not be used in a production environment.
-     */
-    @PostMapping("/users/delete/all")
-    public String deleteAllUsers(@RequestParam String redirectUrl) {
-        userRepo.deleteAll();
-        return "redirect:" + redirectUrl;
     }
 
     //Add property to favourites
