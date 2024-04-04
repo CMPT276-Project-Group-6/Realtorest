@@ -16,23 +16,7 @@
     </head>
     <body>
         <!-- NAVIGATION BAR -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <section class="realtorest-title">
-                <a th:href="@{/}">
-                    <p class="playfair-semibold" style="color: white">Realtorest</p>
-                </a>
-            </section>
-            <section class="navbar-categories ms-auto">
-                <!-- Check to see if the admin signed in or not -->
-
-                <th:block th:if="${admin != null}">
-                    <a th:href="@{/listUsers}" class="navbar-category"><p>View All Users</p></a>
-                    <a th:href="@{/edit-listings}" class="navbar-category"><p>Edit Listings</p></a>
-
-                    <a th:href="@{/logout}" class="navbar-category"><p>Admin Logout</p></a>
-                </th:block>
-            </section>
-        </nav>
+        <div th:insert="~{fragments/navbar :: navbar}"></div>
 
         <!-- INTRODUCTION -->
         <section class="banner">
