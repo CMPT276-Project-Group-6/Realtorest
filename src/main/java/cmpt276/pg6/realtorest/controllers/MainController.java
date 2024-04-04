@@ -53,7 +53,6 @@ public class MainController {
         return request.getRequestURI();
     }
 
-    //#region Get Request for Visitable Pages
     @GetMapping("/")
     public String showHomePage(Model model, HttpServletRequest request, HttpSession session) {
         // Check if the user is in the session
@@ -118,9 +117,7 @@ public class MainController {
         }
         return "login";
     }
-    //#endregion
 
-    //#region Get Request for Visitable Dev Pages
     // Dev Page for Users Database
     @GetMapping("/dev/users")
     public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {
@@ -148,9 +145,6 @@ public class MainController {
         return "dev/admins";
     }
 
-    //#endregion
-
-    //#region Redirects
     @GetMapping("/dev/user")
     public RedirectView reDevUser() {
         return new RedirectView("/dev/users");
@@ -173,9 +167,6 @@ public class MainController {
         return new RedirectView("/dev/users");
     }
 
-    //#endregion
-
-    //#region Users
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
@@ -232,9 +223,7 @@ public class MainController {
         userRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
-    //#endregion
 
-    //#region Properties
     //Add property to favourites
     @PostMapping("/add-favourite/{propertyId}")
     public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
@@ -294,7 +283,6 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-       
     @PostMapping("/properties/edit")
     public String editPropertyPage(Model model, @RequestParam int pid) {
         //TODO: process POST request
@@ -302,14 +290,14 @@ public class MainController {
         model.addAttribute("property", property);
         return "dev/edit-property";
     } //show edit property page
-    
+
     @PostMapping("/properties/update/{pid}")
-	public String updateProperty(@PathVariable int pid, @ModelAttribute Property Property) {
-		Property updateProperty = propertyRepo.findById(pid).get();
+    public String updateProperty(@PathVariable int pid, @ModelAttribute Property Property) {
+        Property updateProperty = propertyRepo.findById(pid).get();
         updateProperty = Property;
         propertyRepo.save(updateProperty);
-		return "redirect:/dev/properties";
-	}//updates Property info to db
+        return "redirect:/dev/properties";
+    }//updates Property info to db
 
     /**
      * Fills the properties database with testing data.
@@ -353,9 +341,7 @@ public class MainController {
         propertyRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
-    //#endregion
 
-    //#region Login logic
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
         HttpSession session) {
@@ -395,9 +381,7 @@ public class MainController {
 
         return ResponseEntity.ok(response);
     }
-    //#endregion
 
-    //#region Admins
     @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl,
         HttpServletResponse response) {
@@ -466,5 +450,4 @@ public class MainController {
         }
 
     }
-    //#endregion
 }
