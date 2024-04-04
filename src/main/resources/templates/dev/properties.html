@@ -64,7 +64,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex gap-1">
-                                        <form th:action="@{/properties/edit}" method="get">
+                                        <form th:action="@{/dev/properties/edit}" method="get">
                                             <input type="hidden" name="pid" th:value="${property.pid}" />
                                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                             <button type="submit" class="btn btn-primary">Edit</button>

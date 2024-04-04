@@ -36,15 +36,6 @@ public class PropertyController {
         return request.getRequestURI();
     }
 
-    // Dev Page for Properties Database
-    @GetMapping("/dev/properties")
-    public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
-        // Get all users from the database
-        List<Property> properties = propertyRepo.findAll();
-        model.addAttribute("properties", properties);
-        return "dev/properties";
-    }
-
     @GetMapping("/property-listing")
     public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -95,9 +86,18 @@ public class PropertyController {
         return "propertyListing";
     }
 
+    // Dev Page for Properties Database
+    @GetMapping("/dev/properties")
+    public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
+        // Get all users from the database
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
+        return "dev/properties";
+    }
+
     // Show edit property page
-    @GetMapping("/properties/edit")
-    public String showEditPropertyPage(Model model, @RequestParam int pid) {
+    @GetMapping("/dev/properties/edit")
+    public String showDevEditProperty(Model model, @RequestParam int pid) {
         Property property = propertyRepo.findById(pid).get();
         model.addAttribute("property", property);
         return "dev/edit-property";
