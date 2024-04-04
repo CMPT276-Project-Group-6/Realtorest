@@ -19,17 +19,23 @@
         <link rel="stylesheet" href="/css/homepage.css" />
     </head>
 
-    <body class="admin-login">
+    <body class="login">
         <!-- NAVIGATION BAR -->
         <div th:insert="~{fragments/navbar :: navbar}"></div>
 
         <section class="main-content">
             <section class="quote-container">
-                <p class="quote">ADMIN <br />LOGIN</p>
+                <p class="quote">
+                    FIND <br />
+                    YOUR <br />
+                    NEXT <br />
+                    HOME
+                </p>
             </section>
             <section class="form-container">
                 <section class="login-form">
-                    <form action="/admin/login" method="post" onsubmit="return validateLoginForm()">
+                    <div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
+                    <form action="/login" method="post" onsubmit="return validateLoginForm()">
                         <section class="mb-3">
                             <label class="form-label">Email address</label>
                             <input type="email" class="form-control" name="email" required />
@@ -41,7 +47,8 @@
                         <section id="errorMessage" th:text="${errorMessage}"></section>
                         <button type="submit" class="btn btn-primary">Login</button>
                         <section class="add-link">
-                            <p class="question-text">Are you a Realtorest customer?<a href="/login"> Login Here</a></p>
+                            <p class="question-text">Admin?<a href="/admin/login"> Login Here</a></p>
+                            <p class="question-text">Does not have an account? <a href="/register">Register Here</a></p>
                         </section>
                     </form>
                 </section>
