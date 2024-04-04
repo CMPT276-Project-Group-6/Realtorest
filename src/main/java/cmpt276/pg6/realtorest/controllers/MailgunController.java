@@ -12,6 +12,9 @@ import kong.unirest.core.HttpResponse;
 import kong.unirest.core.JsonNode;
 import kong.unirest.core.Unirest;
 
+/**
+ * This is for stuff related to Mailgun
+ */
 @Controller
 public class MailgunController {
     /**
