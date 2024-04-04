@@ -38,6 +38,28 @@ public class UserController {
         return request.getRequestURI();
     }
 
+    @GetMapping("/login")
+    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "users/login";
+        } else {// Redirect to the home page if the user is already logged in
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/register")
+    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "users/register";
+        } else {
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
+
     // Dev Page for Users Database
     @GetMapping("/dev/users")
     public String showDevPageUsers(Model model, HttpServletRequest request, HttpSession session) {

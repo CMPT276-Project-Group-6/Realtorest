@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +23,15 @@ public class AdminController {
     private UserRepository userRepo;
     @Autowired
     private AdminRepository adminRepo;
+
+    /**
+     * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
+     * Kevin: Note that this is something that is used in every controller, but I don't know how to extract this.
+     */
+    @ModelAttribute("currentUrl")
+    public String getCurrentUrl(HttpServletRequest request) {
+        return request.getRequestURI();
+    }
 
     // Dev Page for Admins Database
     @GetMapping("/dev/admins")
@@ -75,7 +85,6 @@ public class AdminController {
         List<Admin> adminList = adminRepo.findByEmailAndPassword(email, password);
         if (adminList.isEmpty()) {
             // If no user that matches the email and password is found, return to the login page
-            // TODO Add a message to the login page that says "Invalid email or password"
             model.addAttribute("errorMessage", "Invalid Credentials Entered.");
             return "users/adminlogin";
         } else {

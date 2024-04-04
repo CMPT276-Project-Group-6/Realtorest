@@ -2,13 +2,10 @@ package cmpt276.pg6.realtorest.controllers;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
-import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -27,24 +23,28 @@ public class PropertyController {
     @Autowired
     private PropertyRepository propertyRepo;
 
-    @Autowired
-    private UserRepository userRepo;
-
     public void setPropertyRepo(PropertyRepository propertyRepo) {
         this.propertyRepo = propertyRepo;
     }
 
-    public void setUserRepo(UserRepository userRepo) {
-        this.userRepo = userRepo;
+    /**
+     * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
+     * Kevin: Note that this is something that is used in every controller, but I don't know how to extract this.
+     */
+    @ModelAttribute("currentUrl")
+    public String getCurrentUrl(HttpServletRequest request) {
+        return request.getRequestURI();
     }
 
-    // Dev Page for Properties Database
-    @GetMapping("/dev/properties")
-    public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
-        // Get all users from the database
+    @GetMapping("/property-listing")
+    public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
         List<Property> properties = propertyRepo.findAll();
         model.addAttribute("properties", properties);
-        return "dev/properties";
+        return "propertyListing";
     }
 
     @GetMapping("/properties")
@@ -86,43 +86,21 @@ public class PropertyController {
         return "propertyListing";
     }
 
-    //Add property to favourites
-    @PostMapping("/add-favourite/{propertyId}")
-    public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
-        HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
-        Integer userId = sessionUser != null ? sessionUser.getUid() : null;
-
-        if (userId != null) {
-            User user = userRepo.findById(userId).orElse(null);
-            Property property = propertyRepo.findById(propertyId).orElse(null);
-
-            if (user != null && property != null) {
-                user.getFavouriteProperties().add(property);
-                userRepo.save(user);
-                return ResponseEntity.ok("Property added to favourites successfully");
-            }
-        }
-        return ResponseEntity.badRequest().body("User or Property not found");
+    // Dev Page for Properties Database
+    @GetMapping("/dev/properties")
+    public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {
+        // Get all users from the database
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
+        return "dev/properties";
     }
 
-    //Remove property from favourites
-    @DeleteMapping("/remove-favourite/{propertyId}")
-    public ResponseEntity<String> removeFromFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
-        HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
-        Integer userId = sessionUser != null ? sessionUser.getUid() : null;
-
-        if (userId != null) {
-            Optional<User> userOptional = userRepo.findById(userId);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                user.getFavouriteProperties().removeIf(property -> property.getPid() == propertyId);
-                userRepo.save(user);
-                return ResponseEntity.ok("Property removed from favourites successfully");
-            }
-        }
-        return ResponseEntity.badRequest().body("User not found");
+    // Show edit property page
+    @GetMapping("/dev/properties/edit")
+    public String showDevEditProperty(Model model, @RequestParam int pid) {
+        Property property = propertyRepo.findById(pid).get();
+        model.addAttribute("property", property);
+        return "dev/edit-property";
     }
 
     @PostMapping("/properties/add")
@@ -144,14 +122,6 @@ public class PropertyController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
-
-    @PostMapping("/properties/edit")
-    public String editPropertyPage(Model model, @RequestParam int pid) {
-        //TODO: process POST request
-        Property property = propertyRepo.findById(pid).get();
-        model.addAttribute("property", property);
-        return "dev/edit-property";
-    } //show edit property page
 
     @PostMapping("/properties/update/{pid}")
     public String updateProperty(@PathVariable int pid, @ModelAttribute Property Property) {
@@ -203,5 +173,4 @@ public class PropertyController {
         propertyRepo.deleteAll();
         return "redirect:" + redirectUrl;
     }
-
 }

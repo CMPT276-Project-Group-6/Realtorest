@@ -41,7 +41,7 @@
                             <tr>
                                 <td th:text="${property.pid}"></td>
                                 <td th:text="${property.name}"></td>
-                                <td th:utext="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
+                                <td th:text="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
                                 <td th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></td>
                                 <td th:text="${property.area}"></td>
                                 <td th:text="${property.brCount}"></td>
@@ -49,10 +49,8 @@
                                 <td th:text="${property.featured}"></td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">
-                                        View
-                                    </button>
-                                    
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">View</button>
+
                                     <!-- Modal -->
                                     <div class="modal fade" th:id="'modal' + ${property.pid}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -88,7 +86,7 @@
                         Name:<input type="text" class="form-control" name="name" th:value="${property.name}" required /><br />
                         Street:<input type="text" class="form-control" name="street" th:value="${property.street}" required /><br />
                         City:<input type="text" class="form-control" name="city" th:value="${property.city}" required /><br />
-                        Province:<select class="form-control" name="province"  required>
+                        Province:<select class="form-control" name="province" required>
                             <option value="">Select Province/Territory</option>
                             <option value="AB">Alberta</option>
                             <option value="BC">British Columbia</option>
@@ -102,25 +100,26 @@
                             <option value="PE">Prince Edward Island</option>
                             <option value="QC">Quebec</option>
                             <option value="SK">Saskatchewan</option>
-                            <option value="YT">Yukon</option>
-                        </select><br>
+                            <option value="YT">Yukon</option></select
+                        ><br />
                         Zip:<input type="text" class="form-control" name="zipCode" th:value="${property.zipCode}" required /><br />
-                        Description:<div class="input-group">
-                            <textarea id="textInput" class="form-control" name="description" th:text="${property.description}" required></textarea><br>
+                        Description:
+                        <div class="input-group">
+                            <textarea id="textInput" class="form-control" name="description" th:text="${property.description}" required></textarea><br />
                             <span id="charCount">0 / 3000</span>
-                        </div> <br>
+                        </div>
+                        <br />
                         Price:<input type="text" class="form-control" name="price" pattern="[0-9]+" th:value="${property.price}" required /><br />
                         Area:<input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" th:value="${property.area}" required /><br />
                         Number of Bedrooms:<input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" th:value="${property.brCount}" required /><br />
                         Number of Bathrooms:<input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" th:value="${property.baCount}" required /><br />
                         Featured?<select class="form-control" name="featured" required>
                             <option value="false">Not Featured</option>
-                            <option value="true">Featured</option>
-                        </select><br />
+                            <option value="true">Featured</option></select
+                        ><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                         <button type="submit" class="btn btn-primary">Update Property Information</button>
                     </form>
-
                 </div>
             </div>
         </section>
@@ -128,19 +127,19 @@
         <!-- Buttons used for testing purposes -->
 
         <script>
-            const maxLength = 3000;
-            const textInput = document.getElementById('textInput');
-            const charCount = document.getElementById('charCount');
-    
-            textInput.addEventListener('input', function() {
-                const remainingChars = maxLength - textInput.value.length;
-                charCount.textContent = `${remainingChars} / 3000`;
-    
+            const maxLength = 3000
+            const textInput = document.getElementById("textInput")
+            const charCount = document.getElementById("charCount")
+
+            textInput.addEventListener("input", function () {
+                const remainingChars = maxLength - textInput.value.length
+                charCount.textContent = `${remainingChars} / 3000`
+
                 if (remainingChars < 0) {
-                    textInput.value = textInput.value.slice(0, maxLength);
-                    charCount.textContent = 'Character limit reached';
+                    textInput.value = textInput.value.slice(0, maxLength)
+                    charCount.textContent = "Character limit reached"
                 }
-            });
+            })
         </script>
     </body>
 </html>
