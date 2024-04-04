@@ -9,20 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
-import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
     @Autowired
-    private UserRepository userRepo;
-    @Autowired
     private PropertyRepository propertyRepo;
-
-    public void setUserRepo(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
 
     public void setPropertyRepo(PropertyRepository propertyRepo) {
         this.propertyRepo = propertyRepo;
