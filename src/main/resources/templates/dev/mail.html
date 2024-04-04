@@ -22,7 +22,7 @@
             <div class="card section-box">
                 <div class="card-body">
                     <h2 class="mb-3">Send Mails to Mailing List</h2>
-                    <form action="/users/add" method="post">
+                    <form action="/mail/send" method="post">
                         <input type="text" class="form-control" name="subject" placeholder="Subject" /><br />
                         <textarea type="text" class="form-control" name="text" placeholder="Text" rows="5"></textarea><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
