@@ -1,8 +1,6 @@
 package cmpt276.pg6.realtorest.controllers;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,56 +49,5 @@ public class MainController {
         model.addAttribute("properties", featuredProperties);
         // Display the home page
         return "home";
-    }
-
-    @GetMapping("/property-listing")
-    public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-        List<Property> properties = propertyRepo.findAll();
-        model.addAttribute("properties", properties);
-        return "propertyListing";
-    }
-
-    @GetMapping("/login")
-    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "users/login";
-        } else {// Redirect to the home page if the user is already logged in
-            model.addAttribute("user", user);
-            return "redirect:/";
-        }
-    }
-
-    @GetMapping("/register")
-    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "users/register";
-        } else {
-            model.addAttribute("user", user);
-            return "redirect:/";
-        }
-    }
-
-    @GetMapping("/favourites")
-    public String showFavourites(HttpServletRequest request, HttpSession session, Model model) {
-        User sessionUser = (User) session.getAttribute("session_user");
-        Integer userId = sessionUser != null ? sessionUser.getUid() : null;
-
-        if (userId != null) {
-            Optional<User> userOptional = userRepo.findById(userId);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                Set<Property> favouriteProperties = user.getFavouriteProperties();
-                model.addAttribute("favouriteProperties", favouriteProperties);
-                model.addAttribute("user", user); // Add this line
-                return "favourites";
-            }
-        }
-        return "login";
     }
 }

@@ -139,11 +139,11 @@ public class ControllersTests {
         when(session.getAttribute("session_user")).thenReturn(user);
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
 
-        MainController controller = new MainController();
-        controller.setUserRepo(userRepo);
+        PropertyController propertyController = new PropertyController();
+        propertyController.setUserRepo(userRepo);
 
         // Act
-        String result = controller.showFavourites(request, session, model);
+        String result = propertyController.showFavourites(request, session, model);
 
         // Assert
         assertEquals("favourites", result);
@@ -165,10 +165,6 @@ public class ControllersTests {
         when(session.getAttribute("session_user")).thenReturn(user);
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
         when(propertyRepo.findById(1)).thenReturn(Optional.of(property));
-
-        MainController mainController = new MainController();
-        mainController.setUserRepo(userRepo);
-        mainController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         PropertyController propertyController = new PropertyController();
         propertyController.setUserRepo(userRepo);

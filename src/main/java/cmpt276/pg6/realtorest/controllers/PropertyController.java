@@ -3,6 +3,7 @@ package cmpt276.pg6.realtorest.controllers;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,17 @@ public class PropertyController {
         return "dev/properties";
     }
 
+    @GetMapping("/property-listing")
+    public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
+        return "propertyListing";
+    }
+
     @GetMapping("/properties")
     public String getProperties(
         @RequestParam(required = false) String city,
@@ -93,6 +105,24 @@ public class PropertyController {
         model.addAttribute("properties", properties);
         System.out.println("Fetched properties: " + properties.size());
         return "propertyListing";
+    }
+
+    @GetMapping("/favourites")
+    public String showFavourites(HttpServletRequest request, HttpSession session, Model model) {
+        User sessionUser = (User) session.getAttribute("session_user");
+        Integer userId = sessionUser != null ? sessionUser.getUid() : null;
+
+        if (userId != null) {
+            Optional<User> userOptional = userRepo.findById(userId);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                Set<Property> favouriteProperties = user.getFavouriteProperties();
+                model.addAttribute("favouriteProperties", favouriteProperties);
+                model.addAttribute("user", user); // Add this line
+                return "favourites";
+            }
+        }
+        return "login";
     }
 
     // Show edit property page
