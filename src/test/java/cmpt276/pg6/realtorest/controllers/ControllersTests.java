@@ -36,7 +36,7 @@ import jakarta.servlet.http.HttpSession;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllersTest {
+public class ControllersTests {
     @Autowired
     private MockMvc mockMvc;
 
