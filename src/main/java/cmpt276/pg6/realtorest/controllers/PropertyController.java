@@ -30,6 +30,14 @@ public class PropertyController {
     @Autowired
     private UserRepository userRepo;
 
+    public void setPropertyRepo(PropertyRepository propertyRepo) {
+        this.propertyRepo = propertyRepo;
+    }
+
+    public void setUserRepo(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
+
     // Dev Page for Properties Database
     @GetMapping("/dev/properties")
     public String showDevPageProperties(Model model, HttpServletRequest request, HttpSession session) {

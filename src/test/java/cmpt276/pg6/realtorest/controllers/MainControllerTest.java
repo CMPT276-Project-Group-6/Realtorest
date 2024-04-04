@@ -166,12 +166,16 @@ public class MainControllerTest {
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
         when(propertyRepo.findById(1)).thenReturn(Optional.of(property));
 
-        MainController controller = new MainController();
-        controller.setUserRepo(userRepo);
-        controller.setPropertyRepo(propertyRepo); // set the propertyRepo mock
+        MainController mainController = new MainController();
+        mainController.setUserRepo(userRepo);
+        mainController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
+
+        PropertyController propertyController = new PropertyController();
+        propertyController.setUserRepo(userRepo);
+        propertyController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         // Act
-        ResponseEntity<String> result = controller.addToFavourites(1, request, session);
+        ResponseEntity<String> result = propertyController.addToFavourites(1, request, session);
 
         // Assert
         assertEquals("Property added to favourites successfully", result.getBody());
@@ -184,6 +188,7 @@ public class MainControllerTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpSession session = mock(HttpSession.class);
         UserRepository userRepo = mock(UserRepository.class);
+        PropertyRepository propertyRepo = mock(PropertyRepository.class);
         User user = new User();
         user.setUid(1);
         Property property = new Property();
@@ -192,11 +197,15 @@ public class MainControllerTest {
         when(session.getAttribute("session_user")).thenReturn(user);
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
 
-        MainController controller = new MainController();
-        controller.setUserRepo(userRepo);
+        MainController mainController = new MainController();
+        mainController.setUserRepo(userRepo);
+
+        PropertyController propertyController = new PropertyController();
+        propertyController.setUserRepo(userRepo);
+        propertyController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         // Act
-        ResponseEntity<String> result = controller.removeFromFavourites(1, request, session);
+        ResponseEntity<String> result = propertyController.removeFromFavourites(1, request, session);
 
         // Assert
         assertEquals("Property removed from favourites successfully", result.getBody());
