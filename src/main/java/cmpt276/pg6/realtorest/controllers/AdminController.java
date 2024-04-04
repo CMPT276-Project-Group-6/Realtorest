@@ -62,7 +62,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/login")
-    public String adminlogin(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
+    public String adminLogin(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
         HttpSession session) {
         // Process the login form (user enters email and password to login)
         String email = formData.get("email");
