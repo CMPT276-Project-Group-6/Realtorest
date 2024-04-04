@@ -18,115 +18,63 @@
         <title>Properties Listing</title>
     </head>
     <body class="property-listing">
-        <!-- CLIENT INFORMATION -->
-        <section class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-            <section class="profile-image">
-                <img src="/img/homepage/logo.png" alt="Profile Picture" />
-            </section>
-            <section class="offcanvas-header">
-                <p class="playfair-regular client-name" id="offcanvasTopLabel">Aman Dhiman</p>
-                <p class="client-information" id="offcanvasTopLabel">Agent</p>
-                <p class="client-information" id="offcanvasTopLabel">amandhiman@gmail.com</p>
-                <p class="client-information" id="offcanvasTopLabel">604-123-4567</p>
-                <section class="social-media">
-                    <a href="https://www.facebook.com"><i class="fa-brands fa-facebook fa-lg"></i></a>
-                    <a href="https://www.instagram.com/yyj.realtor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-lg"></i></a>
-                    <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                    <a href="https://www.youtube.com"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                </section>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
-            </section>
-            <section class="offcanvas-body">
-                <p class="playfair-regular description-title">About Aman</p>
-                <p class="client-personal-statement">"Hello, I'm Aman, your dedicated Victoria, BC realtor. With a passion for the unique charm of our city, I specialize in turning property dreams into reality. From first-time buyers to seasoned investors, I provide personalized guidance for a smooth and satisfying real estate experience. Let's make your dreams come true together!"</p>
-            </section>
-        </section>
-
         <!-- NAVIGATION BAR -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <section class="realtorest-title">
-                <a th:href="@{/}">
-                    <p class="playfair-semibold" style="color: white">Realtorest</p>
-                </a>
-            </section>
-            <section class="navbar-categories ms-auto">
-                <a class="navbar-category" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><p>About Us</p></a>
-                <a th:href="@{/property-listing}" class="navbar-category"><p>Listing</p></a>
-                <!-- <a href="" class="navbar-category"><p>Buy</p></a>
-                <a href="" class="navbar-category"><p>Rent</p></a>
-                <a href="" class="navbar-category"><p>Sell</p></a> -->
-                <!-- Check to see if the user signed in or not -->
-                <!-- If user is logged in, link to favourites page -->
-                <th:block th:if="${user != null}">
-                    <a th:href="@{/favourites}" class="navbar-category"><p>Favourites</p></a>
-                </th:block>
-                <!-- If user is not logged in, link to login page -->
-                <th:block th:if="${user == null}">
-                    <a th:href="@{/login}" class="navbar-category"><p>Favourites</p></a>
-                </th:block>
-                <th:block th:if="${user == null}">
-                    <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
-                </th:block>
-                <th:block th:if="${user != null}">
-                    <a th:href="@{/logout}" class="navbar-category"><p>Log Out</p></a>
-                </th:block>
-            </section>
-        </nav>
- 
+        <div th:insert="~{fragments/navbar :: navbar}"></div>
+
         <!-- FILTER BAR SECTION with Thymeleaf -->
-                <section class="container mt-5 filter-bar-section">
-                    <div class="card filter-bar-card">
-                        <div class="card-header">
-                            <h5>Filter Properties</h5>
+        <section class="container mt-5 filter-bar-section">
+            <div class="card filter-bar-card">
+                <div class="card-header">
+                    <h5>Filter Properties</h5>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/properties}" method="get" class="row g-3 align-items-center justify-content-start" id="filterForm">
+                        <!-- City filter -->
+                        <div class="col-auto">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" th:value="${city}" />
                         </div>
-                        <div class="card-body">
-                            <form action="#" th:action="@{/properties}" method="get" class="row g-3 align-items-center justify-content-start" id="filterForm">
-                                <!-- City filter -->
-                                <div class="col-auto">
-                                    <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" th:value="${city}">
-                                </div>
-                                <!-- Price sort order -->
-                                <div class="col-auto">
-                                    <label for="priceSort" class="form-label">Sort by Price</label>
-                                    <select class="form-select" id="priceSort" name="sortOrder">
-                                        <option value="ASC" th:selected="${sortOrder == 'ASC'}">Low to High</option>
-                                        <option value="DESC" th:selected="${sortOrder == 'DESC'}">High to Low</option>
-                                    </select>
-                                </div>
-                                <!-- Additional filters like Bedrooms and Bathrooms -->
-                                <div class="col-auto">
-                                    <label for="bedrooms" class="form-label">Bedrooms</label>
-                                    <select class="form-select" id="bedrooms" name="brCount">
-                                        <!-- <option selected>Bedrooms...</option> -->
-                                        <option value="1" th:selected="${brCount == '1'}">1+</option>
-                                        <option value="2" th:selected="${brCount == '2'}">2+</option>
-                                        <option value="3" th:selected="${brCount == '3'}">3+</option>
-                                    </select>
-                                </div>
-                                <div class="col-auto">
-                                    <label for="bathrooms" class="form-label">Bathrooms</label>
-                                    <select class="form-select" id="bathrooms" name="baCount">
-                                        <!-- <option selected>Bathrooms...</option> -->
-                                        <option value="1" th:selected="${baCount == '1'}">1+</option>
-                                        <option value="2" th:selected="${baCount == '2'}">2+</option>
-                                        <option value="3" th:selected="${baCount == '3'}">3+</option>
-                                    </select>
-                                </div>
-                                <!-- <div class="col-auto">
+                        <!-- Price sort order -->
+                        <div class="col-auto">
+                            <label for="priceSort" class="form-label">Sort by Price</label>
+                            <select class="form-select" id="priceSort" name="sortOrder">
+                                <option value="ASC" th:selected="${sortOrder == 'ASC'}">Low to High</option>
+                                <option value="DESC" th:selected="${sortOrder == 'DESC'}">High to Low</option>
+                            </select>
+                        </div>
+                        <!-- Additional filters like Bedrooms and Bathrooms -->
+                        <div class="col-auto">
+                            <label for="bedrooms" class="form-label">Bedrooms</label>
+                            <select class="form-select" id="bedrooms" name="brCount">
+                                <!-- <option selected>Bedrooms...</option> -->
+                                <option value="1" th:selected="${brCount == '1'}">1+</option>
+                                <option value="2" th:selected="${brCount == '2'}">2+</option>
+                                <option value="3" th:selected="${brCount == '3'}">3+</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <label for="bathrooms" class="form-label">Bathrooms</label>
+                            <select class="form-select" id="bathrooms" name="baCount">
+                                <!-- <option selected>Bathrooms...</option> -->
+                                <option value="1" th:selected="${baCount == '1'}">1+</option>
+                                <option value="2" th:selected="${baCount == '2'}">2+</option>
+                                <option value="3" th:selected="${baCount == '3'}">3+</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
                                     <label for="searchName" class="form-label">Search by Name</label>
                                     <input type="text" class="form-control" id="searchName" name="name" placeholder="Property name">
                                 </div> -->
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary">Apply Filters</button>
-                                </div>
-                            </form>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Apply Filters</button>
                         </div>
-                    </div>
-                </section>
+                    </form>
+                </div>
+            </div>
+        </section>
 
         <!-- PROPERTY LISTING -->
-        
+
         <section class="listing-container">
             <section id="property-container" class="property-container" th:each="property : ${properties}">
                 <!-- MODAL INFORMATION -->
@@ -187,14 +135,7 @@
                                     <p th:text="${property.description}"></p>
                                 </section>
                                 <section id="map-display">
-                                    <iframe
-                                    width="100%"
-                                    height="350px"
-                                    frameborder="0" style="border:0"
-                                    referrerpolicy="no-referrer-when-downgrade"
-                                    th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=' + ${property.street} + ', ' + ${property.city} + ', ' + ${property.province} + ', ' + ${property.zipCode}}"
-                                    allowfullscreen>
-                                    </iframe>
+                                    <iframe width="100%" height="350px" frameborder="0" style="border: 0" referrerpolicy="no-referrer-when-downgrade" th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDJs1uGbi9b_irT7vSRZhfjAG3Cs9z3K7o&q=' + ${property.street} + ', ' + ${property.city} + ', ' + ${property.province} + ', ' + ${property.zipCode}}" allowfullscreen> </iframe>
                                 </section>
                                 <section class="display-realtor">
                                     <section class="profile-image">
