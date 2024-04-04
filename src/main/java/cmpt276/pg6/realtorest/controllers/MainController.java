@@ -145,28 +145,6 @@ public class MainController {
         return "dev/admins";
     }
 
-    @GetMapping("/dev/user")
-    public RedirectView reDevUser() {
-        return new RedirectView("/dev/users");
-    }
-
-    @GetMapping("/dev/property")
-    public RedirectView reDevProperty() {
-        return new RedirectView("/dev/properties");
-    }
-
-    @GetMapping("/dev/admin")
-    public RedirectView reDevAdmin() {
-        // Previously this redirected to /dev, but now we have a dev page for the admins database
-        return new RedirectView("/dev/admins");
-    }
-
-    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
-    @GetMapping("/dev")
-    public RedirectView reDev() {
-        return new RedirectView("/dev/users");
-    }
-
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
