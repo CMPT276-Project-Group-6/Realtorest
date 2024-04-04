@@ -29,6 +29,7 @@
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Password</th>
+                                <th scope="col">Mail</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -38,6 +39,7 @@
                                 <td th:text="${user.username}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.password}"></td>
+                                <td th:text="${user.isOnMailingList}"></td>
                                 <td>
                                     <div class="d-flex gap-1">
                                         <form th:action="@{/users/delete/{uid}(uid=${user.uid})}" method="post">
@@ -62,6 +64,7 @@
                         <input type="text" class="form-control" name="username" placeholder="Username" /><br />
                         <input type="text" class="form-control" name="email" placeholder="Email" /><br />
                         <input type="text" class="form-control" name="password" placeholder="Password" /><br />
+                        <input type="checkbox" class="form-check-input" name="isOnMailingList" id="MailingListCheck"/><label class="form-check-label" for="MailingListCheck">Put On Mailing List</label><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                         <button type="submit" class="btn btn-primary">Add User</button>
                     </form>

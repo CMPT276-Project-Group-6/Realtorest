@@ -54,14 +54,17 @@ public class UserController {
         String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
-        // Check if a user with the same email already exists
+        boolean isOnMailingList = newUser.containsKey("isOnMailingList");
+        // System.out.println("isOnMailingList: " + isOnMailingList);
 
+        // Check if a user with the same email already exists
         if (!userRepo.findByEmail(email).isEmpty()) {
             redirectAttributes.addFlashAttribute("error",
                 "An account with this email already exists. Please try logging in.");
             return "redirect:/login";
         }
-        User user = new User(username, email, password);
+
+        User user = new User(username, email, password, isOnMailingList);
         userRepo.save(user);
         request.getSession().setAttribute("session_user", user); // add user to session
         response.setStatus(HttpServletResponse.SC_CREATED);
