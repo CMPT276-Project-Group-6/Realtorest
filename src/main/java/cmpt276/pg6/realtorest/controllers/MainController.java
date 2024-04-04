@@ -1,6 +1,5 @@
 package cmpt276.pg6.realtorest.controllers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.AdminRepository;
 import cmpt276.pg6.realtorest.models.Property;
@@ -253,46 +251,6 @@ public class MainController {
         return "redirect:" + redirectUrl;
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
-        HttpSession session) {
-        // Process the login form (user enters email and password to login)
-        String email = formData.get("email");
-        String password = formData.get("password");
-        List<User> userList = userRepo.findByEmailAndPassword(email, password);
-        if (userList.isEmpty()) {
-            // If no user that matches the email and password is found, return to the login page
-            // TODO Add a message to the login page that says "Invalid email or password"
-            model.addAttribute("errorMessage", "Invalid Credentials Entered.");
-            return "users/login";
-        } else {
-            // Successful login
-            User user = userList.get(0);
-            request.getSession().setAttribute("session_user", user);
-            model.addAttribute("user", user);
-            return "redirect:/";
-        }
-    }
-
-    // Logout by nuking the session
-    // TODO: Would it be better to use a POST request for this?
-    @GetMapping("/logout")
-    public RedirectView destroySession(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return new RedirectView("/");
-    }
-
-    @GetMapping("/check-login")
-    public ResponseEntity<Map<String, Boolean>> checkLogin(HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
-        boolean isLoggedIn = sessionUser != null;
-
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("loggedIn", isLoggedIn);
-
-        return ResponseEntity.ok(response);
-    }
-
     @PostMapping("/admins/add")
     public String addAdmin(@RequestParam Map<String, String> newUser, @RequestParam String redirectUrl,
         HttpServletResponse response) {
@@ -359,6 +317,5 @@ public class MainController {
             mav.addObject("users", userRepo.findAll());
             return mav;
         }
-
     }
 }
