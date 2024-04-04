@@ -1,0 +1,141 @@
+/* FONTS */
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* NAVIGATION BAR */
+.realtorest-title {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 30px;
+}
+a {
+    text-decoration: none;
+}
+.navbar-categories {
+    display: flex;
+    font-family: "Montserrat", "sans-serif";
+    font-size: 20px;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-right: 20px;
+}
+.navbar-category {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar-category:hover {
+    color: rgb(211, 211, 211);
+}
+.navbar {
+    background-color: rgba(14, 29, 51, 0) !important;
+}
+/* OFF CANVAS */
+.offcanvas {
+    background-color: rgba(14, 29, 51) !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 250px !important;
+}
+.profile-image {
+    height: 200px;
+    width: 200px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    padding-left: 30px;
+}
+.profile-image img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.offcanvas-header {
+    margin-top: 50px;
+    padding-top: 5px;
+    margin-left: 45px;
+    display: block;
+    text-align: left;
+}
+.offcanvas-header p {
+    margin-bottom: -5px;
+}
+.offcanvas-body {
+    color: white;
+}
+.client-name {
+    color: white;
+    font-size: 23px;
+    padding-bottom: 15px;
+}
+.client-information {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
+    padding-bottom: 5px;
+}
+.social-media {
+    color: white;
+    padding-top: 10px;
+}
+.social-media i {
+    padding-right: 15px;
+}
+.social-media a {
+    color: white;
+}
+.social-media a:hover {
+    color: rgb(211, 211, 211);
+}
+.offcanvas-body {
+    height: 180px;
+    margin-top: 50px;
+    padding-top: 9px;
+    margin-left: 50px;
+    display: block;
+    text-align: left;
+    border-left: 1px solid gray;
+}
+.description-title {
+    font-size: 20px;
+}
+.client-personal-statement {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
+}
+/* BODY */
+body {
+    background-image: url(/img/registerBackground.jpg) !important; /* find new background*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+}
+
+.main-content{
+    background-color: white;
+    border: 2px solid grey;
+    width: 800px;
+    margin: auto;
+    padding: 20px; 
+}

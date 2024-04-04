@@ -18,7 +18,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/homepage.css" />
+        <link rel="stylesheet" href="/css/mortgage.css" />
+        <script src="/js/mortgage-calculator.js"></script>
     </head>
     <body>
         <header>
@@ -76,69 +77,52 @@
             <!-- INTRODUCTION -->
             <section class="banner">
                 <section class="container">
-                    <p class="title cormorant-garamond-light">Aman Dhiman</p>
+                    <h1 class="title cormorant-garamond-light" style="text-align: center;">Mortgage Calculator</h1>
                 </section>
             </section>
         </header>
         <main>
-            <section class="body-title">
-                <p>Featured Properties</p>
-            </section>
-            <section class th:each="property : ${properties}">
-                <section class="featured-container">
-                    <section class="featured-image"> 
-                        <div th:id="'featured-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="3000">
-                                    <img src="/img/featured1.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="/img/featured2.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="/img/featured3.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" th:data-bs-target="'#featured-carousel' + ${property.pid}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" th:data-bs-target="'#featured-carousel' + ${property.pid}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                        <section class="icon-container">
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-dollar-sign"></i>
-                                <p th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></p>
-                            </section>
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-bed"></i>
-                                <p th:text="${property.brCount}"></p>
-                            </section>
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-bath"></i>
-                                <p th:text="${property.baCount}"></p>
-                            </section>
-                            <section class="icon-subcontainer">
-                                <i class="fa-solid fa-house"></i>
-                                <p th:text="${property.area} + ' ft&sup2'"></p>
-                            </section>
-                        </section>
-                    </section>
-                    <section class="featured-address">
-                        <p id="description-address" th:text="${property.street} + ', ' + ${property.city} + ', ' + ${property.province}"></p>                    
-                    </section>
-                    <section class="featured-description">
-                        <p id="description-describe" th:text="${property.description}"></p>
-                    </section>
+            <section class="main-content">
+                <section class="mortgage-form">
+                    <h3>Estimate your Mortgage Payments</h3>
+                    <form name="mortgage">
+                        <label for="price">Property Price:</label>
+                        <input type="text" class="form-control" id="price"  pattern="[0-9]+" placeholder="$" required /><br>
+                        <label for="donwpay">Your Downpayment:</label>
+                        <input type="text" class="form-control" id="downpay"  pattern="[0-9]+"placeholder="$" required><br>
+                    </form>
+
+                    <button class="btn btn-primary" onclick="calculateMortgage()">Calculate your Mortgage</button><br>
+                    <p>Your Mortgage: <span id="yourMortgage"></span></p>
+
+                    <form name="payment">
+                        <label for="amortization">Amortization Period:</label>
+                        <select class="form-control" name="amortization" required>
+                            <option value="5">5 years</option>
+                            <option value="10">10 years</option>
+                            <option value="15">15 years</option>
+                            <option value="20">20 years</option>
+                            <option value="25">25 years</option>
+                            <option value="30">30 years</option>
+                        </select><br />
+
+                        <label for="frequency">Payment Frequency</label>
+                        <select class="form-control" name="frequency" required>
+                            <option value="month">Monthly</option>
+                            <option value="biweek">Bi-Weekly</option>
+                        </select><br />
+
+                        <label for="interest">Interest Rate:</label>
+                        <input type="text" class="form-control" id="interest" name="rate" pattern="[0-9]{}" placeholder="%" required /><br>
+
+                    </form>
+
+                    <button class="btn btn-primary" onclick="calculatePayment()">Calculate your payments</button>
+                    <p>Your Payments: <span id="yourPayments"></span></p>
+
                 </section>
             </section>
-            <section class="explore-button">
-                <a th:href="@{/property-listing}"><button type="button" class="btn btn-primary view-listing">Explore Our Listing</button></a>
-            </section>
-            </section>
+      
         </main>
     </body>
 </html>
