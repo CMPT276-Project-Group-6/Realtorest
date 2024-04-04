@@ -43,7 +43,7 @@ public class FavouriteController {
     }
 
     @GetMapping("/favourites")
-    public String showFavourites(HttpServletRequest request, HttpSession session, Model model) {
+    public String showFavouritesPage(HttpServletRequest request, HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 

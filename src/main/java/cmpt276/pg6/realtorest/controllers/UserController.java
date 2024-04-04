@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -151,9 +150,9 @@ public class UserController {
     // Logout by nuking the session
     // TODO: Would it be better to use a POST request for this?
     @GetMapping("/logout")
-    public RedirectView destroySession(HttpServletRequest request) {
+    public String destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
-        return new RedirectView("/");
+        return "redirect:/";
     }
 
     @GetMapping("/check-login")

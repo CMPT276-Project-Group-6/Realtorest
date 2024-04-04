@@ -59,7 +59,7 @@ public class MailgunController {
     }
 
     @PostMapping("/mail/send")
-    public String addUser(@RequestParam Map<String, String> mail, @RequestParam String redirectUrl) {
+    public String sendMailsToMailinglist(@RequestParam Map<String, String> mail, @RequestParam String redirectUrl) {
         String[] recipients = loadRecipients();
 
         String subject = mail.get("subject");
