@@ -69,14 +69,14 @@ public class ControllersTests {
     void testShowLoginPage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/login"))
             .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("users/login"));
+            .andExpect(MockMvcResultMatchers.view().name("user/login"));
     }
 
     @Test
     void testShowRegisterPage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/register"))
             .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("users/register"));
+            .andExpect(MockMvcResultMatchers.view().name("user/register"));
     }
 
     @Test

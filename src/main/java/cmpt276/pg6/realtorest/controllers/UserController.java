@@ -41,7 +41,7 @@ public class UserController {
     public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
-            return "users/login";
+            return "user/login";
         } else {// Redirect to the home page if the user is already logged in
             model.addAttribute("user", user);
             return "redirect:/";
@@ -52,7 +52,7 @@ public class UserController {
     public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
-            return "users/register";
+            return "user/register";
         } else {
             model.addAttribute("user", user);
             return "redirect:/";
@@ -137,7 +137,7 @@ public class UserController {
         if (userList.isEmpty()) {
             // If no user that matches the email and password is found, return to the login page
             model.addAttribute("errorMessage", "Invalid Credentials Entered.");
-            return "users/login";
+            return "user/login";
         } else {
             // Successful login
             User user = userList.get(0);
