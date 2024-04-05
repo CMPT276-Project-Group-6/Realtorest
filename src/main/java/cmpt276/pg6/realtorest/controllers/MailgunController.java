@@ -1,6 +1,9 @@
 package cmpt276.pg6.realtorest.controllers;
 
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -89,5 +94,66 @@ public class MailgunController {
             .map(user -> user.getUsername() + " <" + user.getEmail() + ">")
             .toArray(String[]::new);
     }
+
+    // Method for sending password reset email
+    @PostMapping("/forgotpassword")
+    public String sendPasswordResetEmail(@RequestParam String email, @RequestParam String confirmEmail, HttpServletRequest request) {
+        // Find the user by email
+        List<User> users = userRepo.findByEmail(email);
+        User user = users.isEmpty() ? null : users.get(0);
+        if (user == null) {
+            // Handle case where there's no user with this email
+            return "redirect:/register";
+        }
+
+        // Generate a unique reset token
+        String resetToken = generateResetToken(user);
+
+        // Construct the base URL of your application
+        String appUrl = request.getScheme() + "://" + request.getServerName();
+        if (request.getServerPort() != 80 && request.getServerPort() != 443) {
+            appUrl += ":" + request.getServerPort();
+        }
+
+        // Construct the reset password link with the reset token and email
+        String resetLink = appUrl + "/resetpassword?token=" + resetToken + "&email=" + email;
+
+        // Construct the email content
+        String recipient = email;
+        String subject = "Password Reset Request";
+        String text = "Use the link below to reset your password:<br/><a href=\"" + resetLink + "\" target=\"_blank\" style=\"color: blue; text-decoration: underline;\">" + resetLink + "</a>";
+
+        // Send the email using MailGun API
+        HttpResponse<JsonNode> response = Unirest
+            .post("https://api.mailgun.net/v3/" + MAILGUN_DOMAIN + "/messages")
+            .basicAuth("api", MAILGUN_API_KEY)
+            .field("from", "Mailgun Sandbox <postmaster@" + MAILGUN_DOMAIN + ">")
+            .field("to", recipient)
+            .field("subject", subject)
+            .field("html", text) // Use 'html' field instead of 'text'
+            .asJson();
+
+        // Check if the email was sent successfully
+        if (response.getStatus() == 200) {
+            System.out.println("Password reset email sent successfully!");
+        } else {
+            System.out.println("Failed to send password reset email. Status code: " + response.getStatus());
+        }
+
+        // Redirect user to login page
+        return "redirect:/login";
+    }
+
+    // Generate a unique reset token
+    private String generateResetToken(User user) {
+        String resetToken = UUID.randomUUID().toString();
+
+        // Save the reset token in the user's record
+        user.setResetToken(resetToken);
+        userRepo.save(user);
+
+        return resetToken;
+    }
+
 
 }

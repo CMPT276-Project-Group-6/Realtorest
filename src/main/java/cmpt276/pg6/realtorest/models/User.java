@@ -26,6 +26,7 @@ public class User {
     private String email;
     private String password;
     private boolean isOnMailingList;
+    private String resetToken;
 
     // Kevin: So it seems like, Malaika made the favourite list not as a attribute of users, but as a relationship table. Seems fine.
     @ManyToMany
@@ -89,6 +90,14 @@ public class User {
 
     public void setOnMailingList(boolean isOnMailingList) {
         this.isOnMailingList = isOnMailingList;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
     }
 
     public Set<Property> getFavouriteProperties() {
