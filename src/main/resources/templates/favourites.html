@@ -140,6 +140,12 @@
         </section>
 
         <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                if (!sessionStorage.getItem("isLoggedIn")) {
+                    window.location.href = "/login";
+                }
+            });
+            
             function toggleFavourite(button) {
                 var propertyId = button.getAttribute("data-pid")
                 var iconElement = button.querySelector("i")
