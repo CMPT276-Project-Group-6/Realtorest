@@ -170,7 +170,7 @@ public class UserController {
    public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
        User user = (User) session.getAttribute("session_user");
        if (user == null) {
-           return "users/forgotpassword";
+           return "user/forgotpassword";
        } else {
            model.addAttribute("user", user);
            return "redirect:/";
@@ -187,7 +187,7 @@ public class UserController {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             model.addAttribute("token", token);
-            return "users/resetpassword";
+            return "user/resetpassword";
         } else {
             model.addAttribute("user", user);
             return "redirect:/";
@@ -207,7 +207,7 @@ public class UserController {
         if (users.isEmpty()) {
             System.out.println("No user found with provided email and reset token.");
             model.addAttribute("errorMessage", "Invalid reset token.");
-            return "users/forgotpassword";
+            return "user/forgotpassword";
         } else {
             User user = users.get(0);
             user.setPassword(password);
