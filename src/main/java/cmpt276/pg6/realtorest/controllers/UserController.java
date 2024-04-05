@@ -38,7 +38,11 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session) {
+    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+        // Set no-cache headers
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0); // Proxies.
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             return "user/login";
@@ -49,7 +53,11 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session) {
+    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+        // Set no-cache headers
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             return "user/register";
