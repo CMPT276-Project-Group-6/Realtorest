@@ -16,6 +16,7 @@ import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -43,7 +44,13 @@ public class FavouriteController {
     }
 
     @GetMapping("/favourites")
-    public String showFavouritesPage(HttpServletRequest request, HttpSession session, Model model) {
+    public String showFavouritesPage(HttpServletRequest request, HttpSession session, Model model,
+        HttpServletResponse response) {
+        // Set no-cache headers
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0); // Proxies.
+
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
@@ -57,7 +64,7 @@ public class FavouriteController {
                 return "favourites";
             }
         }
-        return "login";
+        return "redirect:/login";
     }
 
     //Add property to favourites
