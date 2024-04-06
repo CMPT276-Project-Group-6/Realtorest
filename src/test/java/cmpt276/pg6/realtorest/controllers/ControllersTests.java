@@ -29,6 +29,7 @@ import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @SpringBootTest
@@ -128,6 +129,7 @@ public class ControllersTests {
     public void testGetFavourites() {
         // Arrange
         HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
         Model model = mock(Model.class);
         UserRepository userRepo = mock(UserRepository.class);
@@ -139,8 +141,7 @@ public class ControllersTests {
         FavouriteController favouriteController = new FavouriteController();
         favouriteController.setUserRepo(userRepo);
 
-        // Act
-        String result = favouriteController.showFavouritesPage(request, session, model);
+        String result = favouriteController.showFavouritesPage(request, session, model, response);
 
         // Assert
         assertEquals("favourites", result);
