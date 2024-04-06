@@ -64,12 +64,12 @@ public class PropertyController {
         } else if (!brCount.isEmpty() && brCount != null) {
             String numericPart = brCount.replaceAll("[^\\d]", "");
             int bathroomCount = Integer.parseInt(numericPart);
-            properties = propertyRepo.findByBrCountGreaterThanEqual(bathroomCount, sort);
+            properties = propertyRepo.findByBaCountGreaterThanEqual(bathroomCount, sort);
         } else if (!baCount.isEmpty()) {
             String numericPart = baCount.replaceAll("[^\\d]", "");
             int bedroomCount = Integer.parseInt(numericPart);
 
-            properties = propertyRepo.findByBaCountGreaterThanEqual(bedroomCount, sort);
+            properties = propertyRepo.findByBrCountGreaterThanEqual(bedroomCount, sort);
         } else if (name.isEmpty()) {
             properties = propertyRepo.findByNameContainingIgnoreCase(name, sort);
         } else {
