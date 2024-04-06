@@ -227,18 +227,18 @@ document.getElementById("contactForm").addEventListener("submit", function (even
     }
 
     // Send form data to backend
-    fetch("/submit-contact-form", {
+    fetch("/popup/send", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({name: name, email: email, phone: phone}),
+        body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`,
     })
         .then((response) => {
             if (response.ok) {
                 // Form submission successful, do something (e.g., show a success message)
                 alert("Thank you! Your information has been submitted.")
-                // Optionally, close the modal after submission
+                // Close the popup after submission
                 document.getElementById("popup-form").style.display = "none"
             } else {
                 // Form submission failed, handle errors
