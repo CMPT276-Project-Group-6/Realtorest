@@ -197,7 +197,6 @@ function removeFavourite(propertyId) {
         .catch((error) => console.error("Error:", error))
 }
 
-
 // Function to show the pop-up form
 function showPopup() {
     var popup = document.getElementById("popup-form")

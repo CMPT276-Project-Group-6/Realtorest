@@ -3,7 +3,6 @@ package cmpt276.pg6.realtorest.controllers;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -99,7 +97,8 @@ public class MailgunController {
 
     // Method for sending password reset email
     @PostMapping("/forgotpassword")
-    public String sendPasswordResetEmail(@RequestParam String email, @RequestParam String confirmEmail, HttpServletRequest request) {
+    public String sendPasswordResetEmail(@RequestParam String email, @RequestParam String confirmEmail,
+        HttpServletRequest request) {
         // Find the user by email
         List<User> users = userRepo.findByEmail(email);
         User user = users.isEmpty() ? null : users.get(0);
@@ -123,7 +122,8 @@ public class MailgunController {
         // Construct the email content
         String recipient = email;
         String subject = "Password Reset Request";
-        String text = "Use the link below to reset your password:<br/><a href=\"" + resetLink + "\" target=\"_blank\" style=\"color: blue; text-decoration: underline;\">" + resetLink + "</a>";
+        String text = "Use the link below to reset your password:<br/><a href=\"" + resetLink
+            + "\" target=\"_blank\" style=\"color: blue; text-decoration: underline;\">" + resetLink + "</a>";
 
         // Send the email using MailGun API
         HttpResponse<JsonNode> response = Unirest
@@ -158,7 +158,8 @@ public class MailgunController {
     }
 
     @PostMapping("/popup/send")
-    public ResponseEntity<String> handlePopupFormSubmission(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone) {
+    public ResponseEntity<String> handlePopupFormSubmission(@RequestParam("name") String name,
+        @RequestParam("email") String email, @RequestParam("phone") String phone) {
         String recipient = "CMPT276 Realtorest <cmpt276projectgroup6@gmail.com>"; //Change email to whoever want to send Popup info to
         String subject = "New contact form submission from " + name;
         String text = "Name: " + name + "\nEmail: " + email + "\nPhone: " + phone;
