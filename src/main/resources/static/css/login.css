@@ -34,7 +34,6 @@ body {
 /* QUOTE */
 .quote-container {
     width: 50%;
-    display: flex;
 }
 .quote {
     font-family: "Montserrat", "sans-serif";
@@ -44,6 +43,15 @@ body {
     padding-top: 150px;
     padding-left: 45%;
     padding-right: 20%;
+}
+.sentence {
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 150;
+    font-size: 17px;
+    color: #ffffff;
+    padding-left: 45%;
+    padding-right: 20%;
+
 }
 
 /* LOGIN FORM */
@@ -76,6 +84,35 @@ body {
     border-bottom: rgb(225, 225, 225) 1px solid;
     outline: none !important;
 }
+.forgot-password {
+    color: #ffffff !important;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 15px;
+    text-decoration: none;
+    padding-left: 350px;
+ }
+ .forgot-password a {
+    color: #ffffff !important;
+    text-decoration: none;
+ }
+ .forgot-password a:hover {
+    cursor: pointer;
+    color: #d0d0d0 !important;  
+ }
+ .login-form .btn {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 16px;
+    border-radius: 0%;
+    border: white 1px solid; 
+    padding: 5px 0px;
+    width: 100px;
+    height: 35px;
+ }
+ 
 .login-form .btn {
     background-color: transparent;
     color: #ffffff;
