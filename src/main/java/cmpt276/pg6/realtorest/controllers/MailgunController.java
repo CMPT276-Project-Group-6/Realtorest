@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -155,5 +157,16 @@ public class MailgunController {
         return resetToken;
     }
 
+    @PostMapping("/popup/send")
+    public ResponseEntity<String> handlePopupFormSubmission(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone) {
+        String recipient = "CMPT276 Realtorest <cmpt276projectgroup6@gmail.com>"; //Change email to whoever want to send Popup info to
+        String subject = "New contact form submission from " + name;
+        String text = "Name: " + name + "\nEmail: " + email + "\nPhone: " + phone;
+
+        HttpResponse<JsonNode> response = sendMail(recipient, subject, text);
+        System.out.println("Send Mail Response: " + response.getBody().toPrettyString());
+
+        return new ResponseEntity<>("Form submitted successfully", HttpStatus.OK);
+    }
 
 }
