@@ -33,6 +33,9 @@
             </section>
             <section class="form-container">
                 <section class="register-form">
+                    <div th:if="${error}" class="alert alert-danger" role="alert">
+                        <p th:text="${error}"></p>
+                    </div>
                     <form action="/users/add" method="post" onsubmit="return validateRegistration()">
                         <input type="hidden" name="redirectUrl" value="/" />
                         <section class="mb-3">
