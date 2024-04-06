@@ -158,8 +158,13 @@ public class UserController {
     // Logout by nuking the session
     // TODO: Would it be better to use a POST request for this?
     @GetMapping("/logout")
-    public String destroySession(HttpServletRequest request) {
+    public String destroySession(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
+        //no-cache headers to ensure the final page isn't cached by the browser
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setDateHeader("Expires", 0); // Proxies
+
         return "redirect:/";
     }
 
