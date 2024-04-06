@@ -51,7 +51,6 @@ body {
     color: #ffffff;
     padding-left: 45%;
     padding-right: 20%;
-
 }
 
 /* LOGIN FORM */
@@ -91,28 +90,28 @@ body {
     font-size: 15px;
     text-decoration: none;
     padding-left: 350px;
- }
- .forgot-password a {
+}
+.forgot-password a {
     color: #ffffff !important;
     text-decoration: none;
- }
- .forgot-password a:hover {
+}
+.forgot-password a:hover {
     cursor: pointer;
-    color: #d0d0d0 !important;  
- }
- .login-form .btn {
+    color: #d0d0d0 !important;
+}
+.login-form .btn {
     background-color: transparent;
     color: #ffffff;
     font-family: "Montserrat", "sans-serif";
     font-weight: 300;
     font-size: 16px;
     border-radius: 0%;
-    border: white 1px solid; 
+    border: white 1px solid;
     padding: 5px 0px;
     width: 100px;
     height: 35px;
- }
- 
+}
+
 .login-form .btn {
     background-color: transparent;
     color: #ffffff;
