@@ -57,7 +57,7 @@ public class FavouriteController {
                 return "favourites";
             }
         }
-        return "login";
+        return "redirect:/login";
     }
 
     //Add property to favourites
