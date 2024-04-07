@@ -196,16 +196,16 @@ public class UserController {
        }
    }
 
-
     @GetMapping("/resetpassword")
-    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, Model model, HttpServletRequest request, HttpSession session) {
-        if (token == null || token.isEmpty()) {
+    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, @RequestParam(value = "email", required = false) String email, Model model, HttpServletRequest request, HttpSession session) {
+        if (token == null || token.isEmpty() || email == null || email.isEmpty()) {
             return "redirect:/login";
         }
     
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             model.addAttribute("token", token);
+            model.addAttribute("email", email);
             return "user/resetpassword";
         } else {
             model.addAttribute("user", user);
@@ -213,13 +213,11 @@ public class UserController {
         }
     }
 
-
     @PostMapping("/resetpassword")
     public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password, Model model) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty()) {
             return "redirect:/login";
         }
-
 
         System.out.println("Reset password request received. Email: " + email + ", Token: " + token);
         List<User> users = userRepo.findByEmailAndResetToken(email, token); // Find the user by email and reset token
