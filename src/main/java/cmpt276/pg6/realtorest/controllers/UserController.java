@@ -78,17 +78,18 @@ public class UserController {
 
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
-        @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-        String username = newUser.get("username");
+    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request, @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         String email = newUser.get("email");
         String password = newUser.get("password");
+        String username = newUser.get("username");
+        String firstName = newUser.get("firstName");
+        String lastName = newUser.get("lastName");
         boolean isOnMailingList = newUser.containsKey("isOnMailingList");
         // System.out.println("isOnMailingList: " + isOnMailingList);
         // check if the username is unique
-        if (userRepo.findByUsername(username).size() > 0){
+        if (userRepo.findByUsername(username).size() > 0) {
             redirectAttributes.addFlashAttribute("error",
-            "Username is already taken. Please pick another one.");
+                "Username is already taken. Please pick another one.");
             return "redirect:/register";
         }
 
@@ -99,7 +100,7 @@ public class UserController {
             return "redirect:/login";
         }
 
-        User user = new User(username, email, password, isOnMailingList);
+        User user = new User(email, password, username, firstName, lastName, isOnMailingList);
         userRepo.save(user);
         request.getSession().setAttribute("session_user", user); // add user to session
         response.setStatus(HttpServletResponse.SC_CREATED);
@@ -111,14 +112,13 @@ public class UserController {
      */
     @PostMapping("/users/fill")
     public String fillTestingDataUsers(@RequestParam String redirectUrl) {
-        userRepo.save(new User("Alice", "alice@email.com", "123"));
-        userRepo.save(new User("Bob", "bob@email.com", "456"));
-        userRepo.save(new User("Charlie", "charlie@email.com", "789"));
-        userRepo.save(new User("David", "david@email.com", "741"));
-        userRepo.save(new User("Eve", "eve@email.com", "852"));
-        userRepo.save(new User("Frank", "frank@email.com", "963"));
-        userRepo.save(new User("Grace", "grace@email.com", "846"));
-        userRepo.save(new User("Heidi", "heidi@email.com", "753"));
+        userRepo.save(new User("alice@email.com", "123", "alice123", "Alice", "Smith", false));
+        userRepo.save(new User("bob@email.com", "456", "bob456", "Bob", "Johnson", false));
+        userRepo.save(new User("charlie@email.com", "789", "charlie789", "Charlie", "Williams", false));
+        userRepo.save(new User("david@email.com", "741", "david741", "David", "Brown", false));
+        userRepo.save(new User("eve@email.com", "852", "eve852", "Eve", "Jones", false));
+        userRepo.save(new User("cmpt276projectgroup6+test1@gmail.com", "123", "mailgunTester1", "First", "Tester", true));
+        userRepo.save(new User("cmpt276projectgroup6+test2@gmail.com", "123", "mailgunTester2", "Second", "Tester", true));
         return "redirect:" + redirectUrl;
     }
 
@@ -142,8 +142,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
-        HttpSession session) {
+    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // Process the login form (user enters email and password to login)
         String email = formData.get("email");
         String password = formData.get("password");
@@ -186,22 +185,23 @@ public class UserController {
     }
 
     @GetMapping("/forgotpassword")
-   public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
-       User user = (User) session.getAttribute("session_user");
-       if (user == null) {
-           return "user/forgotpassword";
-       } else {
-           model.addAttribute("user", user);
-           return "redirect:/";
-       }
-   }
+    public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "user/forgotpassword";
+        } else {
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
 
     @GetMapping("/resetpassword")
-    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, @RequestParam(value = "email", required = false) String email, Model model, HttpServletRequest request, HttpSession session) {
+    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, @RequestParam(value = "email", required = false) String email,
+        Model model, HttpServletRequest request, HttpSession session) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty()) {
             return "redirect:/login";
         }
-    
+
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             model.addAttribute("token", token);
@@ -215,7 +215,8 @@ public class UserController {
 
     @PostMapping("/resetpassword")
     public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password, Model model) {
-        if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty()) {
+        if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null
+            || password.isEmpty()) {
             return "redirect:/login";
         }
 
@@ -234,4 +235,70 @@ public class UserController {
         }
     }
 
+    @GetMapping("/settings")
+    public String goSettings(Model model, HttpServletRequest request, HttpSession session) {
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "user/settings";
+    }
+
+    @PostMapping("/settings")
+    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) {
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            // Check if username is unique
+            List<User> existingUsersByUsername = userRepo.findByUsername(formData.get("username"));
+            if (!existingUsersByUsername.isEmpty()) {
+                // Check if the found user is not the current user being edited
+                boolean foundCurrent = false;
+                for (User existingUser : existingUsersByUsername) {
+                    if (existingUser.getUid() == user.getUid()) {
+                        foundCurrent = true;
+                        break;
+                    }
+                }
+                if (!foundCurrent) {
+                    // Username is not unique
+                    redirectAttributes.addFlashAttribute("usernameError", "Username is already taken");
+                    return "redirect:/settings";
+                }
+            }
+
+            // Check if email is unique
+            List<User> existingUsersByEmail = userRepo.findByEmail(formData.get("email"));
+            if (!existingUsersByEmail.isEmpty()) {
+                // Check if the found user is not the current user being edited
+                boolean foundCurrent = false;
+                for (User existingUser : existingUsersByEmail) {
+                    if (existingUser.getUid() == user.getUid()) {
+                        foundCurrent = true;
+                        break;
+                    }
+                }
+                if (!foundCurrent) {
+                    // Email is not unique
+                    redirectAttributes.addFlashAttribute("emailError", "Email is already registered");
+                    return "redirect:/settings";
+                }
+            }
+
+            // Update user information if no errors are found
+            user.setEmail(formData.get("email"));
+            user.setPassword(formData.get("password"));
+            user.setUsername(formData.get("username"));
+            user.setFirstName(formData.get("firstName"));
+            user.setLastName(formData.get("lastName"));
+            user.setOnMailingList(formData.containsKey("isOnMailingList"));
+            userRepo.save(user);
+
+            // Add the user object to the model
+            model.addAttribute("user", user);
+        }
+        // Redirect to the settings page without any errors
+        return "redirect:/settings";
+    }
 }

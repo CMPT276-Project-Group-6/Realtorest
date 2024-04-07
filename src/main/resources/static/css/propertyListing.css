@@ -210,6 +210,8 @@ body {
 }
 .icon-container,
 .icon-container p,
+.icon-subcontainer:nth-child(4),
+.icon-container:nth-child(4) p,
 .address-container,
 .address-container p {
     font-family: "Montserrat", "sans-serif";

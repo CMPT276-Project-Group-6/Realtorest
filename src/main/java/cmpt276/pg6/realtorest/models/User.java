@@ -22,9 +22,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // The above two annotations are applied to the uid field.
     private int uid;
-    private String username;
     private String email;
     private String password;
+    private String username;
+    private String firstName;
+    private String lastName;
     private boolean isOnMailingList;
     private String resetToken;
 
@@ -41,14 +43,17 @@ public class User {
 
     // Constructor with no isOnMailingList
     // Defaults to false
-    public User(String username, String email, String password) {
-        this(username, email, password, false);
+    public User(String email, String password, String username, String firstName, String lastName) {
+        this(email, password, username, firstName, lastName, false);
     }
 
-    public User(String username, String email, String password, boolean isOnMailingList) {
-        this.username = username;
+    public User(String email, String password, String username, String firstName, String lastName,
+        boolean isOnMailingList) {
         this.email = email;
         this.password = password;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.isOnMailingList = isOnMailingList;
     }
 
@@ -58,14 +63,6 @@ public class User {
 
     public void setUid(int uid) {
         this.uid = uid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -82,6 +79,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean isOnMailingList() {

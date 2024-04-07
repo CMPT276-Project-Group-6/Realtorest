@@ -44,6 +44,11 @@
                 <a th:href="@{/login}" class="navbar-category"><p>Favourites</p></a>
             </th:block>
 
+            <!-- If the user is logged in then they are allowed to change their info-->
+            <th:block th:if="${user != null}">
+                <a th:href="@{/settings}" class="navbar-category"><p>Settings</p></a>
+            </th:block>
+
             <th:block th:if="${user == null}">
                 <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
             </th:block>
