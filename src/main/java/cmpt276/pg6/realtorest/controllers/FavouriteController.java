@@ -44,8 +44,7 @@ public class FavouriteController {
     }
 
     @GetMapping("/favourites")
-    public String showFavouritesPage(HttpServletRequest request, HttpSession session, Model model,
-        HttpServletResponse response) {
+    public String showFavouritesPage(HttpServletRequest request, HttpSession session, Model model, HttpServletResponse response) {
         // Set no-cache headers
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
@@ -69,8 +68,7 @@ public class FavouriteController {
 
     //Add property to favourites
     @PostMapping("/add-favourite/{propertyId}")
-    public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
-        HttpSession session) {
+    public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
@@ -89,8 +87,7 @@ public class FavouriteController {
 
     //Remove property from favourites
     @DeleteMapping("/remove-favourite/{propertyId}")
-    public ResponseEntity<String> removeFromFavourites(@PathVariable Integer propertyId, HttpServletRequest request,
-        HttpSession session) {
+    public ResponseEntity<String> removeFromFavourites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 

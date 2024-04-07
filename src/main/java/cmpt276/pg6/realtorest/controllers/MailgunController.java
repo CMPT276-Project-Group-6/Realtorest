@@ -97,8 +97,7 @@ public class MailgunController {
 
     // Method for sending password reset email
     @PostMapping("/forgotpassword")
-    public String sendPasswordResetEmail(@RequestParam String email, @RequestParam String confirmEmail,
-        HttpServletRequest request) {
+    public String sendPasswordResetEmail(@RequestParam String email, @RequestParam String confirmEmail, HttpServletRequest request) {
         // Find the user by email
         List<User> users = userRepo.findByEmail(email);
         User user = users.isEmpty() ? null : users.get(0);
@@ -158,8 +157,7 @@ public class MailgunController {
     }
 
     @PostMapping("/popup/send")
-    public ResponseEntity<String> handlePopupFormSubmission(@RequestParam("name") String name,
-        @RequestParam("email") String email, @RequestParam("phone") String phone) {
+    public ResponseEntity<String> handlePopupFormSubmission(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone) {
         String recipient = "CMPT276 Realtorest <cmpt276projectgroup6@gmail.com>"; //Change email to whoever want to send Popup info to
         String subject = "New contact form submission from " + name;
         String text = "Name: " + name + "\nEmail: " + email + "\nPhone: " + phone;
