@@ -38,7 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session,
+        HttpServletResponse response) {
         // Set no-cache headers
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
@@ -53,7 +54,8 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session,
+        HttpServletResponse response) {
         // Set no-cache headers
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
@@ -80,17 +82,17 @@ public class UserController {
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
         @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-        String firstName = newUser.get("firstName");
-        String lastName = newUser.get("lastName");
-        String username = newUser.get("username");
         String email = newUser.get("email");
         String password = newUser.get("password");
+        String username = newUser.get("username");
+        String firstName = newUser.get("firstName");
+        String lastName = newUser.get("lastName");
         boolean isOnMailingList = newUser.containsKey("isOnMailingList");
         // System.out.println("isOnMailingList: " + isOnMailingList);
         // check if the username is unique
-        if (userRepo.findByUsername(username).size() > 0){
+        if (userRepo.findByUsername(username).size() > 0) {
             redirectAttributes.addFlashAttribute("error",
-            "Username is already taken. Please pick another one.");
+                "Username is already taken. Please pick another one.");
             return "redirect:/register";
         }
 
@@ -101,7 +103,7 @@ public class UserController {
             return "redirect:/login";
         }
 
-        User user = new User(firstName, lastName, username, email, password, isOnMailingList);
+        User user = new User(email, password, username, firstName, lastName, isOnMailingList);
         userRepo.save(user);
         request.getSession().setAttribute("session_user", user); // add user to session
         response.setStatus(HttpServletResponse.SC_CREATED);
@@ -113,14 +115,11 @@ public class UserController {
      */
     @PostMapping("/users/fill")
     public String fillTestingDataUsers(@RequestParam String redirectUrl) {
-        userRepo.save(new User("Alice","Smith", "alice123", "alice@email.com", "123"));
-        userRepo.save(new User("Bob","Smith", "bob123", "bob@email.com", "456"));
-        userRepo.save(new User("Charlie","Smith", "charlie123", "charlie@email.com", "789"));
-        userRepo.save(new User("David","Smith", "david123", "david@email.com", "741"));
-        userRepo.save(new User("Eve","Smith", "eve123", "eve@email.com", "852"));
-        userRepo.save(new User("Frank","Smith", "frank123", "frank@email.com", "963"));
-        userRepo.save(new User("Grace","Smith", "grace123", "grace@email.com", "846"));
-        userRepo.save(new User("Heidi","Smith", "heidi123", "heidi@email.com", "753"));
+        userRepo.save(new User("alice@email.com", "123", "alice123", "Alice", "Smith"));
+        userRepo.save(new User("bob@email.com", "456", "bob456", "Bob", "Johnson"));
+        userRepo.save(new User("charlie@email.com", "789", "charlie789", "Charlie", "Williams"));
+        userRepo.save(new User("david@email.com", "741", "david741", "David", "Brown"));
+        userRepo.save(new User("eve@email.com", "852", "eve852", "Eve", "Jones"));
         return "redirect:" + redirectUrl;
     }
 
@@ -188,22 +187,24 @@ public class UserController {
     }
 
     @GetMapping("/forgotpassword")
-   public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
-       User user = (User) session.getAttribute("session_user");
-       if (user == null) {
-           return "user/forgotpassword";
-       } else {
-           model.addAttribute("user", user);
-           return "redirect:/";
-       }
-   }
+    public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) {
+            return "user/forgotpassword";
+        } else {
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+    }
 
     @GetMapping("/resetpassword")
-    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, @RequestParam(value = "email", required = false) String email, Model model, HttpServletRequest request, HttpSession session) {
+    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token,
+        @RequestParam(value = "email", required = false) String email, Model model, HttpServletRequest request,
+        HttpSession session) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty()) {
             return "redirect:/login";
         }
-    
+
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
             model.addAttribute("token", token);
@@ -216,8 +217,10 @@ public class UserController {
     }
 
     @PostMapping("/resetpassword")
-    public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password, Model model) {
-        if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty()) {
+    public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password,
+        Model model) {
+        if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null
+            || password.isEmpty()) {
             return "redirect:/login";
         }
 
@@ -247,7 +250,8 @@ public class UserController {
     }
 
     @PostMapping("/settings")
-    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
+        HttpSession session, RedirectAttributes redirectAttributes) {
         // Check if the user is in the session
         User user = (User) session.getAttribute("session_user");
         if (user != null) {
@@ -268,7 +272,7 @@ public class UserController {
                     return "redirect:/settings";
                 }
             }
-    
+
             // Check if email is unique
             List<User> existingUsersByEmail = userRepo.findByEmail(formData.get("email"));
             if (!existingUsersByEmail.isEmpty()) {
@@ -286,20 +290,20 @@ public class UserController {
                     return "redirect:/settings";
                 }
             }
-    
+
             // Update user information if no errors are found
-            user.setFirstName(formData.get("firstName"));
-            user.setLastName(formData.get("lastName"));
-            user.setUsername(formData.get("username"));
             user.setEmail(formData.get("email"));
             user.setPassword(formData.get("password"));
+            user.setUsername(formData.get("username"));
+            user.setFirstName(formData.get("firstName"));
+            user.setLastName(formData.get("lastName"));
             user.setOnMailingList(formData.containsKey("isOnMailingList"));
             userRepo.save(user);
-    
+
             // Add the user object to the model
             model.addAttribute("user", user);
         }
         // Redirect to the settings page without any errors
         return "redirect:/settings";
-    }    
+    }
 }
