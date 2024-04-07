@@ -91,7 +91,7 @@ public class MailgunController {
 
     private String[] loadRecipients() {
         return userRepo.findByIsOnMailingList(true).stream()
-            .map(user -> user.getUsername() + " <" + user.getEmail() + ">")
+            .map(user -> user.getFirstName() + " " + user.getLastName() + " <" + user.getEmail() + ">")
             .toArray(String[]::new);
     }
 
