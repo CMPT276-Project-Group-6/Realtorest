@@ -38,8 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session,
-        HttpServletResponse response) {
+    public String showLoginPage(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         // Set no-cache headers
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
@@ -54,8 +53,7 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session,
-        HttpServletResponse response) {
+    public String showRegisterPage(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         // Set no-cache headers
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
@@ -80,8 +78,7 @@ public class UserController {
 
     // Adding a user to the database, used for registering
     @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request,
-        @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    public String addUser(@RequestParam Map<String, String> newUser, HttpServletRequest request, @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         String email = newUser.get("email");
         String password = newUser.get("password");
         String username = newUser.get("username");
@@ -115,11 +112,13 @@ public class UserController {
      */
     @PostMapping("/users/fill")
     public String fillTestingDataUsers(@RequestParam String redirectUrl) {
-        userRepo.save(new User("alice@email.com", "123", "alice123", "Alice", "Smith"));
-        userRepo.save(new User("bob@email.com", "456", "bob456", "Bob", "Johnson"));
-        userRepo.save(new User("charlie@email.com", "789", "charlie789", "Charlie", "Williams"));
-        userRepo.save(new User("david@email.com", "741", "david741", "David", "Brown"));
-        userRepo.save(new User("eve@email.com", "852", "eve852", "Eve", "Jones"));
+        userRepo.save(new User("alice@email.com", "123", "alice123", "Alice", "Smith", false));
+        userRepo.save(new User("bob@email.com", "456", "bob456", "Bob", "Johnson", false));
+        userRepo.save(new User("charlie@email.com", "789", "charlie789", "Charlie", "Williams", false));
+        userRepo.save(new User("david@email.com", "741", "david741", "David", "Brown", false));
+        userRepo.save(new User("eve@email.com", "852", "eve852", "Eve", "Jones", false));
+        userRepo.save(new User("cmpt276projectgroup6+test1@gmail.com", "123", "mailgunTester1", "First", "Tester", true));
+        userRepo.save(new User("cmpt276projectgroup6+test2@gmail.com", "123", "mailgunTester2", "Second", "Tester", true));
         return "redirect:" + redirectUrl;
     }
 
@@ -143,8 +142,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
-        HttpSession session) {
+    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // Process the login form (user enters email and password to login)
         String email = formData.get("email");
         String password = formData.get("password");
@@ -198,9 +196,8 @@ public class UserController {
     }
 
     @GetMapping("/resetpassword")
-    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token,
-        @RequestParam(value = "email", required = false) String email, Model model, HttpServletRequest request,
-        HttpSession session) {
+    public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, @RequestParam(value = "email", required = false) String email,
+        Model model, HttpServletRequest request, HttpSession session) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty()) {
             return "redirect:/login";
         }
@@ -217,8 +214,7 @@ public class UserController {
     }
 
     @PostMapping("/resetpassword")
-    public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password,
-        Model model) {
+    public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password, Model model) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null
             || password.isEmpty()) {
             return "redirect:/login";
@@ -250,8 +246,7 @@ public class UserController {
     }
 
     @PostMapping("/settings")
-    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
-        HttpSession session, RedirectAttributes redirectAttributes) {
+    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) {
         // Check if the user is in the session
         User user = (User) session.getAttribute("session_user");
         if (user != null) {
