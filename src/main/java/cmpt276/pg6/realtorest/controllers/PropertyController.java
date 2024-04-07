@@ -37,16 +37,16 @@ public class PropertyController {
         return request.getRequestURI();
     }
 
-    @GetMapping("/property-listing")
-    public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-        List<Property> properties = propertyRepo.findAll();
-        model.addAttribute("properties", properties);
-        return "propertyListing";
-    }
+    // @GetMapping("/property-listing")
+    // public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
+    //     User user = (User) session.getAttribute("session_user");
+    //     if (user != null) {
+    //         model.addAttribute("user", user);
+    //     }
+    //     List<Property> properties = propertyRepo.findAll();
+    //     model.addAttribute("properties", properties);
+    //     return "propertyListing";
+    // }
 
     @GetMapping("/properties")
     public String getProperties(

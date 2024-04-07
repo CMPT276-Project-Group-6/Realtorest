@@ -79,7 +79,7 @@ public class ControllersTests {
 
     @Test
     void testShowPropertyListingsPage() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/property-listing"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/properties"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.view().name("propertyListing"));
     }
