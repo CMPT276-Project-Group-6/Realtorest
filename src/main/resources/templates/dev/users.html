@@ -26,6 +26,8 @@
                         <thead class="table-info">
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Password</th>
@@ -36,6 +38,8 @@
                         <tbody>
                             <tr th:each="user:${users}">
                                 <td th:text="${user.uid}"></td>
+                                <td th:text="${user.firstName}"></td>
+                                <td th:text="${user.lastName}"></td>
                                 <td th:text="${user.username}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.password}"></td>
@@ -61,11 +65,13 @@
                 <div class="card-body">
                     <h2 class="mb-3">Add User</h2>
                     <form action="/users/add" method="post">
+                        <input type="text" class="form-control" name="firstName" placeholder="First Name" /><br />
+                        <input type="text" class="form-control" name="lastName" placeholder="Last Name" /><br />
                         <input type="text" class="form-control" name="username" placeholder="Username" /><br />
                         <input type="text" class="form-control" name="email" placeholder="Email" /><br />
                         <input type="text" class="form-control" name="password" placeholder="Password" /><br />
                         <input type="checkbox" class="form-check-input" name="isOnMailingList" id="MailingListCheck"/><label class="form-check-label" for="MailingListCheck">Put On Mailing List</label><br />
-                        <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                        <input type="hidden" name="redirectUrl" th:value="${currentUrl}" /><br />
                         <button type="submit" class="btn btn-primary">Add User</button>
                     </form>
                 </div>

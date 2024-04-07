@@ -1,0 +1,318 @@
+/* FONTS */
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+.playfair-extrabold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+.cormorant-garamond-regular {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+.cormorant-garamond-light {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+/* HEADER */
+/* NAVIGATION BAR */
+.realtorest-title {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 30px;
+}
+a {
+    text-decoration: none;
+}
+.navbar-categories {
+    display: flex;
+    font-family: "Montserrat", "sans-serif";
+    font-size: 20px;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-right: 20px;
+}
+.navbar-category {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar-category:hover {
+    cursor: pointer;
+    color: rgb(211, 211, 211);
+}
+.navbar {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* INTRODUCTION */
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.title {
+    color: white;
+    background-color: none;
+    font-size: 80px;
+    margin-top: 30vh;
+}
+.banner .container p.title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+/* OFF CANVAS */
+.offcanvas {
+    background-color: rgba(14, 29, 51) !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 250px !important;
+}
+.profile-image {
+    height: 200px;
+    width: 200px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    padding-left: 30px;
+}
+.profile-image img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.offcanvas-header {
+    margin-top: 50px;
+    padding-top: 5px;
+    margin-left: 45px;
+    display: block;
+    text-align: left;
+}
+.offcanvas-header p {
+    margin-bottom: -5px;
+}
+.offcanvas-body {
+    color: white;
+}
+.client-name {
+    color: white;
+    font-size: 23px;
+    padding-bottom: 15px;
+}
+.client-information {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
+    padding-bottom: 5px;
+}
+.social-media {
+    color: white;
+    padding-top: 10px;
+}
+.social-media i {
+    padding-right: 15px;
+}
+.social-media a {
+    color: white;
+}
+.social-media a:hover {
+    color: rgb(211, 211, 211);
+}
+.offcanvas-body {
+    height: 180px;
+    margin-top: 50px;
+    padding-top: 9px;
+    margin-left: 50px;
+    display: block;
+    text-align: left;
+    border-left: 1px solid gray;
+}
+.description-title {
+    font-size: 20px;
+}
+.client-personal-statement {
+    font-family: "Montserrat", "sans-serif";
+    font-size: 15px;
+    color: white;
+    font-weight: 200;
+}
+
+/* BODY */
+body {
+    background-image: url(/img/settingsBackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+.greeting-container {
+    display: flex;
+    gap: 10px;
+    font-size: 2em;
+    color: rgb(240, 240, 240);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+/* SETTING FORM */
+.form-container {
+    background-color: rgba(0, 0, 0, 0.559);
+    padding: 50px 80px;
+}
+.form-control {
+    background-color: transparent;
+    border: none;
+    border-radius: 0%;
+    color: #ffffff !important;
+    font-family: "Montserrat", "sans-serif" !important;
+    font-weight: 300 !important;
+}
+.form-control:focus {
+    background-color: transparent;
+    outline: none !important;
+}
+.login-form {
+    padding-bottom: 15px;
+}
+.login-form .btn {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 16px;
+    border-radius: 0%;
+    border: white 1px solid;
+    width: 100px;
+    height: 35px;
+    margin-top: 25px !important;
+}
+
+.login-form .btn {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 16px;
+    border-radius: 0%;
+    border: white 1px solid;
+    padding: 5px 0px;
+    width: 100px;
+    height: 35px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.login-form .btn:hover {
+    background-color: rgb(220, 220, 220) !important;
+    color: #000000;
+    border: white 1px solid;
+    cursor: pointer;
+}
+.login-form .btn:active {
+    background-color: rgb(220, 220, 220) !important;
+    color: #000000;
+    border: white 1px solid;
+}
+.input-group {
+    display: flex;
+    align-items: flex-end;
+}
+.input-group-text {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+}
+.form-check {
+    margin-left: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: white;
+
+}
+.form-check,
+.input-group-text
+.form-control {
+    font-size: 16px;
+}
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+    appearance: none; /* Hide default appearance */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    width: 16px; /* Set the width of the custom checkbox */
+    height: 16px; /* Set the height of the custom checkbox */
+    border: 1px solid white; /* Add white border */
+    border-radius: 0; /* Remove border radius */
+    background-color: transparent; /* Set transparent background */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Add cursor pointer */
+    position: relative; /* Set position */
+}
+
+/* Style the checked state */
+input[type="checkbox"]:checked {
+    background-color: #ffffff; /* Change background color when checked */
+    border: 0.5px solid #ffffff; /* Change border color when checked */
+}
+
+/* Style the checkmark */
+input[type="checkbox"]::before {
+    content: ''; /* Add content */
+    display: block; /* Make it block */
+    width: 14px; /* Set width */
+    height: 14px; /* Set height */
+    position: absolute; /* Set position */
+    top: 50%; /* Position it in the middle vertically */
+    left: 50%; /* Position it in the middle horizontally */
+    transform: translate(-50%, -50%); /* Center it */
+    background-color: #6c8077; /* Set checkmark color */
+    border-radius: 3px; /* Set border radius */
+    opacity: 0; /* Initially hide it */
+}
+
+/* Show the checkmark when checked */
+input[type="checkbox"]:checked::before {
+    opacity: 1; /* Show the checkmark */
+}
+
+/* ERROR MESSAGE */
+.error-container {
+    padding-left: 12px;
+}
+#errorMessage {
+    color: rgb(210, 92, 92);
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+    font-size: 16px;
+}

@@ -22,6 +22,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // The above two annotations are applied to the uid field.
     private int uid;
+    private String firstName;
+    private String lastName;
     private String username;
     private String email;
     private String password;
@@ -41,11 +43,13 @@ public class User {
 
     // Constructor with no isOnMailingList
     // Defaults to false
-    public User(String username, String email, String password) {
-        this(username, email, password, false);
+    public User(String firstName, String lastName, String username, String email, String password) {
+        this(firstName, lastName, username, email, password, false);
     }
 
-    public User(String username, String email, String password, boolean isOnMailingList) {
+    public User(String firstName, String lastName, String username, String email, String password, boolean isOnMailingList) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -58,6 +62,22 @@ public class User {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
