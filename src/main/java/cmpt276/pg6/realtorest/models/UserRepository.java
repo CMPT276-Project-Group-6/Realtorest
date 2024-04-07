@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByIsOnMailingList(boolean isOnMailingList);
 
     List<User> findByEmailAndResetToken(String email, String resetToken);
+
+    List<User> findByUsername(String username);
 }

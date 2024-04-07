@@ -85,6 +85,12 @@ public class UserController {
         String password = newUser.get("password");
         boolean isOnMailingList = newUser.containsKey("isOnMailingList");
         // System.out.println("isOnMailingList: " + isOnMailingList);
+        // check if the username is unique
+        if (userRepo.findByUsername(username).size() > 0){
+            redirectAttributes.addFlashAttribute("error",
+            "Username is already taken. Please pick another one.");
+            return "redirect:/register";
+        }
 
         // Check if a user with the same email already exists
         if (!userRepo.findByEmail(email).isEmpty()) {
