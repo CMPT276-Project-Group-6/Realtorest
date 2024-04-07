@@ -1,198 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Settings</title>
-    <!-- Bootstrap CSS and JS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
-    <!-- FontAwesome -->
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-    <!-- Custom CSS and JS -->
-    <link rel="stylesheet" type="text/css" href="/css/settings.css" />
-</head>
-<body>
-    <header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Account Settings</title>
+        <!-- Bootstrap CSS and JS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+        <!-- FontAwesome -->
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+        <!-- Custom CSS and JS -->
+        <link rel="stylesheet" type="text/css" href="/css/settings.css" />
+    </head>
+    <body>
         <!-- NAVIGATION BAR -->
         <section th:insert="~{fragments/navbar :: navbar}"></section>
-    </header>
-    <main>
-        <section class="main-content">
-            <section class="greeting-container">
-                <section id="greeting-user">
+
+        <main>
+            <section class="main-content">
+                <section class="greeting-container">
+                    <section id="greeting-user"></section>
+                    <section th:text="${user.firstName} + '!'"></section>
                 </section>
-                <section th:text="${user.firstName} + '!'"></section>
-            </section>
-            <section class="form-container">
-                <section class="login-form">
-                    <div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
-                    <form id="setting-form" action="/settings" method="post" onsubmit="return validateRegistration()">
-                        <section class="mb-3">
-                            <section class="input-group has-validation">
-                                <span class="input-group-text">First Name :</span>
-                                <input type="text" class="form-control" name="firstName" th:value="${user.firstName}" required>
+                <section class="form-container">
+                    <section class="login-form">
+                        <div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
+                        <form id="setting-form" action="/settings" method="post" onsubmit="return validateRegistration()">
+                            <section class="mb-3">
+                                <section class="input-group has-validation">
+                                    <span class="input-group-text">First Name :</span>
+                                    <input type="text" class="form-control" name="firstName" th:value="${user.firstName}" required />
+                                </section>
                             </section>
-                        </section>
-                        <section class="mb-3">
-                            <section class="input-group has-validation">
-                                <span class="input-group-text">Last Name :</span>
-                                <input type="text" class="form-control" name="lastName" th:value="${user.lastName}" required>
+                            <section class="mb-3">
+                                <section class="input-group has-validation">
+                                    <span class="input-group-text">Last Name :</span>
+                                    <input type="text" class="form-control" name="lastName" th:value="${user.lastName}" required />
+                                </section>
                             </section>
-                        </section>
-                        <section class="mb-3">
-                            <section class="input-group has-validation">
-                                <span class="input-group-text">Username :</span>
-                                <input type="text" class="form-control" name="username" th:value="${user.username}" required>
+                            <section class="mb-3">
+                                <section class="input-group has-validation">
+                                    <span class="input-group-text">Username :</span>
+                                    <input type="text" class="form-control" name="username" th:value="${user.username}" required />
+                                </section>
                             </section>
-                        </section>
-                        <!-- Display username error -->
-                        <section class="mb-3 error-container" th:if="${usernameError}" role="alert">
-                            <section id="errorMessage" th:text="${usernameError}"></section>
-                        </section>
-                        <section class="mb-3">
-                            <section class="input-group has-validation">
-                                <span class="input-group-text">Email Address :</span>
-                                <input type="email" class="form-control" name="email" th:value="${user.email}" required>
+                            <!-- Display username error -->
+                            <section class="mb-3 error-container" th:if="${usernameError}" role="alert">
+                                <section id="errorMessage" th:text="${usernameError}"></section>
                             </section>
-                        </section>
-                        <!-- Display email error -->
-                        <section class="mb-3 error-container" th:if="${emailError}" role="alert">
-                            <section id="errorMessage" th:text="${emailError}"></section>
-                        </section>
-                        <section class="mb-3">
-                            <section class="input-group has-validation">
-                                <span class="input-group-text">Password :</span>
-                                <input id="password" type="password" class="form-control" name="password" th:value="${user.password}" required>
+                            <section class="mb-3">
+                                <section class="input-group has-validation">
+                                    <span class="input-group-text">Email Address :</span>
+                                    <input type="email" class="form-control" name="email" th:value="${user.email}" required />
+                                </section>
                             </section>
-                        </section>
-                        <section class="mb-3">
-                            <section class="input-group has-validation" hidden>
-                                <span class="input-group-text">Confirm Password :</span>
-                                <input id="confirm_password" type="password" class="form-control" name="confirmPassword" required>
+                            <!-- Display email error -->
+                            <section class="mb-3 error-container" th:if="${emailError}" role="alert">
+                                <section id="errorMessage" th:text="${emailError}"></section>
                             </section>
-                        </section>
-                        <section class="form-check">
-                            <input class="form-check-input" type="checkbox" name="isOnMailingList" id="invalidCheck" th:checked="${user.isOnMailingList}">
-                            <label class="form-check-label" for="invalidCheck">
-                                Subscribe to <i>Realtorest</i> mailing list
-                            </label>
-                        </section>
-                        <section class="button-container">
-                            <button type="submit" id="save-button" class="btn btn-primary" disabled>Save</button>
-                            <a th:href="@{/}" class="btn btn-primary">Back</a>
-                        </section>
-                    </form>
+                            <section class="mb-3">
+                                <section class="input-group has-validation">
+                                    <span class="input-group-text">Password :</span>
+                                    <input id="password" type="password" class="form-control" name="password" th:value="${user.password}" required />
+                                </section>
+                            </section>
+                            <section class="mb-3">
+                                <section class="input-group has-validation" hidden>
+                                    <span class="input-group-text">Confirm Password :</span>
+                                    <input id="confirm_password" type="password" class="form-control" name="confirmPassword" required />
+                                </section>
+                            </section>
+                            <section class="form-check">
+                                <input class="form-check-input" type="checkbox" name="isOnMailingList" id="invalidCheck" th:checked="${user.isOnMailingList}" />
+                                <label class="form-check-label" for="invalidCheck"> Subscribe to <i>Realtorest</i> mailing list </label>
+                            </section>
+                            <section class="button-container">
+                                <button type="submit" id="save-button" class="btn btn-primary" disabled>Save</button>
+                                <a th:href="@{/}" class="btn btn-primary">Back</a>
+                            </section>
+                        </form>
+                    </section>
                 </section>
             </section>
-        </section>
-    </main>
-    <script src="/js/greeting.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('setting-form');
-            const saveButton = document.getElementById('save-button');
-            const passwordField = document.querySelector('input[name="password"]');
-            const confirmPasswordField = document.querySelector('input[name="confirmPassword"]');
-            const inputs = form.querySelectorAll('input');
-            const initialValue = {}; // Store initial value of inputs
+        </main>
+        <script src="/js/greeting.js" defer></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const form = document.getElementById("setting-form")
+                const saveButton = document.getElementById("save-button")
+                const passwordField = document.querySelector('input[name="password"]')
+                const confirmPasswordField = document.querySelector('input[name="confirmPassword"]')
+                const inputs = form.querySelectorAll("input")
+                const initialValue = {} // Store initial value of inputs
 
-            inputs.forEach(input => {
-                initialValue[input.name] = input.type === 'checkbox' ? input.checked : input.value;
-            });
+                inputs.forEach((input) => {
+                    initialValue[input.name] = input.type === "checkbox" ? input.checked : input.value
+                })
 
-            // Function to check if the form is modified
-            const isFormModified = () => {
-                for (const input of inputs) {
-                    if (input.type === 'checkbox' && input.checked !== initialValue[input.name]) {
-                        return true;
+                // Function to check if the form is modified
+                const isFormModified = () => {
+                    for (const input of inputs) {
+                        if (input.type === "checkbox" && input.checked !== initialValue[input.name]) {
+                            return true
+                        }
+                        if (input.type !== "checkbox" && input.value !== initialValue[input.name]) {
+                            return true
+                        }
                     }
-                    if (input.type !== 'checkbox' && input.value !== initialValue[input.name]) {
-                        return true;
+                    return false
+                }
+
+                // Function to enable/disable save button based on form modification
+                const updateSaveButtonState = () => {
+                    saveButton.disabled = !isFormModified()
+                }
+
+                // Function to hide confirm password field if passwords match
+                const checkPasswordsMatch = () => {
+                    if (passwordField.value === initialValue["password"]) {
+                        confirmPasswordField.parentNode.hidden = true
+                    } else {
+                        confirmPasswordField.parentNode.hidden = false
                     }
                 }
-                return false;
-            };
 
-            // Function to enable/disable save button based on form modification
-            const updateSaveButtonState = () => {
-                saveButton.disabled = !isFormModified();
-            };
+                // Listen for input changes
+                inputs.forEach((input) => {
+                    input.addEventListener("input", () => {
+                        updateSaveButtonState()
+                        if (input.name === "password") {
+                            checkPasswordsMatch()
+                        }
+                    })
+                })
 
-            // Function to hide confirm password field if passwords match
-            const checkPasswordsMatch = () => {
-                if (passwordField.value === initialValue['password']) {
-                    confirmPasswordField.parentNode.hidden = true;
-                } else {
-                    confirmPasswordField.parentNode.hidden = false;
+                // Initial state of the save button
+                updateSaveButtonState()
+            })
+
+            // Password Strength Checker
+            function validateForm() {
+                var password = document.getElementById("password").value
+                var confirm_password = document.getElementById("confirm_password").value
+
+                if (password !== confirm_password) {
+                    alert("Passwords do not match!")
+                    return false
                 }
-            };
 
-            // Listen for input changes
-            inputs.forEach(input => {
-                input.addEventListener('input', () => {
-                    updateSaveButtonState();
-                    if (input.name === 'password') {
-                        checkPasswordsMatch();
-                    }
-                });
-            });
-
-            // Initial state of the save button
-            updateSaveButtonState();
-        });
-
-        // Password Strength Checker
-        function validateForm() {
-            var password = document.getElementById("password").value
-            var confirm_password = document.getElementById("confirm_password").value
-
-            if (password !== confirm_password) {
-                alert("Passwords do not match!")
-                return false
+                return true
             }
 
-            return true
-        }
+            function validatePasswordStrength(password) {
+                var minLength = password.length >= 8
+                var upperCase = /[A-Z]/.test(password)
+                var lowerCase = /[a-z]/.test(password)
+                var number = /[0-9]/.test(password)
+                var specialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
 
-        function validatePasswordStrength(password) {
-            var minLength = password.length >= 8
-            var upperCase = /[A-Z]/.test(password)
-            var lowerCase = /[a-z]/.test(password)
-            var number = /[0-9]/.test(password)
-            var specialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
+                // Calculate strength score
+                var strength = 0
+                if (minLength) strength++
+                if (upperCase) strength++
+                if (lowerCase) strength++
+                if (number) strength++
+                if (specialCharacter) strength++
 
-            // Calculate strength score
-            var strength = 0
-            if (minLength) strength++
-            if (upperCase) strength++
-            if (lowerCase) strength++
-            if (number) strength++
-            if (specialCharacter) strength++
-
-            return strength
-        }
-
-        function validateRegistration() {
-            if (!validateForm()) {
-                return false // Prevent form submission
+                return strength
             }
 
-            var password = document.getElementById("password").value
-            var strength = validatePasswordStrength(password)
+            function validateRegistration() {
+                if (!validateForm()) {
+                    return false // Prevent form submission
+                }
 
-            if (strength < 4) {
-                alert("Please enter a stronger password. Password must be at least 8 characters long and contains uppercase, lowercase, number, and special character.")
-                return false // Prevent form submission
+                var password = document.getElementById("password").value
+                var strength = validatePasswordStrength(password)
+
+                if (strength < 4) {
+                    alert("Please enter a stronger password. Password must be at least 8 characters long and contains uppercase, lowercase, number, and special character.")
+                    return false // Prevent form submission
+                }
+
+                // Proceed with form submission
+                return true
             }
-
-            // Proceed with form submission
-            return true
-        }        
-    </script>
-</body>
+        </script>
+    </body>
 </html>

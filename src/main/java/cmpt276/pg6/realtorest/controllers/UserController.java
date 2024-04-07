@@ -246,7 +246,7 @@ public class UserController {
     }
 
     @PostMapping("/settings")
-    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         // Check if the user is in the session
         User user = (User) session.getAttribute("session_user");
         if (user != null) {

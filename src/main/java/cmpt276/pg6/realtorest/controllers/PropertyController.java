@@ -37,71 +37,72 @@ public class PropertyController {
         return request.getRequestURI();
     }
 
-    @GetMapping("/property-listing")
-    public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
+    // @GetMapping("/property-listing")
+    // public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
+    //     User user = (User) session.getAttribute("session_user");
+    //     if (user != null) {
+    //         model.addAttribute("user", user);
+    //     }
+    //     List<Property> properties = propertyRepo.findAll();
+    //     model.addAttribute("properties", properties);
+    //     return "propertyListing";
+    // }
+
+    @GetMapping("/properties")
+    public String getProperties(
+        @RequestParam(required = false) String city,
+        @RequestParam(required = false) String brCount,
+        @RequestParam(required = false) String baCount,
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
+        Model model) {
+
+        Sort sort = Sort.by(sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, "price");
+
+        boolean cityPresent = city != null && !city.isEmpty();
+        boolean brCountPresent = brCount != null && !brCount.isEmpty();
+        boolean baCountPresent = baCount != null && !baCount.isEmpty();
+        boolean namePresent = name != null && !name.isEmpty();
+
+        List<Property> properties = new ArrayList<>();
+
+        if (cityPresent || brCountPresent || baCountPresent || namePresent) {
+            // Initially, fetch all listings sorted as a base case
+            properties = propertyRepo.findAll(sort);
+
+            if (cityPresent) {
+                properties = propertyRepo.findByCity(city, sort);
+            }
+
+            if (brCountPresent) {
+                String numericPartBr = brCount.replaceAll("[^\\d]", "");
+                int bedroomCount = Integer.parseInt(numericPartBr);
+                properties = propertyRepo.findByBrCountGreaterThanEqual(bedroomCount, sort);
+            }
+
+            if (baCountPresent) {
+                String numericPartBa = baCount.replaceAll("[^\\d]", "");
+                int bathroomCount = Integer.parseInt(numericPartBa);
+                properties = propertyRepo.findByBaCountGreaterThanEqual(bathroomCount, sort);
+            }
+
+            if (namePresent) {
+                properties = propertyRepo.findByNameContainingIgnoreCase(name, sort);
+            }
+        } else {
+            properties = propertyRepo.findAll(sort);
         }
-        List<Property> properties = propertyRepo.findAll();
+
+        model.addAttribute("city", city);
+        model.addAttribute("brCount", brCount);
+        model.addAttribute("baCount", baCount);
+        model.addAttribute("name", name);
+        model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("properties", properties);
+        System.out.println("Fetched properties: " + properties.size());
+
         return "propertyListing";
     }
-@GetMapping("/properties")
-public String getProperties(
-    @RequestParam(required = false) String city,
-    @RequestParam(required = false) String brCount,
-    @RequestParam(required = false) String baCount,
-    @RequestParam(required = false) String name,
-    @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
-    Model model) {
-
-    Sort sort = Sort.by(sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, "price");
-
-    boolean cityPresent = city != null && !city.isEmpty();
-    boolean brCountPresent = brCount != null && !brCount.isEmpty();
-    boolean baCountPresent = baCount != null && !baCount.isEmpty();
-    boolean namePresent = name != null && !name.isEmpty();
-
-    List<Property> properties = new ArrayList<>();
-
-    if (cityPresent || brCountPresent || baCountPresent || namePresent) {
-        // Initially, fetch all listings sorted as a base case
-        properties = propertyRepo.findAll(sort);
-        
-        if (cityPresent) {
-            properties = propertyRepo.findByCity(city, sort);
-        }
-
-        if (brCountPresent) {
-            String numericPartBr = brCount.replaceAll("[^\\d]", "");
-            int bedroomCount = Integer.parseInt(numericPartBr);
-            properties = propertyRepo.findByBrCountGreaterThanEqual(bedroomCount, sort);
-        }
-
-        if (baCountPresent) {
-            String numericPartBa = baCount.replaceAll("[^\\d]", "");
-            int bathroomCount = Integer.parseInt(numericPartBa);
-            properties = propertyRepo.findByBaCountGreaterThanEqual( bathroomCount, sort);
-        }
-
-        if (namePresent) {
-            properties = propertyRepo.findByNameContainingIgnoreCase(name,sort);
-        }
-    } else {
-        properties = propertyRepo.findAll(sort);
-    }
-
-    model.addAttribute("city", city);
-    model.addAttribute("brCount", brCount);
-    model.addAttribute("baCount", baCount);
-    model.addAttribute("name", name);
-    model.addAttribute("sortOrder", sortOrder);
-    model.addAttribute("properties", properties);
-    System.out.println("Fetched properties: " + properties.size());
-
-    return "propertyListing";
-}
 
     // Dev Page for Properties Database
     @GetMapping("/dev/properties")
@@ -121,8 +122,7 @@ public String getProperties(
     }
 
     @PostMapping("/properties/add")
-    public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl,
-        HttpServletResponse response) {
+    public String addProperty(@RequestParam Map<String, String> newProperty, @RequestParam String redirectUrl, HttpServletResponse response) {
         String name = newProperty.get("name");
         String street = newProperty.get("street");
         String city = newProperty.get("city");
