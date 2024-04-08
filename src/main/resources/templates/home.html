@@ -45,17 +45,11 @@
                 <section class="featured-container">
                     <section class="featured-image"> 
                         <div th:id="'featured-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="3000">
-                                    <img src="/img/featured1.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="/img/featured2.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="/img/featured3.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                            </div>
+                            <section class="carousel-inner">
+                                <section th:each="image, stat : ${propertyImages.get(property.pid)}" th:class="${stat.first} ? 'carousel-item active' : 'carousel-item'" data-bs-interval="3000">
+                                    <img th:src="${image.imageAddress}" class="d-block w-100" />
+                                </section>
+                            </section>
                             <button class="carousel-control-prev" type="button" th:data-bs-target="'#featured-carousel' + ${property.pid}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
