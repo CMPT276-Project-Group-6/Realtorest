@@ -1,0 +1,205 @@
+@font-face {
+    font-family: "Montserrat";
+    src: url(Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    src: url(Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 400 to 900 */
+.playfair-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.playfair-semibold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+.playfair-extrabold {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+.cormorant-garamond-regular {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.cormorant-garamond-light {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* HEADER */
+/* NAVIGATION BAR */
+.realtorest-title {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 30px;
+}
+a {
+    text-decoration: none;
+}
+.navbar-categories {
+    display: flex;
+    font-family: "Montserrat", "sans-serif" !important;
+    font-size: 20px;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-right: 20px;
+}
+.navbar-category {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar-category:hover {
+    cursor: pointer;
+    color: rgb(211, 211, 211);
+}
+.navbar {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* BODY */
+body {
+    background-image: url(/img/listingBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set minimum height to full viewport height */
+}
+/* Main */
+.title-container {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    color: rgba(245, 245, 245, 0.849);
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* Property Table */
+.table {
+    font-family: "Montserrat", "sans-serif" !important;
+    font-size: 15px;
+    font-weight: 400;
+    border-collapse: collapse;
+    width: 1000px;
+}
+thead th {
+    font-weight: 500 !important;
+}
+.table th {
+    background-color: rgba(60, 93, 107, 0.7); /* Adjust the opacity as needed */
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.table td {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Adjust the opacity as needed */
+}
+
+td .btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 20px 15px;
+    border: 1px solid black;
+    color: black;
+    background-color: transparent;
+}
+td .btn-view:hover,
+td .btn-view:active {
+    background-color: rgba(0, 72, 167, 0.8);
+    border: 1px solid rgba(0, 72, 167, 0.8);
+    color: white;
+}
+td .btn-danger:hover,
+td .btn-danger:active {
+    background-color: rgba(140, 1, 1, 0.8);
+    border: 1px solid rgba(140, 1, 1, 0.8);
+    color: white;
+}
+/* Add Property Form */
+.add-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.add-new-listing {
+    background-color: rgba(0, 0, 0, 0.502);
+    padding: 15px 15px;
+    width: 800px;
+    margin-bottom: 50px;
+}
+
+.form-control,
+.form-control:active,
+.form-control:focus {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 300;   
+    background-color: transparent;
+    color: white !important;
+    border: none;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-group-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: transparent;
+    color: white !important;
+    border: none;
+}
+#textInput {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    background-color: transparent;
+    color: white !important;
+    border: 0.5px solid white;
+    width: 500px;
+}
+#charCount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: white;
+}
+.add-new-listing input::placeholder,
+#textInput::placeholder {
+    color: white;
+}
+.add-property-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.add-property-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 10px 15px;
+    border: 1px solid white;
+    color: white;
+    background-color: transparent;
+}
+.add-property-btn:hover,
+.add-property-btn:active {
+    background-color: rgba(140, 140, 140, 0.245) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    color: white !important;
+}
