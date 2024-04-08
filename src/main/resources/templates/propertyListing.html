@@ -70,7 +70,6 @@
         </section>
 
         <!-- PROPERTY LISTING -->
-
         <section class="listing-container">
             <section id="property-container" class="property-container" th:each="property : ${properties}">
                 <!-- MODAL INFORMATION -->
@@ -81,14 +80,8 @@
                                 <!-- CAROUSEL -->
                                 <section th:id="'inner-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
                                     <section class="carousel-inner">
-                                        <section class="carousel-item active" data-bs-interval="3000">
-                                            <img src="https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg" class="d-block w-100" alt="Front House" />
-                                        </section>
-                                        <section class="carousel-item" data-bs-interval="3000">
-                                            <img src="https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room" />
-                                        </section>
-                                        <section class="carousel-item" data-bs-interval="3000">
-                                            <img src="https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom" />
+                                        <section th:each="image : ${propertyImages.get(property.pid)}" class="carousel-item active" data-bs-interval="3000">
+                                            <img th:src="${image.imageAddress}" class="d-block w-100" alt="Front House" />
                                         </section>
                                     </section>
                                     <button class="carousel-control-prev" type="button" th:data-bs-target="'#inner-carousel' + ${property.pid}" data-bs-slide="prev">

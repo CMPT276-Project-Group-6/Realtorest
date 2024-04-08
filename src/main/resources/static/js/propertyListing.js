@@ -3,6 +3,79 @@ const properties = document.querySelectorAll(".property-container")
 const itemsPerPage = 9
 let currentPage = 1
 
+// Initial display and pagination setup
+displayProperties()
+updatePagination()
+
+setTimeout(showPopup, 120000) //Show popup after 2 minutes
+
+window.onload = function () {
+    updateFavoriteButtons()
+
+    // Fetch login status again
+    fetch("/check-login", {
+        method: "GET",
+        credentials: "include",
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            // Clear local storage if user is not logged in
+            if (!data.loggedIn) {
+                localStorage.clear()
+            }
+
+            // Initialize the state of favorite buttons based on local storage
+            var favouriteButtons = document.querySelectorAll(".favourite-button")
+            favouriteButtons.forEach(function (button) {
+                var propertyId = button.getAttribute("data-pid")
+                if (localStorage.getItem(propertyId)) {
+                    button.querySelector("i").classList.add("highlighted")
+                }
+            })
+        })
+        .catch((error) => console.error("Error:", error))
+}
+
+// Function to handle form submission
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+    event.preventDefault() // Prevent default form submission
+
+    // Get form data
+    var name = document.getElementById("name").value
+    var email = document.getElementById("email").value
+    var phone = document.getElementById("phone").value
+
+    // Validate form data (you may add more validation here)
+    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
+        alert("Please fill in all fields.")
+        return
+    }
+
+    // Send form data to backend
+    fetch("/popup/send", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`,
+    })
+        .then((response) => {
+            if (response.ok) {
+                // Form submission successful, do something (e.g., show a success message)
+                alert("Thank you! Your information has been submitted.")
+                // Close the popup after submission
+                document.getElementById("popup-form").style.display = "none"
+            } else {
+                // Form submission failed, handle errors
+                alert("Error: Form submission failed.")
+            }
+        })
+        .catch((error) => {
+            // Handle network errors
+            alert("Network error: Unable to submit form.")
+        })
+})
+
 // Function to show properties for the current page
 function displayProperties() {
     const startIndex = (currentPage - 1) * itemsPerPage
@@ -91,10 +164,6 @@ function goToPage(page) {
     updatePagination()
 }
 
-// Initial display and pagination setup
-displayProperties()
-updatePagination()
-
 // Function to check login status and update behavior of favorite buttons
 function updateFavoriteButtons() {
     fetch("/check-login", {
@@ -120,33 +189,6 @@ function updateFavoriteButtons() {
                     }
                 })
             }
-        })
-        .catch((error) => console.error("Error:", error))
-}
-
-window.onload = function () {
-    updateFavoriteButtons()
-
-    // Fetch login status again
-    fetch("/check-login", {
-        method: "GET",
-        credentials: "include",
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            // Clear local storage if user is not logged in
-            if (!data.loggedIn) {
-                localStorage.clear()
-            }
-
-            // Initialize the state of favorite buttons based on local storage
-            var favouriteButtons = document.querySelectorAll(".favourite-button")
-            favouriteButtons.forEach(function (button) {
-                var propertyId = button.getAttribute("data-pid")
-                if (localStorage.getItem(propertyId)) {
-                    button.querySelector("i").classList.add("highlighted")
-                }
-            })
         })
         .catch((error) => console.error("Error:", error))
 }
@@ -208,45 +250,3 @@ function closePopup() {
     var popup = document.getElementById("popup-form")
     popup.classList.remove("active")
 }
-
-setTimeout(showPopup, 120000) //Show popup after 2 minutes
-
-// Function to handle form submission
-document.getElementById("contactForm").addEventListener("submit", function (event) {
-    event.preventDefault() // Prevent default form submission
-
-    // Get form data
-    var name = document.getElementById("name").value
-    var email = document.getElementById("email").value
-    var phone = document.getElementById("phone").value
-
-    // Validate form data (you may add more validation here)
-    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
-        alert("Please fill in all fields.")
-        return
-    }
-
-    // Send form data to backend
-    fetch("/popup/send", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`,
-    })
-        .then((response) => {
-            if (response.ok) {
-                // Form submission successful, do something (e.g., show a success message)
-                alert("Thank you! Your information has been submitted.")
-                // Close the popup after submission
-                document.getElementById("popup-form").style.display = "none"
-            } else {
-                // Form submission failed, handle errors
-                alert("Error: Form submission failed.")
-            }
-        })
-        .catch((error) => {
-            // Handle network errors
-            alert("Network error: Unable to submit form.")
-        })
-})
