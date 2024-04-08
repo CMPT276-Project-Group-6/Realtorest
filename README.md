@@ -26,7 +26,7 @@ The port when deploying this project to `localhost` have been changed to `9090`.
 ### Environment Variables
 Environment variables are being used to store the database credentials.
 
-As shown in `src\main\resources\application.properties`, the environment variables are `${DB_REALTOREST_URL}`, `${DB_REALTOREST_USER}`, and `${DB_REALTOREST_PASS}`.
+As shown in `src\main\resources\application.properties`, this project uses some environment variables.
 
 Using `cdimascio/dotenv-java`, the data is being read from the file `etc\secrets\.env`, which should be provided as a part of the submission. If there are any issues, please contact me at <kzcheng@sfu.ca>.
 
@@ -72,6 +72,7 @@ There are many personalized websites tailored for realtors, hence it is very com
 ### Register
 ![Register](<Documentation/Screenshots/I2 Register.png>)
 
+
 ## Group Members
 ### Kevin
 GitHub: https://github.com/kzcheng
@@ -93,7 +94,7 @@ GitHub: https://github.com/MalaikaQ
 ### Proposal
 https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0
 
-### Requirements and Specification Document - Iteration 1
+### Requirements and Specification Document
 https://docs.google.com/document/d/1_oOKkc0if6xlwWooyd694t9nAQmbeQBu31ZJ956VdmE/edit?usp=sharing
 
 
@@ -103,18 +104,3 @@ https://github.com/CMPT276-Project-Group-6/Realtorest
 
 ### GitHub Organization
 https://github.com/CMPT276-Project-Group-6
-
-### Canvas Group
-https://canvas.sfu.ca/groups/310253
-
-### Canvas Group Project Description
-https://canvas.sfu.ca/courses/83043/pages/group-project-description-2?module_item_id=3214720
-
-### Canvas Requirements Document Overview
-https://canvas.sfu.ca/courses/83043/files/23085487?module_item_id=3214721
-
-### Canvas Iteration 1
-https://canvas.sfu.ca/courses/83043/assignments/952051
-
-### Canvas Customer Commitment Form
-https://canvas.sfu.ca/courses/83043/files/23292672?module_item_id=3242357
