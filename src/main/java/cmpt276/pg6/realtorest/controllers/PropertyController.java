@@ -112,6 +112,9 @@ public class PropertyController {
     @GetMapping("/admin/properties")
     public String editListing(Model model, HttpServletRequest request, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
         // Get all properties from the database
         List<Property> properties = propertyRepo.findAll();
         model.addAttribute("properties", properties);

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
@@ -18,6 +20,8 @@ import cmpt276.pg6.realtorest.models.PropertyRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class ImageController {
@@ -45,7 +49,33 @@ public class ImageController {
         return "dev/images";
     }
 
-    // Adding an image to the database
+    // Admin Page for Images Database
+    @GetMapping("/admin/images")
+    public String showAdminPageImages(@RequestParam(name = "propertyId") Integer propertyId, Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+        // Get all images from the database
+        List<Image> images = imageRepo.findByPropertyID(propertyId);
+        // Get the property information
+        Property property = propertyRepo.findById(propertyId).get();
+        model.addAttribute("images", images);
+        model.addAttribute("admin", admin);
+        model.addAttribute("property", property);
+        return "admin/images";
+    }
+    @PostMapping("/admin/images")
+    public String addImageforAdmin(@RequestParam Map<String, String> newImage, HttpServletRequest request, @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        int propertyID = Integer.parseInt(newImage.get("propertyID"));
+        String imageAddress = newImage.get("imageAddress");
+        Image image = new Image(propertyID, imageAddress);
+        imageRepo.save(image);
+        return "redirect:/admin/images?propertyId=" + propertyID;
+    }
+    
+    // Adding an image to the database for DEV purposes
     @PostMapping("/images/add")
     public String addImage(@RequestParam Map<String, String> newImage, HttpServletRequest request, @RequestParam String redirectUrl, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         int propertyID = Integer.parseInt(newImage.get("propertyID"));
@@ -76,6 +106,12 @@ public class ImageController {
     public String deleteImage(@PathVariable int iid, @RequestParam String redirectUrl) {
         imageRepo.deleteById(iid);
         return "redirect:" + redirectUrl;
+    }
+    // Customize for deletion in admin page
+    @PostMapping("/admin/images/delete/{pid}/{iid}")
+    public String deleteImageForAdmin(@PathVariable int pid, @PathVariable int iid) {
+        imageRepo.deleteById(iid);
+        return "redirect:/admin/images?propertyId=" + pid;
     }
 
     /**
