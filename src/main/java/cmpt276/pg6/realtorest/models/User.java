@@ -47,8 +47,7 @@ public class User {
         this(email, password, username, firstName, lastName, false);
     }
 
-    public User(String email, String password, String username, String firstName, String lastName,
-        boolean isOnMailingList) {
+    public User(String email, String password, String username, String firstName, String lastName, boolean isOnMailingList) {
         this.email = email;
         this.password = password;
         this.username = username;
