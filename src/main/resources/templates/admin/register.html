@@ -14,8 +14,10 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+        <!-- Custom CSS and JS -->
         <link rel="stylesheet" href="/css/homepage.css" />
         <link rel="stylesheet" href="/css/login.css" />
+        <script src="/js/admin-register.js" defer></script>
     </head>
 
     <body>
@@ -51,18 +53,5 @@
                 </div>
             </div>
         </section>
-
-        <script>
-            function validateForm() {
-                var password = document.getElementById("password").value
-                var confirm_password = document.getElementById("confirm_password").value
-
-                if (password !== confirm_password) {
-                    alert("Passwords do not match!")
-                    return false
-                }
-                return true
-            }
-        </script>
     </body>
 </html>
