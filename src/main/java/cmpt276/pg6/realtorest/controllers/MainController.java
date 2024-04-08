@@ -43,6 +43,7 @@ public class MainController {
         if (user != null) {
             model.addAttribute("user", user);
         }
+        
         // Fetch the featured properties from the database
         List<Property> featuredProperties = propertyRepo.findByFeatured(true);
         model.addAttribute("properties", featuredProperties);
