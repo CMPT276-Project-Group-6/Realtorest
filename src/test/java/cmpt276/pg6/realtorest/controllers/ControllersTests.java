@@ -156,6 +156,7 @@ public class ControllersTests {
         HttpSession session = mock(HttpSession.class);
         UserRepository userRepo = mock(UserRepository.class);
         PropertyRepository propertyRepo = mock(PropertyRepository.class);
+        Model model = mock(Model.class);
         User user = new User();
         user.setUid(1);
         Property property = new Property();
@@ -169,7 +170,7 @@ public class ControllersTests {
         favoriteController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         // Act
-        ResponseEntity<String> result = favoriteController.addToFavorites(1, request, session);
+        ResponseEntity<String> result = favoriteController.addToFavorites(1, request, session, model);
 
         // Assert
         assertEquals("Property added to favorites successfully", result.getBody());
@@ -183,6 +184,7 @@ public class ControllersTests {
         HttpSession session = mock(HttpSession.class);
         UserRepository userRepo = mock(UserRepository.class);
         PropertyRepository propertyRepo = mock(PropertyRepository.class);
+        Model model = mock(Model.class);
         User user = new User();
         user.setUid(1);
         Property property = new Property();
@@ -196,7 +198,7 @@ public class ControllersTests {
         favoriteController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         // Act
-        ResponseEntity<String> result = favoriteController.removeFromFavorites(1, request, session);
+        ResponseEntity<String> result = favoriteController.removeFromFavorites(1, request, session, model);
 
         // Assert
         assertEquals("Property removed from favorites successfully", result.getBody());

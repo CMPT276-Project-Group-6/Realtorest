@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class MainController {
+public class MainController extends BaseController {
     @Autowired
     private PropertyRepository propertyRepo;
     @Autowired
@@ -38,12 +39,8 @@ public class MainController {
 
     @GetMapping("/")
     public String showHomePage(Model model, HttpServletRequest request, HttpSession session) {
-        // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-        
+        addModelAttributeFromSession(session, model);
+
         // Fetch the featured properties from the database
         List<Property> featuredProperties = propertyRepo.findByFeatured(true);
         model.addAttribute("properties", featuredProperties);
@@ -62,11 +59,7 @@ public class MainController {
     //Mortgage Calculator Page
     @GetMapping("/mortgage")
     public String showMortgageCalcPage(Model model, HttpServletRequest request, HttpSession session) {
-        // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
+        addModelAttributeFromSession(session, model);
 
         // Display the mortgage calculator page
         return "mortgage-calculator";

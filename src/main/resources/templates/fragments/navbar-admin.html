@@ -10,8 +10,9 @@
             <th:block th:if="${admin != null}">
                 <a th:href="@{/admin/properties}" class="navbar-category"><p>Manage Listing</p></a>
                 <a th:href="@{/admin/users}" class="navbar-category"><p>View Users</p></a>
-                <a th:href="@{/logout}" class="navbar-category"><p>Sign Out</p></a>
             </th:block>
+
+            <a th:href="@{/logout}" class="navbar-category"><p>Sign Out</p></a>
         </section>
     </nav>
 </div>

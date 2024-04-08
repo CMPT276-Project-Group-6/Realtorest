@@ -35,26 +35,24 @@
             <a th:href="@{/properties}" class="navbar-category"><p>Listing</p></a>
             <a th:href="@{/mortgage}" class="navbar-category"><p>Mortgage Calculator</p></a>
 
-            <!-- Check to see if the user signed in or not -->
-            <!-- If user is logged in, link to favorites page -->
+            <!-- Decide if those buttons needs to be displayed based on if the user is logged in or not -->
             <th:block th:if="${user != null}">
                 <a th:href="@{/favorites}" class="navbar-category"><p>Favorites</p></a>
             </th:block>
-            <!-- If user is not logged in, link to login page -->
             <th:block th:if="${user == null}">
                 <a th:href="@{/login}" class="navbar-category"><p>Favorites</p></a>
             </th:block>
 
-            <!-- If the user is logged in then they are allowed to change their info-->
             <th:block th:if="${user != null}">
+                <!-- If the user is logged in then they are allowed to change their info-->
                 <a th:href="@{/settings}" class="navbar-category"><p>Settings</p></a>
             </th:block>
 
-            <th:block th:if="${user == null}">
+            <th:block th:if="${user == null and admin == null}">
                 <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
             </th:block>
-            <th:block th:if="${user != null}">
-                <a th:href="@{/logout}" class="navbar-category"><p>Log Out</p></a>
+            <th:block th:if="${user != null or admin != null}">
+                <a th:href="@{/logout}" class="navbar-category"><p>Sign Out</p></a>
             </th:block>
         </section>
     </nav>

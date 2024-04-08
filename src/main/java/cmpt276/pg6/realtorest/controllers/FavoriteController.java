@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class FavoriteController {
+public class FavoriteController extends BaseController {
     @Autowired
     private UserRepository userRepo;
     @Autowired
@@ -57,26 +57,27 @@ public class FavoriteController {
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         response.setDateHeader("Expires", 0); // Proxies.
 
-        User sessionUser = (User) session.getAttribute("session_user");
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (!(currentUser instanceof User)) {
+            return "redirect:/login";
+        }
+
+        User sessionUser = (User) currentUser;
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
+        Optional<User> userOptional = userRepo.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Set<Property> favoriteProperties = user.getFavoriteProperties();
+            model.addAttribute("favoriteProperties", favoriteProperties);
 
-        if (userId != null) {
-            Optional<User> userOptional = userRepo.findById(userId);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                Set<Property> favoriteProperties = user.getFavoriteProperties();
-                model.addAttribute("favoriteProperties", favoriteProperties);
-                model.addAttribute("user", user); // Add this line
-
-                Map<Integer, List<Image>> propertyImages = new HashMap<>();
-                for (Property property : favoriteProperties) {
-                    List<Image> images = imageRepo.findByPropertyID(property.getPid());
-                    propertyImages.put(property.getPid(), images);
-                }
-                model.addAttribute("propertyImages", propertyImages); 
-
-                return "favorites";
+            Map<Integer, List<Image>> propertyImages = new HashMap<>();
+            for (Property property : favoriteProperties) {
+                List<Image> images = imageRepo.findByPropertyID(property.getPid());
+                propertyImages.put(property.getPid(), images);
             }
+            model.addAttribute("propertyImages", propertyImages);
+
+            return "favorites";
         }
 
         return "redirect:/login";
@@ -84,8 +85,9 @@ public class FavoriteController {
 
     //Add property to favorites
     @PostMapping("/add-favorite/{propertyId}")
-    public ResponseEntity<String> addToFavorites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
+    public ResponseEntity<String> addToFavorites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session, Model model) {
+        Object currentUser = addModelAttributeFromSession(session, model);
+        User sessionUser = (User) currentUser;
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
         if (userId != null) {
@@ -103,8 +105,9 @@ public class FavoriteController {
 
     //Remove property from favorites
     @DeleteMapping("/remove-favorite/{propertyId}")
-    public ResponseEntity<String> removeFromFavorites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
+    public ResponseEntity<String> removeFromFavorites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session, Model model) {
+        Object currentUser = addModelAttributeFromSession(session, model);
+        User sessionUser = (User) currentUser;
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
         if (userId != null) {

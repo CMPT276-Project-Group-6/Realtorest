@@ -18,14 +18,13 @@ import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
-import cmpt276.pg6.realtorest.models.User;
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class PropertyController {
+public class PropertyController extends BaseController {
     @Autowired
     private PropertyRepository propertyRepo;
     @Autowired
@@ -53,11 +52,7 @@ public class PropertyController {
         @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
         Model model, HttpSession session) {
 
-        // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
+        addModelAttributeFromSession(session, model);
 
         Dotenv dotenv = Dotenv.configure().directory("./etc/secrets").load();
         model.addAttribute("googleMapsApiKey", dotenv.get("GOOGLE_MAPS_API_KEY"));
@@ -121,14 +116,14 @@ public class PropertyController {
     // Edit Listing for Admin
     @GetMapping("/admin/properties")
     public String editListing(Model model, HttpServletRequest request, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("session_user");
-        if (admin == null) {
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (!(currentUser instanceof Admin)) {
             return "redirect:/admin/login";
         }
+
         // Get all properties from the database
         List<Property> properties = propertyRepo.findAll();
         model.addAttribute("properties", properties);
-        model.addAttribute("admin", admin);
         return "admin/properties";
     }
 
