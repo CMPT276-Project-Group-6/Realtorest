@@ -1,11 +1,15 @@
 package cmpt276.pg6.realtorest.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import cmpt276.pg6.realtorest.models.Image;
+import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
@@ -16,6 +20,8 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
     @Autowired
     private PropertyRepository propertyRepo;
+    @Autowired
+    private ImageRepository imageRepo;
 
     public void setPropertyRepo(PropertyRepository propertyRepo) {
         this.propertyRepo = propertyRepo;
@@ -40,7 +46,28 @@ public class MainController {
         // Fetch the featured properties from the database
         List<Property> featuredProperties = propertyRepo.findByFeatured(true);
         model.addAttribute("properties", featuredProperties);
+
+        Map<Integer, List<Image>> propertyImages = new HashMap<>();
+        for (Property property : featuredProperties) {
+            List<Image> images = imageRepo.findByPropertyID(property.getPid());
+            propertyImages.put(property.getPid(), images);
+        }
+        model.addAttribute("propertyImages", propertyImages);
+
         // Display the home page
         return "home";
+    }
+
+    //Mortgage Calculator Page
+    @GetMapping("/mortgage")
+    public String showMortgageCalcPage(Model model, HttpServletRequest request, HttpSession session) {
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+
+        // Display the mortgage calculator page
+        return "mortgage-calculator";
     }
 }

@@ -61,10 +61,6 @@
                                 <option value="3" th:selected="${baCount == '3'}">3+</option>
                             </select>
                         </div>
-                        <!-- <div class="col-auto">
-                                    <label for="searchName" class="form-label">Search by Name</label>
-                                    <input type="text" class="form-control" id="searchName" name="name" placeholder="Property name">
-                                </div> -->
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">Apply Filters</button>
                         </div>
@@ -74,7 +70,6 @@
         </section>
 
         <!-- PROPERTY LISTING -->
-
         <section class="listing-container">
             <section id="property-container" class="property-container" th:each="property : ${properties}">
                 <!-- MODAL INFORMATION -->
@@ -85,14 +80,8 @@
                                 <!-- CAROUSEL -->
                                 <section th:id="'inner-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
                                     <section class="carousel-inner">
-                                        <section class="carousel-item active" data-bs-interval="3000">
-                                            <img src="/img/Property1/Front.jpg" class="d-block w-100" alt="Front House" />
-                                        </section>
-                                        <section class="carousel-item" data-bs-interval="3000">
-                                            <img src="/img/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room" />
-                                        </section>
-                                        <section class="carousel-item" data-bs-interval="3000">
-                                            <img src="/img/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom" />
+                                        <section th:each="image, stat : ${propertyImages.get(property.pid)}" th:class="${stat.first} ? 'carousel-item active' : 'carousel-item'" data-bs-interval="3000">
+                                            <img th:src="${image.imageAddress}" class="d-block w-100" />
                                         </section>
                                     </section>
                                     <button class="carousel-control-prev" type="button" th:data-bs-target="'#inner-carousel' + ${property.pid}" data-bs-slide="prev">
@@ -161,14 +150,8 @@
                 <!-- PROPERTY CARD -->
                 <section th:id="'carousel' + ${property.pid}" class="carousel slide carousel-fade">
                     <section class="carousel-inner">
-                        <section class="carousel-item active">
-                            <img src="/img/Property1/Front.jpg" class="d-block w-100" alt="Front House" />
-                        </section>
-                        <section class="carousel-item">
-                            <img src="/img/Property1/Livingroom.jpeg" class="d-block w-100" alt="Living Room" />
-                        </section>
-                        <section class="carousel-item">
-                            <img src="/img/Property1/Washroom.jpg" class="d-block w-100" alt="Washroom" />
+                        <section th:each="image, stat : ${propertyImages.get(property.pid)}" th:class="${stat.first} ? 'carousel-item active' : 'carousel-item'" data-bs-interval="3000">
+                            <img th:src="${image.imageAddress}" class="d-block w-100" />
                         </section>
                     </section>
                     <button class="carousel-control-prev" type="button" th:data-bs-target="'#carousel' + ${property.pid}" data-bs-slide="prev">

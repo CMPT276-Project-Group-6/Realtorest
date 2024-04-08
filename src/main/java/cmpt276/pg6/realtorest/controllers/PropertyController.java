@@ -1,6 +1,7 @@
 package cmpt276.pg6.realtorest.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cmpt276.pg6.realtorest.models.Admin;
+import cmpt276.pg6.realtorest.models.Image;
+import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +27,8 @@ import jakarta.servlet.http.HttpSession;
 public class PropertyController {
     @Autowired
     private PropertyRepository propertyRepo;
+    @Autowired
+    private ImageRepository imageRepo;
 
     public void setPropertyRepo(PropertyRepository propertyRepo) {
         this.propertyRepo = propertyRepo;
@@ -37,17 +42,6 @@ public class PropertyController {
     public String getCurrentUrl(HttpServletRequest request) {
         return request.getRequestURI();
     }
-
-    // @GetMapping("/property-listing")
-    // public String showListingPage(Model model, HttpServletRequest request, HttpSession session) {
-    //     User user = (User) session.getAttribute("session_user");
-    //     if (user != null) {
-    //         model.addAttribute("user", user);
-    //     }
-    //     List<Property> properties = propertyRepo.findAll();
-    //     model.addAttribute("properties", properties);
-    //     return "propertyListing";
-    // }
 
     @GetMapping("/properties")
     public String getProperties(
@@ -100,6 +94,14 @@ public class PropertyController {
         model.addAttribute("name", name);
         model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("properties", properties);
+
+        Map<Integer, List<Image>> propertyImages = new HashMap<>();
+        for (Property property : properties) {
+            List<Image> images = imageRepo.findByPropertyID(property.getPid());
+            propertyImages.put(property.getPid(), images);
+        }
+        model.addAttribute("propertyImages", propertyImages);
+
         System.out.println("Fetched properties: " + properties.size());
 
         return "propertyListing";
