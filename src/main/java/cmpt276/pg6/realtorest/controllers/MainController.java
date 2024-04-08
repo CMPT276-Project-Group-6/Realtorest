@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class MainController {
+public class MainController extends BaseController {
     @Autowired
     private PropertyRepository propertyRepo;
     @Autowired
@@ -39,14 +39,7 @@ public class MainController {
 
     @GetMapping("/")
     public String showHomePage(Model model, HttpServletRequest request, HttpSession session) {
-        // Check session
-        Object sessionUser = session.getAttribute("session_user");
-        if (sessionUser instanceof User) {
-            model.addAttribute("user", (User) sessionUser);
-        }
-        if (sessionUser instanceof Admin) {
-            model.addAttribute("admin", (Admin) sessionUser);
-        }
+        addModelAttributeFromSession(session, model);
 
         // Fetch the featured properties from the database
         List<Property> featuredProperties = propertyRepo.findByFeatured(true);
@@ -66,11 +59,7 @@ public class MainController {
     //Mortgage Calculator Page
     @GetMapping("/mortgage")
     public String showMortgageCalcPage(Model model, HttpServletRequest request, HttpSession session) {
-        // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
+        addModelAttributeFromSession(session, model);
 
         // Display the mortgage calculator page
         return "mortgage-calculator";

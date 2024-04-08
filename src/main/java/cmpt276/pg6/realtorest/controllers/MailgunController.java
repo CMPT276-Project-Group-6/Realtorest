@@ -24,7 +24,7 @@ import kong.unirest.core.Unirest;
  * This is for stuff related to Mailgun
  */
 @Controller
-public class MailgunController {
+public class MailgunController extends BaseController {
     @Autowired
     private UserRepository userRepo;
 

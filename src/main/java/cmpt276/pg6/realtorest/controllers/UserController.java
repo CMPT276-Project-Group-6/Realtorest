@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
@@ -22,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private UserRepository userRepo;
 
@@ -45,13 +44,12 @@ public class UserController {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         response.setDateHeader("Expires", 0); // Proxies.
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "user/login";
-        } else {// Redirect to the home page if the user is already logged in
-            model.addAttribute("user", user);
+
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (currentUser != null) {
             return "redirect:/";
         }
+        return "user/login";
     }
 
     @GetMapping("/register")
@@ -60,13 +58,12 @@ public class UserController {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "user/register";
-        } else {
-            model.addAttribute("user", user);
+
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (currentUser != null) {
             return "redirect:/";
         }
+        return "user/register";
     }
 
     // Dev Page for Users Database
@@ -81,14 +78,14 @@ public class UserController {
     // Admin Page for Users Database
     @GetMapping("/admin/users")
     public String showAdminPageUsers(Model model, HttpServletRequest request, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("session_user");
-        if (admin == null) {
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (!(currentUser instanceof Admin)) {
             return "redirect:/admin/login";
         }
+
         // Get all users from the database
         List<User> users = userRepo.findAll();
         model.addAttribute("users", users);
-        model.addAttribute("admin", admin);
         return "admin/users";
     }
 
@@ -189,26 +186,13 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/check-login")
-    public ResponseEntity<Map<String, Boolean>> checkLogin(HttpSession session) {
-        User sessionUser = (User) session.getAttribute("session_user");
-        boolean isLoggedIn = sessionUser != null;
-
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("loggedIn", isLoggedIn);
-
-        return ResponseEntity.ok(response);
-    }
-
     @GetMapping("/forgot-password")
     public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "user/forgot-password";
-        } else {
-            model.addAttribute("user", user);
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (currentUser != null) {
             return "redirect:/";
         }
+        return "user/forgot-password";
     }
 
     @GetMapping("/reset-password")
@@ -218,15 +202,14 @@ public class UserController {
             return "redirect:/login";
         }
 
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            model.addAttribute("token", token);
-            model.addAttribute("email", email);
-            return "user/reset-password";
-        } else {
-            model.addAttribute("user", user);
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (currentUser != null) {
             return "redirect:/";
         }
+
+        model.addAttribute("token", token);
+        model.addAttribute("email", email);
+        return "user/reset-password";
     }
 
     @PostMapping("/reset-password")
@@ -254,9 +237,9 @@ public class UserController {
     @GetMapping("/settings")
     public String goSettings(Model model, HttpServletRequest request, HttpSession session) {
         // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            model.addAttribute("user", user);
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (!(currentUser instanceof User)) {
+            return "redirect:/login";
         }
         return "user/settings";
     }
@@ -264,7 +247,8 @@ public class UserController {
     @PostMapping("/settings")
     public String changeInformation(@RequestParam Map<String, String> formData, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         // Check if the user is in the session
-        User user = (User) session.getAttribute("session_user");
+        Object currentUser = addModelAttributeFromSession(session, model);
+        User user = (User) currentUser;
         if (user != null) {
             // Check if username is unique
             List<User> existingUsersByUsername = userRepo.findByUsername(formData.get("username"));
@@ -314,6 +298,7 @@ public class UserController {
             // Add the user object to the model
             model.addAttribute("user", user);
         }
+
         // Redirect to the settings page without any errors
         return "redirect:/settings";
     }

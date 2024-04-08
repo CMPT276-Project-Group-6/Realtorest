@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class AdminController {
+public class AdminController extends BaseController {
     @Autowired
     private AdminRepository adminRepo;
 
@@ -32,24 +32,18 @@ public class AdminController {
     // Home Page for Admin, should not be accessible without logging in as an admin
     @GetMapping("/admin")
     public String showAdminHomepage(Model model, HttpServletRequest request, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("session_user");
-        if (admin == null) {
-            return "redirect:/admin/login";
-        }
-
-        model.addAttribute("admin", admin);
+        addModelAttributeFromSession(session, model);
         return "admin/home";
     }
 
     // Login Page for admin
     @GetMapping("/admin/login")
     public String showAdminLoginPage(Model model, HttpServletRequest request, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("session_user");
-        if (admin == null) {
-            return "admin/login";
-        } else {
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (currentUser instanceof Admin) {
             return "redirect:/admin";
         }
+        return "admin/login";
     }
 
     // Dev Page for Admins Database
