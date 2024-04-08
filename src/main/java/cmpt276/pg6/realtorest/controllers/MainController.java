@@ -57,4 +57,17 @@ public class MainController {
         // Display the home page
         return "home";
     }
+
+    //Mortgage Calculator Page
+    @GetMapping("/mortgage")
+    public String showMortgageCalcPage(Model model, HttpServletRequest request, HttpSession session) {
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+
+        // Display the mortgage calculator page
+        return "mortgage-calculator";
+    }
 }
