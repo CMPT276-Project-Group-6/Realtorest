@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
@@ -103,6 +105,18 @@ public class PropertyController {
         System.out.println("Fetched properties: " + properties.size());
 
         return "propertyListing";
+    }
+    
+    // Admin Page for Properties Database
+    // Edit Listing for Admin
+    @GetMapping("/admin/properties")
+    public String editListing(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        // Get all properties from the database
+        List<Property> properties = propertyRepo.findAll();
+        model.addAttribute("properties", properties);
+        model.addAttribute("admin", admin);
+        return "admin/properties";
     }
 
     // Dev Page for Properties Database
