@@ -34,7 +34,7 @@
                         <tbody>
                             <tr th:each="images:${images}">
                                 <td th:text="${images.iid}"></td>
-                                <td th:text="${images.property}"></td>
+                                <td th:text="${images.propertyID}"></td>
                                 <td th:text="${images.imageAddress}"></td>
                                 <!-- <td>
                                     <div class="d-flex gap-1">
@@ -56,12 +56,12 @@
             <div class="card section-box">
                 <div class="card-body">
                     <h2 class="mb-3">Add Image</h2>
-                    <!-- <form action="/admins/add" method="post">
-                        <input type="text" class="form-control" name="adminname" placeholder="Property ID" /><br />
-                        <input type="text" class="form-control" name="password" placeholder="Password" /><br />
+                    <form action="/images/add" method="post">
+                        <input type="text" class="form-control" name="propertyID" placeholder="Property ID" /><br />
+                        <input type="text" class="form-control" name="imageAddress" placeholder="Image Address" /><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                         <button type="submit" class="btn btn-primary">Add User</button>
-                    </form> -->
+                    </form>
                 </div>
             </div>
         </section>

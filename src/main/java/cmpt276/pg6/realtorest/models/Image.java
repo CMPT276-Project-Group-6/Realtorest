@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,17 +12,14 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int iid;
-
-    @ManyToOne
-    @JoinColumn(name = "property_id", nullable = false)
-    private Property property;
+    private int propertyID;
 
     private String imageAddress;
 
     public Image() {}
 
-    public Image(Property property, String imageAddress) {
-        this.property = property;
+    public Image(int propertyID, String imageAddress) {
+        this.propertyID = propertyID;
         this.imageAddress = imageAddress;
     }
 
@@ -36,12 +31,12 @@ public class Image {
         this.iid = iid;
     }
 
-    public Property getProperty() {
-        return property;
+    public int getPropertyID() {
+        return propertyID;
     }
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setPropertyID(int propertyID) {
+        this.propertyID = propertyID;
     }
 
     public String getImageAddress() {
@@ -51,5 +46,4 @@ public class Image {
     public void setImageAddress(String imageAddress) {
         this.imageAddress = imageAddress;
     }
-
 }
