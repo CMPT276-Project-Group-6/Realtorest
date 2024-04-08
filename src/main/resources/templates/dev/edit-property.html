@@ -39,9 +39,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td th:text="${property.pid}"></td>
+                                <td th:text="${property.pid}"></td>.
                                 <td th:text="${property.name}"></td>
-                                <td th:text="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
+                                <td th:text="${property.street + ', ' + property.city + ', ' + property.province + ', ' + property.zipCode}"></td>
                                 <td th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></td>
                                 <td th:text="${property.area}"></td>
                                 <td th:text="${property.brCount}"></td>
