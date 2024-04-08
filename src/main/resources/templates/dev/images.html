@@ -32,18 +32,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="images:${images}">
-                                <td th:text="${images.iid}"></td>
-                                <td th:text="${images.propertyID}"></td>
-                                <td th:text="${images.imageAddress}"></td>
-                                <!-- <td>
+                            <tr th:each="image:${images}">
+                                <td th:text="${image.iid}"></td>
+                                <td th:text="${image.propertyID}"></td>
+                                <td th:text="${image.imageAddress}"></td>
+                                <td>
                                     <div class="d-flex gap-1">
-                                        <form th:action="@{/properties/delete/{pid}(pid=${property.pid})}" method="post">
+                                        <form th:action="@{/images/delete/{iid}(iid=${image.iid})}" method="post">
                                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </div>
-                                </td> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>

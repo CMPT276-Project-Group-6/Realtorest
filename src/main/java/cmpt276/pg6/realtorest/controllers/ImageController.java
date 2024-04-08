@@ -72,9 +72,9 @@ public class ImageController {
     /**
      * Deletes an image from the system.
      */
-    @PostMapping("/images/delete/{imageId}")
-    public String deleteImage(@PathVariable int imageId, @RequestParam String redirectUrl) {
-        imageRepo.deleteById(imageId);
+    @PostMapping("/images/delete/{iid}")
+    public String deleteImage(@PathVariable int iid, @RequestParam String redirectUrl) {
+        imageRepo.deleteById(iid);
         return "redirect:" + redirectUrl;
     }
 
