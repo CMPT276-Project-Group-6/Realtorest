@@ -200,18 +200,18 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/forgotpassword")
+    @GetMapping("/forgot-password")
     public String showForgotPasswordPage(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
-            return "user/forgotpassword";
+            return "user/forgot-password";
         } else {
             model.addAttribute("user", user);
             return "redirect:/";
         }
     }
 
-    @GetMapping("/resetpassword")
+    @GetMapping("/reset-password")
     public String showResetPasswordPage(@RequestParam(value = "token", required = false) String token, @RequestParam(value = "email", required = false) String email,
         Model model, HttpServletRequest request, HttpSession session) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty()) {
@@ -222,14 +222,14 @@ public class UserController {
         if (user == null) {
             model.addAttribute("token", token);
             model.addAttribute("email", email);
-            return "user/resetpassword";
+            return "user/reset-password";
         } else {
             model.addAttribute("user", user);
             return "redirect:/";
         }
     }
 
-    @PostMapping("/resetpassword")
+    @PostMapping("/reset-password")
     public String resetPassword(@RequestParam String token, @RequestParam String email, @RequestParam String password, Model model) {
         if (token == null || token.isEmpty() || email == null || email.isEmpty() || password == null
             || password.isEmpty()) {
@@ -241,7 +241,7 @@ public class UserController {
         if (users.isEmpty()) {
             System.out.println("No user found with provided email and reset token.");
             model.addAttribute("errorMessage", "Invalid reset token.");
-            return "user/forgotpassword";
+            return "user/forgot-password";
         } else {
             User user = users.get(0);
             user.setPassword(password);

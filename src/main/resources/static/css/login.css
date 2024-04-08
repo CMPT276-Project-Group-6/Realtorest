@@ -21,7 +21,7 @@
 
 /* MAIN CONTENT */
 body {
-    background-image: url(/img/loginBackground.jpg) !important;
+    background-image: url(/img/login-background.jpg) !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -156,7 +156,7 @@ body {
 
 /* ADMIN LOGIN BACKGROUND */
 .admin-login {
-    background-image: url(/img/adminBackground.jpg) !important;
+    background-image: url(/img/admin-background.jpg) !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

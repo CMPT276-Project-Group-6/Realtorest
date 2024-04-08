@@ -96,7 +96,7 @@ public class MailgunController {
     }
 
     // Method for sending password reset email
-    @PostMapping("/forgotpassword")
+    @PostMapping("/forgot-password")
     public String sendPasswordResetEmail(@RequestParam String email, @RequestParam String confirmEmail, HttpServletRequest request) {
         // Find the user by email
         List<User> users = userRepo.findByEmail(email);
@@ -116,7 +116,7 @@ public class MailgunController {
         }
 
         // Construct the reset password link with the reset token and email
-        String resetLink = appUrl + "/resetpassword?token=" + resetToken + "&email=" + email;
+        String resetLink = appUrl + "/reset-password?token=" + resetToken + "&email=" + email;
 
         // Construct the email content
         String recipient = email;
