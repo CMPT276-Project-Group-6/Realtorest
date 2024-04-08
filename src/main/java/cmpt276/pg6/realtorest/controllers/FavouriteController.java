@@ -1,5 +1,8 @@
 package cmpt276.pg6.realtorest.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import cmpt276.pg6.realtorest.models.Image;
+import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
@@ -25,6 +30,8 @@ public class FavouriteController {
     private UserRepository userRepo;
     @Autowired
     private PropertyRepository propertyRepo;
+    @Autowired
+    private ImageRepository imageRepo;
 
     public void setUserRepo(UserRepository userRepo) {
         this.userRepo = userRepo;
@@ -60,9 +67,18 @@ public class FavouriteController {
                 Set<Property> favouriteProperties = user.getFavouriteProperties();
                 model.addAttribute("favouriteProperties", favouriteProperties);
                 model.addAttribute("user", user); // Add this line
+
+                Map<Integer, List<Image>> propertyImages = new HashMap<>();
+                for (Property property : favouriteProperties) {
+                    List<Image> images = imageRepo.findByPropertyID(property.getPid());
+                    propertyImages.put(property.getPid(), images);
+                }
+                model.addAttribute("propertyImages", propertyImages); 
+
                 return "favourites";
             }
         }
+
         return "redirect:/login";
     }
 
