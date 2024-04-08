@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.User;
 import cmpt276.pg6.realtorest.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -74,6 +76,20 @@ public class UserController {
         List<User> users = userRepo.findAll();
         model.addAttribute("users", users);
         return "dev/users";
+    }
+
+    // Admin Page for Users Database
+    @GetMapping("/admin/users")
+    public String showAdminPageUsers(Model model, HttpServletRequest request, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("session_user");
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+        // Get all users from the database
+        List<User> users = userRepo.findAll();
+        model.addAttribute("users", users);
+        model.addAttribute("admin", admin);
+        return "admin/users";
     }
 
     // Adding a user to the database, used for registering

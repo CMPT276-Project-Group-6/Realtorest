@@ -67,7 +67,7 @@ a {
 
 /* BODY */
 body {
-    background-image: url(/img/listingBackground.jpg);
+    background-image: url(/img/settingsBackground.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -85,7 +85,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* Property Table */
+/* User Table */
 .table {
     font-family: "Montserrat", "sans-serif" !important;
     font-size: 15px;
@@ -106,64 +106,19 @@ thead th {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.7); /* Adjust the opacity as needed */
 }
-
-td .btn {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    border: 1px solid black;
-    color: black;
-    background-color: transparent;
+/* Mailing form */
+.mailing-container {
+    margin-bottom: 40px;
+    width: 600px;
 }
-td .btn-view:hover,
-td .btn-view:active {
-    background-color: rgba(0, 72, 167, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white;
-}
-td .btn-danger:hover,
-td .btn-danger:active {
-    background-color: rgba(140, 1, 1, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white;
-}
-td .btn-edit:hover,
-td .btn-edit:active {
-    background-color: rgba(25, 136, 66, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white !important;
-}
-td .btn-view {
-    padding: 30px 25px;
-}
-.actions-btn {
+.mailing-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-/* Add Property Form */
-.add-form-container {
-    display: flex;
     justify-content: center;
     align-items: center;
-
-}
-.add-new-listing {
-    background-color: rgba(0, 0, 0, 0.502);
-    padding: 15px 15px;
-    width: 800px;
-    margin-bottom: 50px;
-}
-
-.form-control,
-.form-control:active,
-.form-control:focus {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    font-weight: 300;   
-    background-color: transparent;
-    color: white !important;
-    border: none;
+    padding: 20px 50px;
+    background-color: rgba(0, 0, 0, 0.353); /* Adjust the opacity as needed */
+    border-radius: 10px;
 }
 .input-group {
     margin-bottom: 15px;
@@ -176,44 +131,50 @@ td .btn-view {
     color: white !important;
     border: none;
 }
-#textInput {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
+.subject-field {
+    border: none;
+}
+.subject-field:focus, .subject-field:active {
+    border: none;
+}
+.form-control:active, .form-control:focus {
     background-color: transparent;
-    color: white !important;
-    border: 0.5px solid white;
-    width: 500px;
-}
-#charCount {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
     color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
 }
-.add-new-listing input::placeholder,
-#textInput::placeholder {
+.form-control {
+    background-color: transparent;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+.form-control::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
     color: rgb(215, 215, 215);
     font-style: italic;
-    font-style: italic;
 }
-.add-property-btn-container {
+.send-mail-btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
 }
-.add-property-btn {
+.send-mail-btn {
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 300;
     padding: 10px 15px;
     border: 1px solid white;
     color: white;
     background-color: transparent;
 }
-.add-property-btn:hover,
-.add-property-btn:active {
+.send-mail-btn:hover,
+.send-mail-btn:active {
     background-color: rgba(140, 140, 140, 0.245) !important;
     border: 1px solid rgba(255, 255, 255, 0.8) !important;
     color: white !important;

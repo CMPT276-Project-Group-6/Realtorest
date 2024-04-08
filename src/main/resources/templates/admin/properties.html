@@ -64,9 +64,10 @@
                         </section>
                     </td>
                     <td>
-                        <section class="d-flex gap-1">
-                            <form th:action="@{/properties/delete/{pid}(pid=${property.pid})}" method="post">
+                        <section class="d-flex justify-content-center align-items-center gap-1">
+                            <form class="actions-btn" th:action="@{/properties/delete/{pid}(pid=${property.pid})}" method="post">
                                 <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                                <a class="btn btn-edit" th:href="@{/admin/images(propertyId=${property.pid})}">Images</a>
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </section>
