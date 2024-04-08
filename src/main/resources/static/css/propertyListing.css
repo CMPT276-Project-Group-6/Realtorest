@@ -266,23 +266,23 @@ body {
 .display-realtor .offcanvas-header .social-media a:hover {
     color: rgb(140, 140, 140);
 }
-.favourite-button {
+.favorite-button {
     padding-top: 15px;
     background-color: transparent;
     color: rgb(186, 186, 186);
     border: none;
     outline: none;
 }
-#favourite-button p {
+#favorite-button p {
     font-family: "Montserrat", sans-serif;
     color: rgb(100, 100, 100);
 }
-.favourite-button:hover {
+.favorite-button:hover {
     cursor: pointer;
     color: #f1c40f;
 }
 
-.favourite-button i.highlighted {
+.favorite-button i.highlighted {
     color: #f1c40f;
 }
 

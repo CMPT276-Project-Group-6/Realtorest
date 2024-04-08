@@ -126,7 +126,7 @@ public class ControllersTests {
     }
 
     @Test
-    public void testGetFavourites() {
+    public void testGetFavorites() {
         // Arrange
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -138,19 +138,19 @@ public class ControllersTests {
         when(session.getAttribute("session_user")).thenReturn(user);
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
 
-        FavouriteController favouriteController = new FavouriteController();
-        favouriteController.setUserRepo(userRepo);
+        FavoriteController favoriteController = new FavoriteController();
+        favoriteController.setUserRepo(userRepo);
 
-        String result = favouriteController.showFavouritesPage(request, session, model, response);
+        String result = favoriteController.showFavoritesPage(request, session, model, response);
 
         // Assert
-        assertEquals("favourites", result);
-        verify(model, times(1)).addAttribute(eq("favouriteProperties"), any(Set.class));
+        assertEquals("favorites", result);
+        verify(model, times(1)).addAttribute(eq("favoriteProperties"), any(Set.class));
         verify(model, times(1)).addAttribute("user", user);
     }
 
     @Test
-    public void testAddToFavourites() {
+    public void testAddToFavorites() {
         // Arrange
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpSession session = mock(HttpSession.class);
@@ -164,20 +164,20 @@ public class ControllersTests {
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
         when(propertyRepo.findById(1)).thenReturn(Optional.of(property));
 
-        FavouriteController favouriteController = new FavouriteController();
-        favouriteController.setUserRepo(userRepo);
-        favouriteController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
+        FavoriteController favoriteController = new FavoriteController();
+        favoriteController.setUserRepo(userRepo);
+        favoriteController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         // Act
-        ResponseEntity<String> result = favouriteController.addToFavourites(1, request, session);
+        ResponseEntity<String> result = favoriteController.addToFavorites(1, request, session);
 
         // Assert
-        assertEquals("Property added to favourites successfully", result.getBody());
+        assertEquals("Property added to favorites successfully", result.getBody());
         verify(userRepo, times(1)).save(user);
     }
 
     @Test
-    public void testRemoveFromFavourites() {
+    public void testRemoveFromFavorites() {
         // Arrange
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpSession session = mock(HttpSession.class);
@@ -187,19 +187,19 @@ public class ControllersTests {
         user.setUid(1);
         Property property = new Property();
         property.setPid(1);
-        user.getFavouriteProperties().add(property);
+        user.getFavoriteProperties().add(property);
         when(session.getAttribute("session_user")).thenReturn(user);
         when(userRepo.findById(1)).thenReturn(Optional.of(user));
 
-        FavouriteController favouriteController = new FavouriteController();
-        favouriteController.setUserRepo(userRepo);
-        favouriteController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
+        FavoriteController favoriteController = new FavoriteController();
+        favoriteController.setUserRepo(userRepo);
+        favoriteController.setPropertyRepo(propertyRepo); // set the propertyRepo mock
 
         // Act
-        ResponseEntity<String> result = favouriteController.removeFromFavourites(1, request, session);
+        ResponseEntity<String> result = favoriteController.removeFromFavorites(1, request, session);
 
         // Assert
-        assertEquals("Property removed from favourites successfully", result.getBody());
+        assertEquals("Property removed from favorites successfully", result.getBody());
         verify(userRepo, times(1)).save(user);
     }
 

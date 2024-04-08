@@ -30,14 +30,14 @@ public class User {
     private boolean isOnMailingList;
     private String resetToken;
 
-    // Kevin: So it seems like, Malaika made the favourite list not as a attribute of users, but as a relationship table. Seems fine.
+    // Kevin: So it seems like, Malaika made the favorite list not as a attribute of users, but as a relationship table. Seems fine.
     @ManyToMany
     @JoinTable(
-        name = "user_favourite_properties",
+        name = "user_favorite_properties",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "property_id"))
 
-    private Set<Property> favouriteProperties = new HashSet<>();
+    private Set<Property> favoriteProperties = new HashSet<>();
 
     public User() {}
 
@@ -120,11 +120,11 @@ public class User {
         this.resetToken = resetToken;
     }
 
-    public Set<Property> getFavouriteProperties() {
-        return favouriteProperties;
+    public Set<Property> getFavoriteProperties() {
+        return favoriteProperties;
     }
 
-    public void setFavouriteProperties(Set<Property> favouriteProperties) {
-        this.favouriteProperties = favouriteProperties;
+    public void setFavoriteProperties(Set<Property> favoriteProperties) {
+        this.favoriteProperties = favoriteProperties;
     }
 }

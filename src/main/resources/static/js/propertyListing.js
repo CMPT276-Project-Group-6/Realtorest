@@ -25,8 +25,8 @@ window.onload = function () {
             }
 
             // Initialize the state of favorite buttons based on local storage
-            var favouriteButtons = document.querySelectorAll(".favourite-button")
-            favouriteButtons.forEach(function (button) {
+            var favoriteButtons = document.querySelectorAll(".favorite-button")
+            favoriteButtons.forEach(function (button) {
                 var propertyId = button.getAttribute("data-pid")
                 if (localStorage.getItem(propertyId)) {
                     button.querySelector("i").classList.add("highlighted")
@@ -174,15 +174,15 @@ function updateFavoriteButtons() {
         .then((data) => {
             if (data.loggedIn) {
                 // User is logged in, update behavior of favorite buttons
-                var favoriteButtons = document.querySelectorAll(".favourite-button")
+                var favoriteButtons = document.querySelectorAll(".favorite-button")
                 favoriteButtons.forEach(function (button) {
                     button.onclick = function () {
-                        toggleFavourite(this)
+                        toggleFavorite(this)
                     }
                 })
             } else {
                 // User is not logged in, redirect to login page when any favorite button is clicked
-                var favoriteButtons = document.querySelectorAll(".favourite-button")
+                var favoriteButtons = document.querySelectorAll(".favorite-button")
                 favoriteButtons.forEach(function (button) {
                     button.onclick = function () {
                         window.location.href = "/login"
@@ -194,27 +194,27 @@ function updateFavoriteButtons() {
 }
 
 // Function to toggle favorite status
-function toggleFavourite(button) {
+function toggleFavorite(button) {
     var propertyId = button.getAttribute("data-pid")
     var iconElement = button.querySelector("i")
 
     if (iconElement.classList.contains("highlighted")) {
         // Remove from favorites
         iconElement.classList.remove("highlighted")
-        removeFavourite(propertyId)
+        removeFavorite(propertyId)
         localStorage.removeItem(propertyId) // Remove from local storage
     } else {
         // Add to favorites
         iconElement.classList.add("highlighted")
-        addFavourite(propertyId)
+        addFavorite(propertyId)
         localStorage.setItem(propertyId, true) // Add to local storage
     }
 }
 
 // Function to add property to favorites
-function addFavourite(propertyId) {
+function addFavorite(propertyId) {
     // Make AJAX POST request to add property to favorites
-    fetch(`/add-favourite/${propertyId}`, {
+    fetch(`/add-favorite/${propertyId}`, {
         method: "POST",
         credentials: "include", // This is required to include the session cookie in the request
     })
@@ -226,9 +226,9 @@ function addFavourite(propertyId) {
 }
 
 // Function to remove property from favorites
-function removeFavourite(propertyId) {
+function removeFavorite(propertyId) {
     // Make AJAX DELETE request to remove property from favorites
-    fetch(`/remove-favourite/${propertyId}`, {
+    fetch(`/remove-favorite/${propertyId}`, {
         method: "DELETE",
         credentials: "include", // This is required to include the session cookie in the request
     })

@@ -36,13 +36,13 @@
             <a th:href="@{/mortgage}" class="navbar-category"><p>Mortgage Calculator</p></a>
 
             <!-- Check to see if the user signed in or not -->
-            <!-- If user is logged in, link to favourites page -->
+            <!-- If user is logged in, link to favorites page -->
             <th:block th:if="${user != null}">
-                <a th:href="@{/favourites}" class="navbar-category"><p>Favourites</p></a>
+                <a th:href="@{/favorites}" class="navbar-category"><p>Favorites</p></a>
             </th:block>
             <!-- If user is not logged in, link to login page -->
             <th:block th:if="${user == null}">
-                <a th:href="@{/login}" class="navbar-category"><p>Favourites</p></a>
+                <a th:href="@{/login}" class="navbar-category"><p>Favorites</p></a>
             </th:block>
 
             <!-- If the user is logged in then they are allowed to change their info-->

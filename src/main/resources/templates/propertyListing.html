@@ -95,11 +95,11 @@
                                 </section>
 
                                 <!-- PROPERTY INFO -->
-                                <section id="favourite-button" class="icon-subcontainer">
-                                    <button id="favourite-button-${property.pid}" class="favourite-button ${property.isFavourite ? 'highlighted' : ''}" th:data-pid="${property.pid}" onclick="toggleFavourite(this)">
+                                <section id="favorite-button" class="icon-subcontainer">
+                                    <button id="favorite-button-${property.pid}" class="favorite-button ${property.isFavorite ? 'highlighted' : ''}" th:data-pid="${property.pid}" onclick="toggleFavorite(this)">
                                         <i class="fa-solid fa-bookmark"></i>
                                     </button>
-                                    <p>Add to favourites</p>
+                                    <p>Add to favorites</p>
                                 </section>
                                 <p class="location-address" th:text="${property.street + ', ' + property.city + ', ' + property.province +  ' ' + property.zipCode}"></p>
                                 <section class="location-icon-container">
