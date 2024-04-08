@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
+import cmpt276.pg6.realtorest.models.User;
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,11 +51,17 @@ public class PropertyController {
         @RequestParam(required = false) String baCount,
         @RequestParam(required = false) String name,
         @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
-        Model model) {
+        Model model, HttpSession session) {
+
+        // Check if the user is in the session
+        User user = (User) session.getAttribute("session_user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
 
         Dotenv dotenv = Dotenv.configure().directory("./etc/secrets").load();
         model.addAttribute("googleMapsApiKey", dotenv.get("GOOGLE_MAPS_API_KEY"));
-        
+
         Sort sort = Sort.by(sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, "price");
 
         boolean cityPresent = city != null && !city.isEmpty();
@@ -110,7 +116,7 @@ public class PropertyController {
 
         return "propertyListing";
     }
-    
+
     // Admin Page for Properties Database
     // Edit Listing for Admin
     @GetMapping("/admin/properties")
