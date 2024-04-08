@@ -1,171 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Listing</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.css" rel="stylesheet" />
-    <!-- Playfair Display Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/adminPropertyListing.css" />
-</head>
-<body>
-    <header>
-        <!-- NAVIGATION BAR -->
-        <section th:insert="~{fragments/navbar-admin :: navbar-admin}"></section>
-    </header>
-    <main class="main-container">
-        <section class="title-container">
-            <h2 class="title playfair-semibold">Manage Listing</h2>
-        </section>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Owner</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Price (CAD)</th>
-                    <th scope="col">Area (ft&sup2)</th>
-                    <th scope="col">Bed(s)</th>
-                    <th scope="col">Bath(s)</th>
-                    <th scope="col">Featured</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="property : ${properties}">
-                    <td th:text="${property.name}"></td>
-                    <td th:utext="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
-                    <td th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></td>
-                    <td th:text="${property.area}"></td>
-                    <td th:text="${property.brCount}"></td>
-                    <td th:text="${property.baCount}"></td>
-                    <td th:text="${property.featured}"></td>
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-view" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">View</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Manage Listings</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.css" rel="stylesheet" />
+        <!-- Playfair Display Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" />
+        <!-- Custom CSS and JS -->
+        <link rel="stylesheet" href="/css/admin-property-listings.css" />
+        <script src="/js/admin-property-listings.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <!-- NAVIGATION BAR -->
+            <section th:insert="~{fragments/navbar-admin :: navbar-admin}"></section>
+        </header>
+        <main class="main-container">
+            <section class="title-container">
+                <h2 class="title playfair-semibold">Manage Listing</h2>
+            </section>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Owner</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Price (CAD)</th>
+                        <th scope="col">Area (ft&sup2)</th>
+                        <th scope="col">Bed(s)</th>
+                        <th scope="col">Bath(s)</th>
+                        <th scope="col">Featured</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="property : ${properties}">
+                        <td th:text="${property.name}"></td>
+                        <td th:utext="${property.street + '<br>' + property.city + ', ' + property.province + '<br>' + property.zipCode}"></td>
+                        <td th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></td>
+                        <td th:text="${property.area}"></td>
+                        <td th:text="${property.brCount}"></td>
+                        <td th:text="${property.baCount}"></td>
+                        <td th:text="${property.featured}"></td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary btn-view" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${property.pid}">View</button>
 
-                        <!-- Modal -->
-                        <section class="modal fade" th:id="'modal' + ${property.pid}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <section class="modal-dialog">
-                                <section class="modal-content">
-                                    <section class="modal-body">
-                                        <p th:text="${property.description}"></p>
+                            <!-- Modal -->
+                            <section class="modal fade" th:id="'modal' + ${property.pid}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <section class="modal-dialog">
+                                    <section class="modal-content">
+                                        <section class="modal-body">
+                                            <p th:text="${property.description}"></p>
+                                        </section>
                                     </section>
                                 </section>
                             </section>
-                        </section>
-                    </td>
-                    <td>
-                        <section class="d-flex justify-content-center align-items-center gap-1">
-                            <form class="actions-btn" th:action="@{/properties/delete/{pid}(pid=${property.pid})}" method="post">
-                                <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                                <a class="btn btn-edit" th:href="@{/admin/images(propertyId=${property.pid})}">Images</a>
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </section>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                        <td>
+                            <section class="d-flex justify-content-center align-items-center gap-1">
+                                <form class="actions-btn" th:action="@{/properties/delete/{pid}(pid=${property.pid})}" method="post">
+                                    <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                                    <a class="btn btn-edit" th:href="@{/admin/images(propertyId=${property.pid})}">Images</a>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </section>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <!-- Form to add a new entry -->
-        <section class="title-container">
-            <h2 class="title playfair-semibold">Create New Listing</h2>
-        </section>
-        <section class="add-form-container">
-            <form class="add-new-listing" action="/properties/add" method="post">
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Owner's Name :</span>
-                    <input type="text" class="form-control" name="name" placeholder="John Smith" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Street :</span>
-                    <input type="text" class="form-control" name="street" placeholder="2024 Realtorest St" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">City :</span>
-                    <input type="text" class="form-control" name="city" placeholder="Realcity" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Province :</span>
-                    <select class="form-control" name="province" required>
-                        <option value="">Select Province/Territory</option>
-                        <option value="AB">Alberta</option>
-                        <option value="BC" selected>British Columbia</option>
-                        <option value="MB">Manitoba</option>
-                        <option value="NB">New Brunswick</option>
-                        <option value="NL">Newfoundland and Labrador</option>
-                        <option value="NS">Nova Scotia</option>
-                        <option value="NT">Northwest Territories</option>
-                        <option value="NU">Nunavut</option>
-                        <option value="ON">Ontario</option>
-                        <option value="PE">Prince Edward Island</option>
-                        <option value="QC">Quebec</option>
-                        <option value="SK">Saskatchewan</option>
-                        <option value="YT">Yukon</option></select
-                    ><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Postal Code :</span>
-                    <input type="text" class="form-control" name="zipCode" placeholder="A1B 2C3" required /><br />
-                </section>
-                <section class="input-group has-validation" style="position: relative;">
-                    <span class="input-group-text">Description :</span>
-                    <textarea id="textInput" class="form-control" name="description" placeholder="Something about the property..." required></textarea><br />
-                    <span id="charCount" style="position: absolute; bottom: 5px; right: 10px;">0 / 3000</span>
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Price :</span>
-                    <input type="text" class="form-control" name="price" pattern="[0-9]+" placeholder="Price" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Area :</span>
-                    <input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" placeholder="Area of Property in Squared Foot" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Bedrooms :</span>
-                    <input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" placeholder="Number of Bedrooms" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Bathrooms :</span>
-                    <input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" placeholder="Number of Bathrooms" required /><br />
-                </section>
-                <section class="input-group has-validation">
-                    <span class="input-group-text">Featured :</span>
-                    <select class="form-control" name="featured" required>
-                        <option value="false">No</option>
-                        <option value="true">Yes</option></select
-                    ><br />
-                </section>
-                <section class="add-property-btn-container">
-                    <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
-                    <button type="submit" class="add-property-btn btn btn-primary">Add Property</button>
-                </section>
-            </form>
-        </section>
-    </main>
-    <script>
-        const maxLength = 3000
-        const textInput = document.getElementById("textInput")
-        const charCount = document.getElementById("charCount")
-
-        textInput.addEventListener("input", function () {
-            const remainingChars = maxLength - textInput.value.length
-            charCount.textContent = `${remainingChars} / 3000`
-
-            if (remainingChars < 0) {
-                textInput.value = textInput.value.slice(0, maxLength)
-                charCount.textContent = "Character limit reached"
-            }
-        })
-    </script>
-</body>
+            <!-- Form to add a new entry -->
+            <section class="title-container">
+                <h2 class="title playfair-semibold">Create New Listing</h2>
+            </section>
+            <section class="add-form-container">
+                <form class="add-new-listing" action="/properties/add" method="post">
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Owner's Name :</span>
+                        <input type="text" class="form-control" name="name" placeholder="John Smith" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Street :</span>
+                        <input type="text" class="form-control" name="street" placeholder="2024 Realtorest St" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">City :</span>
+                        <input type="text" class="form-control" name="city" placeholder="Realcity" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Province :</span>
+                        <select class="form-control" name="province" required>
+                            <option value="">Select Province/Territory</option>
+                            <option value="AB">Alberta</option>
+                            <option value="BC" selected>British Columbia</option>
+                            <option value="MB">Manitoba</option>
+                            <option value="NB">New Brunswick</option>
+                            <option value="NL">Newfoundland and Labrador</option>
+                            <option value="NS">Nova Scotia</option>
+                            <option value="NT">Northwest Territories</option>
+                            <option value="NU">Nunavut</option>
+                            <option value="ON">Ontario</option>
+                            <option value="PE">Prince Edward Island</option>
+                            <option value="QC">Quebec</option>
+                            <option value="SK">Saskatchewan</option>
+                            <option value="YT">Yukon</option></select
+                        ><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Postal Code :</span>
+                        <input type="text" class="form-control" name="zipCode" placeholder="A1B 2C3" required /><br />
+                    </section>
+                    <section class="input-group has-validation" style="position: relative">
+                        <span class="input-group-text">Description :</span>
+                        <textarea id="textInput" class="form-control" name="description" placeholder="Something about the property..." required></textarea><br />
+                        <span id="charCount" style="position: absolute; bottom: 5px; right: 10px">0 / 3000</span>
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Price :</span>
+                        <input type="text" class="form-control" name="price" pattern="[0-9]+" placeholder="Price" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Area :</span>
+                        <input type="number" class="form-control" name="area" min="0" step="0.1" pattern="\d+(\.\d{1,2})?" placeholder="Area of Property in Squared Foot" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Bedrooms :</span>
+                        <input type="number" class="form-control" name="brCount" min="0" step="1" pattern="\d+" placeholder="Number of Bedrooms" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Bathrooms :</span>
+                        <input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" placeholder="Number of Bathrooms" required /><br />
+                    </section>
+                    <section class="input-group has-validation">
+                        <span class="input-group-text">Featured :</span>
+                        <select class="form-control" name="featured" required>
+                            <option value="false">No</option>
+                            <option value="true">Yes</option></select
+                        ><br />
+                    </section>
+                    <section class="add-property-btn-container">
+                        <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                        <button type="submit" class="add-property-btn btn btn-primary">Add Property</button>
+                    </section>
+                </form>
+            </section>
+        </main>
+    </body>
 </html>

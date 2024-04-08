@@ -125,7 +125,7 @@ a {
 }
 /* BODY */
 body {
-    background-image: url(/img/mortgagecalcbackground.jpg) !important; /* find new background*/
+    background-image: url(/img/mortgage-calculator-background.jpg) !important; /* find new background*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

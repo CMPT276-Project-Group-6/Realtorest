@@ -114,7 +114,7 @@ public class PropertyController {
 
         System.out.println("Fetched properties: " + properties.size());
 
-        return "propertyListing";
+        return "property-listings";
     }
 
     // Admin Page for Properties Database
