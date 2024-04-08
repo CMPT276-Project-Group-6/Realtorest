@@ -64,7 +64,8 @@
                                 </td>
                                 <td>
                                     <div class="d-flex gap-1">
-                                        <form th:action="@{/properties/edit(pid=${property.pid})}" method="post">
+                                        <form th:action="@{/dev/properties/edit}" method="get">
+                                            <input type="hidden" name="pid" th:value="${property.pid}" />
                                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                             <button type="submit" class="btn btn-primary">Edit</button>
                                         </form>
@@ -73,7 +74,6 @@
                                             <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
-
                                     </div>
                                 </td>
                             </tr>
@@ -120,8 +120,8 @@
                         <input type="number" class="form-control" name="baCount" min="0" step="1" pattern="\d+" placeholder="Number of Bathrooms" required /><br />
                         <select class="form-control" name="featured" required>
                             <option value="false">Not Featured</option>
-                            <option value="true">Featured</option>
-                        </select><br />
+                            <option value="true">Featured</option></select
+                        ><br />
                         <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                         <button type="submit" class="btn btn-primary">Add Property</button>
                     </form>

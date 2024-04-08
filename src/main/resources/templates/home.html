@@ -22,57 +22,14 @@
     </head>
     <body>
         <header>
-            <!-- CLIENT INFORMATION -->
-            <section class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                <section class="profile-image">
-                    <img src="/img/homepage/logo.png" alt="Profile Picture" />
-                </section>
-                <section class="offcanvas-header">
-                    <p class="playfair-regular client-name" id="offcanvasTopLabel">Aman Dhiman</p>
-                    <p class="client-information" id="offcanvasTopLabel">Agent</p>
-                    <p class="client-information" id="offcanvasTopLabel">amandhiman@gmail.com</p>
-                    <p class="client-information" id="offcanvasTopLabel">604-123-4567</p>
-                    <section class="social-media">
-                        <a href="https://www.facebook.com/youragentaman?mibextid=LQQJ4d"><i class="fa-brands fa-facebook fa-lg"></i></a>
-                        <a href="https://www.instagram.com/yyj.realtor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-lg"></i></a>
-                        <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                        <a href="https://www.youtube.com"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                    </section>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
-                </section>
-                <section class="offcanvas-body">
-                    <p class="playfair-regular description-title">About Aman</p>
-                    <p class="client-personal-statement">Aman Dhiman is more than just a real estate agent; he's your trusted partner and passionate about making your property dreams a reality. With a commitment to honesty, transparency, and personalized service, Aman goes the extra mile to ensure his clients have a seamless and rewarding experience. Whether you're buying your first home, selling your current property, or investing in real estate, Aman's expertise and dedication will guide you towards success. Contact Aman today, and let his passion for real estate works for you!</p>
-                </section>
-            </section>
+            <video autoplay muted loop id="background-video">
+                <source src="/img/background.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
 
             <!-- NAVIGATION BAR -->
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <section class="realtorest-title">
-                    <a th:href="@{/}">
-                        <p class="playfair-semibold" style="color: white">Realtorest</p>
-                    </a>
-                </section>
-                <section class="navbar-categories ms-auto">
-                    <a class="navbar-category" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><p>About Us</p></a>
-                    <a th:href="@{/property-listing}" class="navbar-category"><p>Listing</p></a>
-                    <a th:href="@{/mortgage}" class="navbar-category"><p>Mortgage Calculator</p></a>
-                    <!-- <a href="" class="navbar-category"><p>Buy</p></a>
-                    <a href="" class="navbar-category"><p>Rent</p></a>
-                    <a href="" class="navbar-category"><p>Sell</p></a> -->
-                    <!-- Check to see if the user signed in or not -->
-                    <th:block th:if="${user == null}">
-                        <a th:href="@{/login}" class="navbar-category"><p>Sign In</p></a>
-                    </th:block>
-                    <th:block th:if="${user != null}">
-                        <a th:href="@{/logout}" class="navbar-category"><p>Log Out</p></a>
-                    </th:block>
+            <div th:insert="~{fragments/navbar :: navbar}"></div>
 
-                    <th:block th:if="${admin != null}">
-                        <a th:href="@{/logout}" class="navbar-category"><p>Admin Logout</p></a>
-                    </th:block>
-                </section>
-            </nav>
             <!-- INTRODUCTION -->
             <section class="banner">
                 <section class="container">
@@ -88,17 +45,11 @@
                 <section class="featured-container">
                     <section class="featured-image"> 
                         <div th:id="'featured-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="3000">
-                                    <img src="/img/featured1.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="/img/featured2.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="/img/featured3.jpg" class="d-block w-100" alt="Featured Picture">
-                                </div>
-                            </div>
+                            <section class="carousel-inner">
+                                <section th:each="image, stat : ${propertyImages.get(property.pid)}" th:class="${stat.first} ? 'carousel-item active' : 'carousel-item'" data-bs-interval="3000">
+                                    <img th:src="${image.imageAddress}" class="d-block w-100" />
+                                </section>
+                            </section>
                             <button class="carousel-control-prev" type="button" th:data-bs-target="'#featured-carousel' + ${property.pid}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
@@ -136,7 +87,7 @@
                 </section>
             </section>
             <section class="explore-button">
-                <a th:href="@{/property-listing}"><button type="button" class="btn btn-primary view-listing">Explore Our Listing</button></a>
+                <a th:href="@{/properties}"><button type="button" class="btn btn-primary view-listing">Explore Our Listing</button></a>
             </section>
             </section>
         </main>

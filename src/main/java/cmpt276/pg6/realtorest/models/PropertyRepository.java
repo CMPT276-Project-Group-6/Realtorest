@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<Property> findByPid(int pid);
 
-    List<Property> findByCityAndBrCountAndBaCountAndNameAllIgnoreCase(String city, Integer brCount, Integer baCount, String name);
+    List<Property> findByCityAndBrCountAndBaCountAndNameAllIgnoreCase(String city, Integer brCount, Integer baCount,
+        String name);
 
     List<Property> findByNameContainingIgnoreCase(String name, Sort sort);
 
