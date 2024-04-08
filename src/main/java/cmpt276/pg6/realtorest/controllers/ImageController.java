@@ -61,9 +61,9 @@ public class ImageController {
         List<Property> properties = propertyRepo.findAll();
         for (Property property : properties) {
             if (imageRepo.findByPropertyID(property.getPid()).isEmpty()) {
-                imageRepo.save(new Image(property.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/store-image-as-links/Images/Property1/Front.jpg"));
-                imageRepo.save(new Image(property.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/store-image-as-links/Images/Property1/Livingroom.jpeg"));
-                imageRepo.save(new Image(property.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/store-image-as-links/Images/Property1/Washroom.jpg"));
+                imageRepo.save(new Image(property.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg"));
+                imageRepo.save(new Image(property.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg"));
+                imageRepo.save(new Image(property.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Washroom.jpg"));
             }
         }
         return "redirect:" + redirectUrl;
