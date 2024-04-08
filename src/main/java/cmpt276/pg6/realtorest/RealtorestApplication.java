@@ -11,6 +11,7 @@ public class RealtorestApplication {
 		System.setProperty("DB_REALTOREST_URL", dotenv.get("DB_REALTOREST_URL"));
 		System.setProperty("DB_REALTOREST_USER", dotenv.get("DB_REALTOREST_USER"));
 		System.setProperty("DB_REALTOREST_PASS", dotenv.get("DB_REALTOREST_PASS"));
+		System.setProperty("GOOGLE_MAPS_API_KEY", dotenv.get("GOOGLE_MAPS_API_KEY"));
 		System.setProperty("MAILGUN_DOMAIN", dotenv.get("MAILGUN_DOMAIN"));
 		System.setProperty("MAILGUN_API_KEY", dotenv.get("MAILGUN_API_KEY"));
 		SpringApplication.run(RealtorestApplication.class, args);

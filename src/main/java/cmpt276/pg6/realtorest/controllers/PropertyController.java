@@ -19,6 +19,7 @@ import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -52,6 +53,9 @@ public class PropertyController {
         @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
         Model model) {
 
+        Dotenv dotenv = Dotenv.configure().directory("./etc/secrets").load();
+        model.addAttribute("googleMapsApiKey", dotenv.get("GOOGLE_MAPS_API_KEY"));
+        
         Sort sort = Sort.by(sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, "price");
 
         boolean cityPresent = city != null && !city.isEmpty();
