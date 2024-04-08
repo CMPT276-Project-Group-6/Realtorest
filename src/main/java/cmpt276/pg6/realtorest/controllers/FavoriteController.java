@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class FavouriteController {
+public class FavoriteController {
     @Autowired
     private UserRepository userRepo;
     @Autowired
@@ -50,8 +50,8 @@ public class FavouriteController {
         return request.getRequestURI();
     }
 
-    @GetMapping("/favourites")
-    public String showFavouritesPage(HttpServletRequest request, HttpSession session, Model model, HttpServletResponse response) {
+    @GetMapping("/favorites")
+    public String showFavoritesPage(HttpServletRequest request, HttpSession session, Model model, HttpServletResponse response) {
         // Set no-cache headers
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
@@ -64,27 +64,27 @@ public class FavouriteController {
             Optional<User> userOptional = userRepo.findById(userId);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                Set<Property> favouriteProperties = user.getFavouriteProperties();
-                model.addAttribute("favouriteProperties", favouriteProperties);
+                Set<Property> favoriteProperties = user.getFavoriteProperties();
+                model.addAttribute("favoriteProperties", favoriteProperties);
                 model.addAttribute("user", user); // Add this line
 
                 Map<Integer, List<Image>> propertyImages = new HashMap<>();
-                for (Property property : favouriteProperties) {
+                for (Property property : favoriteProperties) {
                     List<Image> images = imageRepo.findByPropertyID(property.getPid());
                     propertyImages.put(property.getPid(), images);
                 }
                 model.addAttribute("propertyImages", propertyImages); 
 
-                return "favourites";
+                return "favorites";
             }
         }
 
         return "redirect:/login";
     }
 
-    //Add property to favourites
-    @PostMapping("/add-favourite/{propertyId}")
-    public ResponseEntity<String> addToFavourites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
+    //Add property to favorites
+    @PostMapping("/add-favorite/{propertyId}")
+    public ResponseEntity<String> addToFavorites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
@@ -93,17 +93,17 @@ public class FavouriteController {
             Property property = propertyRepo.findById(propertyId).orElse(null);
 
             if (user != null && property != null) {
-                user.getFavouriteProperties().add(property);
+                user.getFavoriteProperties().add(property);
                 userRepo.save(user);
-                return ResponseEntity.ok("Property added to favourites successfully");
+                return ResponseEntity.ok("Property added to favorites successfully");
             }
         }
         return ResponseEntity.badRequest().body("User or Property not found");
     }
 
-    //Remove property from favourites
-    @DeleteMapping("/remove-favourite/{propertyId}")
-    public ResponseEntity<String> removeFromFavourites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
+    //Remove property from favorites
+    @DeleteMapping("/remove-favorite/{propertyId}")
+    public ResponseEntity<String> removeFromFavorites(@PathVariable Integer propertyId, HttpServletRequest request, HttpSession session) {
         User sessionUser = (User) session.getAttribute("session_user");
         Integer userId = sessionUser != null ? sessionUser.getUid() : null;
 
@@ -111,9 +111,9 @@ public class FavouriteController {
             Optional<User> userOptional = userRepo.findById(userId);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                user.getFavouriteProperties().removeIf(property -> property.getPid() == propertyId);
+                user.getFavoriteProperties().removeIf(property -> property.getPid() == propertyId);
                 userRepo.save(user);
-                return ResponseEntity.ok("Property removed from favourites successfully");
+                return ResponseEntity.ok("Property removed from favorites successfully");
             }
         }
         return ResponseEntity.badRequest().body("User not found");
