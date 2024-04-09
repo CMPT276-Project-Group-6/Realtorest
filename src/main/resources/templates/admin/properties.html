@@ -70,7 +70,17 @@
                                     <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
                                     <a class="btn btn-edit" th:href="@{/admin/images(propertyId=${property.pid})}">Images</a>
                                     <button type="submit" class="btn btn-danger">Delete</button>
+                                    
                                 </form>
+
+                                <form class="actions-btn" th:action="@{/dev/properties/edit}" method="get">
+                                    <input type="hidden" name="pid" th:value="${property.pid}" />
+                                    <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </form>
+                                
+                            
+                                
                             </section>
                         </td>
                     </tr>
