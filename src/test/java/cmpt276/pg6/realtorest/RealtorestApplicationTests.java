@@ -17,5 +17,5 @@ class RealtorestApplicationTests {
 	}
 
 	@Test
-	void contextLoads() {}
+	void testContextLoads() {}
 }
