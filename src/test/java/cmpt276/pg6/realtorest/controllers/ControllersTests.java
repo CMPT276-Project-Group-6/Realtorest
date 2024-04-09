@@ -2,11 +2,15 @@ package cmpt276.pg6.realtorest.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,6 +34,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kong.unirest.core.HttpRequestWithBody;
+import kong.unirest.core.Unirest;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -240,4 +246,56 @@ public class ControllersTests {
     //     assertEquals("Request processing failed: java.lang.SecurityException: This is a protected page",
     //         exception.getMessage());
     // }
+
+    @Test
+   public void testShowForgotPasswordPage() {
+       // Arrange
+       HttpServletRequest request = mock(HttpServletRequest.class);
+       HttpSession session = mock(HttpSession.class);
+       Model model = mock(Model.class);
+       UserRepository userRepo = mock(UserRepository.class);
+       User user = new User();
+       user.setUid(1);
+       when(session.getAttribute("session_user")).thenReturn(user);
+       when(userRepo.findById(1)).thenReturn(Optional.of(user));
+  
+       MailgunController mailgunController = new MailgunController();
+       UserController userController = new UserController();
+       mailgunController.setUserRepo(userRepo);
+  
+       // Act
+       String result = userController.showForgotPasswordPage(model, request, session);
+  
+       // Assert
+       assertEquals("redirect:/", result);
+   }
+  
+   @Test
+   public void testSendPasswordResetEmail() throws Exception {
+       // Arrange
+       HttpServletRequest request = mock(HttpServletRequest.class);
+       UserRepository userRepo = mock(UserRepository.class);
+       MailgunController mailgunController = new MailgunController();
+       mailgunController.setUserRepo(userRepo);
+  
+       String email = "existing@example.com";
+       User existingUser = new User();
+       existingUser.setEmail(email);
+       List<User> users = new ArrayList<>();
+       users.add(existingUser);
+  
+       when(userRepo.findByEmail(email)).thenReturn(users);
+       when(request.getScheme()).thenReturn("http");
+       when(request.getServerName()).thenReturn("localhost");
+       when(request.getServerPort()).thenReturn(8080);
+  
+       // Act
+       String result = mailgunController.sendPasswordResetEmail(email, email, request);
+  
+       // Assert
+       assertEquals("redirect:/login", result);
+       verify(userRepo, times(1)).findByEmail(email);
+   }
+
+
 }
