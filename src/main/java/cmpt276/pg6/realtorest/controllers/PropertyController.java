@@ -200,7 +200,9 @@ public class PropertyController extends BaseController {
      */
     @PostMapping("/properties/delete/{pid}")
     public String deleteProperty(@PathVariable int pid, @RequestParam String redirectUrl) {
+        imageRepo.deleteByPropertyID(pid);  //deletes all images that share the same property id
         propertyRepo.deleteById(pid);
+        
         return "redirect:" + redirectUrl;
     }
 
