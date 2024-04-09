@@ -168,6 +168,7 @@ public class PropertyController extends BaseController {
         Property updateProperty = propertyRepo.findById(pid).get();
         updateProperty = Property;
         propertyRepo.save(updateProperty);
+        // TODO: Change this back to dev page after actual admin page is implemented
         return "redirect:/admin/properties";
     }//updates Property info to db
 
