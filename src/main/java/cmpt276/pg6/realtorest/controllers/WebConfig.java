@@ -15,7 +15,3 @@ public class WebConfig {
         return registrationBean;
     }
 }
-
-
-    
-
