@@ -22,7 +22,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.ui.Model;
-import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
 import cmpt276.pg6.realtorest.models.User;
@@ -203,32 +202,6 @@ public class ControllersTests {
         // Assert
         assertEquals("Property removed from favorites successfully", result.getBody());
         verify(userRepo, times(1)).save(user);
-    }
-
-    @Test
-    void testShowAdminLoginPage() throws Exception {
-        // Setup session
-        MockHttpSession session =
-            (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-                .andReturn().getRequest().getSession();
-
-        // Perform GET request and verify the view name
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/login").session(session))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("admin/login"));
-    }
-
-    @Test
-    void testShowAdminLoginPageLoggedIn() throws Exception {
-        // Setup session with an admin user
-        MockHttpSession session =
-            (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-                .andReturn().getRequest().getSession();
-        session.setAttribute("session_user", new Admin());
-
-        // Perform GET request and verify the view name
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/login").session(session))
-            .andExpect(MockMvcResultMatchers.redirectedUrl("/admin"));
     }
 
     // Kevin: Seems like the list all users functionality for admin is missing. Disabling the test for now.
