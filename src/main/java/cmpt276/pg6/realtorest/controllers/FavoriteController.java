@@ -52,11 +52,6 @@ public class FavoriteController extends BaseController {
 
     @GetMapping("/favorites")
     public String showFavoritesPage(HttpServletRequest request, HttpSession session, Model model, HttpServletResponse response) {
-        // Set no-cache headers
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-        response.setDateHeader("Expires", 0); // Proxies.
-
         Object currentUser = addModelAttributeFromSession(session, model);
         if (!(currentUser instanceof User)) {
             return "redirect:/login";
