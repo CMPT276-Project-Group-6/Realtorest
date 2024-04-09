@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import cmpt276.pg6.realtorest.models.Admin;
+import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
@@ -25,6 +27,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PropertyController extends BaseController {
+    @Autowired 
+    private UserRepository userRepo;
     @Autowired
     private PropertyRepository propertyRepo;
     @Autowired
@@ -201,9 +205,18 @@ public class PropertyController extends BaseController {
      */
     @PostMapping("/properties/delete/{pid}")
     public String deleteProperty(@PathVariable int pid, @RequestParam String redirectUrl) {
-        imageRepo.deleteByPropertyID(pid);  //deletes all images that share the same property id
+        // Deletes all images that share the same property id
+        List<Image> images = imageRepo.findByPropertyID(pid);
+        for (Image image : images) {
+            imageRepo.deleteById(image.getIid());
+        }
+        // Deletes all users that have the property in their favorites
+        Iterable<User> users = userRepo.findAll();
+        for (User user : users) {
+            user.getFavoriteProperties().removeIf(property -> property.getPid() == pid);
+            userRepo.save(user);
+        }
         propertyRepo.deleteById(pid);
-        
         return "redirect:" + redirectUrl;
     }
 
