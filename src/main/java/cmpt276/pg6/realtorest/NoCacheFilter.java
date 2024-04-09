@@ -1,4 +1,4 @@
-package cmpt276.pg6.realtorest.controllers;
+package cmpt276.pg6.realtorest;
 
 import java.io.IOException;
 import jakarta.servlet.Filter;

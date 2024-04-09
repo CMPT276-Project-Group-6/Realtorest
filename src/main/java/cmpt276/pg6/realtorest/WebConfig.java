@@ -1,4 +1,4 @@
-package cmpt276.pg6.realtorest.controllers;
+package cmpt276.pg6.realtorest;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
