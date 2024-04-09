@@ -9,6 +9,9 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Filter to prevent caching of pages. WebConfig.java will make this filter apply to all URLs.
+ */
 public class NoCacheFilter implements Filter {
 
     @Override
