@@ -53,19 +53,6 @@ public class AdminControllerTests {
     }
 
     @Test
-    void testShowAdminLoginPage() throws Exception {
-        // Setup session
-        MockHttpSession session =
-            (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-                .andReturn().getRequest().getSession();
-
-        // Perform GET request and verify the view name
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/login").session(session))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("admin/login"));
-    }
-
-    @Test
     void testShowAdminLoginPage_NotLoggedIn_ShouldReturnLoginPage() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/login"))
             .andExpect(MockMvcResultMatchers.status().isOk())
