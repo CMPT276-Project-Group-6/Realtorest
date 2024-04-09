@@ -66,7 +66,14 @@ public class AdminControllerTests {
     }
 
     @Test
-    void testShowAdminLoginPageLoggedIn() throws Exception {
+    void testShowAdminLoginPage_NotLoggedIn_ShouldReturnLoginPage() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/login"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("admin/login"));
+    }
+
+    @Test
+    void testShowAdminLoginPage_LoggedIn_ShouldRedirectToAdminHomepage() throws Exception {
         // Setup session with an admin user
         MockHttpSession session =
             (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
@@ -79,14 +86,7 @@ public class AdminControllerTests {
     }
 
     @Test
-    public void showAdminLoginPage_NotLoggedIn_ShouldReturnLoginPage() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/login"))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("admin/login"));
-    }
-
-    @Test
-    public void adminLogin_WithValidCredentials_ShouldRedirectToAdminHomepage() throws Exception {
+    void testAdminLogin_WithValidCredentials_ShouldRedirectToAdminHomepage() throws Exception {
         when(adminRepository.findByEmailAndPassword("admin@example.com", "password")).thenReturn(List.of(admin));
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/admin/login")
@@ -99,7 +99,7 @@ public class AdminControllerTests {
     }
 
     @Test
-    public void adminLogin_WithInvalidCredentials_ShouldReturnToLogin() throws Exception {
+    void testAdminLogin_WithInvalidCredentials_ShouldReturnToLogin() throws Exception {
         when(adminRepository.findByEmailAndPassword(anyString(), anyString())).thenReturn(List.of());
 
         mockMvc.perform(post("/admin/login").param("email", "wrong@example.com").param("password", "wrongPassword"))
@@ -110,7 +110,7 @@ public class AdminControllerTests {
     }
 
     @Test
-    public void addAdmin_ShouldCreateAdminAndRedirect() throws Exception {
+    void testAddAdmin_ShouldCreateAdminAndRedirect() throws Exception {
         mockMvc.perform(post("/admins/add")
             .param("adminname", "NewAdmin")
             .param("email", "newadmin@example.com")
