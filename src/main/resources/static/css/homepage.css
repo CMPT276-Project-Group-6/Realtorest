@@ -279,3 +279,14 @@ main {
 .view-listing:active {
     color: white !important;
 }
+
+/* FEATURED ANIMATION */
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px); /* Initial position, adjust as needed */
+    transition: opacity 0.5s ease, transform 0.8s ease; /* Animation properties */
+}
+.fade-in.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0); /* Final position, adjust as needed */
+}
