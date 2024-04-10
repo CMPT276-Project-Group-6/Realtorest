@@ -204,22 +204,23 @@ public class PropertyController extends BaseController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        Property thisOne;
+
+        thisOne = propertyRepo.save(new Property(
+            "Alice's House",
+            "13579 Pine Road",
+            "Vancouver",
+            "BC",
+            "V6P 3V2",
+            "Experience contemporary living in this sleek apartment on Pine Road. Offering floor-to-ceiling windows and a gourmet kitchen, it's perfect for urban professionals. Enjoy access to onsite amenities including a fitness center and rooftop garden, all within close proximity to transportation and entertainment options.",
+            10000000,
+            4945.0,
+            3,
+            2,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Washroom.jpg"));
         return "redirect:" + redirectUrl;
     }
 
