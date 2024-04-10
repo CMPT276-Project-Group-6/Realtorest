@@ -33,6 +33,11 @@ Using `cdimascio/dotenv-java`, the data is being read from the file `etc\secrets
 ### Admin Pages
 The admin pages can be accessed by going to `/dev`, `/dev/users`, `/dev/properties`, and `/dev/admins`. It have some useful functions, like displaying the table of all users and adding users manually. Those pages will be disabled in the final product, but while developing, they are pretty useful.
 
+### Password Reset
+The Mailgun API only allows for sending emails to 5 pre-authorized accounts if you don't pay. So it may be impossible to receive the password reset email. 
+
+It may be a good idea to register for a Mailgun Account and use your own credentials for this.
+
 ### Why Does Kevin Have So Many Commits / Pulls / Lines Changed
 For this project, Kevin have been mostly working on things like setting things up, refactoring, auto formatting files, etc. Kevin have not actually worked on that many features, but doing those side activities causes a lot of changes to the code base.
 
