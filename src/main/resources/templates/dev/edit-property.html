@@ -39,7 +39,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td th:text="${property.pid}"></td>.
+                                <td th:text="${property.pid}"></td>
+                                .
                                 <td th:text="${property.name}"></td>
                                 <td th:text="${property.street + ', ' + property.city + ', ' + property.province + ', ' + property.zipCode}"></td>
                                 <td th:text="${#numbers.formatInteger(property.price, 0, 'COMMA')}"></td>
@@ -82,7 +83,8 @@
             <div class="card section-box">
                 <div class="card-body">
                     <h2 class="mb-3">Edit Property Information</h2>
-                    <form th:action="@{/properties/update/{pid}(pid=${property.pid})}" method="post">
+                    <form th:action="@{/properties/update}" method="post">
+                        <input type="hidden" name="pid" th:value="${property.pid}" />
                         Name:<input type="text" class="form-control" name="name" th:value="${property.name}" required /><br />
                         Street:<input type="text" class="form-control" name="street" th:value="${property.street}" required /><br />
                         City:<input type="text" class="form-control" name="city" th:value="${property.city}" required /><br />
@@ -117,7 +119,7 @@
                             <option value="false">Not Featured</option>
                             <option value="true">Featured</option></select
                         ><br />
-                        <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                        <input type="hidden" name="redirectUrl" value="/dev/properties" />
                         <button type="submit" class="btn btn-primary">Update Property Information</button>
                     </form>
                 </div>

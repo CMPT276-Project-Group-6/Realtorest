@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import cmpt276.pg6.realtorest.models.Admin;
-import cmpt276.pg6.realtorest.models.User;
-import cmpt276.pg6.realtorest.models.UserRepository;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
+import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PropertyController extends BaseController {
-    @Autowired 
+    @Autowired
     private UserRepository userRepo;
     @Autowired
     private PropertyRepository propertyRepo;
@@ -128,6 +128,7 @@ public class PropertyController extends BaseController {
         model.addAttribute("properties", properties);
         return "admin/properties";
     }
+
     // Edit Listing for Admin
     @GetMapping("/properties/edit/{pid}")
     public String editListing(Model model, @PathVariable int pid, HttpSession session) {
@@ -140,11 +141,12 @@ public class PropertyController extends BaseController {
         model.addAttribute("property", property);
         return "admin/edit-property";
     }
+
     @PostMapping("/properties/update")
-    public String updateProperty(@RequestParam("pid") int pid, @ModelAttribute Property Property) {
+    public String updateProperty(@RequestParam("pid") int pid, @RequestParam("redirectUrl") String redirectUrl, @ModelAttribute Property Property) {
         Property updateProperty = propertyRepo.findById(pid).get();
         if (updateProperty == null) {
-            return "redirect:/admin/properties";
+            return "redirect:" + redirectUrl;
         }
         updateProperty.setName(Property.getName());
         updateProperty.setStreet(Property.getStreet());
@@ -158,9 +160,8 @@ public class PropertyController extends BaseController {
         updateProperty.setBaCount(Property.getBaCount());
         updateProperty.setFeatured(Property.isFeatured());
         propertyRepo.save(updateProperty);
-        return "redirect:/admin/properties";
+        return "redirect:" + redirectUrl;
     }
-
 
     // Dev Page for Properties Database
     @GetMapping("/dev/properties")
