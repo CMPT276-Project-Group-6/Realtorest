@@ -43,7 +43,6 @@ public class FavoriteController extends BaseController {
 
     /**
      * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
-     * Kevin: Note that this is something that is used in every controller, but I don't know how to extract this.
      */
     @ModelAttribute("currentUrl")
     public String getCurrentUrl(HttpServletRequest request) {

@@ -30,7 +30,6 @@ public class User {
     private boolean isOnMailingList;
     private String resetToken;
 
-    // Kevin: So it seems like, Malaika made the favorite list not as a attribute of users, but as a relationship table. Seems fine.
     @ManyToMany
     @JoinTable(
         name = "user_favorite_properties",

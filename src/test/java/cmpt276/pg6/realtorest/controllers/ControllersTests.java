@@ -107,10 +107,6 @@ public class ControllersTests {
     void testUserLogout() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
             .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
-
-        // Drishty: initially it should redirect to home page [/] not [""] whosoever was responsible for this function in model controller should fix it or either explain what is actually happening
-
-        // Kevin: Both the home page and the empty string URL are the same page, but I changed it to redirect to "/" instead if you prefer that.
     }
 
     @Test
