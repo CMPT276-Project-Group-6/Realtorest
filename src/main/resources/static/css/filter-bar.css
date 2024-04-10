@@ -1,23 +1,24 @@
 /* Filter Bar Styles Adjusted for Consistency with Property Listing */
-
 .filter-bar-section {
-    margin-top: 2px;
+    margin-top: 50px;
 }
 
 .filter-bar-card {
     box-shadow: 0 0 5px 0.1px rgb(125, 125, 125); /* Match shadow style from property-container */
     border: none;
-    height: 100%;
-
     background-color: rgb(211, 211, 211);
 }
 
 .filter-bar-card .card-header {
     background-color: rgb(153, 161, 148);
-    color: white;
     border-bottom: none;
-    font-family: "Montserrat", sans-serif; /* Consistent font family */
-    font-weight: 600; /* Maintained font weight */
+}
+.filter-bar-card .card-header h5 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 10px;
 }
 
 .filter-bar-card .col-auto {
@@ -51,6 +52,10 @@
 }
 
 .filter-bar-card .btn-primary:hover {
-    background-color: #8fb3005d; /* Hover effect similar to navbar-category */
+    background-color: #738f005d; /* Hover effect similar to navbar-category */
     border-color: #8fb30044;
+}
+.card {
+    max-width: 800px;
+    margin: auto;
 }

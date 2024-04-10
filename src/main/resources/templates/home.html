@@ -18,6 +18,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
         <!-- Custom CSS and JS -->
+        
         <link rel="stylesheet" href="/css/homepage.css" />
     </head>
     <body>
@@ -41,8 +42,8 @@
             <section class="body-title">
                 <p>Featured Properties</p>
             </section>
-            <section class th:each="property : ${properties}">
-                <section class="featured-container">
+            <section th:each="property : ${properties}">
+                <section class="featured-container fade-in">
                     <section class="featured-image"> 
                         <div th:id="'featured-carousel' + ${property.pid}" class="carousel slide carousel-fade" data-bs-ride="carousel">
                             <section class="carousel-inner">
@@ -91,5 +92,24 @@
             </section>
             </section>
         </main>
+    <script>
+    // JavaScript to trigger fade-in effect when scrolling
+    const featuredProperties = document.querySelectorAll('.featured-container');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-visible');
+            } else {
+                entry.target.classList.remove('fade-in-visible');
+            }
+        });
+    }, {threshold:0.3});
+
+    featuredProperties.forEach(featuredProperty => {
+        observer.observe(featuredProperty);
+    });
+
+    </script>
     </body>
 </html>
