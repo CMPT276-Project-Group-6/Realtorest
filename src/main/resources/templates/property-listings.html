@@ -24,7 +24,7 @@
         <div th:insert="~{fragments/navbar :: navbar}"></div>
 
         <!-- FILTER BAR SECTION with Thymeleaf -->
-        <section class="container mt-5 filter-bar-section">
+        <section class="container filter-bar-section">
             <div class="card filter-bar-card">
                 <div class="card-header">
                     <h5>Filter Properties</h5>
@@ -33,7 +33,7 @@
                     <form action="#" th:action="@{/properties}" method="get" class="row g-3 align-items-center justify-content-start" id="filterForm">
                         <!-- Price sort order -->
                         <div class="col-auto">
-                            <label for="priceSort" class="form-label">Sort by Price</label>
+                            <label for="priceSort" class="form-label" style="padding-left: 2px;">Sort by Price</label>
                             <select class="form-select" id="priceSort" name="sortOrder">
                                 <option value="ASC" th:selected="${sortOrder == 'ASC'}">Low to High</option>
                                 <option value="DESC" th:selected="${sortOrder == 'DESC'}">High to Low</option>
