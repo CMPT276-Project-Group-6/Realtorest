@@ -98,7 +98,10 @@ body {
     width: 800px;
     margin-bottom: 50px;
 }
-
+.form-control option{
+    background-color: rgba(0, 0, 0, 0.499);
+    color: white;
+}
 .form-control,
 .form-control:active,
 .form-control:focus {
