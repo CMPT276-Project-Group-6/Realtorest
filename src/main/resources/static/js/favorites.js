@@ -19,7 +19,7 @@ window.onload = function () {
     var favoriteButtons = document.querySelectorAll(".favorite-button")
     favoriteButtons.forEach(function (button) {
         var propertyId = button.getAttribute("data-pid")
-        if (localStorage.getItem(propertyId)) {
+        if (favoritePropertyIds.includes(parseInt(propertyId))) { // // Using the favoritePropertyIds from the server
             button.querySelector("i").classList.add("highlighted")
         }
     })

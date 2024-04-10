@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -71,6 +73,10 @@ public class FavoriteController extends BaseController {
                 propertyImages.put(property.getPid(), images);
             }
             model.addAttribute("propertyImages", propertyImages);
+
+             // Pass favorite property IDs to the front end
+            Set<Integer> favoritePropertyIds = favoriteProperties.stream().map(Property::getPid).collect(Collectors.toSet());
+            model.addAttribute("favoritePropertyIds", favoritePropertyIds);
 
             return "favorites";
         }
