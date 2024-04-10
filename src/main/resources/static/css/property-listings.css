@@ -101,7 +101,7 @@
     padding-left: 30px;
 }
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .navbar-categories {
     display: flex;
@@ -118,6 +118,7 @@ a {
 }
 .navbar-category:hover {
     color: rgb(211, 211, 211);
+    cursor: pointer;
 }
 .navbar {
     background-color: rgba(14, 29, 51, 0) !important;
