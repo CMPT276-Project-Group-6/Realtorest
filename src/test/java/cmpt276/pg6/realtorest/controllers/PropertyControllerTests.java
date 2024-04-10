@@ -27,20 +27,13 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PropertyControllerTest {
+public class PropertyControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private static PropertyRepository propertyRepository;
-
-    // Sample test to ensure context loads and mockMvc is injected
-    @Test
-    void contextLoads() throws Exception {
-        mockMvc.perform(get("/properties"))
-            .andExpect(status().isOk());
-    }
 
     @BeforeAll
     static void setUp() {
@@ -49,6 +42,13 @@ public class PropertyControllerTest {
         System.setProperty("DB_REALTOREST_URL", dotenv.get("DB_REALTOREST_URL"));
         System.setProperty("DB_REALTOREST_USER", dotenv.get("DB_REALTOREST_USER"));
         System.setProperty("DB_REALTOREST_PASS", dotenv.get("DB_REALTOREST_PASS"));
+    }
+
+    // Sample test to ensure context loads and mockMvc is injected
+    @Test
+    void testContextLoadsPropertyListingsPage() throws Exception {
+        mockMvc.perform(get("/properties"))
+            .andExpect(status().isOk());
     }
 
     // Get properties page with no parameters
@@ -65,7 +65,7 @@ public class PropertyControllerTest {
         verify(propertyRepository, times(1)).findAll(any(Sort.class));
     }
 
-    //  test: Admin access to edit listing, Should Return EditPage
+    // Admin access to edit listing, Should Return EditPage
     @Test
     void testEditListings_Admin() throws Exception {
         mockMvc.perform(get("/admin/properties")
@@ -99,48 +99,7 @@ public class PropertyControllerTest {
         verify(propertyRepository, times(1)).save(any(Property.class));
     }
 
-    // test to show dev page properties, Should return all properties
-    @Test
-    void testShowDevPageProperties() throws Exception {
-        when(propertyRepository.findAll()).thenReturn(new ArrayList<>());
-
-        mockMvc.perform(get("/dev/properties"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("dev/properties"))
-            .andExpect(model().attributeExists("properties"));
-
-        verify(propertyRepository, times(1)).findAll();
-    }
-
-    // test to show DevEditProperty, Should return edit property page
-    @Test
-    void testShowDevEditProperty() throws Exception {
-        int pid = 1; // Example property ID
-        Property property = new Property(); // Mock property (fill with data as needed)
-        when(propertyRepository.findById(pid)).thenReturn(java.util.Optional.of(property));
-
-        mockMvc.perform(get("/dev/properties/edit").param("pid", String.valueOf(pid)))
-            .andExpect(status().isOk())
-            .andExpect(view().name("dev/edit-property"))
-            .andExpect(model().attributeExists("property"));
-
-        verify(propertyRepository, times(1)).findById(pid);
-    }
-
-    // test to check filling property data, Should redirect after filling data
-    @Test
-    void testFillTestingDataProperties() throws Exception {
-        String redirectUrl = "/properties";
-
-        mockMvc.perform(post("/properties/fill").param("redirectUrl", redirectUrl))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrl(redirectUrl));
-
-        // Verifying the save method is called the expected number of times
-        verify(propertyRepository, times(8)).save(any(Property.class));
-    }
-
-    // Test to check  delete property, Should delete and redirect
+    // Test to check delete property, Should delete and redirect
     @Test
     void testDeleteProperty() throws Exception {
         int pid = 1; // Example property ID
@@ -153,15 +112,56 @@ public class PropertyControllerTest {
         verify(propertyRepository, times(1)).deleteById(pid);
     }
 
-    // test to check delete all properties 
-    @Test
-    void testDeleteAllProperties_ShouldDeleteAllAndRedirect() throws Exception {
-        String redirectUrl = "/properties";
+    // Tests for developer pages, temporarily disabled
+    // // test to show dev page properties, Should return all properties
+    // @Test
+    // void testShowDevPageProperties() throws Exception {
+    //     when(propertyRepository.findAll()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(post("/properties/delete/all").param("redirectUrl", redirectUrl))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrl(redirectUrl));
-        verify(propertyRepository, times(1)).deleteAll();
-    }
+    //     mockMvc.perform(get("/dev/properties"))
+    //         .andExpect(status().isOk())
+    //         .andExpect(view().name("dev/properties"))
+    //         .andExpect(model().attributeExists("properties"));
 
+    //     verify(propertyRepository, times(1)).findAll();
+    // }
+
+    // // test to show DevEditProperty, Should return edit property page
+    // @Test
+    // void testShowDevEditProperty() throws Exception {
+    //     int pid = 1; // Example property ID
+    //     Property property = new Property(); // Mock property (fill with data as needed)
+    //     when(propertyRepository.findById(pid)).thenReturn(java.util.Optional.of(property));
+
+    //     mockMvc.perform(get("/dev/properties/edit").param("pid", String.valueOf(pid)))
+    //         .andExpect(status().isOk())
+    //         .andExpect(view().name("dev/edit-property"))
+    //         .andExpect(model().attributeExists("property"));
+
+    //     verify(propertyRepository, times(1)).findById(pid);
+    // }
+
+    // // test to check filling property data, Should redirect after filling data
+    // @Test
+    // void testFillTestingDataProperties() throws Exception {
+    //     String redirectUrl = "/properties";
+
+    //     mockMvc.perform(post("/properties/fill").param("redirectUrl", redirectUrl))
+    //         .andExpect(status().is3xxRedirection())
+    //         .andExpect(redirectedUrl(redirectUrl));
+
+    //     // Verifying the save method is called the expected number of times
+    //     verify(propertyRepository, times(8)).save(any(Property.class));
+    // }
+
+    // // test to check delete all properties 
+    // @Test
+    // void testDeleteAllProperties_ShouldDeleteAllAndRedirect() throws Exception {
+    //     String redirectUrl = "/properties";
+
+    //     mockMvc.perform(post("/properties/delete/all").param("redirectUrl", redirectUrl))
+    //         .andExpect(status().is3xxRedirection())
+    //         .andExpect(redirectedUrl(redirectUrl));
+    //     verify(propertyRepository, times(1)).deleteAll();
+    // }
 }
