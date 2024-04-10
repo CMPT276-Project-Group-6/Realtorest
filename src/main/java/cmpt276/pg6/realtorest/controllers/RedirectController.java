@@ -18,12 +18,6 @@ public class RedirectController extends BaseController {
         return request.getRequestURI();
     }
 
-    // Since previously users was the only dev page available, we are gonna assume if someone goes to /dev, they want to go to /dev/users
-    @GetMapping("/dev")
-    public String redirectDev() {
-        return "redirect:/dev/users";
-    }
-
     @GetMapping("/dev/user")
     public String redirectDevUser() {
         return "redirect:/dev/users";

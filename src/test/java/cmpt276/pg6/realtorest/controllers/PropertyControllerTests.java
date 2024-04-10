@@ -135,7 +135,7 @@ public class PropertyControllerTests {
 
     //     mockMvc.perform(get("/dev/properties/edit").param("pid", String.valueOf(pid)))
     //         .andExpect(status().isOk())
-    //         .andExpect(view().name("dev/edit-property"))
+    //         .andExpect(view().name("dev/properties-edit"))
     //         .andExpect(model().attributeExists("property"));
 
     //     verify(propertyRepository, times(1)).findById(pid);

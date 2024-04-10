@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import cmpt276.pg6.realtorest.models.Admin;
-import cmpt276.pg6.realtorest.models.User;
-import cmpt276.pg6.realtorest.models.UserRepository;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
+import cmpt276.pg6.realtorest.models.User;
+import cmpt276.pg6.realtorest.models.UserRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PropertyController extends BaseController {
-    @Autowired 
+    @Autowired
     private UserRepository userRepo;
     @Autowired
     private PropertyRepository propertyRepo;
@@ -128,6 +128,7 @@ public class PropertyController extends BaseController {
         model.addAttribute("properties", properties);
         return "admin/properties";
     }
+
     // Edit Listing for Admin
     @GetMapping("/properties/edit/{pid}")
     public String editListing(Model model, @PathVariable int pid, HttpSession session) {
@@ -138,13 +139,14 @@ public class PropertyController extends BaseController {
 
         Property property = propertyRepo.findById(pid).get();
         model.addAttribute("property", property);
-        return "admin/edit-property";
+        return "admin/properties-edit";
     }
+
     @PostMapping("/properties/update")
-    public String updateProperty(@RequestParam("pid") int pid, @ModelAttribute Property Property) {
+    public String updateProperty(@RequestParam("pid") int pid, @RequestParam("redirectUrl") String redirectUrl, @ModelAttribute Property Property) {
         Property updateProperty = propertyRepo.findById(pid).get();
         if (updateProperty == null) {
-            return "redirect:/admin/properties";
+            return "redirect:" + redirectUrl;
         }
         updateProperty.setName(Property.getName());
         updateProperty.setStreet(Property.getStreet());
@@ -158,9 +160,8 @@ public class PropertyController extends BaseController {
         updateProperty.setBaCount(Property.getBaCount());
         updateProperty.setFeatured(Property.isFeatured());
         propertyRepo.save(updateProperty);
-        return "redirect:/admin/properties";
+        return "redirect:" + redirectUrl;
     }
-
 
     // Dev Page for Properties Database
     @GetMapping("/dev/properties")
@@ -176,7 +177,7 @@ public class PropertyController extends BaseController {
     public String showDevEditProperty(Model model, @RequestParam int pid) {
         Property property = propertyRepo.findById(pid).get();
         model.addAttribute("property", property);
-        return "dev/edit-property";
+        return "dev/properties-edit";
     }
 
     @PostMapping("/properties/add")
@@ -203,22 +204,104 @@ public class PropertyController extends BaseController {
      */
     @PostMapping("/properties/fill")
     public String fillTestingDataProperties(@RequestParam String redirectUrl) {
-        propertyRepo.save(new Property("Alice's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Bob's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Charlie's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("David's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Eve's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Frank's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Grace's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
-        propertyRepo.save(new Property("Heidi's House", "8888 University Dr", "Burnaby", "BC", "V5A 1S6",
-            "Nothing much...", 1000000, 1500.50, 3, 2, false));
+        Property thisOne;
+
+        thisOne = propertyRepo.save(new Property(
+            "Alice's House",
+            "262 Cedar Lane",
+            "Vancouver",
+            "BC",
+            "V5Y 4R2",
+            "Discover serenity in this modern duplex on Cedar Lane. Featuring a private backyard and upscale finishes, it offers the perfect blend of comfort and style. With three bedrooms and an open-concept living area, there's plenty of space for family gatherings and relaxation. Conveniently located near parks, schools, and transit routes.",
+            9000000,
+            4945.0,
+            2,
+            1,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Bathroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Bob's House",
+            "13579 Pine Road",
+            "Vancouver",
+            "BC",
+            "V6P 3V2",
+            "Experience contemporary living in this sleek apartment on Pine Road. Offering floor-to-ceiling windows and a gourmet kitchen, it's perfect for urban professionals. Enjoy access to onsite amenities including a fitness center and rooftop garden, all within close proximity to transportation and entertainment options.",
+            10000000,
+            4000.0,
+            3,
+            2,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Kitchen.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Charlie's House",
+            "1234 Main Street",
+            "Vancouver",
+            "BC",
+            "V6A 1B6",
+            "This cozy one-bedroom apartment on Main Street boasts modern amenities with an open-concept layout. Enjoy stunning city views from the balcony, perfect for relaxing evenings. Located in the heart of Vancouver, it offers easy access to trendy cafes, restaurants, and parks.",
+            2000000,
+            4000.0,
+            1,
+            2,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Kitchen.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "David's House",
+            "8203 Elm Street",
+            "Vancouver",
+            "BC",
+            "V6M 2Y6",
+            "This spacious condominium on Elm Street features modern design and abundant natural light. With two bedrooms and a den, there's plenty of space for a home office or guest room. Located in a vibrant neighborhood, it's within walking distance to shops, dining, and recreational facilities.",
+            3000000,
+            3200.0,
+            3,
+            3,
+            true));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Kitchen.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Eve's House",
+            "9876 Maple Drive",
+            "Vancouver",
+            "BC",
+            "V7S 1Z8",
+            "Embrace luxury living in this elegant townhouse on Maple Drive. Offering four bedrooms, a gourmet kitchen, and high-end finishes throughout, it exudes sophistication. Enjoy breathtaking mountain views from the rooftop terrace, ideal for entertaining guests or unwinding after a long day.",
+            4000000,
+            2500.0,
+            2,
+            3,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Kitchen.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Frank's House",
+            "567 Oak Avenue",
+            "Vancouver",
+            "BC",
+            "V5Z 2W9",
+            "Nestled in a quiet neighborhood, this charming two-story home on Oak Avenue features three bedrooms, ideal for a growing family. With a spacious backyard and deck, it's perfect for outdoor gatherings and BBQs. Conveniently located near schools, shopping centers, and public transit.",
+            2500000,
+            2000.0,
+            1,
+            1,
+            true));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Kitchen.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Washroom.jpg"));
+
         return "redirect:" + redirectUrl;
     }
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dev Homepage</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" defer></script>
+        <link href="/css/dev.css" rel="stylesheet" />
+    </head>
+    <body class="justify-content-center">
+        <header class="container my-5">
+            <div class="card section-box mx-auto" style="max-width: 600px">
+                <div class="card-body text-center">
+                    <h1 class="display-3" style="font-weight: 500">Dev Homepage</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Links to dev pages -->
+        <section class="container my-5">
+            <div class="card section-box">
+                <div class="card-body">
+                    <h2 class="mb-3">Links to Dev Pages</h2>
+                    <div>
+                        <a href="/dev/users" class="btn btn-primary mb-3">Users Database Page</a> <br />
+                        <a href="/dev/properties" class="btn btn-primary mb-3">Properties Database Page</a> <br />
+                        <a href="/dev/images" class="btn btn-primary mb-3">Images Database Page</a> <br />
+                        <a href="/dev/admins" class="btn btn-primary mb-3">Admins Database Page</a> <br />
+                        <a href="/dev/mail" class="btn btn-primary mb-3">Mailgun Page</a> <br />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons used for testing purposes -->
+        <section class="container my-5">
+            <div class="card section-box">
+                <div class="card-body">
+                    <h2 class="mb-3">Testing Buttons for ALL Databases</h2>
+                    <div class="d-flex gap-2">
+                        <form th:action="@{/dev/fill}" method="post">
+                            <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                            <button type="submit" class="btn btn-primary" disabled>Add Testing Data</button>
+                        </form>
+                        <form th:action="@{/dev/delete/all}" method="post">
+                            <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                            <button type="submit" class="btn btn-danger" disabled>Delete All Entries</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

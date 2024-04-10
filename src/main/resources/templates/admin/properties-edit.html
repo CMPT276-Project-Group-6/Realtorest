@@ -26,21 +26,21 @@
             <!-- Form to add a new entry -->
             <section class="title-container">
                 <h2 class="title playfair-semibold">Edit Property Information</h2>
-            </section> 
+            </section>
             <section class="add-form-container">
                 <form class="add-new-listing" action="/properties/update" method="post">
-                    <input type="hidden" name="pid" th:value="${property.pid}">
+                    <input type="hidden" name="pid" th:value="${property.pid}" />
                     <section class="input-group has-validation">
                         <span class="input-group-text">Owner's Name :</span>
-                        <input type="text" class="form-control" name="name" th:value="${property.name}">
+                        <input type="text" class="form-control" name="name" th:value="${property.name}" />
                     </section>
                     <section class="input-group has-validation">
                         <span class="input-group-text">Street :</span>
-                        <input type="text" class="form-control" name="street" th:value="${property.street}">
+                        <input type="text" class="form-control" name="street" th:value="${property.street}" />
                     </section>
                     <section class="input-group has-validation">
                         <span class="input-group-text">City :</span>
-                        <input type="text" class="form-control" name="city" th:value="${property.city}"><br />
+                        <input type="text" class="form-control" name="city" th:value="${property.city}" /><br />
                     </section>
                     <section class="input-group has-validation">
                         <span class="input-group-text">Province :</span>
@@ -63,7 +63,7 @@
                     </section>
                     <section class="input-group has-validation">
                         <span class="input-group-text">Postal Code :</span>
-                        <input type="text" class="form-control" name="zipCode" th:value="${property.zipCode}"><br />
+                        <input type="text" class="form-control" name="zipCode" th:value="${property.zipCode}" /><br />
                     </section>
                     <section class="input-group has-validation" style="position: relative">
                         <span class="input-group-text">Description :</span>
@@ -94,7 +94,7 @@
                         ><br />
                     </section>
                     <section class="add-property-btn-container">
-                        <input type="hidden" name="redirectUrl" th:value="${currentUrl}" />
+                        <input type="hidden" name="redirectUrl" value="/admin/properties" />
                         <button type="submit" class="add-property-btn btn btn-primary">Save Information</button>
                     </section>
                 </form>
