@@ -158,7 +158,10 @@ td .btn-edit:active {
     width: 800px;
     margin-bottom: 50px;
 }
-
+.form-control option{
+    background-color: rgba(0, 0, 0, 0.499);
+    color: white;
+}
 .form-control,
 .form-control:active,
 .form-control:focus {
@@ -166,7 +169,7 @@ td .btn-edit:active {
     font-size: 15px;
     font-weight: 300;   
     background-color: transparent;
-    color: white !important;
+    color: white;
     border: none;
 }
 .input-group {
