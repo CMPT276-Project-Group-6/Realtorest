@@ -151,6 +151,10 @@ body {
     font-weight: 400;
     font-size: 15px;
 }
+.form-control option{
+    background-color: rgba(0, 0, 0, 0.499);
+    color: white;
+} 
 .form-control,
 .form-control::placeholder,
 .form-control:active,
