@@ -208,19 +208,100 @@ public class PropertyController extends BaseController {
 
         thisOne = propertyRepo.save(new Property(
             "Alice's House",
+            "262 Cedar Lane",
+            "Vancouver",
+            "BC",
+            "V5Y 4R2",
+            "Discover serenity in this modern duplex on Cedar Lane. Featuring a private backyard and upscale finishes, it offers the perfect blend of comfort and style. With three bedrooms and an open-concept living area, there's plenty of space for family gatherings and relaxation. Conveniently located near parks, schools, and transit routes.",
+            9000000,
+            4945.0,
+            2,
+            1,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Bob's House",
             "13579 Pine Road",
             "Vancouver",
             "BC",
             "V6P 3V2",
             "Experience contemporary living in this sleek apartment on Pine Road. Offering floor-to-ceiling windows and a gourmet kitchen, it's perfect for urban professionals. Enjoy access to onsite amenities including a fitness center and rooftop garden, all within close proximity to transportation and entertainment options.",
             10000000,
-            4945.0,
+            4000.0,
             3,
             2,
             false));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Washroom.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property2/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property2/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property2/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Charlie's House",
+            "1234 Main Street",
+            "Vancouver",
+            "BC",
+            "V6A 1B6",
+            "This cozy one-bedroom apartment on Main Street boasts modern amenities with an open-concept layout. Enjoy stunning city views from the balcony, perfect for relaxing evenings. Located in the heart of Vancouver, it offers easy access to trendy cafes, restaurants, and parks.",
+            2000000,
+            4000.0,
+            1,
+            2,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property3/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property3/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property3/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "David's House",
+            "8203 Elm Street",
+            "Vancouver",
+            "BC",
+            "V6M 2Y6",
+            "This spacious condominium on Elm Street features modern design and abundant natural light. With two bedrooms and a den, there's plenty of space for a home office or guest room. Located in a vibrant neighborhood, it's within walking distance to shops, dining, and recreational facilities.",
+            3000000,
+            3200.0,
+            3,
+            3,
+            true));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property4/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property4/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property4/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Eve's House",
+            "9876 Maple Drive",
+            "Vancouver",
+            "BC",
+            "V7S 1Z8",
+            "Embrace luxury living in this elegant townhouse on Maple Drive. Offering four bedrooms, a gourmet kitchen, and high-end finishes throughout, it exudes sophistication. Enjoy breathtaking mountain views from the rooftop terrace, ideal for entertaining guests or unwinding after a long day.",
+            4000000,
+            2500.0,
+            2,
+            3,
+            false));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property5/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property5/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property5/Washroom.jpg"));
+
+        thisOne = propertyRepo.save(new Property(
+            "Frank's House",
+            "567 Oak Avenue",
+            "Vancouver",
+            "BC",
+            "V5Z 2W9",
+            "Nestled in a quiet neighborhood, this charming two-story home on Oak Avenue features three bedrooms, ideal for a growing family. With a spacious backyard and deck, it's perfect for outdoor gatherings and BBQs. Conveniently located near schools, shopping centers, and public transit.",
+            2500000,
+            2000.0,
+            1,
+            1,
+            true));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property6/Front.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property6/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/property6/Washroom.jpg"));
+
         return "redirect:" + redirectUrl;
     }
 

@@ -119,6 +119,7 @@ public class UserController extends BaseController {
         userRepo.save(new User("charlie@email.com", "789", "charlie789", "Charlie", "Williams", false));
         userRepo.save(new User("david@email.com", "741", "david741", "David", "Brown", false));
         userRepo.save(new User("eve@email.com", "852", "eve852", "Eve", "Jones", false));
+        userRepo.save(new User("frank@email.com", "492", "frank492", "Frank", "Chan", false));
         userRepo.save(new User("cmpt276projectgroup6+test1@gmail.com", "123", "mailgunTester1", "First", "Tester", true));
         userRepo.save(new User("cmpt276projectgroup6+test2@gmail.com", "123", "mailgunTester2", "Second", "Tester", true));
         return "redirect:" + redirectUrl;
