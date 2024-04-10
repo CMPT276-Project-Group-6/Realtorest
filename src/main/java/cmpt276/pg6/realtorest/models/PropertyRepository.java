@@ -23,4 +23,7 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<Property> findByBaCountGreaterThanEqual(Integer baCount, Sort sort);
 
     List<Property> findByFeatured(boolean featured);
+
+    List<Property> findAll(org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort sort);
+
 }
