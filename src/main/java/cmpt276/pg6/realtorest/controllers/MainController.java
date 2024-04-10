@@ -8,12 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import cmpt276.pg6.realtorest.models.Admin;
 import cmpt276.pg6.realtorest.models.Image;
 import cmpt276.pg6.realtorest.models.ImageRepository;
 import cmpt276.pg6.realtorest.models.Property;
 import cmpt276.pg6.realtorest.models.PropertyRepository;
-import cmpt276.pg6.realtorest.models.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -62,5 +60,10 @@ public class MainController extends BaseController {
 
         // Display the mortgage calculator page
         return "mortgage-calculator";
+    }
+
+    @GetMapping("/dev")
+    public String showDevPageAdmins(Model model, HttpServletRequest request, HttpSession session) {
+        return "dev/home";
     }
 }
