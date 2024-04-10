@@ -103,19 +103,6 @@ public class ControllersTests {
             .andExpect(MockMvcResultMatchers.redirectedUrl(redirectUrl)); // Verify the redirection URL
     }
 
-    // @Test
-    // void testUserLogin() throws Exception {
-    //     this.mockMvc.perform(MockMvcRequestBuilders.post("/login")
-    //         .param("email", "email@gmail.com")
-    //         .param("password", "password12"))
-    //         .andExpect(MockMvcResultMatchers.status().isOk());
-
-    //     // Drishty: im curious where are we redirecting to after login?
-    //     // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
-
-    //     // Kevin: The probably is likely because login have failed, since the email and password are not in the database.
-    // }
-
     @Test
     void testUserLogout() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
@@ -205,43 +192,6 @@ public class ControllersTests {
         assertEquals("Property removed from favorites successfully", result.getBody());
         verify(userRepo, times(1)).save(user);
     }
-
-    // Kevin: Seems like the list all users functionality for admin is missing. Disabling the test for now.
-
-    // @Test
-    // void testGetAllUsers() throws Exception {
-    //     // Setup session with an admin user
-    //     MockHttpSession session =
-    //         (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-    //             .andReturn().getRequest().getSession();
-    //     session.setAttribute("session_user", new Admin());
-
-    //     // Mock the user repository and its findAll() method
-    //     List<User> users = new ArrayList<>();
-    //     users.add(new User("user1", "user1@example.com", "password1"));
-    //     users.add(new User("user2", "user2@example.com", "password2"));
-    //     when(userRepository.findAll()).thenReturn(users);
-
-    //     // Perform GET request and verify the view name and model attribute
-    //     this.mockMvc.perform(MockMvcRequestBuilders.get("/listUsers").session(session))
-    //         .andExpect(MockMvcResultMatchers.status().isOk())
-    //         .andExpect(MockMvcResultMatchers.view().name("list-users"))
-    //         .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
-    //         .andExpect(MockMvcResultMatchers.model().attribute("users", users));
-    // }
-
-    // @Test
-    // void testGetAllUsersUnauthenticated() throws Exception {
-    //     // Perform GET request without an admin user in the session
-    //     Exception exception = assertThrows(jakarta.servlet.ServletException.class, () -> {
-    //         this.mockMvc.perform(MockMvcRequestBuilders.get("/listUsers"))
-    //             .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-    //             .andExpect(MockMvcResultMatchers.handler().handlerType(MainController.class))
-    //             .andExpect(MockMvcResultMatchers.handler().methodName("getAllUsers"));
-    //     });
-    //     assertEquals("Request processing failed: java.lang.SecurityException: This is a protected page",
-    //         exception.getMessage());
-    // }
 
     @Test
     public void testShowForgotPasswordPage() {
