@@ -16,13 +16,24 @@ function toggleFavorite(button) {
 }
 
 window.onload = function () {
-    var favoriteButtons = document.querySelectorAll(".favorite-button")
+    // Check if the user is logged in
+    if (!isUserLoggedIn) {
+        document.querySelectorAll(".favorite-button").forEach(function(button) {
+            // event listener to prompt login
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default action
+                window.location.href = '/login';
+            });
+        });
+    } else {
+        var favoriteButtons = document.querySelectorAll(".favorite-button")
     favoriteButtons.forEach(function (button) {
         var propertyId = button.getAttribute("data-pid")
         if (favoritePropertyIds.includes(parseInt(propertyId))) { // // Using the favoritePropertyIds from the server
             button.querySelector("i").classList.add("highlighted")
         }
     })
+    }   
 }
 
 function viewFavorite() {
