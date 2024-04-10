@@ -139,7 +139,7 @@ public class PropertyController extends BaseController {
 
         Property property = propertyRepo.findById(pid).get();
         model.addAttribute("property", property);
-        return "admin/edit-property";
+        return "admin/properties-edit";
     }
 
     @PostMapping("/properties/update")
@@ -177,7 +177,7 @@ public class PropertyController extends BaseController {
     public String showDevEditProperty(Model model, @RequestParam int pid) {
         Property property = propertyRepo.findById(pid).get();
         model.addAttribute("property", property);
-        return "dev/edit-property";
+        return "dev/properties-edit";
     }
 
     @PostMapping("/properties/add")
