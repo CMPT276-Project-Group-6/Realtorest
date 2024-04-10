@@ -34,7 +34,6 @@ public class MailgunController extends BaseController {
 
     /**
      * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.
-     * Kevin: Note that this is something that is used in every controller, but I don't know how to extract this.
      */
     @ModelAttribute("currentUrl")
     public String getCurrentUrl(HttpServletRequest request) {
@@ -82,7 +81,6 @@ public class MailgunController extends BaseController {
 
     // Send an email using the Mailgun API
     private HttpResponse<JsonNode> sendMail(String recipient, String subject, String text) {
-        // This is Kevin's bad habit of writing functions with a single return statement lol
         return Unirest
             .post("https://api.mailgun.net/v3/" + MAILGUN_DOMAIN + "/messages")
             .basicAuth("api", MAILGUN_API_KEY)

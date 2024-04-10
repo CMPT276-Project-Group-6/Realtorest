@@ -2,13 +2,11 @@ package cmpt276.pg6.realtorest.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +32,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import kong.unirest.core.HttpRequestWithBody;
-import kong.unirest.core.Unirest;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -107,27 +103,10 @@ public class ControllersTests {
             .andExpect(MockMvcResultMatchers.redirectedUrl(redirectUrl)); // Verify the redirection URL
     }
 
-    // @Test
-    // void testUserLogin() throws Exception {
-    //     this.mockMvc.perform(MockMvcRequestBuilders.post("/login")
-    //         .param("email", "email@gmail.com")
-    //         .param("password", "password12"))
-    //         .andExpect(MockMvcResultMatchers.status().isOk());
-
-    //     // Drishty: im curious where are we redirecting to after login?
-    //     // .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
-
-    //     // Kevin: The probably is likely because login have failed, since the email and password are not in the database.
-    // }
-
     @Test
     void testUserLogout() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
             .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
-
-        // Drishty: initially it should redirect to home page [/] not [""] whosoever was responsible for this function in model controller should fix it or either explain what is actually happening
-
-        // Kevin: Both the home page and the empty string URL are the same page, but I changed it to redirect to "/" instead if you prefer that.
     }
 
     @Test
@@ -210,92 +189,54 @@ public class ControllersTests {
         verify(userRepo, times(1)).save(user);
     }
 
-    // Kevin: Seems like the list all users functionality for admin is missing. Disabling the test for now.
+    @Test
+    public void testShowForgotPasswordPage() {
+        // Arrange
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
+        Model model = mock(Model.class);
+        UserRepository userRepo = mock(UserRepository.class);
+        User user = new User();
+        user.setUid(1);
+        when(session.getAttribute("session_user")).thenReturn(user);
+        when(userRepo.findById(1)).thenReturn(Optional.of(user));
 
-    // @Test
-    // void testGetAllUsers() throws Exception {
-    //     // Setup session with an admin user
-    //     MockHttpSession session =
-    //         (MockHttpSession) mockMvc.perform(MockMvcRequestBuilders.get("/").session(mockHttpSession))
-    //             .andReturn().getRequest().getSession();
-    //     session.setAttribute("session_user", new Admin());
+        MailgunController mailgunController = new MailgunController();
+        UserController userController = new UserController();
+        mailgunController.setUserRepo(userRepo);
 
-    //     // Mock the user repository and its findAll() method
-    //     List<User> users = new ArrayList<>();
-    //     users.add(new User("user1", "user1@example.com", "password1"));
-    //     users.add(new User("user2", "user2@example.com", "password2"));
-    //     when(userRepository.findAll()).thenReturn(users);
+        // Act
+        String result = userController.showForgotPasswordPage(model, request, session);
 
-    //     // Perform GET request and verify the view name and model attribute
-    //     this.mockMvc.perform(MockMvcRequestBuilders.get("/listUsers").session(session))
-    //         .andExpect(MockMvcResultMatchers.status().isOk())
-    //         .andExpect(MockMvcResultMatchers.view().name("list-users"))
-    //         .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
-    //         .andExpect(MockMvcResultMatchers.model().attribute("users", users));
-    // }
-
-    // @Test
-    // void testGetAllUsersUnauthenticated() throws Exception {
-    //     // Perform GET request without an admin user in the session
-    //     Exception exception = assertThrows(jakarta.servlet.ServletException.class, () -> {
-    //         this.mockMvc.perform(MockMvcRequestBuilders.get("/listUsers"))
-    //             .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-    //             .andExpect(MockMvcResultMatchers.handler().handlerType(MainController.class))
-    //             .andExpect(MockMvcResultMatchers.handler().methodName("getAllUsers"));
-    //     });
-    //     assertEquals("Request processing failed: java.lang.SecurityException: This is a protected page",
-    //         exception.getMessage());
-    // }
+        // Assert
+        assertEquals("redirect:/", result);
+    }
 
     @Test
-   public void testShowForgotPasswordPage() {
-       // Arrange
-       HttpServletRequest request = mock(HttpServletRequest.class);
-       HttpSession session = mock(HttpSession.class);
-       Model model = mock(Model.class);
-       UserRepository userRepo = mock(UserRepository.class);
-       User user = new User();
-       user.setUid(1);
-       when(session.getAttribute("session_user")).thenReturn(user);
-       when(userRepo.findById(1)).thenReturn(Optional.of(user));
-  
-       MailgunController mailgunController = new MailgunController();
-       UserController userController = new UserController();
-       mailgunController.setUserRepo(userRepo);
-  
-       // Act
-       String result = userController.showForgotPasswordPage(model, request, session);
-  
-       // Assert
-       assertEquals("redirect:/", result);
-   }
-  
-   @Test
-   public void testSendPasswordResetEmail() throws Exception {
-       // Arrange
-       HttpServletRequest request = mock(HttpServletRequest.class);
-       UserRepository userRepo = mock(UserRepository.class);
-       MailgunController mailgunController = new MailgunController();
-       mailgunController.setUserRepo(userRepo);
-  
-       String email = "existing@example.com";
-       User existingUser = new User();
-       existingUser.setEmail(email);
-       List<User> users = new ArrayList<>();
-       users.add(existingUser);
-  
-       when(userRepo.findByEmail(email)).thenReturn(users);
-       when(request.getScheme()).thenReturn("http");
-       when(request.getServerName()).thenReturn("localhost");
-       when(request.getServerPort()).thenReturn(8080);
-  
-       // Act
-       String result = mailgunController.sendPasswordResetEmail(email, email, request);
-  
-       // Assert
-       assertEquals("redirect:/login", result);
-       verify(userRepo, times(1)).findByEmail(email);
-   }
+    public void testSendPasswordResetEmail() throws Exception {
+        // Arrange
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        UserRepository userRepo = mock(UserRepository.class);
+        MailgunController mailgunController = new MailgunController();
+        mailgunController.setUserRepo(userRepo);
 
+        String email = "existing@example.com";
+        User existingUser = new User();
+        existingUser.setEmail(email);
+        List<User> users = new ArrayList<>();
+        users.add(existingUser);
+
+        when(userRepo.findByEmail(email)).thenReturn(users);
+        when(request.getScheme()).thenReturn("http");
+        when(request.getServerName()).thenReturn("localhost");
+        when(request.getServerPort()).thenReturn(8080);
+
+        // Act
+        String result = mailgunController.sendPasswordResetEmail(email, email, request);
+
+        // Assert
+        assertEquals("redirect:/login", result);
+        verify(userRepo, times(1)).findByEmail(email);
+    }
 
 }
