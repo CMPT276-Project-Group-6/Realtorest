@@ -41,8 +41,6 @@ public class PropertyControllerTest {
             .andExpect(status().isOk());
     }
 
-
-
     @BeforeAll
     static void setUp() {
         // Grab the environment variables from the .env file
@@ -162,10 +160,8 @@ void deleteAllProperties_ShouldDeleteAllAndRedirect() throws Exception {
     mockMvc.perform(post("/properties/delete/all").param("redirectUrl", redirectUrl))
            .andExpect(status().is3xxRedirection())
            .andExpect(redirectedUrl(redirectUrl));
-
     verify(propertyRepository, times(1)).deleteAll();
 }
-
 
 }
 

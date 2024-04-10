@@ -2,6 +2,7 @@ package cmpt276.pg6.realtorest.models;
 
 import java.util.List;
 import org.springframework.data.domain.Sort;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
@@ -24,6 +25,7 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 
     List<Property> findByFeatured(boolean featured);
 
-    List<Property> findAll(org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort sort);
+    List<Property> findAll(Sort sort);
+
 
 }
