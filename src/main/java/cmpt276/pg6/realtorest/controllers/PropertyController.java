@@ -219,7 +219,7 @@ public class PropertyController extends BaseController {
             1,
             false));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Livingroom.jpeg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Kitchen.jpg"));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property1/Bathroom.jpg"));
 
         thisOne = propertyRepo.save(new Property(
@@ -235,8 +235,8 @@ public class PropertyController extends BaseController {
             2,
             false));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Kitchen.jpeg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Washroom.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Kitchen.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property2/Bathroom.jpg"));
 
         thisOne = propertyRepo.save(new Property(
             "Charlie's House",
@@ -251,8 +251,8 @@ public class PropertyController extends BaseController {
             2,
             false));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Kitchen.jpeg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Washroom.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Kitchen.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property3/Bathroom.jpg"));
 
         thisOne = propertyRepo.save(new Property(
             "David's House",
@@ -267,8 +267,8 @@ public class PropertyController extends BaseController {
             3,
             true));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Kitchen.jpeg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Washroom.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Kitchen.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property4/Bathroom.jpg"));
 
         thisOne = propertyRepo.save(new Property(
             "Eve's House",
@@ -283,8 +283,8 @@ public class PropertyController extends BaseController {
             3,
             false));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Kitchen.jpeg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Washroom.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Kitchen.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property5/Bathroom.jpg"));
 
         thisOne = propertyRepo.save(new Property(
             "Frank's House",
@@ -299,8 +299,8 @@ public class PropertyController extends BaseController {
             1,
             true));
         imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Front.jpg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Kitchen.jpeg"));
-        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Washroom.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Kitchen.jpg"));
+        imageRepo.save(new Image(thisOne.getPid(), "https://raw.githubusercontent.com/CMPT276-Project-Group-6/Realtorest/main/Images/Property6/Bathroom.jpg"));
 
         return "redirect:" + redirectUrl;
     }
