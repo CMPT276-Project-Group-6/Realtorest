@@ -18,6 +18,9 @@ To login as an admin, use the following credentials:
   Password: 159
 
 The developer pages contains useful info for reviewing the website. Mostly being visualizations of database tables. Information such as credentials can also be found here. Those pages will be removed in the final deployment of the website.
+  https://cmpt276-realtorest.onrender.com/dev
   https://cmpt276-realtorest.onrender.com/dev/users
   https://cmpt276-realtorest.onrender.com/dev/properties
+  https://cmpt276-realtorest.onrender.com/dev/images
   https://cmpt276-realtorest.onrender.com/dev/admins
+  https://cmpt276-realtorest.onrender.com/dev/mail

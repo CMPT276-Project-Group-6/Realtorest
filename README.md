@@ -8,7 +8,7 @@ When working on this project, GitHub's productivity tools are being used extensi
 
 1. Setup the project by cloning this repo, then place the `etc\secrets\.env` file provided as part of the submission into the corresponding location.
 
-2. Run the website locally and visit the locally hosted page (http://localhost:9090/) to play around with the website. You can visit the dev pages for [users](http://localhost:9090/dev/users), [properties](http://localhost:9090/dev/properties), and [admins](http://localhost:9090/dev/admins) for helpful tools.
+2. Run the website locally and visit the locally hosted page (http://localhost:9090/) to play around with the website. You can visit the dev pages for [users](http://localhost:9090/dev/users), [properties](http://localhost:9090/dev/properties), and [admins](http://localhost:9090/dev/admins) for helpful tools. A list of all dev pages can be found [here](http://localhost:9090/dev).
 
 3. Check out the [GitHub Projects page](https://github.com/orgs/CMPT276-Project-Group-6/projects/1) to see a list of [all Issues](https://github.com/orgs/CMPT276-Project-Group-6/projects/1/views/8) and [all Pull Requests](https://github.com/orgs/CMPT276-Project-Group-6/projects/1/views/11). As shown by the screenshots below, here, you can see a list of everything we worked on in Issues, and every time we merged something into the main branch in Pulls. The start date and end date also shows when was each person working on each item. If you prefer, you can also find a list of everything in the [Issues page](https://github.com/CMPT276-Project-Group-6/Realtorest/issues?q=is%3Aissue) and the [Pull Requests page](https://github.com/CMPT276-Project-Group-6/Realtorest/pulls?q=is%3Apr) of the repo.
 
@@ -31,7 +31,7 @@ As shown in `src\main\resources\application.properties`, this project uses some 
 Using `cdimascio/dotenv-java`, the data is being read from the file `etc\secrets\.env`, which should be provided as a part of the submission. If there are any issues, please contact me at <kzcheng@sfu.ca>.
 
 ### Admin Pages
-The admin pages can be accessed by going to `/dev/users`, `/dev/properties`, and `/dev/admins`. It have some useful functions, like displaying the table of all users and adding users manually. Those pages will be disabled in the final product, but while developing, they are pretty useful.
+The admin pages can be accessed by going to `/dev`, `/dev/users`, `/dev/properties`, and `/dev/admins`. It have some useful functions, like displaying the table of all users and adding users manually. Those pages will be disabled in the final product, but while developing, they are pretty useful.
 
 ### Why Does Kevin Have So Many Commits / Pulls / Lines Changed
 For this project, Kevin have been mostly working on things like setting things up, refactoring, auto formatting files, etc. Kevin have not actually worked on that many features, but doing those side activities causes a lot of changes to the code base.
