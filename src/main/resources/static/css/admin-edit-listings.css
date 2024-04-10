@@ -67,7 +67,7 @@ a {
 
 /* BODY */
 body {
-    background-image: url(/img/listing-background.jpg);
+    background-image: url(/img/settings-background.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -84,66 +84,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-/* Property Table */
-.table {
-    font-family: "Montserrat", "sans-serif" !important;
-    font-size: 15px;
-    font-weight: 400;
-    border-collapse: collapse;
-    width: 1000px;
-}
-thead th {
-    font-weight: 500 !important;
-}
-.table th {
-    background-color: rgba(60, 93, 107, 0.7); /* Adjust the opacity as needed */
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-.table td {
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.7); /* Adjust the opacity as needed */
-}
-
-td .btn {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    border: 1px solid black;
-    color: black;
-    background-color: transparent;
-    width: 110px;
-}
-td .btn-view:hover,
-td .btn-view:active {
-    background-color: rgba(0, 72, 167, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white;
-}
-td .btn-danger:hover,
-td .btn-danger:active {
-    background-color: rgba(140, 1, 1, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white;
-}
-td .btn-image:hover,
-td .btn-image:active {
-    background-color: rgba(25, 136, 66, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white !important;
-}
-td .btn-edit:hover,
-td .btn-edit:active {
-    background-color: rgba(206, 163, 62, 0.8) !important;
-    border: 1px solid rgba(0, 0, 0, 0.8) !important;
-    color: white !important;
-}
-.actions-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 /* Add Property Form */
 .add-form-container {

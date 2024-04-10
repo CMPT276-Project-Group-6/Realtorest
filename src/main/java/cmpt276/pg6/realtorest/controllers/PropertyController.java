@@ -117,9 +117,8 @@ public class PropertyController extends BaseController {
     }
 
     // Admin Page for Properties Database
-    // Edit Listing for Admin
     @GetMapping("/admin/properties")
-    public String editListing(Model model, HttpServletRequest request, HttpSession session) {
+    public String viewListing(Model model, HttpServletRequest request, HttpSession session) {
         Object currentUser = addModelAttributeFromSession(session, model);
         if (!(currentUser instanceof Admin)) {
             return "redirect:/admin/login";
@@ -130,6 +129,39 @@ public class PropertyController extends BaseController {
         model.addAttribute("properties", properties);
         return "admin/properties";
     }
+    // Edit Listing for Admin
+    @GetMapping("/properties/edit/{pid}")
+    public String editListing(Model model, @PathVariable int pid, HttpSession session) {
+        Object currentUser = addModelAttributeFromSession(session, model);
+        if (!(currentUser instanceof Admin)) {
+            return "redirect:/admin/login";
+        }
+
+        Property property = propertyRepo.findById(pid).get();
+        model.addAttribute("property", property);
+        return "admin/edit-property";
+    }
+    @PostMapping("/properties/update")
+    public String updateProperty(@RequestParam("pid") int pid, @ModelAttribute Property Property) {
+        Property updateProperty = propertyRepo.findById(pid).get();
+        if (updateProperty == null) {
+            return "redirect:/admin/properties";
+        }
+        updateProperty.setName(Property.getName());
+        updateProperty.setStreet(Property.getStreet());
+        updateProperty.setCity(Property.getCity());
+        updateProperty.setProvince(Property.getProvince());
+        updateProperty.setZipCode(Property.getZipCode());
+        updateProperty.setDescription(Property.getDescription());
+        updateProperty.setPrice(Property.getPrice());
+        updateProperty.setArea(Property.getArea());
+        updateProperty.setBrCount(Property.getBrCount());
+        updateProperty.setBaCount(Property.getBaCount());
+        updateProperty.setFeatured(Property.isFeatured());
+        propertyRepo.save(updateProperty);
+        return "redirect:/admin/properties";
+    }
+
 
     // Dev Page for Properties Database
     @GetMapping("/dev/properties")
@@ -166,15 +198,6 @@ public class PropertyController extends BaseController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "redirect:" + redirectUrl;
     }
-
-    @PostMapping("/properties/update/{pid}")
-    public String updateProperty(@PathVariable int pid, @ModelAttribute Property Property) {
-        Property updateProperty = propertyRepo.findById(pid).get();
-        updateProperty = Property;
-        propertyRepo.save(updateProperty);
-        // TODO: Change this back to dev page after actual admin page is implemented
-        return "redirect:/admin/properties";
-    }//updates Property info to db
 
     /**
      * Fills the properties database with testing data.
