@@ -151,17 +151,17 @@ body {
     font-weight: 400;
     font-size: 15px;
 }
-.form-control option{
+.form-control option {
     background-color: rgba(0, 0, 0, 0.499);
     color: white;
-} 
+}
 .form-control,
 .form-control::placeholder,
 .form-control:active,
 .form-control:focus {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
-    font-weight: 300;   
+    font-weight: 300;
     background-color: transparent;
     color: white !important;
 }
@@ -171,7 +171,7 @@ body {
     align-items: center;
 }
 .calculate-btn {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
     padding: 10px 15px;
@@ -188,9 +188,9 @@ body {
 /* RESULTS */
 #yourMortgage,
 #yourPayments {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
-    font-weight: 300;   
+    font-weight: 300;
     background-color: transparent;
     color: white !important;
     padding: 5px;

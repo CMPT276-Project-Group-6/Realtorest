@@ -111,7 +111,7 @@ thead th {
     background-color: rgba(255, 255, 255, 0.7); /* Adjust the opacity as needed */
 }
 td .btn {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
     border: 1px solid black;
@@ -129,7 +129,6 @@ td .btn-danger:active {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 .add-new-image {
     background-color: rgba(0, 0, 0, 0.502);
@@ -140,9 +139,9 @@ td .btn-danger:active {
 .form-control,
 .form-control:active,
 .form-control:focus {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
-    font-weight: 300;   
+    font-weight: 300;
     background-color: transparent;
     color: white !important;
     border: none;
@@ -151,7 +150,7 @@ td .btn-danger:active {
     margin-bottom: 15px;
 }
 .input-group-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 400;
     background-color: transparent;
@@ -171,7 +170,7 @@ td .btn-danger:active {
     padding-bottom: 10px;
 }
 .add-property-btn {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
     padding: 10px 15px;
@@ -188,7 +187,7 @@ td .btn-danger:active {
 .form-control:disabled {
     background-color: transparent;
     color: rgb(215, 215, 215);
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
 }

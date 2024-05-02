@@ -35,54 +35,48 @@
             </section>
         </header>
         <main class="main-container">
-                <form class="add-new-listing" name="mortgage">
-                    <section class="mb-3 row">
-                        <label for="price" class="col-sm-5 col-form-label">Property Value:</label>
-                        <section class="col-sm-5">
-                            <input type="text" class="form-control" id="price" pattern="[0-9]+" placeholder="$" required><br />
-                        </section>
-                    </section>
-                    <section class="mb-3 row">
-                        <label for="downpay" class="col-sm-5 col-form-label">Down Payment:</label>
-                        <section class="col-sm-5">
-                            <input type="text" class="form-control" id="downpay" pattern="[0-9]+" placeholder="$" required /><br />
-                        </section>
-                    </section>
-                    <section class="mb-3 row">
-                        <label for="interest" class="col-sm-5 col-form-label">Interest Rate:</label>
-                        <section class="col-sm-5">
-                            <input type="text" class="form-control" id="interest" name="rate" pattern="[0-9]{}" placeholder="%" required /><br />
-                        </section>
-                    </section>
-                </form>
-                <form name="payment">
-                    <section class="mb-3 row">
-                        <label for="amortization" class="col-sm-5 col-form-label">Amortization Period:</label>
-                        <section class="col-sm-5">
-                            <select class="form-control" name="amortization" required>
-                                <option value="5">5 years</option>
-                                <option value="10">10 years</option>
-                                <option value="15">15 years</option>
-                                <option value="20">20 years</option>
-                                <option value="25">25 years</option>
-                                <option value="30">30 years</option></select
-                            ><br />
-                        </section>
-                    </section>
-                    <section class="mb-3 row">
-                        <label for="frequency" class="col-sm-5 col-form-label">Payment Frequency:</label>
-                        <section class="col-sm-5">
-                            <select class="form-control" name="frequency" required>
-                                <option value="month">Monthly</option>
-                                <option value="biweek">Bi-Weekly</option></select
-                            ><br />
-                        </section>
-                    </section>
-                </form>
-                <section class="calculate-btn-container">
-                    <button class="calculate-btn btn btn-primary" onclick="calculateMortgage()">Calculate your Mortgage</button>
+            <form class="add-new-listing" name="mortgage">
+                <section class="mb-3 row">
+                    <label for="price" class="col-sm-5 col-form-label">Property Value:</label>
+                    <section class="col-sm-5"><input type="text" class="form-control" id="price" pattern="[0-9]+" placeholder="$" required /><br /></section>
                 </section>
-            <section class="row result-section hidden" style="padding-top: 20px;">
+                <section class="mb-3 row">
+                    <label for="downpay" class="col-sm-5 col-form-label">Down Payment:</label>
+                    <section class="col-sm-5"><input type="text" class="form-control" id="downpay" pattern="[0-9]+" placeholder="$" required /><br /></section>
+                </section>
+                <section class="mb-3 row">
+                    <label for="interest" class="col-sm-5 col-form-label">Interest Rate:</label>
+                    <section class="col-sm-5"><input type="text" class="form-control" id="interest" name="rate" pattern="[0-9]{}" placeholder="%" required /><br /></section>
+                </section>
+            </form>
+            <form name="payment">
+                <section class="mb-3 row">
+                    <label for="amortization" class="col-sm-5 col-form-label">Amortization Period:</label>
+                    <section class="col-sm-5">
+                        <select class="form-control" name="amortization" required>
+                            <option value="5">5 years</option>
+                            <option value="10">10 years</option>
+                            <option value="15">15 years</option>
+                            <option value="20">20 years</option>
+                            <option value="25">25 years</option>
+                            <option value="30">30 years</option></select
+                        ><br />
+                    </section>
+                </section>
+                <section class="mb-3 row">
+                    <label for="frequency" class="col-sm-5 col-form-label">Payment Frequency:</label>
+                    <section class="col-sm-5">
+                        <select class="form-control" name="frequency" required>
+                            <option value="month">Monthly</option>
+                            <option value="biweek">Bi-Weekly</option></select
+                        ><br />
+                    </section>
+                </section>
+            </form>
+            <section class="calculate-btn-container">
+                <button class="calculate-btn btn btn-primary" onclick="calculateMortgage()">Calculate your Mortgage</button>
+            </section>
+            <section class="row result-section hidden" style="padding-top: 20px">
                 <label class="col-sm-5 col-form-label">Principle Mortgage:</label>
                 <section class="col-sm-5">
                     <p id="yourMortgage"></p>
