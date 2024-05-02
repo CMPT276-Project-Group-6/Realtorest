@@ -27,5 +27,4 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 
     List<Property> findAll(Sort sort);
 
-
 }

@@ -1,6 +1,58 @@
 # **Realtorest**
 A small web application used to host a website. Designed for hosting a personal website for realtors. Exploration, sorting, and direct contact functionalities are available for visiting users, while enabling Admin to manage listings and engage with potential buyers effectively, all within a user-friendly, ad-free environment.
 
+### Context
+This project is created for the course CMPT 276 D200 from Simon Fraser University, taught by Bobby Chan in 2024 Spring. More details about the course can be seen by following this link: https://www.sfu.ca/outlines.html?2024/spring/cmpt/276/d200
+
+For the course, students are required to gather in groups of 5, and create a project for a client of their choice. As documented by the project desciption: 
+
+> The group project will be completed in teams of five.  The project will have four stages: a project proposal and three iterations of development; each iteration will involve designing, planning, developing, testing, and deploying a web application while submitting proper documentation. You will also need to plan a meeting with your client after each iteration of development.
+
+The purpose of the project is to give students a chance to experience the agile development workflow, and practice using Java, Spring Boot, PostgreSQL, HTML, CSS, and Javascript to create a project. Then deploying the project on Render.com to be evaluated.
+
+Overall, the workload for this project invovles 3 iterations that are 2-weeks each, plus some additional pre-production on things like project proposal and sepcification defenitions, and presenting the project in a final demo.
+
+### Notes for Prosterity
+
+This project uses a PostgreSQL database deployed to Render.com. So by the time someone is reading this, it's very likely the free account have already expired, and it won't be possible to access the website anymore. The website will not be able to start without a functional database, so it might be required to setup a local database and connect it to this project.
+
+Also, the email systems also uses Mailgun API, which is also tied to a free account. Those may also not work in the future.
+
+And most importantly, the enviroment variables for API keys and such are not in this repo, so... if the Render.com website is down, it will be very difficult to get the website running by simply cloning this repo.
+
+
+
+## About this project
+### Abstract
+**Realtorest** is a real estate web application that is created for a realtor. The application displays a list of properties that can be sorted based on price, location and room features, and the available map feature can assist users to explore properties in different locations. From general users’ perspective, users can create an account, manage their basic information, control their property choices with features such as ‘Save as Favorite’, and connect with the website owner to discuss or set up an appointment. The application is specifically tailored for our client, who is the middleman that helps property sellers and buyers connect with each other. This application focuses on helping the client upload and display information of properties that are being sold and help potential buyers who are interested in those properties to make the purchase.
+
+### Project Description
+Our client is a realtor in British Columbia who does not have a personal website for their real estate business, and due to the competitiveness in the industry, a personal website can benefit our client a lot by helping them connect with potential clients and widening their business scope. Hence, the web application **Realtorest** is created to help our client connect to property buyers and sellers. The description will outline two types of users that will use this software: the project’s client, who will be the admin of the website. And the general customers, who are home buyers, real estate investors, renters, and real estate professionals. Detailed below are the high-level descriptions of the features that **Realtorest** has to offer.   
+
+General customers can explore properties without the sign in but must register to contact the client or to save the properties to the favorites. Sign up/sign in  can be done using email or through third party accounts like Google. This process will save log in details in the database to avoid scam and enable property tracking. The website will also offer filters for location, room numbers, and sorting by price or distance.
+
+**Realtorest** also utilizes application programming interface (API) for property listing view, which allows customers to view properties as markers on a map; this process requires an external API, for example Google Maps, in order to function. Moreover, customers who wish to get updated frequently about real estate news by the website owner also can sign up to be in the automated mailing list that uses an external API allowing the admins to send the update emails automatically. 
+
+As for the Admin, they will be able to login to their website under admin login, which allows them to manage the property listing, by uploading new properties information or removing any properties that they wishes to. In addition, the website owner can get notified by any customers who are wishing to contact them regarding a property.
+
+### Project Competitiveness
+There are many personalized websites tailored for realtors, hence it is very competitive for the project to have its own distinctive features that stand out from the rest of the other websites. However, **Realtorest** is different from many other realtor websites in which it does not have any advertisements, because the project is focused on the client, rather than profit like the others. In addition, under UI perspective, most of the realtors websites that the team encountered are usually very hard to navigate and not user friendly, since there are many website features and interactions that all appear at once. Hence, to avoid this problem, **Realtorest** will focus on the customer interaction experience by creating a minimalist layout that can help the user to navigate with ease, while also providing sufficient features. 
+
+
+
+## Screenshots
+### Home Page
+![Home Page](<Documentation/Screenshots/I2 Home Page.png>)
+### Properties Listing
+![Properties Listing View](<Documentation/Screenshots/I2 Listing.png>)
+### Login
+![Login](<Documentation/Screenshots/I2 Login.png>)
+### Admin Login
+![Admin Login](<Documentation/Screenshots/I2 Admin Login.png>)
+### Register
+![Register](<Documentation/Screenshots/I2 Register.png>)
+
+
 
 ## Notes for Marking This
 ### Recommended Way for Marking
@@ -48,35 +100,6 @@ Workflow wise, because Kevin is familiar with Git and GitHub, this also means Ke
 So yeah, when checking information with things like `git blame`, remember to check the full history, since other wise it may cause confusion, due to issues where only the most recent activity only shows Kevin auto formatting the file.
 
 
-## About this project
-### Abstract
-**Realtorest** is a real estate web application that is created for a realtor. The application displays a list of properties that can be sorted based on price, location and room features, and the available map feature can assist users to explore properties in different locations. From general users’ perspective, users can create an account, manage their basic information, control their property choices with features such as ‘Save as Favorite’, and connect with the website owner to discuss or set up an appointment. The application is specifically tailored for our client, who is the middleman that helps property sellers and buyers connect with each other. This application focuses on helping the client upload and display information of properties that are being sold and help potential buyers who are interested in those properties to make the purchase.
-
-### Project Description
-Our client is a realtor in British Columbia who does not have a personal website for their real estate business, and due to the competitiveness in the industry, a personal website can benefit our client a lot by helping them connect with potential clients and widening their business scope. Hence, the web application **Realtorest** is created to help our client connect to property buyers and sellers. The description will outline two types of users that will use this software: the project’s client, who will be the admin of the website. And the general customers, who are home buyers, real estate investors, renters, and real estate professionals. Detailed below are the high-level descriptions of the features that **Realtorest** has to offer.   
-
-General customers can explore properties without the sign in but must register to contact the client or to save the properties to the favorites. Sign up/sign in  can be done using email or through third party accounts like Google. This process will save log in details in the database to avoid scam and enable property tracking. The website will also offer filters for location, room numbers, and sorting by price or distance.
-
-**Realtorest** also utilizes application programming interface (API) for property listing view, which allows customers to view properties as markers on a map; this process requires an external API, for example Google Maps, in order to function. Moreover, customers who wish to get updated frequently about real estate news by the website owner also can sign up to be in the automated mailing list that uses an external API allowing the admins to send the update emails automatically. 
-
-As for the Admin, they will be able to login to their website under admin login, which allows them to manage the property listing, by uploading new properties information or removing any properties that they wishes to. In addition, the website owner can get notified by any customers who are wishing to contact them regarding a property.
-
-### Project Competitiveness
-There are many personalized websites tailored for realtors, hence it is very competitive for the project to have its own distinctive features that stand out from the rest of the other websites. However, **Realtorest** is different from many other realtor websites in which it does not have any advertisements, because the project is focused on the client, rather than profit like the others. In addition, under UI perspective, most of the realtors websites that the team encountered are usually very hard to navigate and not user friendly, since there are many website features and interactions that all appear at once. Hence, to avoid this problem, **Realtorest** will focus on the customer interaction experience by creating a minimalist layout that can help the user to navigate with ease, while also providing sufficient features. 
-
-
-## Screenshots
-### Home Page
-![Home Page](<Documentation/Screenshots/I2 Home Page.png>)
-### Properties Listing
-![Properties Listing View](<Documentation/Screenshots/I2 Listing.png>)
-### Login
-![Login](<Documentation/Screenshots/I2 Login.png>)
-### Admin Login
-![Admin Login](<Documentation/Screenshots/I2 Admin Login.png>)
-### Register
-![Register](<Documentation/Screenshots/I2 Register.png>)
-
 
 ## Group Members
 ### Kevin
@@ -95,15 +118,17 @@ GitHub: https://github.com/htoor1999
 GitHub: https://github.com/MalaikaQ
 
 
+
 ## Documentation
-### Proposal
+### Project Proposal
 https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0
 
 ### Requirements and Specification Document
-https://docs.google.com/document/d/1_oOKkc0if6xlwWooyd694t9nAQmbeQBu31ZJ956VdmE/edit?usp=sharing
+https://docs.google.com/document/d/1_oOKkc0if6xlwWooyd694t9nAQmbeQBu31ZJ956VdmE
 
 
-## Useful Links
+
+## Links
 ### GitHub Repository
 https://github.com/CMPT276-Project-Group-6/Realtorest
 

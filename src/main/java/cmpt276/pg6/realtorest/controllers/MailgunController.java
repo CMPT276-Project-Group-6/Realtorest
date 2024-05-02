@@ -30,7 +30,7 @@ public class MailgunController extends BaseController {
 
     public void setUserRepo(UserRepository userRepo) {
         this.userRepo = userRepo;
-    } 
+    }
 
     /**
      * Grabs the current URL and stores it as a model attribute, which means everything can use it. Mostly used for refreshing the page.

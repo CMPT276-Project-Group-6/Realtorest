@@ -34,7 +34,7 @@
     font-style: normal;
 }
 
-/* HEADER */ 
+/* HEADER */
 /* NAVIGATION BAR */
 .realtorest-title {
     font-size: 25px;
@@ -108,7 +108,7 @@ thead th {
 }
 
 td .btn {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
     border: 1px solid black;
@@ -150,7 +150,6 @@ td .btn-edit:active {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 .add-new-listing {
     background-color: rgba(0, 0, 0, 0.502);
@@ -158,16 +157,16 @@ td .btn-edit:active {
     width: 800px;
     margin-bottom: 50px;
 }
-.form-control option{
+.form-control option {
     background-color: rgba(0, 0, 0, 0.499);
     color: white;
 }
 .form-control,
 .form-control:active,
 .form-control:focus {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
-    font-weight: 300;   
+    font-weight: 300;
     background-color: transparent;
     color: white;
     border: none;
@@ -176,7 +175,7 @@ td .btn-edit:active {
     margin-bottom: 15px;
 }
 .input-group-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 400;
     background-color: transparent;
@@ -184,7 +183,7 @@ td .btn-edit:active {
     border: none;
 }
 #textInput {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 300;
     background-color: transparent;
@@ -193,7 +192,7 @@ td .btn-edit:active {
     width: 500px;
 }
 #charCount {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 13px;
     font-weight: 300;
     color: white;
@@ -211,7 +210,7 @@ td .btn-edit:active {
     padding-bottom: 10px;
 }
 .add-property-btn {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
     padding: 10px 15px;

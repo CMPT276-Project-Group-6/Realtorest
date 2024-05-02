@@ -124,7 +124,7 @@ thead th {
     margin-bottom: 15px;
 }
 .input-group-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 400;
     background-color: transparent;
@@ -134,25 +134,27 @@ thead th {
 .subject-field {
     border: none;
 }
-.subject-field:focus, .subject-field:active {
+.subject-field:focus,
+.subject-field:active {
     border: none;
 }
-.form-control:active, .form-control:focus {
+.form-control:active,
+.form-control:focus {
     background-color: transparent;
     color: white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
 }
 .form-control {
     background-color: transparent;
     color: white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
 }
 .form-control::placeholder {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
     color: rgb(215, 215, 215);
@@ -165,7 +167,7 @@ thead th {
     padding-bottom: 10px;
 }
 .send-mail-btn {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 300;
     padding: 10px 15px;
