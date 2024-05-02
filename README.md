@@ -96,14 +96,14 @@ GitHub: https://github.com/MalaikaQ
 
 
 ## Documentation
-### Proposal
+### Project Proposal
 https://docs.google.com/document/d/18ciUDUsWcUADZHcMQhobZ8FYAu0NfuLscaJnMyYtte0
 
 ### Requirements and Specification Document
-https://docs.google.com/document/d/1_oOKkc0if6xlwWooyd694t9nAQmbeQBu31ZJ956VdmE/edit?usp=sharing
+https://docs.google.com/document/d/1_oOKkc0if6xlwWooyd694t9nAQmbeQBu31ZJ956VdmE
 
 
-## Useful Links
+## Links
 ### GitHub Repository
 https://github.com/CMPT276-Project-Group-6/Realtorest
 
